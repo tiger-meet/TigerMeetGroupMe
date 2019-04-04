@@ -11,12 +11,9 @@ def a(request):
 def about(request):
     return render(request, 'chat/about.html', {})
 
-def g(request):
-    url = "https://www.google.com/"
+#def g(request):
     #url = "https://oauth.groupme.com/oauth/authorize?client_id=BLmGX0dIG8rQGtSUZS4kcOVkP9RoNb65x01H8fxPSK9ANNR7"
-    return webbrowser.open(url)
     #return response.write("<p>Here's the text of the Web page.</p>")
 
 def redirect(request):
-    url = "https://www.google.com/"
-    return webbrowser.open(url)
+    return render(request, 'chat/a.html', {})
