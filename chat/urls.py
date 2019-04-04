@@ -8,5 +8,5 @@ urlpatterns = [
     path('g/', g, name='g'),
     path('about/', about, name='about'),
     #re_path(r'user/(?P<user_token>[^/]+)/$', token, name='token'),
-    path('tigermeetgroupme.herokuapp.com/user?access_token=3ad70e40394a0137a92656b15122bc3d', redirect, name='redirect'),
+    path('tigermeetgroupme.herokuapp.com?access_token=3ad70e40394a0137a92656b15122bc3d', redirect, name='redirect'),
 ]
