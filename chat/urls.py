@@ -1,6 +1,6 @@
 from django.urls import path, re_path
 
-from .views import index, a, about, g, redirect
+from .views import index, a, about, redirect
 
 urlpatterns = [
     path('?access_token=3ad70e40394a0137a92656b15122bc3d', redirect, name='redirect'),
