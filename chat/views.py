@@ -12,7 +12,7 @@ def a(request):
 def about(request):
     return render(request, 'chat/about.html', {})
 
-def gmlogin():
+def gmlogin(request):
     return urllib.urlopen('https://oauth.groupme.com/oauth/authorize?client_id=AWKH6CxG0zTyz1cXWKZPvomGOkVdTW3jJb8nVYTJMljPKvDI')
 
 #def g(request):
