@@ -7,5 +7,5 @@ urlpatterns = [
     path('a/', a, name='a'),
     path('g/', g, name='g'),
     path('about/', about, name='about'),
-    path('abc?access_token=ACCESS_TOKEN', redirect, name='redirect'),
+    path('?access_token=ACCESS_TOKEN', redirect, name='redirect'),
 ]
