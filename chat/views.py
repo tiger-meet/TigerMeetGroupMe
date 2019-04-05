@@ -8,9 +8,6 @@ import urllib.parse as urlparse
 def index(request):
     return render(request, 'chat/index.html', {})
 
-def a(request):
-    return render(request, 'chat/a.html', {})
-
 def about(request):
     return render(request, 'chat/about.html', {})
 

@@ -1,10 +1,9 @@
 from django.urls import path, re_path
 
-from .views import index, a, about, gmlogin
+from .views import index, about
 
 urlpatterns = [
     path('', index, name='index'),
-    path('a/', a, name='a'),
     path('about/', about, name='about'),
     #path('gmlogin/', gmlogin, name='gmlogin'),
     #re_path(r'user/(?P<user_token>[^/]+)/$', token, name='token'),
