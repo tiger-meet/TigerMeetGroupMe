@@ -14,10 +14,10 @@ def about(request):
     return render(request, 'chat/about.html', {})
 
 
-@csrf_exempt
+#@csrf_exempt
 def sports(request):
     path_info = request.META.get('PATH_INFO')
-    url = 'https://tigermeetgroupme.herokuapp.com' + path_info
+    url = 'https://api.groupme.com/v3/groups?token=3ad70e40394a0137a92656b15122bc3'
     #parsed = urlparse.urlparse(url)
     #print(urlparse.parse_qs(parsed.query)['access_token'])
     data = {'name':'sports'}
