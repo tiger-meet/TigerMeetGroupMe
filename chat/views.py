@@ -14,7 +14,7 @@ def about(request):
     return render(request, 'chat/about.html', {})
 
 def gmlogin(request):
-    return redirect('https://oauth.groupme.com/oauth/authorize?client_id=AWKH6CxG0zTyz1cXWKZPvomGOkVdTW3jJb8nVYTJMljPKvDI')
+    return redirect('https://oauth.groupme.com/oauth/authorize?client_id=AWKH6CxG0zTyz1cXWKZPvomGOkVdTW3jJb8nVYTJMljPKvDI', permanent=True)
 
 #def g(request):
     #url = "https://oauth.groupme.com/oauth/authorize?client_id=BLmGX0dIG8rQGtSUZS4kcOVkP9RoNb65x01H8fxPSK9ANNR7"
