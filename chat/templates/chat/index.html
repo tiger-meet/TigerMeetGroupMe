@@ -27,6 +27,7 @@
 <body>
 
 <!-- Navbar -->
+<script>url = "/chat/?access_token=" + {{ access_token }}</script>
 <div class="ui pointing menu" style="margin-bottom: 0; border-radius: 0;">
   <a class="item" href="/">
     <img src="{% static 'cub.png' %}">
@@ -34,7 +35,7 @@
   <div class="ui simple dropdown item">
     Chatrooms <i class="dropdown icon"></i>
     <div class="menu">
-      <a class="item" href="/chat/?access_token=" + {{ access_token }}>Sports</a>
+      <a class="item" href=url >Sports</a>
       <a class="item" href="/workingout">Working Out</a>
       <a class="item" href="/videogames">Video Games</a>
       <a class="item" href="/transportation">Transportation</a>
