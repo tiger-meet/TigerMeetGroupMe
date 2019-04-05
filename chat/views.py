@@ -23,7 +23,7 @@ def sports(request):
     data = {'name':'sports'}
     headers = {"Content-Type": "application/json"}
     requests.post(url, data=json.dumps(data), headers=headers)
-    return return HttpResponse(status=200)
+    return HttpResponse(status=200)
     #return render(request, 'chat/chat.html', {})
 
 #def gmlogin(request):
