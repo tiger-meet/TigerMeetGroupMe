@@ -14,7 +14,7 @@ def about(request):
     return render(request, 'chat/about.html', {})
 
 def sports(request):
-    return render(request, 'chat/about.html', {})
+    return render(request, 'chat/chat.html', {})
 
 #def gmlogin(request):
     #my_dict['my url'] = 'https://oauth.groupme.com/oauth/authorize?client_id=BLmGX0dIG8rQGtSUZS4kcOVkP9RoNb65x01H8fxPSK9ANNR7'
@@ -24,4 +24,4 @@ def sports(request):
     #return response.write("<p>Here's the text of the Web page.</p>")
 
 def redirect(request):
-    return render(request, 'chat/a.html', {})
+    return render(request, 'chat/chat.html', {})
