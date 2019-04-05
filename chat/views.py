@@ -23,6 +23,7 @@ def sports(request):
     parsed = urlparse.urlparse(temp_url)
     token = urlparse.parse_qs(parsed.query)['token']
     url = 'https://api.groupme.com/v3/groups?token=' + token
+    url = str(url)
 
     data = {'name':'sports'}
     headers = {"Content-Type": "application/json"}
