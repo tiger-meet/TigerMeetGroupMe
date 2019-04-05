@@ -1,11 +1,9 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from django.views.decorators.csrf import csrf_exempt
 import requests
 import json
-import webbrowser
-import urllib
 import urllib.parse as urlparse
+from django.utils.safestring import mark_safe
 
 def index(request):
 
@@ -32,7 +30,6 @@ def gmlogin(request):
 
 
 
-#@csrf_exempt
 def chat(request):
     http_host = request.META.get('HTTP_HOST')
     not_host = request.META.get('RAW_URI')
