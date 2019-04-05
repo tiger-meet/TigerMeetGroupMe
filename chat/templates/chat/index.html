@@ -28,7 +28,7 @@
 
 <!-- Navbar -->
 <script>
-  url = "/chat/?access_token=" + {{ access_token }}
+  var url = "/chat/?access_token=" + {{ access_token }};
   window.onload = function() {
   document.getElementById("url").innerHTML = url;
 }
@@ -40,7 +40,7 @@
   <div class="ui simple dropdown item">
     Chatrooms <i class="dropdown icon"></i>
     <div class="menu">
-      <a class="item" href="url" >Sports</a>
+      <a class="item" href= "url" >Sports</a>
       <a class="item" href="/workingout">Working Out</a>
       <a class="item" href="/videogames">Video Games</a>
       <a class="item" href="/transportation">Transportation</a>
