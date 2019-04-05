@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
 import requests
 import json
 import webbrowser
@@ -12,6 +13,8 @@ def index(request):
 def about(request):
     return render(request, 'chat/about.html', {})
 
+
+@csrf_exempt
 def sports(request):
     path_info = request.META.get('PATH_INFO')
     url = 'https://tigermeetgroupme.herokuapp.com' + path_info
