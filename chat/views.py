@@ -14,7 +14,7 @@ def about(request):
     return render(request, 'chat/about.html', {})
 
 
-@csrf_exempt
+#@csrf_exempt
 def sports(request):
     path_info = request.META.get('PATH_INFO')
     url = 'https://tigermeetgroupme.herokuapp.com' + path_info
