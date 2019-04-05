@@ -22,17 +22,21 @@
   crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
 
+  <script>
+  function myFunction() {
+    var url = "/chat/?access_token=" + {{ access_token }};
+    document.getElementById("url").innerHTML = url;
+}
+  </script>
+
   <link rel="stylesheet" href="{% static 'index.css' %}">
 </head>
-<body>
+<body onload="myFunction()">
 
 <!-- Navbar -->
-<script>
-  var url = "/chat/?access_token=" + {{ access_token }};
-  window.onload = function() {
-  document.getElementById("url").innerHTML = url;
-}
-</script>
+
+
+
 <div class="ui pointing menu" style="margin-bottom: 0; border-radius: 0;">
   <a class="item" href="/">
     <img src="{% static 'cub.png' %}">
