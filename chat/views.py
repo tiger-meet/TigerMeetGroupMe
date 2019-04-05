@@ -14,7 +14,7 @@ def about(request):
     return render(request, 'chat/about.html', {})
 
 
-#@csrf_exempt
+@csrf_exempt
 def sports(request):
     path_info = request.META.get('PATH_INFO')
     url = 'https://tigermeetgroupme.herokuapp.com' + path_info
@@ -23,7 +23,8 @@ def sports(request):
     data = {'name':'sports'}
     headers = {"Content-Type": "application/json"}
     requests.post(url, data=json.dumps(data), headers=headers)
-    return render(request, 'chat/chat.html', {})
+    return return HttpResponse(status=200)
+    #return render(request, 'chat/chat.html', {})
 
 #def gmlogin(request):
     #my_dict['my url'] = 'https://oauth.groupme.com/oauth/authorize?client_id=BLmGX0dIG8rQGtSUZS4kcOVkP9RoNb65x01H8fxPSK9ANNR7'
