@@ -1,19 +1,25 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+import requests
 import json
 import webbrowser
 import urllib
 import urllib.parse as urlparse
 
 def index(request):
-    path_info = request.META.get('PATH_INFO')
-    url = 'https://tigermeetgroupme.herokuapp.com' + path_info
     return render(request, 'chat/index.html', {})
 
 def about(request):
     return render(request, 'chat/about.html', {})
 
 def sports(request):
+    path_info = request.META.get('PATH_INFO')
+    url = 'https://tigermeetgroupme.herokuapp.com' + path_info
+    #parsed = urlparse.urlparse(url)
+    #print(urlparse.parse_qs(parsed.query)['access_token'])
+    data = {'name':'sports'}
+    headers = {"Content-Type": "application/json"}
+    requests.post(url, data=json.dumps(data), headers=headers)
     return render(request, 'chat/chat.html', {})
 
 #def gmlogin(request):
