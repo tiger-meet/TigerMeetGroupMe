@@ -16,12 +16,14 @@ def about(request):
 
 #@csrf_exempt
 def sports(request):
-    http_host = request.META.get('HTTP_HOST')
-    path_info = request.META.get('PATH_INFO')
-    url = http_host + path_info
-    #url = 'https://api.groupme.com/v3/groups?token=3ad70e40394a0137a92656b15122bc3d'
-    #parsed = urlparse.urlparse(url)
+    #http_host = request.META.get('HTTP_HOST')
+    #path_info = request.META.get('PATH_INFO')
+    #temp_url = http_host + path_info
+    url = 'https://api.groupme.com/v3/groups?token=3ad70e40394a0137a92656b15122bc3d'
+    #parsed = urlparse.urlparse(temp_url)
     #token = urlparse.parse_qs(parsed.query)['token']
+
+    #url = http_host +
     data = {'name':'sports'}
     headers = {"Content-Type": "application/json"}
     requests.post(url, data=json.dumps(data), headers=headers)
