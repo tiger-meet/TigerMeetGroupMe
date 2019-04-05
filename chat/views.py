@@ -21,7 +21,7 @@ def sports(request):
     temp_url = 'https://' + http_host + path_info
     #temp_url = 'https://api.groupme.com/v3/groups?token=3ad70e40394a0137a92656b15122bc3d'
     parsed = urlparse.urlparse(temp_url)
-    token_list = urlparse.parse_qs(parsed.query)['token']
+    token_list = urlparse.parse_qs(parsed.query)['access_token']
     token = str(token_list[0])
     url = 'https://api.groupme.com/v3/groups?token=' + token
     url = str(url)
