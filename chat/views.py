@@ -20,6 +20,8 @@ def sports(request):
     path_info = request.META.get('PATH_INFO')
     temp_url = 'https://' + http_host + path_info
     print(temp_url)
+    print(request.query)
+    print(request.query_string)
     #temp_url = 'https://api.groupme.com/v3/groups?token=3ad70e40394a0137a92656b15122bc3d'
     #parsed = urlparse.urlparse(temp_url)
     #token_list = urlparse.parse_qs(parsed.query)['access_token']
