@@ -26,8 +26,8 @@
   var url = "?access_token=" + {{ access_token }};
   window.onload = function() {
   document.getElementById("url").innerHTML = url;
-}
-</script>
+  }
+  </script>
 
   <link rel="stylesheet" href="{% static 'index.css' %}">
 </head>
@@ -43,7 +43,7 @@
     Chatrooms <i class="dropdown icon"></i>
     <div class="menu">
       <!--<a class="item" href="" onclick="location.href=url;return false;" >Sports</a> -->
-      <a class="item" href="/chat" onclick="location.href=url;return false;" >Sports</a>
+      <a class="item" href="/chat" onclick="url;return false;" >Sports</a>
       <a class="item" href="/workingout">Working Out</a>
       <a class="item" href="/videogames">Video Games</a>
       <a class="item" href="/transportation">Transportation</a>
