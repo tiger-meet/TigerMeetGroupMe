@@ -29,13 +29,7 @@
   }
   </script>  -->
 
-  <script type="text/javascript">
-  var url = "?access_token=" + {{ access_token }};
-  function f1()
-  {
-    document.getElementById("url").href=url;
-  }
-</script>
+
 
   <link rel="stylesheet" href="{% static 'index.css' %}">
 </head>
@@ -50,7 +44,14 @@
   <div class="ui simple dropdown item">
     Chatrooms <i class="dropdown icon"></i>
     <div class="menu">
-      <a  class="item" id="url" href="/chat" onclick="f1(); return false;" >Blah</a>
+        <script type="text/javascript">
+  var url = "?access_token=" + {{ access_token }};
+  function f1()
+  {
+    document.getElementById("url").href=url;
+  }
+</script>
+      <a class="item" id="url" href="#" onclick="return f1();return false;" >Blah</a>
       <!--<a class="item" href="/chat" onclick="location.href=url;return false;" >Sports</a> -->
       <a class="item" href="/workingout">Working Out</a>
       <a class="item" href="/videogames">Video Games</a>
