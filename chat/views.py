@@ -41,13 +41,13 @@ def group(request, group_name):
     url = 'https://api.groupme.com/v3/groups?token=' + token
     url = str(url)
 
-    data = {'name': mark_safe(json.dumps(group_name))}
+    data = {'name': group_name }
     headers = {"Content-Type": "application/json"}
     requests.post(url, data=json.dumps(data), headers=headers)
 
     return render(request, 'chat/chat.html', {
         #'access_token': mark_safe(json.dumps(access_token)),
-        'group_name': group_name
+        'group_name': mark_safe(json.dumps(group_name))
     })
 
 def chat(request):
