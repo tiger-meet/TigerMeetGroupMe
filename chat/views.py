@@ -14,6 +14,7 @@ def index(request):
 
     # temp_url = 'https://api.groupme.com/v3/groups?token=3ad70e40394a0137a92656b15122bc3d'
     parsed = urlparse.urlparse(temp_url)
+    print(parsed)
     token_list = urlparse.parse_qs(parsed.query)['access_token']
     token = str(token_list[0])
 
