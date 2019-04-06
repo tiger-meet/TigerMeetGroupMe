@@ -17,7 +17,7 @@ def index(request):
     token_list = urlparse.parse_qs(parsed.query)['access_token']
     token = str(token_list[0])
 
-    return render(request, 'chat/index.html', {'access_token': token})
+    return render(request, 'chat/index.html', {'access_token': mark_safe(json.dumps(token))})
 
 def about(request):
     return render(request, 'chat/about.html', {})
