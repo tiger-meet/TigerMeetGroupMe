@@ -41,7 +41,8 @@ def group(request, group_name):
     url = 'https://api.groupme.com/v3/groups?token=' + token
     url = str(url)
 
-    data = {'name': group_name }
+    chatname = "TigerMeet " + group_name
+    data = {'name': chatname }
     headers = {"Content-Type": "application/json"}
     requests.post(url, data=json.dumps(data), headers=headers)
 
