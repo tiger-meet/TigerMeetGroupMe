@@ -29,13 +29,9 @@
   }
   </script>  -->
 
+  <!-- script to place in the access token -->
   <script type="text/javascript">
   var url = "?access_token=" + {{ access_token }};
-  //var url = "?access_token=";
-  //window.onload = function f1()
-  //{
-  //  document.getElementById("url").href=url;
-  //}
   </script>
 
 
@@ -52,9 +48,8 @@
   <div class="ui simple dropdown item">
     Chatrooms <i class="dropdown icon"></i>
     <div class="menu">
-
+<!-- changes url to /chatname with the authentication token appended -->
       <a class="item" href="/sports" onclick="location.href='/sports' +url; return false;" >Sports</a>
-      <!--<a class="item" href="/chat" onclick="location.href=url;return false;" >Sports</a> -->
       <a class="item" href="/workingout" onclick="location.href='/workingout' +url; return false;" >Working Out</a>
       <a class="item" href="/videogames" onclick="location.href='/videogames' +url; return false;" >Video Games</a>
       <a class="item" href="/transportation" onclick="location.href='/transportation' +url; return false;" >Transportation</a>
