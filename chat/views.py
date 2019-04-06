@@ -25,8 +25,12 @@ def about(request):
 def gmlogin(request):
     return render(request, 'chat/gmlogin.html', {})
 
-def group(request, group_name):
-    return render(request, 'chat/gmlogin.html', {})
+def group(request, group_name, access_token):
+
+    return render(request, 'chat/index.html', {
+        'access_token': mark_safe(json.dumps(access_token)),
+        'group_name': mark_safe(json.dumps(group_name))
+    })
 
 def chat(request):
     http_host = request.META.get('HTTP_HOST')

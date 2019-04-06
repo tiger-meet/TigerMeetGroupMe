@@ -1,7 +1,19 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <script type="text/javascript">
+    var token = {{ access_token }};
+    var name = {{ group_name }};
+    window.onload = function() {
+    document.getElementById("myToken").innerHTML=token;
+    document.getElementById("myName").innerHTML=name;
+}
+    </script>
+</head>
 <body>
 
+< aid="myToken"> </a>
+< aid="myName"> </a>
 <h1>Groupme Made!</h1>
 
 </body>
