@@ -20,7 +20,7 @@ def index(request):
     # return HttpResponse(status=200)
 
 
-    return render(request, 'chat/index.html', {'access_token': mark_safe(json.dumps(token))})
+    return render(request, 'chat/index.html', {'access_token': token})
 
 def about(request):
     return render(request, 'chat/about.html', {})
@@ -28,7 +28,8 @@ def about(request):
 def gmlogin(request):
     return render(request, 'chat/gmlogin.html', {})
 
-
+def group(request, group_name):
+    return render(request, 'chat/gmlogin.html', {})
 
 def chat(request):
     http_host = request.META.get('HTTP_HOST')
