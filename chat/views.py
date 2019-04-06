@@ -47,7 +47,7 @@ def group(request, group_name):
 
     return render(request, 'chat/chat.html', {
         #'access_token': mark_safe(json.dumps(access_token)),
-        'group_name': mark_safe(json.dumps(group_name))
+        'group_name': group_name
     })
 
 def chat(request):
