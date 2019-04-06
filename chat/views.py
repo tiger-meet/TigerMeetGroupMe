@@ -28,7 +28,7 @@ def gmlogin(request):
 
 def group(request, group_name):
 
-    return render(request, 'chat/index.html', {
+    return render(request, 'chat/chat.html', {
         #'access_token': mark_safe(json.dumps(access_token)),
         'group_name': mark_safe(json.dumps(group_name))
     })
