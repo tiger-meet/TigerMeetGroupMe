@@ -41,7 +41,8 @@ def group(request, group_name):
     url = str(url)
 
     chatname = "TigerMeet " + group_name
-    data = {'name': chatname}
+    data = {'name': chatname,
+            "share": true,}
     headers = {"Content-Type": "application/json"}
     r = requests.post(url, data=json.dumps(data), headers=headers)
     print(r.json())
