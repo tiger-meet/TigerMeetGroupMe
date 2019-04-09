@@ -41,9 +41,10 @@ def group(request, group_name):
     url = str(url)
 
     chatname = "TigerMeet " + group_name
-    data = {'name': chatname }
+    data = {'name': chatname}
     headers = {"Content-Type": "application/json"}
-    requests.post(url, data=json.dumps(data), headers=headers)
+    r = requests.post(url, data=json.dumps(data), headers=headers)
+    print r.json()
 
     return render(request, 'chat/chat.html', {
         #'access_token': mark_safe(json.dumps(access_token)),
