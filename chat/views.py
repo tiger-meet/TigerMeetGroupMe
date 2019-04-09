@@ -27,6 +27,10 @@ def about(request):
 def gmlogin(request):
     return render(request, 'chat/gmlogin.html', {})
 
+# joins sports chat
+def joinsportschat(request):
+    return render(request, 'chat/joinsportschat.html', {})
+
 # creates a chat in your own personal groupme application based on which one you click
 def group(request, group_name):
     http_host = request.META.get('HTTP_HOST')
