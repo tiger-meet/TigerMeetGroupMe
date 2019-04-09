@@ -45,7 +45,9 @@ def group(request, group_name):
             "share": True,}
     headers = {"Content-Type": "application/json"}
     r = requests.post(url, data=json.dumps(data), headers=headers)
-    print(r.json())
+    print(r.json()['response']['share_url'])
+    p = GroupChats(GroupName="Fred Flintstone", GroupId="18273rasd4")
+    p.save()
 
     return render(request, 'chat/chat.html', {
         #'access_token': mark_safe(json.dumps(access_token)),
