@@ -4,6 +4,7 @@ import requests
 import json
 import urllib.parse as urlparse
 from django.utils.safestring import mark_safe
+from .models import GroupChats
 
 # loads the index page with authentication token
 def index(request):
@@ -46,6 +47,9 @@ def group(request, group_name):
     headers = {"Content-Type": "application/json"}
     r = requests.post(url, data=json.dumps(data), headers=headers)
     print(r.json()['response']['share_url'])
+
+    #database stuff
+    #Foo.objects.create
     p = GroupChats(GroupName="Fred Flintstone", GroupId="18273rasd4")
     p.save()
 
