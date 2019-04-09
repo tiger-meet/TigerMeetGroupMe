@@ -6,7 +6,7 @@ import urllib.parse as urlparse
 from django.utils.safestring import mark_safe
 from .models import GroupChats
 
-def gettoken():
+def gettoken(request):
     http_host = request.META.get('HTTP_HOST')
     not_host = request.META.get('RAW_URI')
     temp_url = 'https://' + http_host + not_host
@@ -18,7 +18,7 @@ def gettoken():
 
 # loads the index page with authentication token
 def index(request):
-    token = gettoken()
+    token = gettoken(request)
 
     return render(request, 'chat/index.html', {'access_token': mark_safe(json.dumps(token))})
 
@@ -37,7 +37,7 @@ def joinsportschat(request):
 
 # creates a chat in your own personal groupme application based on which one you click
 def group(request, group_name):
-    token = gettoken()
+    token = gettoken(request)
 
     url = 'https://api.groupme.com/v3/groups?token=' + token
     url = str(url)
