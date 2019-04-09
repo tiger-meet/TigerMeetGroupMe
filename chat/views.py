@@ -33,7 +33,9 @@ def gmlogin(request):
 # joins sports chat
 def joinsportschat(request):
     code = GroupChats.objects.filter(GroupName="Fred Flintstone").values_list("GroupId", flat=True)[0]
-    return render(request, 'chat/joinsportschat.html', {})
+    return render(request, 'chat/joinsportschat.html', {
+        'GroupId': mark_safe(json.dumps(code))
+    })
 
 # creates a chat in your own personal groupme application based on which one you click
 def group(request, group_name):
