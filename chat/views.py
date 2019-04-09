@@ -32,7 +32,13 @@ def gmlogin(request):
 
 # joins sports chat
 def joinsportschat(request):
-    code = GroupChats.objects.filter(GroupName="Test").values_list("GroupId", flat=True)[0]
+    token = gettoken(request)
+    code = GroupChats.objects.filter(GroupName="sports").values_list("GroupId", flat=True)[0]
+    sharetoken = GroupChats.objects.filter(GroupName="sports").values_list("ShareToken", flat=True)[0]
+
+    url = "https://api.groupme.com/v3/groups/" + code + "join" + sharetoken + "token=" + token
+    requests.post(url)
+
     return render(request, 'chat/joinsportschat.html', {
         'GroupId': mark_safe(json.dumps(code))
     })
@@ -49,36 +55,22 @@ def group(request, group_name):
             "share": True,}
     headers = {"Content-Type": "application/json"}
     r = requests.post(url, data=json.dumps(data), headers=headers)
+
     print(r.json()['response']['share_url'])
+    shareurl = (r.json()['response']['share_url'])
+    code = str(shareurl[-16:-9])
+    sharetoken = str(shareurl[-8:])
+
 
     #database stuff
     #Foo.objects.create
-    p = GroupChats(GroupName="Test", GroupId="abcdefg")
+    p = GroupChats(GroupName=group_name, GroupId=code, ShareToken=sharetoken)
     p.save()
 
     return render(request, 'chat/chat.html', {
         #'access_token': mark_safe(json.dumps(access_token)),
         'group_name': mark_safe(json.dumps(group_name))
     })
-
-# unused but was the basis for the group view
-def chat(request):
-    http_host = request.META.get('HTTP_HOST')
-    not_host = request.META.get('RAW_URI')
-    temp_url = 'https://' + http_host + not_host
-
-    #temp_url = 'https://api.groupme.com/v3/groups?token=3ad70e40394a0137a92656b15122bc3d'
-    parsed = urlparse.urlparse(temp_url)
-    token_list = urlparse.parse_qs(parsed.query)['access_token']
-    token = str(token_list[0])
-    url = 'https://api.groupme.com/v3/groups?token=' + token
-    url = str(url)
-
-    data = {'name':'sports'}
-    headers = {"Content-Type": "application/json"}
-    requests.post(url, data=json.dumps(data), headers=headers)
-    #return HttpResponse(status=200)
-    return render(request, 'chat/chat.html', {})
 
 #def gmlogin(request):
     #my_dict['my url'] = 'https://oauth.groupme.com/oauth/authorize?client_id=BLmGX0dIG8rQGtSUZS4kcOVkP9RoNb65x01H8fxPSK9ANNR7'
