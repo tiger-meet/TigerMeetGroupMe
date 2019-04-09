@@ -32,7 +32,7 @@ def gmlogin(request):
 
 # joins sports chat
 def joinsportschat(request):
-    code = GroupChats.objects.filter(GroupName="Fred Flintstone").values_list("GroupId", flat=True)[0]
+    code = GroupChats.objects.filter(GroupName="Test").values_list("GroupId", flat=True)[0]
     return render(request, 'chat/joinsportschat.html', {
         'GroupId': mark_safe(json.dumps(code))
     })
@@ -53,7 +53,7 @@ def group(request, group_name):
 
     #database stuff
     #Foo.objects.create
-    p = GroupChats(GroupName="Fred Flintstone", GroupId="18273rasd4")
+    p = GroupChats(GroupName="Test", GroupId="abcdefg")
     p.save()
 
     return render(request, 'chat/chat.html', {
