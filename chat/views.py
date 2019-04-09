@@ -6,9 +6,7 @@ import urllib.parse as urlparse
 from django.utils.safestring import mark_safe
 from .models import GroupChats
 
-# loads the index page with authentication token
-def index(request):
-
+def gettoken():
     http_host = request.META.get('HTTP_HOST')
     not_host = request.META.get('RAW_URI')
     temp_url = 'https://' + http_host + not_host
@@ -16,6 +14,11 @@ def index(request):
     parsed = urlparse.urlparse(temp_url)
     token_list = urlparse.parse_qs(parsed.query)['access_token']
     token = str(token_list[0])
+    return token
+
+# loads the index page with authentication token
+def index(request):
+    token = gettoken()
 
     return render(request, 'chat/index.html', {'access_token': mark_safe(json.dumps(token))})
 
@@ -29,18 +32,12 @@ def gmlogin(request):
 
 # joins sports chat
 def joinsportschat(request):
+    code = GroupChats.objects.filter(GroupName="Fred Flintstone").values_list("GroupId", flat=True)[0]
     return render(request, 'chat/joinsportschat.html', {})
 
 # creates a chat in your own personal groupme application based on which one you click
 def group(request, group_name):
-    http_host = request.META.get('HTTP_HOST')
-    not_host = request.META.get('RAW_URI')
-    temp_url = 'https://' + http_host + not_host
-
-    # temp_url = 'https://api.groupme.com/v3/groups?token=3ad70e40394a0137a92656b15122bc3d'
-    parsed = urlparse.urlparse(temp_url)
-    token_list = urlparse.parse_qs(parsed.query)['access_token']
-    token = str(token_list[0])
+    token = gettoken()
 
     url = 'https://api.groupme.com/v3/groups?token=' + token
     url = str(url)
