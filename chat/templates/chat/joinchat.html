@@ -4,16 +4,18 @@
 <head>
     <script type="text/javascript">
     //var token = {{ access_token }};
-    var Group_id = {{ GroupId }};
+    var Group_id = {{ group_id }};
+    var Group_name = {{ group_name }};
     window.onload = function() {
     document.getElementById("myGroupId").innerHTML=Group_id;
+    document.getElementById("myGroupName").innerHTML=Group_name;
 }
     </script>
 </head>
 <body>
 
 <!--< id="myToken"> </a>-->
-<h1>Groupme <a id="myGroupId"> myGroupId</a> Joined!</h1>
+<h1>Groupme <a id="myGroupName"> myGroupName</a><a id="myGroupId"> myGroupId</a> Joined!</h1>
 
 </body>
 </html>

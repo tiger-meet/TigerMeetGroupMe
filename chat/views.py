@@ -31,10 +31,10 @@ def gmlogin(request):
     return render(request, 'chat/gmlogin.html', {})
 
 # joins sports chat
-def joinsportschat(request):
+def joinchat(request, group_name):
     token = gettoken(request)
-    code = GroupChats.objects.filter(GroupName="sports").values_list("GroupId", flat=True)[0]
-    sharetoken = GroupChats.objects.filter(GroupName="sports").values_list("ShareToken", flat=True)[0]
+    code = GroupChats.objects.filter(GroupName=group_name).values_list("GroupId", flat=True)[0]
+    sharetoken = GroupChats.objects.filter(GroupName=group_name).values_list("ShareToken", flat=True)[0]
 
     url = "https://api.groupme.com/v3/groups/" + code + "/join/" + sharetoken + "?token=" + token
     print(url)
@@ -44,8 +44,9 @@ def joinsportschat(request):
     print(r)
     #print(r.json()['response']['group']['share_url'])
 
-    return render(request, 'chat/joinsportschat.html', {
-        'GroupId': mark_safe(json.dumps(code))
+    return render(request, 'chat/joinchat.html', {
+        'group_id': mark_safe(json.dumps(code)),
+        'group_name': mark_safe(json.dumps(group_name))
     })
 
 # creates a chat in your own personal groupme application based on which one you click
