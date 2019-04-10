@@ -36,12 +36,12 @@ def joinsportschat(request):
     code = GroupChats.objects.filter(GroupName="sports").values_list("GroupId", flat=True)[0]
     sharetoken = GroupChats.objects.filter(GroupName="sports").values_list("ShareToken", flat=True)[0]
 
-    url = "https://api.groupme.com/v3/groups/" + code + "join/" + sharetoken + "?token=" + token
+    url = "https://api.groupme.com/v3/groups/" + code + "/join/" + sharetoken + "?token=" + token
+    print(url)
     r = requests.post(url)
     print(code)
     print(sharetoken)
-    print("heres where it should be!")
-    print(r)
+    #print(r)
     #print(r.json()['response']['group']['share_url'])
 
     return render(request, 'chat/joinsportschat.html', {
