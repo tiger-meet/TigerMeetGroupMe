@@ -50,7 +50,7 @@ def joinchat(request, group_name):
     })
 
 # creates a chat in your own personal groupme application based on which one you click
-def group(request, group_name):
+def createchat(request, group_name):
     token = gettoken(request)
 
     url = 'https://api.groupme.com/v3/groups?token=' + token
@@ -69,7 +69,7 @@ def group(request, group_name):
 
 
     #database stuff
-    GroupChats.objects.filter(GroupName=group_name).delete()
+    #GroupChats.objects.filter(GroupName=group_name).delete()
 
     p = GroupChats(GroupName=group_name, GroupId=code, ShareToken=sharetoken)
     p.save()
