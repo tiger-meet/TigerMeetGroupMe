@@ -69,7 +69,7 @@ def group(request, group_name):
 
 
     #database stuff
-    #GroupChats.objects.filter(GroupName=group_name).delete()
+    GroupChats.objects.filter(GroupName=group_name).delete()
 
     p = GroupChats(GroupName=group_name, GroupId=code, ShareToken=sharetoken)
     p.save()
