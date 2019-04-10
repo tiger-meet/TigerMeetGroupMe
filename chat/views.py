@@ -41,7 +41,7 @@ def joinsportschat(request):
     r = requests.post(url)
     print(code)
     print(sharetoken)
-    #print(r)
+    print(r)
     #print(r.json()['response']['group']['share_url'])
 
     return render(request, 'chat/joinsportschat.html', {
