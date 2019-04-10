@@ -38,6 +38,8 @@ def joinsportschat(request):
 
     url = "https://api.groupme.com/v3/groups/" + code + "join/" + sharetoken + "?token=" + token
     r = requests.post(url)
+    print(code)
+    print(sharetoken)
     print("heres where it should be!")
     print(r)
     #print(r.json()['response']['group']['share_url'])
