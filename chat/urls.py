@@ -1,11 +1,12 @@
 from django.urls import path, re_path
 
-from .views import index, about, chat, gmlogin, group
+from .views import index, about, gmlogin, group, joinsportschat
 
 urlpatterns = [
     path('', gmlogin, name='gmlogin'),
     path('index/', index, name='index'),
     path('about/', about, name='about'),
+    path('joinsportschat/', joinsportschat, name='joinsportschat'),
     # This is the url re for making any chat
     re_path(r'^makechat/(?P<group_name>[^/]+)', group, name='group')
     #path('gmlogin/', gmlogin, name='gmlogin'),
