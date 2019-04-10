@@ -37,7 +37,8 @@ def joinsportschat(request):
     sharetoken = GroupChats.objects.filter(GroupName="sports").values_list("ShareToken", flat=True)[0]
 
     url = "https://api.groupme.com/v3/groups/" + code + "join/" + sharetoken + "?token=" + token
-    requests.post(url)
+    r = requests.post(url)
+    print(r.json()['response']['share_url'])
 
     return render(request, 'chat/joinsportschat.html', {
         'GroupId': mark_safe(json.dumps(code))
