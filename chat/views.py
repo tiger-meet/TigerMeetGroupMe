@@ -69,7 +69,8 @@ def createchat(request, group_name):
 
 
     #database stuff
-    GroupChats.objects.filter(GroupName=group_name).delete()
+    #don't delete this line below! It is used to delete items in database
+    #GroupChats.objects.filter(GroupName=group_name).delete()
 
     p = GroupChats(GroupName=group_name, GroupId=code, ShareToken=sharetoken)
     p.save()
