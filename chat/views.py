@@ -45,12 +45,14 @@ def gmlogin(request):
     return render(request, 'chat/gmlogin.html', {})
 
 # loads the events page
-def events(request):
+def events(request, group_name):
     token = gettoken(request)
     if token == 'none':
         return render(request, 'chat/gmlogin.html', {})
     else:
-        return render(request, 'chat/events.html', {'access_token': mark_safe(json.dumps(token))})
+        return render(request, 'chat/events.html', {'access_token': mark_safe(json.dumps(token)),
+                                                    'group_name': mark_safe(json.dumps(group_name))
+                                                    })
 
 # joins sports chat
 def joinchat(request, group_name):
