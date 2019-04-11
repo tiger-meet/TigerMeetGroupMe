@@ -16,11 +16,12 @@ def gettoken(request):
     #parse the url for the token, if there is one
     parsed = urlparse.urlparse(temp_url)
     token_dict = urlparse.parse_qs(parsed.query)
+    print(token_dict)
     print(token_dict == {})
 
     #if there isn't a token, load the groupme login page
     if token_dict == {}:
-        return render(request, 'chat/gmlogin.html', {})
+        return False
 
     #if there is a token, continue onward
     else:
@@ -31,8 +32,10 @@ def gettoken(request):
 # loads the index page with authentication token
 def index(request):
     token = gettoken(request)
-
-    return render(request, 'chat/index.html', {'access_token': mark_safe(json.dumps(token))})
+    if False:
+        return render(request, 'chat/gmlogin.html', {})
+    else:
+        return render(request, 'chat/index.html', {'access_token': mark_safe(json.dumps(token))})
 
 # loads the about page
 def about(request):
@@ -45,6 +48,7 @@ def gmlogin(request):
 # joins sports chat
 def joinchat(request, group_name):
     token = gettoken(request)
+
     code = GroupChats.objects.filter(GroupName=group_name).values_list("GroupId", flat=True)[0]
     sharetoken = GroupChats.objects.filter(GroupName=group_name).values_list("ShareToken", flat=True)[0]
 
