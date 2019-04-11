@@ -14,13 +14,14 @@
     document.getElementById("myGroup").innerHTML=name;
     document.getElementById("myGroup1").innerHTML=name;
     document.getElementById("myGroup2").innerHTML=name;
+    allurl = '/makechat/' + name;
 }
     </script>
 </head>
 <body>
 
 <!--< id="myToken"> </a>-->
-<h1> Events Page for <a id="myGroup">chatname</a></h1>
+<h1> Events Page <a id="myGroup">chatname</a></h1>
 <!-- <a href="fill" onclick="location.href='/test/'+ test; return false;" >Join <a id="myGroup1">chatname</a> Chat</a> -->
     <a href="fill" onclick="location.href=allurl; return false;" >Join <a id="myGroup1">chatname</a> Chat</a>
 
