@@ -16,6 +16,7 @@ def gettoken(request):
     #parse the url for the token, if there is one
     parsed = urlparse.urlparse(temp_url)
     token_dict = urlparse.parse_qs(parsed.query)
+    print(token_dict == {})
 
     #if there isn't a token, load the groupme login page
     if token_dict == {}:
