@@ -21,7 +21,7 @@ def gettoken(request):
 
     #if there isn't a token, load the groupme login page
     if token_dict == {}:
-        return False
+        return 'none'
 
     #if there is a token, continue onward
     else:
@@ -32,7 +32,7 @@ def gettoken(request):
 # loads the index page with authentication token
 def index(request):
     token = gettoken(request)
-    if not token:
+    if token == 'none':
         return render(request, 'chat/gmlogin.html', {})
     else:
         return render(request, 'chat/index.html', {'access_token': mark_safe(json.dumps(token))})
