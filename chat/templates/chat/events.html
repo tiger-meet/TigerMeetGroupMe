@@ -10,11 +10,12 @@
     <script type="text/javascript">
     var name = {{ group_name }};
     var allurl = '/makechat/' + name;
+    var url = "?access_token=" + {{ access_token }};
     window.onload = function() {
     document.getElementById("myGroup").innerHTML=name;
     document.getElementById("myGroup1").innerHTML=name;
-    document.getElementById("myGroup2").innerHTML=name;
-    allurl = '/makechat/' + name;
+    //document.getElementById("myGroup2").innerHTML=name;
+    allurl = '/makechat/' + name + url;
 }
     </script>
 </head>
