@@ -32,7 +32,7 @@ def gettoken(request):
 # loads the index page with authentication token
 def index(request):
     token = gettoken(request)
-    if False:
+    if not token:
         return render(request, 'chat/gmlogin.html', {})
     else:
         return render(request, 'chat/index.html', {'access_token': mark_safe(json.dumps(token))})
