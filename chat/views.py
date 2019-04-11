@@ -7,7 +7,6 @@ from django.utils.safestring import mark_safe
 from .models import GroupChats
 
 def gettoken(request):
-    #potench add a try catch here to always redirect to gmlogin if there isn't a token
     http_host = request.META.get('HTTP_HOST')
     not_host = request.META.get('RAW_URI')
     temp_url = 'https://' + http_host + not_host
@@ -19,7 +18,7 @@ def gettoken(request):
     print(token_dict)
     print(token_dict == {})
 
-    #if there isn't a token, load the groupme login page
+    #if there isn't a token, return the string 'none' to be later used by functions
     if token_dict == {}:
         return 'none'
 
@@ -44,6 +43,14 @@ def about(request):
 # loads the groupme authentication page
 def gmlogin(request):
     return render(request, 'chat/gmlogin.html', {})
+
+# loads the events page
+def events(request):
+    token = gettoken(request)
+    if token == 'none':
+        return render(request, 'chat/gmlogin.html', {})
+    else:
+        return render(request, 'chat/events.html', {'access_token': mark_safe(json.dumps(token))})
 
 # joins sports chat
 def joinchat(request, group_name):
