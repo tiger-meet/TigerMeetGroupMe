@@ -48,70 +48,71 @@ def gmlogin(request):
 # joins sports chat
 def joinchat(request, group_name):
     token = gettoken(request)
+    if token == 'none':
+        return render(request, 'chat/gmlogin.html', {})
 
-    code = GroupChats.objects.filter(GroupName=group_name).values_list("GroupId", flat=True)[0]
-    sharetoken = GroupChats.objects.filter(GroupName=group_name).values_list("ShareToken", flat=True)[0]
+    else:
+        code = GroupChats.objects.filter(GroupName=group_name).values_list("GroupId", flat=True)[0]
+        sharetoken = GroupChats.objects.filter(GroupName=group_name).values_list("ShareToken", flat=True)[0]
 
-    url = "https://api.groupme.com/v3/groups/" + code + "/join/" + sharetoken + "?token=" + token
-    print(url)
-    r = requests.post(url)
-    #print(code)
-    #print(sharetoken)
-    #print(r)
-    #print(r.json()['response']['group']['share_url'])
+        url = "https://api.groupme.com/v3/groups/" + code + "/join/" + sharetoken + "?token=" + token
+        print(url)
+        r = requests.post(url)
+        #print(code)
+        #print(sharetoken)
+        #print(r)
+        #print(r.json()['response']['group']['share_url'])
 
-    return render(request, 'chat/joinchat.html', {
-        'group_id': mark_safe(json.dumps(code)),
-        'group_name': mark_safe(json.dumps(group_name))
-    })
+        return render(request, 'chat/joinchat.html', {
+            'group_id': mark_safe(json.dumps(code)),
+            'group_name': mark_safe(json.dumps(group_name))
+        })
 
 # creates a chat in your own personal groupme application based on which one you click
 def createchat(request, group_name):
     token = gettoken(request)
 
-    url = 'https://api.groupme.com/v3/groups?token=' + token
-    url = str(url)
+    if token == 'none':
+        return render(request, 'chat/gmlogin.html', {})
+    else:
 
-    try:
-        GroupChats.objects.filter(GroupName=group_name).values_list("GroupId", flat=True)[0]
-        group_name = 'didn\'t create group ' + group_name
-        return render(request, 'chat/chat.html', {
-            # 'access_token': mark_safe(json.dumps(access_token)),
-            'group_name': mark_safe(json.dumps(group_name))
-        })
+        url = 'https://api.groupme.com/v3/groups?token=' + token
+        url = str(url)
 
-    except:
+        try:
+            GroupChats.objects.filter(GroupName=group_name).values_list("GroupId", flat=True)[0]
+            group_name = 'didn\'t create group ' + group_name
+            return render(request, 'chat/chat.html', {
+                # 'access_token': mark_safe(json.dumps(access_token)),
+                'group_name': mark_safe(json.dumps(group_name))
+            })
 
-        chatname = "TigerMeet " + group_name
-        data = {'name': chatname,
-                "share": True,}
-        headers = {"Content-Type": "application/json"}
-        r = requests.post(url, data=json.dumps(data), headers=headers)
+        except:
 
-        print(r.json()['response']['share_url'])
-        shareurl = (r.json()['response']['share_url'])
-        code = str(shareurl[-17:-9])
-        sharetoken = str(shareurl[-8:])
+            chatname = "TigerMeet " + group_name
+            data = {'name': chatname,
+                    "share": True,}
+            headers = {"Content-Type": "application/json"}
+            r = requests.post(url, data=json.dumps(data), headers=headers)
+
+            print(r.json()['response']['share_url'])
+            shareurl = (r.json()['response']['share_url'])
+            code = str(shareurl[-17:-9])
+            sharetoken = str(shareurl[-8:])
 
 
-        #database stuff
-        #don't delete this line below! It is used to delete items in database
-        #GroupChats.objects.filter(GroupName=group_name).delete()
+            #database stuff
+            #don't delete this line below! It is used to delete items in database
+            #GroupChats.objects.filter(GroupName=group_name).delete()
 
-        p = GroupChats(GroupName=group_name, GroupId=code, ShareToken=sharetoken)
-        p.save()
+            p = GroupChats(GroupName=group_name, GroupId=code, ShareToken=sharetoken)
+            p.save()
 
-        return render(request, 'chat/chat.html', {
-            #'access_token': mark_safe(json.dumps(access_token)),
-            'group_name': mark_safe(json.dumps(group_name))
-        })
+            return render(request, 'chat/chat.html', {
+                #'access_token': mark_safe(json.dumps(access_token)),
+                'group_name': mark_safe(json.dumps(group_name))
+            })
 
-#def gmlogin(request):
-    #my_dict['my url'] = 'https://oauth.groupme.com/oauth/authorize?client_id=BLmGX0dIG8rQGtSUZS4kcOVkP9RoNb65x01H8fxPSK9ANNR7'
-    #return HttpResponse(json.dumps([my_dict]))
-#def g(request):
-    #url = "https://oauth.groupme.com/oauth/authorize?client_id=BLmGX0dIG8rQGtSUZS4kcOVkP9RoNb65x01H8fxPSK9ANNR7"
-    #return response.write("<p>Here's the text of the Web page.</p>")
 
 # unused
 def redirect(request):
