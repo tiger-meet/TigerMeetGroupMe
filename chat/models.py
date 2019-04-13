@@ -11,4 +11,4 @@ class GroupChats(models.Model):
 class Todo(models.Model):
     title = models.CharField(max_length=50)
     text = models.CharField(max_length=50)
-    eventTime = models.DateTimeField(default=datetime.now, blank=True)
+    eventTime = models.CharField(max_length=50)
