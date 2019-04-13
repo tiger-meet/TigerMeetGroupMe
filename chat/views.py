@@ -136,5 +136,5 @@ def todo(request):
     context = {
         'todos':todos
     }
-    return render(request, 'todo.html', context)
+    return render(request, 'chat/todo.html', context)
 
