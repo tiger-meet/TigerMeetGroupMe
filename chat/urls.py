@@ -1,6 +1,6 @@
 from django.urls import path, re_path
 
-from .views import index, about, gmlogin, createchat, joinchat, events
+from .views import index, about, gmlogin, createchat, joinchat, events, todo
 
 urlpatterns = [
     path('', gmlogin, name='gmlogin'),
