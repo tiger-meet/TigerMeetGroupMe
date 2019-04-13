@@ -12,6 +12,6 @@ urlpatterns = [
     re_path(r'^makechat/(?P<group_name>[^/]+)', createchat, name='createchat'),
 
     path('todo/', todo, name='todo'),
-    re_path(r'^add', add, name='add')
-    re_path(r'^details/(?P<id>\w{0,50})/$', details, name='details'),
+    re_path(r'^add', add, name='add'),
+    re_path(r'^details/(?P<id>\w{0,50})/$', details, name='details')
 ]
