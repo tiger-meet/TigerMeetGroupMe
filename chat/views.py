@@ -1,9 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import requests
 import json
 import urllib.parse as urlparse
 from django.utils.safestring import mark_safe
-from .models import GroupChats
+from .models import GroupChats, Todo
 from django.contrib import admin
 
 admin.site.register(GroupChats)
@@ -127,3 +127,14 @@ def createchat(request, group_name):
 # unused
 def redirect(request):
     return render(request, 'chat/chat.html', {})
+
+
+
+def todo(request):
+    todos = Todo.objects.all()[:10]
+
+    context = {
+        'todos':todos
+    }
+    return render(request, 'todo.html', context)
+
