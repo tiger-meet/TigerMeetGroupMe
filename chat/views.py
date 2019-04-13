@@ -142,10 +142,19 @@ def add(request):
     if(request.method == 'POST'):
         title = request.POST['title']
         text = request.POST['text']
+        time = request.POST['time']
 
-        todo = Todo(title=title, text=text)
-        todo.save()
+        todo = Todo(title=title, text=text, time=time)
+        #todo.save()
 
         return render(request, 'chat/index.html')
     else:
         return render(request, 'chat/add.html')
+
+def details(request, id):
+    todo = Todo.objects.get(id=id)
+
+    context = {
+        'todo':todo
+    }
+    return render(request, 'chat/details.html', context)

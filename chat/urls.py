@@ -1,6 +1,6 @@
 from django.urls import path, re_path
 
-from .views import index, about, gmlogin, createchat, joinchat, events, todo, add
+from .views import index, about, gmlogin, createchat, joinchat, events, todo, add, details
 
 urlpatterns = [
     path('', gmlogin, name='gmlogin'),
@@ -13,4 +13,5 @@ urlpatterns = [
 
     path('todo/', todo, name='todo'),
     re_path(r'^add', add, name='add')
+    re_path(r'^details/(?P<id>\w{0,50})/$', details, name='details'),
 ]
