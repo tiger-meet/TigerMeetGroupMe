@@ -145,7 +145,7 @@ def add(request):
         time = request.POST['time']
 
         todo = Todo(title=title, text=text, time=time)
-        #todo.save()
+        todo.save()
 
         return render(request, 'chat/index.html')
     else:
