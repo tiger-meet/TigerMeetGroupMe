@@ -144,7 +144,7 @@ def add(request):
         text = request.POST['text']
 
         todo = Todo(title=title, text=text)
-        todo.save()
+        #todo.save()
 
         return redirect('/chat')
     else:
