@@ -1,6 +1,6 @@
 from django.urls import path, re_path
 
-from .views import index, about, gmlogin, createchat, joinchat, events, todo
+from .views import index, about, gmlogin, createchat, joinchat, events, todo, add
 
 urlpatterns = [
     path('', gmlogin, name='gmlogin'),
@@ -12,4 +12,5 @@ urlpatterns = [
     re_path(r'^makechat/(?P<group_name>[^/]+)', createchat, name='createchat'),
 
     path('todo/', todo, name='todo')
+    re_path(r'^add', add, name='add')
 ]
