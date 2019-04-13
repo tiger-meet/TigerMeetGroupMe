@@ -1,10 +1,12 @@
-from django.http import HttpResponse
 from django.shortcuts import render
 import requests
 import json
 import urllib.parse as urlparse
 from django.utils.safestring import mark_safe
 from .models import GroupChats
+from django.contrib import admin
+
+admin.site.register(GroupChats)
 
 def gettoken(request):
     http_host = request.META.get('HTTP_HOST')
@@ -67,7 +69,6 @@ def joinchat(request, group_name):
         url = "https://api.groupme.com/v3/groups/" + code + "/join/" + sharetoken + "?token=" + token
         print(url)
         r = requests.post(url)
-        #print(code)
         #print(sharetoken)
         #print(r)
         #print(r.json()['response']['group']['share_url'])
