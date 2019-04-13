@@ -125,8 +125,8 @@ def createchat(request, group_name):
 
 
 # unused
-def redirect(request):
-    return render(request, 'chat/chat.html', {})
+#def redirect(request):
+ #   return render(request, 'chat/chat.html', {})
 
 
 
