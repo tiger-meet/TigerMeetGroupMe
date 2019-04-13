@@ -26,10 +26,11 @@
 <h1> Events Page <a id="myGroup">chatname</a></h1>
 <!-- <a href="fill" onclick="location.href='/test/'+ test; return false;" >Join <a id="myGroup1">chatname</a> Chat</a> -->
 
+          <ul>
       {% for todo in todos %}
         <li><a href="/details/{{todo.id}}">{{todo.title}}</a>: {{todo.text}}</li>
       {% endfor %}
-      
+  </ul>
     <a id ="link" href="fill" onclick="location.href=allurl; return false;" >replace this</a>
 
 <p>chat will not be made if there already exists a chat of the same name</p>
