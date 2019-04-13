@@ -149,7 +149,7 @@ def add(request):
 
         return render(request, 'chat/index.html')
     else:
-        return render(request, 'chat/add.html')
+        return render(request, 'chat/index.html')
 
 def details(request, id):
     todo = Todo.objects.get(id=id)
