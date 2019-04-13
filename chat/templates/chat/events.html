@@ -12,6 +12,7 @@
     var url = "?access_token=" + {{ access_token }};
     var allurl = '/makechat/' + name + url;
     var joinurl = '/join/' + name + '/chat' +url;
+    var addurl = '/add/'
     window.onload = function() {
     document.getElementById("myGroup").innerHTML=name;
     document.getElementById("link").innerHTML='Create ' + name + ' chat';
@@ -29,5 +30,6 @@
 <p>chat will not be made if there already exists a chat of the same name</p>
 
     <a id = "link2" class="item" href='fill' onclick="location.href=joinurl; return false;" >replace this</a>
+    <a id = "link3" class="item" href='fill' onclick="location.href=addurl; return false;" >replace this</a>
 </body>
 </html>
