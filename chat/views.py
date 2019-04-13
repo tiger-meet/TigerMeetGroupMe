@@ -146,6 +146,6 @@ def add(request):
         todo = Todo(title=title, text=text)
         #todo.save()
 
-        return redirect('/chat')
+        return render(request, 'chat/index.html')
     else:
         return render(request, 'chat/add.html')
