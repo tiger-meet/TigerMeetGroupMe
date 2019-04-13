@@ -148,4 +148,4 @@ def add(request):
 
         return redirect('/chat')
     else:
-        return render(request, 'add.html')
+        return render(request, 'chat/add.html')
