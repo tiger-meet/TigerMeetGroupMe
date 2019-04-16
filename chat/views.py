@@ -138,7 +138,7 @@ def todo(request):
     }
     return render(request, 'chat/todo.html', context)
 
-def add(request, group_name):
+def add(request):
     token = gettoken(request)
     if(request.method == 'POST'):
         title = request.POST['title']
