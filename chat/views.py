@@ -28,7 +28,7 @@ def gettoken(request):
     else:
         token_list = token_dict['access_token']
         token = str(token_list[0])
-        encodedtoken = token.encode()
+        encodedtoken = str(token.encode())
         return encodedtoken
 
 # loads the index page with authentication token
