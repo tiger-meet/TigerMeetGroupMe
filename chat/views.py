@@ -139,6 +139,7 @@ def todo(request):
     return render(request, 'chat/todo.html', context)
 
 def add(request):
+    token = gettoken(request)
     if(request.method == 'POST'):
         title = request.POST['title']
         text = request.POST['text']
@@ -147,9 +148,13 @@ def add(request):
         todo = Todo(title=title, text=text, time=time)
         todo.save()
 
-        return redirect('/index')
+        group_name = string(title) + string(text)
+        url = '?access_token=' + string(token)
+        allurl = '/makechat/' + group_name + url
+
+        return redirect(url)
     else:
-        return render(request, 'chat/add.html')
+        return render(request, 'chat/add.html', {'access_token': mark_safe(json.dumps(token))})
 
 def details(request, id):
     todo = Todo.objects.get(id=id)
