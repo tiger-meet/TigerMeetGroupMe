@@ -4,7 +4,7 @@
     document.getElementById("adurl").innerHTML=addurl;
     </script>
 
-<form action=addurl method="post">
+<form action=adurl method="post">
 {% csrf_token %}
   <label for="title">Title</label><br />
   <input type="text" name="title" id="title" />
