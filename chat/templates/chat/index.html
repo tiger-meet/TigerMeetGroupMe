@@ -168,31 +168,80 @@
       <div class="ui basic segment">
         <h1>TigerMeet</h1>
 
-        What chat room would you like to enter?<br/>
-        <div class="ui action input">
-          <input id="room-name-input" type="text"/>
-          <button id="room-name-submit" class="ui button">Search</button>
+        <h2>What chat room would you like to enter?</h2>
+
+
+
+        <h1>Team</h1>
+        <div class="ui four column stackable grid">
+      
+          <div class="column">
+            <div class="ui fluid card">
+              <div class="image">
+                <img src="{% static 'alin.png' %}">
+              </div>
+              <div class="content">
+                <div class="header">Andrew Lin '21</div>
+                <div class="description">
+                  <div class="ui divider"></div>
+                  <p>arlin(at)princeton.edu</p>
+                </div>
+              </div>
+            </div>
+          </div>
+      
+          <div class="column">
+            <div class="ui fluid card">
+              <div class="image">
+                <img src="{% static 'bkiyan.png' %}">
+              </div>
+              <div class="content">
+                <div class="header">Bora Kiyan '20 <span class="ui label">Team Leader</span></div>
+                <div class="description">
+                  <div class="ui divider"></div>
+                  <p>bkiyan(at)princeton.edu</p>
+                </div>
+              </div>
+            </div>
+          </div>
+      
+          <div class="column">
+            <div class="ui fluid card">
+              <div class="image">
+                <img src="{% static 'dwu.jpg' %}">
+              </div>
+              <div class="content">
+                <div class="header">David Wu '19</div>
+                <div class="description">
+                  <div class="ui divider"></div>
+                  <p>dpwu(at)princeton.edu</p>
+                </div>
+              </div>
+            </div>
+          </div>
+      
+          <div class="column">
+            <div class="ui fluid card">
+              <div class="image">
+                <img src="{% static 'rpark.jpg' %}">
+              </div>
+              <div class="content">
+                <div class="header">Raymond Park '21</div>
+                <div class="description">
+                  <div class="ui divider"></div>
+                  <p>rkp2(at)princeton.edu</p>
+                </div>
+              </div>
+            </div>
+          </div>
+      
         </div>
+        
+
+
       </div>
     </div>
 
   </div>
-
-  <script>
-      document.querySelector('#room-name-input').focus();
-      document.querySelector('#room-name-input').onkeyup = function(e)
-      {
-          if (e.keyCode === 13) // Enter, Return
-          {
-              document.querySelector('#room-name-submit').click();
-          }
-      };
-
-      document.querySelector('#room-name-submit').onclick = function(e)
-      {
-          const roomName = document.querySelector('#room-name-input').value;
-          window.location.pathname = '/' + roomName;
-      };
-  </script>
 </body>
 </html>
