@@ -28,12 +28,12 @@ def gettoken(request):
     else:
         token_list = token_dict['access_token']
         token = str(token_list[0])
-        encodedtoken = str(token.encode())
-        return encodedtoken
+        return token
 
 # loads the index page with authentication token
 def index(request):
-    encodedtoken = gettoken(request)
+    token = gettoken(request)
+    encodedtoken = str(token.encode())
     if encodedtoken == 'none':
         return render(request, 'chat/gmlogin.html', {})
     else:
