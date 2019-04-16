@@ -37,7 +37,7 @@ def index(request):
     if encodedtoken == 'none':
         return render(request, 'chat/gmlogin.html', {})
     else:
-        return render(request, 'chat/index.html', {'access_token': mark_safe(json.dumps(token))})
+        return render(request, 'chat/index.html', {'access_token': mark_safe(json.dumps(encodedtoken))})
 
 # loads the about page
 def about(request):
