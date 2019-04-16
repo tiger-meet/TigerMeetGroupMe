@@ -67,7 +67,7 @@ def joinchat(request, group_name):
         code = GroupChats.objects.filter(GroupName=group_name).values_list("GroupId", flat=True)[0]
         sharetoken = GroupChats.objects.filter(GroupName=group_name).values_list("ShareToken", flat=True)[0]
 
-        url = "https://api.groupme.com/v3/groups/" + code + "/join/" + sharetoken + "?token=" + token
+        url = "https://api.groupme.com/v3/groups/" + code + "/join/" + sharetoken + "?token=" + bytes(encodedtoken, 'utf8').decode()
         print(url)
         r = requests.post(url)
         #print(sharetoken)
