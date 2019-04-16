@@ -87,6 +87,7 @@ def createchat(request, group_name):
         return render(request, 'chat/gmlogin.html', {})
     else:
 
+        print(encodedtoken)
         url = 'https://api.groupme.com/v3/groups?token=' + bytes(encodedtoken, 'utf8').decode()
         url = str(url)
 
