@@ -60,6 +60,7 @@ def events(request, group_name):
 # joins sports chat
 def joinchat(request, group_name):
     encodedtoken = gettoken(request)
+    print(encodedtoken)
     if encodedtoken == 'none':
         return render(request, 'chat/gmlogin.html', {})
 
