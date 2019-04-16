@@ -12,7 +12,7 @@
     var url = "?access_token=" + {{ access_token }};
     var allurl = '/makechat/' + name + url;
     var joinurl = '/join/' + name + '/chat' +url;
-    var addurl = '/add/' url;
+    var addurl = '/add/' + name + url;
     window.onload = function() {
     document.getElementById("myGroup").innerHTML=name;
     document.getElementById("link").innerHTML='Create ' + name + ' chat';
