@@ -152,7 +152,7 @@ def add(request):
         url = '?access_token=' + token
         allurl = '/makechat/' + group_name + url
 
-        return redirect(url)
+        return redirect(allurl)
     else:
         return render(request, 'chat/add.html', {'access_token': mark_safe(json.dumps(token))})
 
