@@ -1,4 +1,9 @@
-<form action="{% url 'add' %}" method="post">
+<script type="text/javascript">
+    var url = "?access_token=" + {{ access_token }};
+    var addurl = '/add/' + url;
+    </script>
+
+<form action=addurl method="post">
 {% csrf_token %}
   <label for="title">Title</label><br />
   <input type="text" name="title" id="title" />

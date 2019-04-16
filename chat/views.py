@@ -148,7 +148,7 @@ def add(request):
         todo = Todo(title=title, text=text, time=time)
         todo.save()
 
-        group_name = title + text
+        group_name = title + time
         url = '?access_token=' + token
         allurl = '/makechat/' + group_name + url
 
