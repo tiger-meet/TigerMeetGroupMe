@@ -33,12 +33,12 @@
     var name = {{ group_name }};
     var url = "?access_token=" + {{ access_token }};
     var allurl = '/makechat/' + name + url;
-    var joinurl = '/join/' + name + '/chat' +url;
+    var joinurl = '/join/' + name + '/chat' + url;
     window.onload = function() 
     {
       document.getElementById("myGroup").innerHTML=name;
-      document.getElementById("link").innerHTML='Create ' + name + ' chat';
-      document.getElementById("link2").innerHTML='Join ' + name + ' chat';
+      document.getElementById("link").innerHTML = "Create " + name + " Chat";
+      document.getElementById("link2").innerHTML = "Join " + name + " Chat";
     }
   </script>
 </head>
@@ -91,17 +91,16 @@
       <h1 class="ui image header">
         <img src="{% static 'cub.png' %}" class="image">
         <div class="content">
-          <!--< id="myToken"> </a>-->
-          <h1> Events Page <a id="myGroup">chatname</a></h1>
+          <h1><span id="myGroup">chatname</span> Events</h1>
         </div>
       </h1>
 
       <!-- <a href="fill" onclick="location.href='/test/'+ test; return false;" >Join <a id="myGroup1">chatname</a> Chat</a> -->
-      <a id ="link" href="fill" onclick="location.href=allurl; return false;" >replace this</a>
+      <a id="link" href="fill" onclick="location.href=allurl; return false;" >replace this</a>
 
-      <p>chat will not be made if there already exists a chat of the same name</p>
+      <p>A chat will not be made if there already exists a chat of the same name.</p>
 
-      <a id = "link2" class="item" href='fill' onclick="location.href=joinurl; return false;" >replace this</a>
+      <a id="link2" class="item" href="fill" onclick="location.href=joinurl; return false;" >replace this</a>
   
     </div>
   </div>
