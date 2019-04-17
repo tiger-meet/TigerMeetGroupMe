@@ -36,7 +36,7 @@
     var joinurl = '/join/' + name + '/chat' + url;
     window.onload = function() 
     {
-      document.getElementById("myGroup").innerHTML=name;
+      document.getElementById("myGroup").innerHTML = name + "Events";
       document.getElementById("link").innerHTML = "Create " + name + " Chat";
       document.getElementById("link2").innerHTML = "Join " + name + " Chat";
     }
@@ -88,10 +88,10 @@
   <div class="ui middle aligned center aligned grid" style="margin: 10px;">
     <div class="column">
 
-      <h1 class="ui image header">
+      <h1 class="ui image header" id="myGroup">
         <img src="{% static 'cub.png' %}" class="image">
         <div class="content">
-          <h1><span id="myGroup">chatname</span> Events</h1>
+          chatname
         </div>
       </h1>
 
