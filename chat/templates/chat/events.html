@@ -1,26 +1,117 @@
+<!-- chat/templates/chat/events.html -->
+
+{% load static %}
+
 <!DOCTYPE html>
 <html>
 <head>
+  <!-- Meta -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-     <script type="text/javascript">
-  //var url = "?access_token=" + {{ access_token }};
-  //var test = + {{ group_name }};
-  </script>
+  <!-- Setup -->
+  <title>TigerMeet</title>
+  <link rel="icon" type="image/png" href="{% static 'cub.png' %}">
 
-    <script type="text/javascript">
+  <!-- Semantic UI -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+  <script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+
+  <link rel="stylesheet" href="{% static 'events.css' %}">
+
+  <script type="text/javascript">
     var name = {{ group_name }};
     var url = "?access_token=" + {{ access_token }};
     var allurl = '/makechat/' + name + url;
-    var joinurl = '/join/' + name + '/chat' +url;
     var addurl = '/add/' + url;
-    window.onload = function() {
-    document.getElementById("myGroup").innerHTML=name;
-    document.getElementById("link").innerHTML='Create ' + name + ' chat';
-    document.getElementById("link2").innerHTML='Join ' + name + ' chat';
-}
-    </script>
+    var joinurl = '/join/' + name + '/chat' + url;
+    window.onload = function()
+    {
+      document.getElementById("myGroup").innerHTML = name + " Events";
+      document.getElementById("link").innerHTML = "Create " + name + " Chat";
+      document.getElementById("link2").innerHTML = "Join " + name + " Chat";
+    }
+  </script>
 </head>
 <body>
+
+  <!-- Navbar -->
+  <div class="ui pointing menu" style="margin-bottom: 0; border-radius: 0;">
+    <a class="item" href="/">
+      <img src="{% static 'cub.png' %}">
+    </a>
+    <div class="ui simple dropdown item">
+      Chatrooms <i class="dropdown icon"></i>
+      <div class="menu">
+        <!-- Changes url to /chatname with the authentication token appended -->
+        <a class="item" href="fill" onclick="location.href='/category/sports'+url; return false;" >
+          <i class="futbol alternate icon"></i>
+          Sports
+        </a>
+        <a class="item" href="fill" onclick="location.href='/category/workingout'+url; return false;" >
+          <i class="heart icon"></i>
+          Working Out
+        </a>
+        <a class="item" href="fill" onclick="location.href='/category/videogames'+url; return false;" >
+          <i class="gamepad icon"></i>
+          Video Games
+        </a>
+        <a class="item" href="fill" onclick="location.href='/category/transportation'+url; return false;" >
+          <i class="car icon"></i>
+          Transportation
+        </a>
+        <a class="item" href="fill" onclick="location.href='/category/problemsetgroups'+url; return false;" >
+          <i class="pencil alternate icon"></i>
+          Problem Set Groups
+        </a>
+        <a class="item" href="fill" onclick="location.href='/category/miscellaneous'+url; return false;" >
+          <i class="ellipsis horizontal icon"></i>
+          Miscellaneous
+        </a>
+      </div>
+    </div>
+    <div class="right menu">
+      <a class="ui item" href="/about">
+        About
+      </a>
+      <a class="ui item" href="/">
+        Logout
+      </a>
+    </div>
+  </div>
+
+  <div class="ui middle aligned center aligned grid" style="margin: 10px;">
+
+    <div class="column">
+
+      <button class="ui left floated button" type="button" onclick="location.href = '/index'+url;">Back to Home</button>
+
+      <br/>
+
+      <h1 class="ui image header" >
+        <img src="{% static 'cub.png' %}" class="image">
+        <div class="content" id="myGroup"></div>
+      </h1>
+
+      <br/>
+      <!-- <a href="fill" onclick="location.href='/test/'+ test; return false;" >Join <a id="myGroup1">chatname</a> Chat</a> -->
+
+      <a class="ui button" id="link" href="fill" onclick="location.href=allurl; return false;">Test</a>
+      <div class="ui bottom attached warning message">
+        A chat will not be made if there already exists a chat of the same name.
+      </div>
+
+      <a class="ui button" id="link2" class="item" href="fill" onclick="location.href=joinurl; return false;">Test</a>
+
+    </div>
+  </div>
+
+<button onclick="location.href = addurl;">add new event</button>
 
 <p>display</p>
   <ul>
@@ -29,17 +120,5 @@
       {% endfor %}
   </ul>
 
-<!--< id="myToken"> </a>-->
-<h1> Events Page <a id="myGroup">chatname</a></h1>
-<!-- <a href="fill" onclick="location.href='/test/'+ test; return false;" >Join <a id="myGroup1">chatname</a> Chat</a> -->
-
-
-    <a id ="link" href="fill" onclick="location.href=allurl; return false;" >replace this</a>
-
-<p>chat will not be made if there already exists a chat of the same name</p>
-
-    <a id = "link2" class="item" href='fill' onclick="location.href=joinurl; return false;" >replace this</a>
-    <p> </p>
-    <button onclick="location.href = addurl;">add new event</button>
 </body>
 </html>

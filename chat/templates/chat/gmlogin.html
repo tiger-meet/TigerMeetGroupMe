@@ -23,9 +23,14 @@
   crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
 
+  <script type="text/javascript">
+    const url = "?access_token=" + {{ access_token }};
+  </script>
+  
   <link rel="stylesheet" href="{% static 'gmlogin.css' %}">
 </head>
 <body>
+
   <!-- Navbar -->
   <div class="ui pointing menu" style="margin-bottom: 0; border-radius: 0;">
     <a class="item" href="/">
@@ -34,27 +39,31 @@
     <div class="ui simple dropdown disabled item">
       Chatrooms <i class="dropdown icon"></i>
       <div class="menu">
-        <!-- changes url to /chatname with the authentication token appended -->
-        <a class="item" href="fill" onclick="location.href='/category/sports'+url; return false;" >Sports</a>
-        <a class="item" href="fill" onclick="location.href='/category/workingout'+url; return false;" >Working Out</a>
-        <a class="item" href="fill" onclick="location.href='/category/videogames'+url; return false;" >Video Games</a>
-        <a class="item" href="fill" onclick="location.href='/category/transportation'+url; return false;" >Transportation</a>
-        <a class="item" href="fill" onclick="location.href='/category/problemsetgroups'+url; return false;" >Problem Set Group</a>
-        <a class="item" href="filler" onclick="location.href='/category/miscellaneous'+url; return false;" >Miscellaneous</a>
-
-        <!--  <a class="item" href="makechat/sports" onclick="location.href='/makechat/sports' +url; return false;" >Sports</a>
-        <a class="item" href="makechat/workingout" onclick="location.href='/makechat/workingout' +url; return false;" >Working Out</a>
-        <a class="item" href="makechat/videogames" onclick="location.href='/makechat/videogames' +url; return false;" >Video Games</a>
-        <a class="item" href="makechat/transportation" onclick="location.href='/makechat/transportation' +url; return false;" >Transportation</a>
-        <a class="item" href="makechat/problemsetgroups" onclick="location.href='/makechat/problemsetgroups' +url; return false;" >Problem Set Group</a>
-        <a class="item" href="makechat/miscellaneous" onclick="location.href='/makechat/miscellaneous' +url; return false;" >Miscellaneous</a>
-
-        <a class="item" href=/joinsportschat onclick="location.href='/join/sports/chat' +url; return false;" >Join Sports Chat</a>
-        <a class="item" href=/joinworkingoutchat onclick="location.href='/join/workingout/chat' +url; return false;" >Join Working Out Chat</a>
-        <a class="item" href=/filler onclick="location.href='/join/videogames/chat' +url; return false;" >Join Video Games Chat</a>
-        <a class="item" href=/filler onclick="location.href='/join/transportation/chat' +url; return false;" >Join Transportation Chat</a>
-        <a class="item" href=/filler onclick="location.href='/join/problemsetgroup/chat' +url; return false;" >Join Problem Set Group Chat</a>
-        <a class="item" href=/filler onclick="location.href='/join/miscellaneous/chat' +url; return false;" >Join Miscellaneous Chat</a> -->
+        <!-- Changes url to /chatname with the authentication token appended -->
+        <a class="item" href="fill" onclick="location.href='/category/sports' +url; return false;" >
+          <i class="futbol alternate icon"></i>
+          Sports
+        </a>
+        <a class="item" href="fill" onclick="location.href='/category/workingout' +url; return false;" >
+          <i class="heart icon"></i>
+          Working Out
+        </a>
+        <a class="item" href="fill" onclick="location.href='/category/videogames' +url; return false;" >
+          <i class="gamepad icon"></i>
+          Video Games
+        </a>
+        <a class="item" href="fill" onclick="location.href='/category/transportation' +url; return false;" >
+          <i class="car icon"></i>
+          Transportation
+        </a>
+        <a class="item" href="fill" onclick="location.href='/category/problemsetgroups' +url; return false;" >
+          <i class="pencil alternate icon"></i>
+          Problem Set Groups
+        </a>
+        <a class="item" href="fill" onclick="location.href='/category/miscellaneous' +url; return false;" >
+          <i class="ellipsis horizontal icon"></i>
+          Miscellaneous
+        </a>
       </div>
     </div>
     <div class="right menu">
@@ -69,17 +78,16 @@
 
   <div class="ui middle aligned center aligned grid" style="margin: 10px;">
     <div class="column">
-      <h1 class="ui image header">
+      <div class="ui image header">
         <img src="{% static 'cub.png' %}" class="image">
-        <div class="content">
-          TigerMeet Login
-        </div>
-      </h1>
-
-      <h4>TigerMeet is a responsive web application that will enable Princeton University students to connect with other students for recreation, transportation, and academic coordination. It is intended to be subdivided into sections of general interest (i.e. Sports, Transportation), with the ability to create specific events. Within sections and events, we plan on having chat capabilities for users to connect.</h4>
+        <h1 class="content">
+          Welcome to TigerMeet
+        </h1>
+        <h4 class="margin-top: 0;">TigerMeet is a web application that enables Princeton University students to connect with other students for recreation, transportation, and academic coordination. It is divided into sections of general interest (i.e. Sports, Transportation) each with a general chat as well as the ability to create specific events with chatrooms for users to connect.</h4>
+      </div>
 
       <div class="ui message">
-        <h3><a href="https://oauth.groupme.com/oauth/authorize?client_id=AWKH6CxG0zTyz1cXWKZPvomGOkVdTW3jJb8nVYTJMljPKvDI" class="button">Login with GroupMe</a></h3>
+        <h3><a href="https://oauth.groupme.com/oauth/authorize?client_id=FRktMGR3ZWsOkuUjEB4PltryBQO9HaQN9aH6tlk0CZOCBp8z" class="button">Login to TigerMeet with GroupMe</a></h3>
       </div>
 
       <h2>How It Works</h2>
