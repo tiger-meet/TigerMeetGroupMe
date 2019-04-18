@@ -63,7 +63,7 @@ def gmlogin(request):
 # loads the events page
 def events(request, group_name):
     encodedtoken = gettoken(request)
-    token = encodedtoken.decodetoken()
+    token = decodetoken(encodedtoken)
     if token == 'none':
         return render(request, 'chat/gmlogin.html', {})
     else:
