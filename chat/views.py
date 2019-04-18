@@ -5,8 +5,16 @@ import urllib.parse as urlparse
 from django.utils.safestring import mark_safe
 from .models import GroupChats, Todo
 from django.contrib import admin
+import base64
 
 admin.site.register(GroupChats)
+
+def encodetoken(token):
+    bytestoken = token.encode()
+    b64bytestoken = base64.b64encode(bytestoken)
+    b64stringtoken = b64bytestoken.decode()
+    return b64stringtoken
+
 
 def gettoken(request):
     http_host = request.META.get('HTTP_HOST')
@@ -35,7 +43,8 @@ def index(request):
     if token == 'none':
         return render(request, 'chat/gmlogin.html', {})
     else:
-        return render(request, 'chat/index.html', {'access_token': mark_safe(json.dumps(token))})
+        encodedtoken = encodetoken(token)
+        return render(request, 'chat/index.html', {'access_token': mark_safe(json.dumps(encodedtoken))})
 
 # loads the about page
 def about(request):
