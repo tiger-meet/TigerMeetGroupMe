@@ -46,6 +46,7 @@ def gettoken(request):
 # loads the index page with authentication token
 def index(request):
     token = gettoken(request)
+    print(token)
 
     if token == 'none':
         return render(request, 'chat/gmlogin.html', {})
