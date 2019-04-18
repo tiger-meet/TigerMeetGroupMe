@@ -46,10 +46,11 @@ def gettoken(request):
 # loads the index page with authentication token
 def index(request):
     token = gettoken(request)
+    print(token)
+    encodedtoken = encodetoken(token)
     if token == 'none':
         return render(request, 'chat/gmlogin.html', {})
     else:
-        encodedtoken = encodetoken(token)
         return render(request, 'chat/index.html', {'access_token': mark_safe(json.dumps(encodedtoken))})
 
 # loads the about page
