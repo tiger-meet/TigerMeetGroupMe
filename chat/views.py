@@ -67,14 +67,14 @@ def events(request, group_name):
     if token == 'none':
         return render(request, 'chat/gmlogin.html', {})
     else:
-        encodedtoken = encodetoken(token)
         return render(request, 'chat/events.html', {'access_token': mark_safe(json.dumps(encodedtoken)),
                                                     'group_name': mark_safe(json.dumps(group_name))
                                                     })
 
 # joins sports chat
 def joinchat(request, group_name):
-    token = gettoken(request)
+    encodedtoken = gettoken(request)
+    token = decodetoken(encodedtoken)
     if token == 'none':
         return render(request, 'chat/gmlogin.html', {})
 
@@ -96,13 +96,13 @@ def joinchat(request, group_name):
 
 # creates a chat in your own personal groupme application based on which one you click
 def createchat(request, group_name):
-    token = gettoken(request)
+    encodedtoken = gettoken(request)
+    token = decodetoken(encodedtoken)
 
     if token == 'none':
         return render(request, 'chat/gmlogin.html', {})
     else:
 
-        print(token)
         url = 'https://api.groupme.com/v3/groups?token=' + token
         url = str(url)
 
@@ -156,7 +156,9 @@ def todo(request):
     return render(request, 'chat/todo.html', context)
 
 def add(request):
-    token = gettoken(request)
+    encodedtoken = gettoken(request)
+    token = decodetoken(encodedtoken)
+
     if(request.method == 'POST'):
         title = request.POST['title']
         text = request.POST['text']
@@ -166,12 +168,12 @@ def add(request):
         todo.save()
 
         group_name = title + time
-        url = '?access_token=' + token
+        url = '?access_token=' + encodedtoken
         allurl = '/makechat/' + group_name + url
 
         return redirect(allurl)
     else:
-        return render(request, 'chat/add.html', {'access_token': mark_safe(json.dumps(token))})
+        return render(request, 'chat/add.html', {'access_token': mark_safe(json.dumps(encodedtoken))})
 
 def details(request, id):
     todo = Todo.objects.get(id=id)
