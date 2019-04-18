@@ -87,19 +87,17 @@
   <div class="ui middle aligned center aligned grid" style="margin: 10px;">
     <div class="column">
 
-      <h1 class="ui image header" id="myGroup">
+      <h1 class="ui image header" >
         <img src="{% static 'cub.png' %}" class="image">
-        <div class="content">
-          chatname
-        </div>
+        <div class="content" id="myGroup"></div>
       </h1>
 
       <!-- <a href="fill" onclick="location.href='/test/'+ test; return false;" >Join <a id="myGroup1">chatname</a> Chat</a> -->
-      <a id="link" href="fill" onclick="location.href=allurl; return false;" >replace this</a>
+      <a class="ui button" id="link" href="fill" onclick="location.href=allurl; return false;" ></a>
 
       <p>A chat will not be made if there already exists a chat of the same name.</p>
 
-      <a id="link2" class="item" href="fill" onclick="location.href=joinurl; return false;" >replace this</a>
+      <a class="ui button" id="link2" class="item" href="fill" onclick="location.href=joinurl; return false;" ></a>
   
     </div>
   </div>
