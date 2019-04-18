@@ -59,6 +59,7 @@ def index(request):
         return redirect(url)
 
     else:
+        print(token)
         encodedtoken = token
         return render(request, 'chat/index.html', {'access_token': mark_safe(json.dumps(encodedtoken))})
 
