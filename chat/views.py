@@ -9,17 +9,17 @@ import base64
 
 admin.site.register(GroupChats)
 
-def encodetoken(token):
-    bytestoken = token.encode()
-    b64bytestoken = base64.b64encode(bytestoken)
-    b64stringtoken = b64bytestoken.decode()
-    return b64stringtoken
-
-def decodetoken(encodedtoken):
-    b64bytestoken = encodedtoken.encode()
-    bytestoken = base64.b64decode(b64bytestoken)
-    token = bytestoken.decode()
-    return token
+# def encodetoken(token):
+#     bytestoken = token.encode()
+#     b64bytestoken = base64.b64encode(bytestoken)
+#     b64stringtoken = b64bytestoken.decode()
+#     return b64stringtoken
+#
+# def decodetoken(encodedtoken):
+#     b64bytestoken = encodedtoken.encode()
+#     bytestoken = base64.b64decode(b64bytestoken)
+#     token = bytestoken.decode()
+#     return token
 
 
 def gettoken(request):
@@ -45,23 +45,32 @@ def gettoken(request):
 
 # loads the index page with authentication token
 def index(request):
+    # token = gettoken(request)
+    #
+    # if token == 'none':
+    #     return render(request, 'chat/gmlogin.html', {})
+    #     #print(token)
+    #
+    # elif any(c.isupper() for c in token):
+    #     print(token)
+    #     encodedtoken = token
+    #     return render(request, 'chat/index.html', {'access_token': mark_safe(json.dumps(encodedtoken))})
+    #
+    # else:
+    #     print(token)
+    #     encodedtoken = encodetoken(token)
+    #     http_host = request.META.get('HTTP_HOST')
+    #     url = 'https://' + http_host + '/index/' + '?access_token=' + encodedtoken
+    #     return redirect(url)
+
     token = gettoken(request)
 
     if token == 'none':
         return render(request, 'chat/gmlogin.html', {})
-        #print(token)
-
-    elif any(c.isupper() for c in token):
-        print(token)
-        encodedtoken = token
-        return render(request, 'chat/index.html', {'access_token': mark_safe(json.dumps(encodedtoken))})
+        # print(token)
 
     else:
-        print(token)
-        encodedtoken = encodetoken(token)
-        http_host = request.META.get('HTTP_HOST')
-        url = 'https://' + http_host + '/index/' + '?access_token=' + encodedtoken
-        return redirect(url)
+        return render(request, 'chat/index.html', {'access_token': mark_safe(json.dumps(token))})
 
 # loads the about page
 def about(request):
@@ -73,19 +82,21 @@ def gmlogin(request):
 
 # loads the events page
 def events(request, group_name):
-    encodedtoken = gettoken(request)
-    token = decodetoken(encodedtoken)
+    token = gettoken(request)
+    #encodedtoken = gettoken(request)
+    #token = decodetoken(encodedtoken)
     if token == 'none':
         return render(request, 'chat/gmlogin.html', {})
     else:
-        return render(request, 'chat/events.html', {'access_token': mark_safe(json.dumps(encodedtoken)),
+        return render(request, 'chat/events.html', {'access_token': mark_safe(json.dumps(token)),#encodedtoken)),
                                                     'group_name': mark_safe(json.dumps(group_name))
                                                     })
 
 # joins sports chat
 def joinchat(request, group_name):
-    encodedtoken = gettoken(request)
-    token = decodetoken(encodedtoken)
+    token = gettoken(request)
+    # encodedtoken = gettoken(request)
+    # token = decodetoken(encodedtoken)
     if token == 'none':
         return render(request, 'chat/gmlogin.html', {})
 
@@ -107,8 +118,9 @@ def joinchat(request, group_name):
 
 # creates a chat in your own personal groupme application based on which one you click
 def createchat(request, group_name):
-    encodedtoken = gettoken(request)
-    token = decodetoken(encodedtoken)
+    token = gettoken(request)
+    # encodedtoken = gettoken(request)
+    # token = decodetoken(encodedtoken)
 
     if token == 'none':
         return render(request, 'chat/gmlogin.html', {})
@@ -167,8 +179,9 @@ def todo(request):
     return render(request, 'chat/todo.html', context)
 
 def add(request):
-    encodedtoken = gettoken(request)
-    token = decodetoken(encodedtoken)
+    token = gettoken(request)
+    # encodedtoken = gettoken(request)
+    # token = decodetoken(encodedtoken)
 
     if(request.method == 'POST'):
         title = request.POST['title']
@@ -179,12 +192,12 @@ def add(request):
         todo.save()
 
         group_name = title + time
-        url = '?access_token=' + encodedtoken
+        url = '?access_token=' + token#encodedtoken
         allurl = '/makechat/' + group_name + url
 
         return redirect(allurl)
     else:
-        return render(request, 'chat/add.html', {'access_token': mark_safe(json.dumps(encodedtoken))})
+        return render(request, 'chat/add.html', {'access_token': mark_safe(json.dumps(token))})#encodedtoken))})
 
 def details(request, id):
     todo = Todo.objects.get(id=id)

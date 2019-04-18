@@ -42,10 +42,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/chat/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="59" column="20" selection-start-line="59" selection-start-column="20" selection-end-line="59" selection-end-column="20" />
+            <state relative-caret-position="386">
+              <caret line="199" column="86" selection-start-line="199" selection-start-column="86" selection-end-line="199" selection-end-column="86" />
               <folding>
                 <element signature="e#0#45#0" expanded="true" />
+                <marker date="1555620370433" expanded="true" signature="4001:4073" ph="..." />
               </folding>
             </state>
           </provider>
@@ -63,10 +64,15 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/chat/templates/chat/gmlogin.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
+            <state relative-caret-position="451">
               <caret line="95" column="36" selection-start-line="95" selection-start-column="36" selection-end-line="95" selection-end-column="36" />
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/chat/urls.py">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -83,6 +89,7 @@
       <find>tigermeet</find>
       <find>database</find>
       <find>group chats</find>
+      <find>encode</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -206,7 +213,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="91473000" />
+    <option name="totallyTimeSpent" value="92995000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="2" y="23" width="1260" height="687" extended-state="0" />
@@ -262,7 +269,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/chat/urls.py" />
     <entry file="file://$PROJECT_DIR$/mysite/urls.py" />
     <entry file="file://$PROJECT_DIR$/chat/apps.py" />
     <entry file="file://$PROJECT_DIR$/mysite/static/alin.png" />
@@ -305,19 +311,22 @@
         <state relative-caret-position="-249" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/chat/templates/chat/gmlogin.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="95" column="36" selection-start-line="95" selection-start-column="36" selection-end-line="95" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mysite/settings.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="200">
           <caret line="81" column="33" selection-start-line="81" selection-start-column="33" selection-end-line="81" selection-end-column="33" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chat/templates/chat/gmlogin.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="451">
+          <caret line="95" column="36" selection-start-line="95" selection-start-column="36" selection-end-line="95" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chat/urls.py">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/chat/templates/chat/events.html">
       <provider selected="true" editor-type-id="text-editor">
@@ -332,10 +341,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/chat/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="59" column="20" selection-start-line="59" selection-start-column="20" selection-end-line="59" selection-end-column="20" />
+        <state relative-caret-position="386">
+          <caret line="199" column="86" selection-start-line="199" selection-start-column="86" selection-end-line="199" selection-end-column="86" />
           <folding>
             <element signature="e#0#45#0" expanded="true" />
+            <marker date="1555620370433" expanded="true" signature="4001:4073" ph="..." />
           </folding>
         </state>
       </provider>
