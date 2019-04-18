@@ -46,12 +46,18 @@ def gettoken(request):
 # loads the index page with authentication token
 def index(request):
     token = gettoken(request)
-    print(token)
-    print(len(token))
-    encodedtoken = encodetoken(token)
+
     if token == 'none':
         return render(request, 'chat/gmlogin.html', {})
+
+    elif len(token) == 32:
+        encodedtoken = encodetoken(token)
+        http_host = request.META.get('HTTP_HOST')
+        url = 'https://' + http_host + 'index/' + '?access_token=' + encodedtoken
+        return redirect(url)
+
     else:
+        encodedtoken = token
         return render(request, 'chat/index.html', {'access_token': mark_safe(json.dumps(encodedtoken))})
 
 # loads the about page
