@@ -35,8 +35,7 @@ def index(request):
     if token == 'none':
         return render(request, 'chat/gmlogin.html', {})
     else:
-        encodedtoken = token.encode()
-        return render(request, 'chat/index.html', {'access_token': mark_safe(json.dumps(encodedtoken))})
+        return render(request, 'chat/index.html', {'access_token': mark_safe(json.dumps(token))})
 
 # loads the about page
 def about(request):
@@ -48,26 +47,25 @@ def gmlogin(request):
 
 # loads the events page
 def events(request, group_name):
-    encodedtoken = gettoken(request)
-    if encodedtoken == 'none':
+    token = gettoken(request)
+    if token == 'none':
         return render(request, 'chat/gmlogin.html', {})
     else:
-        return render(request, 'chat/events.html', {'access_token': mark_safe(json.dumps(encodedtoken)),
+        return render(request, 'chat/events.html', {'access_token': mark_safe(json.dumps(token)),
                                                     'group_name': mark_safe(json.dumps(group_name))
                                                     })
 
 # joins sports chat
 def joinchat(request, group_name):
-    encodedtoken = gettoken(request)
-    print(encodedtoken)
-    if encodedtoken == 'none':
+    token = gettoken(request)
+    if token == 'none':
         return render(request, 'chat/gmlogin.html', {})
 
     else:
         code = GroupChats.objects.filter(GroupName=group_name).values_list("GroupId", flat=True)[0]
         sharetoken = GroupChats.objects.filter(GroupName=group_name).values_list("ShareToken", flat=True)[0]
 
-        url = "https://api.groupme.com/v3/groups/" + code + "/join/" + sharetoken + "?token=" + (bytes(encodedtoken)).decode()
+        url = "https://api.groupme.com/v3/groups/" + code + "/join/" + sharetoken + "?token=" + token
         print(url)
         r = requests.post(url)
         #print(sharetoken)
@@ -81,14 +79,14 @@ def joinchat(request, group_name):
 
 # creates a chat in your own personal groupme application based on which one you click
 def createchat(request, group_name):
-    encodedtoken = gettoken(request)
+    token = gettoken(request)
 
-    if encodedtoken == 'none':
+    if token == 'none':
         return render(request, 'chat/gmlogin.html', {})
     else:
 
-        print(encodedtoken)
-        url = 'https://api.groupme.com/v3/groups?token=' + bytes(encodedtoken, 'utf8').decode()
+        print(token)
+        url = 'https://api.groupme.com/v3/groups?token=' + token
         url = str(url)
 
         try:
@@ -141,7 +139,7 @@ def todo(request):
     return render(request, 'chat/todo.html', context)
 
 def add(request):
-    encodedtoken = gettoken(request)
+    token = gettoken(request)
     if(request.method == 'POST'):
         title = request.POST['title']
         text = request.POST['text']
@@ -151,12 +149,12 @@ def add(request):
         todo.save()
 
         group_name = title + time
-        url = '?access_token=' + encodedtoken
+        url = '?access_token=' + token
         allurl = '/makechat/' + group_name + url
 
         return redirect(allurl)
     else:
-        return render(request, 'chat/add.html', {'access_token': mark_safe(json.dumps(encodedtoken))})
+        return render(request, 'chat/add.html', {'access_token': mark_safe(json.dumps(token))})
 
 def details(request, id):
     todo = Todo.objects.get(id=id)
