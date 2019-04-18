@@ -31,8 +31,7 @@
 
   <!-- doesn't actually do anything... figure out later  -->
   <script type="text/javascript">
-  var url = "?access_token=" + {{ access_token }};
-  //document.getElementById("someInput").value = tbIndx;
+    const url = "?access_token=" + {{ access_token }};
   </script>
 
   <link rel="stylesheet" href="{% static 'index.css' %}">
@@ -48,27 +47,27 @@
       Chatrooms <i class="dropdown icon"></i>
       <div class="menu">
         <!-- Changes url to /chatname with the authentication token appended -->
-        <a class="item" href="fill" onclick="location.href='/category/sports' +url; return false;" >
+        <a class="item" href="fill" onclick="location.href='/category/sports'+url; return false;" >
           <i class="futbol alternate icon"></i>
           Sports
         </a>
-        <a class="item" href="fill" onclick="location.href='/category/workingout' +url; return false;" >
+        <a class="item" href="fill" onclick="location.href='/category/workingout'+url; return false;" >
           <i class="heart icon"></i>
           Working Out
         </a>
-        <a class="item" href="fill" onclick="location.href='/category/videogames' +url; return false;" >
+        <a class="item" href="fill" onclick="location.href='/category/videogames'+url; return false;" >
           <i class="gamepad icon"></i>
           Video Games
         </a>
-        <a class="item" href="fill" onclick="location.href='/category/transportation' +url; return false;" >
+        <a class="item" href="fill" onclick="location.href='/category/transportation'+url; return false;" >
           <i class="car icon"></i>
           Transportation
         </a>
-        <a class="item" href="fill" onclick="location.href='/category/problemsetgroups' +url; return false;" >
+        <a class="item" href="fill" onclick="location.href='/category/problemsetgroups'+url; return false;" >
           <i class="pencil alternate icon"></i>
           Problem Set Group
         </a>
-        <a class="item" href="fill" onclick="location.href='/category/miscellaneous' +url; return false;" >
+        <a class="item" href="fill" onclick="location.href='/category/miscellaneous'+url; return false;" >
           <i class="ellipsis horizontal icon"></i>
           Miscellaneous
         </a>
