@@ -15,6 +15,12 @@ def encodetoken(token):
     b64stringtoken = b64bytestoken.decode()
     return b64stringtoken
 
+def decodetoken(encodedtoken):
+    b64bytestoken = encodedtoken.encode()
+    bytestoken = base64.b64decode(b64bytestoken)
+    token = bytestoken.decode()
+    return token
+
 
 def gettoken(request):
     http_host = request.META.get('HTTP_HOST')
@@ -56,11 +62,13 @@ def gmlogin(request):
 
 # loads the events page
 def events(request, group_name):
-    token = gettoken(request)
+    encodedtoken = gettoken(request)
+    token = encodedtoken.decodetoken()
     if token == 'none':
         return render(request, 'chat/gmlogin.html', {})
     else:
-        return render(request, 'chat/events.html', {'access_token': mark_safe(json.dumps(token)),
+        encodedtoken = encodetoken(token)
+        return render(request, 'chat/events.html', {'access_token': mark_safe(json.dumps(encodedtoken)),
                                                     'group_name': mark_safe(json.dumps(group_name))
                                                     })
 
