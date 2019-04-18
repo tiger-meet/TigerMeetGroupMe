@@ -53,7 +53,7 @@ def index(request):
     elif len(token) == 32:
         encodedtoken = encodetoken(token)
         http_host = request.META.get('HTTP_HOST')
-        url = 'https://' + http_host + 'index/' + '?access_token=' + encodedtoken
+        url = 'https://' + http_host + '/index/' + '?access_token=' + encodedtoken
         return redirect(url)
 
     else:
