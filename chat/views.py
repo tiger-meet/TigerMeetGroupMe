@@ -49,7 +49,7 @@ def index(request):
 
     if token == 'none':
         return render(request, 'chat/gmlogin.html', {})
-        print(token)
+        #print(token)
 
     elif len(token) == 32:
         print(token)
