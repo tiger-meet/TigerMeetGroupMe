@@ -1,6 +1,6 @@
 from django.urls import path, re_path
 
-from .views import index, about, gmlogin, createchat, joinchat, events
+from .views import index, about, gmlogin, createchat, joinchat, events, todo, add, details
 
 urlpatterns = [
     path('', gmlogin, name='gmlogin'),
@@ -9,5 +9,9 @@ urlpatterns = [
     re_path(r'^join/(?P<group_name>[^/]+)', joinchat, name='joinchat'),
     re_path(r'^category/(?P<group_name>[^/]+)', events, name='events'),
     # This is the url re for making any chat
-    re_path(r'^makechat/(?P<group_name>[^/]+)', createchat, name='createchat')
+    re_path(r'^makechat/(?P<group_name>[^/]+)', createchat, name='createchat'),
+
+    path('todo/', todo, name='todo'),
+    path('add/', add, name='add'),
+    re_path(r'^details/(?P<id>\w{0,50})/$', details, name='details')
 ]
