@@ -47,6 +47,7 @@ def gettoken(request):
 def index(request):
     token = gettoken(request)
     print(token)
+    print(token.length)
     encodedtoken = encodetoken(token)
     if token == 'none':
         return render(request, 'chat/gmlogin.html', {})
