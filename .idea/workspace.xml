@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8231220f-eb57-4a9f-b10e-e66543be5ecc" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/chat/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/chat/views.py" afterDir="false" />
-    </list>
+    <list default="true" id="8231220f-eb57-4a9f-b10e-e66543be5ecc" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,8 +40,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/chat/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="386">
-              <caret line="199" column="86" selection-start-line="199" selection-start-column="86" selection-end-line="199" selection-end-column="86" />
+            <state relative-caret-position="-316">
+              <caret line="32" column="9" selection-start-line="32" selection-start-column="4" selection-end-line="32" selection-end-column="9" />
               <folding>
                 <element signature="e#0#45#0" expanded="true" />
                 <marker date="1555620370433" expanded="true" signature="4001:4073" ph="..." />
@@ -90,6 +88,7 @@
       <find>database</find>
       <find>group chats</find>
       <find>encode</find>
+      <find>print</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -213,7 +212,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="92995000" />
+    <option name="totallyTimeSpent" value="93304000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="2" y="23" width="1260" height="687" extended-state="0" />
@@ -341,8 +340,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/chat/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="386">
-          <caret line="199" column="86" selection-start-line="199" selection-start-column="86" selection-end-line="199" selection-end-column="86" />
+        <state relative-caret-position="-316">
+          <caret line="32" column="9" selection-start-line="32" selection-start-column="4" selection-end-line="32" selection-end-column="9" />
           <folding>
             <element signature="e#0#45#0" expanded="true" />
             <marker date="1555620370433" expanded="true" signature="4001:4073" ph="..." />
