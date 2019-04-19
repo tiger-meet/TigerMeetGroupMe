@@ -1,22 +1,30 @@
 <script type="text/javascript">
     var url = "?access_token=" + {{ access_token }};
     var addurl = '/add/' + url;
-    document.getElementById("adurl").innerHTML=addurl;
+    //document.getElementById("adurl").innerHTML=addurl;
+
+    window.onload = function() {
+        document.adurl.action = get_action();
+    }
+
+    function get_action() {
+        return addurl;
+    }
     </script>
 
-<form action="adurl" method="post" name="adurl" id="adurl">
-{% csrf_token %}
-  <label for="title">Title</label><br />
-  <input type="text" name="title" id="title" />
-  <br>
-  <label for="text">Text</label><br />
-  <textarea name="text" id="text"></textarea>
-  <br><br>
-  <label for="time">Time</label><br />
-  <textarea name="time" id="time"></textarea>
-  <br><br>
-  <input type="submit" value="Submit and Create Event Chat" />
-</form>
-<br>
+<!--<form method="post" name="adurl" id="adurl">-->
+<!--{% csrf_token %}-->
+  <!--<label for="title">Title</label><br />-->
+  <!--<input type="text" name="title" id="title" />-->
+  <!--<br>-->
+  <!--<label for="text">Text</label><br />-->
+  <!--<textarea name="text" id="text"></textarea>-->
+  <!--<br><br>-->
+  <!--<label for="time">Time</label><br />-->
+  <!--<textarea name="time" id="time"></textarea>-->
+  <!--<br><br>-->
+  <!--<input type="submit" value="Submit and Create Event Chat" />-->
+<!--</form>-->
+<!--<br>-->
 
 <a href="/">Go Back</a>
