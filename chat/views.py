@@ -8,6 +8,7 @@ from django.contrib import admin
 import base64
 
 admin.site.register(GroupChats)
+admin.site.register(Todo)
 
 def encodetoken(token):
     bytestoken = token.encode()
