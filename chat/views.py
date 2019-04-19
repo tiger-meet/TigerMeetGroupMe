@@ -171,20 +171,24 @@ def todo(request):
     return render(request, 'chat/todo.html', context)
 
 def add(request):
-    token = gettoken(request)
-    # encodedtoken = gettoken(request)
-    # token = decodetoken(encodedtoken)
+    #token = gettoken(request)
+    encodedtoken = gettoken(request)
+    token = decodetoken(encodedtoken)
 
     if(request.method == 'POST'):
         title = request.POST['title']
         text = request.POST['text']
         time = request.POST['time']
 
+        print(title)
+        print(text)
+        print(time)
+
         todo = Todo(title=title, text=text, time=time)
         todo.save()
 
         group_name = title + time
-        url = '?access_token=' + token#encodedtoken
+        url = '?access_token=' + encodedtoken
         allurl = '/makechat/' + group_name + url
 
         return redirect(allurl)
