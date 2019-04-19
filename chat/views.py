@@ -193,7 +193,7 @@ def add(request):
 
         return redirect(allurl)
     else:
-        return render(request, 'chat/add.html', {'access_token': mark_safe(json.dumps(token))})#encodedtoken))})
+        return render(request, 'chat/add.html', {'access_token': mark_safe(json.dumps(encodedtoken))})
 
 def details(request, id):
     todo = Todo.objects.get(id=id)
