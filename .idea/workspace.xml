@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8231220f-eb57-4a9f-b10e-e66543be5ecc" name="Default Changelist" comment="" />
+    <list default="true" id="8231220f-eb57-4a9f-b10e-e66543be5ecc" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/chat/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/chat/views.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,15 +39,24 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/chat/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-316">
-              <caret line="32" column="9" selection-start-line="32" selection-start-column="4" selection-end-line="32" selection-end-column="9" />
+            <state relative-caret-position="235">
+              <caret line="54" column="26" selection-start-line="54" selection-start-column="26" selection-end-line="54" selection-end-column="26" />
               <folding>
                 <element signature="e#0#45#0" expanded="true" />
-                <marker date="1555620370433" expanded="true" signature="4001:4073" ph="..." />
+                <marker date="1555713471346" expanded="true" signature="3723:3793" ph="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/chat/templates/chat/add.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="7" column="16" lean-forward="true" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -59,7 +70,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/chat/templates/chat/gmlogin.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="323">
@@ -117,6 +128,7 @@
         <option value="$PROJECT_DIR$/mysite/chat/views.py" />
         <option value="$PROJECT_DIR$/chat/templates/chat/events.html" />
         <option value="$PROJECT_DIR$/chat/templates/chat/gmlogin.html" />
+        <option value="$PROJECT_DIR$/chat/templates/chat/add.html" />
         <option value="$PROJECT_DIR$/chat/views.py" />
       </list>
     </option>
@@ -217,7 +229,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="93750000" />
+    <option name="totallyTimeSpent" value="95653000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="2" y="23" width="1260" height="687" extended-state="0" />
@@ -315,22 +327,8 @@
         <state relative-caret-position="-249" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/chat/urls.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/chat/templates/chat/todo.html">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/chat/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-316">
-          <caret line="32" column="9" selection-start-line="32" selection-start-column="4" selection-end-line="32" selection-end-column="9" />
-          <folding>
-            <element signature="e#0#45#0" expanded="true" />
-            <marker date="1555620370433" expanded="true" signature="4001:4073" ph="..." />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/chat/templates/chat/events.html">
       <provider selected="true" editor-type-id="text-editor">
@@ -343,6 +341,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/chat/templates/chat/gmlogin.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="95" column="36" selection-start-line="95" selection-start-column="36" selection-end-line="95" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/mysite/settings.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="200">
@@ -350,10 +355,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/chat/templates/chat/gmlogin.html">
+    <entry file="file://$PROJECT_DIR$/chat/urls.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chat/templates/chat/add.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="95" column="36" selection-start-line="95" selection-start-column="36" selection-end-line="95" selection-end-column="36" />
+        <state relative-caret-position="105">
+          <caret line="7" column="16" lean-forward="true" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chat/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="235">
+          <caret line="54" column="26" selection-start-line="54" selection-start-column="26" selection-end-line="54" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#45#0" expanded="true" />
+            <marker date="1555713471346" expanded="true" signature="3723:3793" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
