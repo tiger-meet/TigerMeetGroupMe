@@ -1,21 +1,26 @@
-<!-- page after successfully joining sports chat -->
+<!-- chat/templates/chat/joinchat.html -->
+<!-- Page after successfully joining sports chat -->
+
+{% load static %}
+
 <!DOCTYPE html>
 <html>
 <head>
-    <script type="text/javascript">
+  <script type="text/javascript">
     //var token = {{ access_token }};
     var Group_id = {{ group_id }};
     var Group_name = {{ group_name }};
-    window.onload = function() {
-    document.getElementById("myGroupId").innerHTML=Group_id;
-    document.getElementById("myGroupName").innerHTML=Group_name;
-}
-    </script>
+    window.onload = function() 
+    {
+      document.getElementById("myGroupId").innerHTML=Group_id;
+      document.getElementById("myGroupName").innerHTML=Group_name;
+    }
+  </script>
 </head>
 <body>
 
-<!--< id="myToken"> </a>-->
-<h1>Groupme <a id="myGroupName"> myGroupName</a><a id="myGroupId"> myGroupId</a> Joined!</h1>
+  <!--< id="myToken"> </a>-->
+  <h1>GroupMe <span id="myGroupName">myGroupName</span>(<span id="myGroupId">myGroupId</span>) Joined!</h1>
 
 </body>
 </html>
