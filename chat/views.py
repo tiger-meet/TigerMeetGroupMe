@@ -52,17 +52,17 @@ def index(request):
         return render(request, 'chat/gmlogin.html', {})
         #print(token)
 
-    elif len(token) == 32:# or len(token) == 40:
-        print(token)
-        encodedtoken = token
-        return render(request, 'chat/index.html', {'access_token': mark_safe(json.dumps(encodedtoken))})
-
-    else:
+    elif len(token) == 32 or len(token) == 40:
         print(token)
         encodedtoken = encodetoken(token)
         http_host = request.META.get('HTTP_HOST')
         url = 'https://' + http_host + '/index/' + '?access_token=' + encodedtoken
         return redirect(url)
+
+    else:
+        print(token)
+        encodedtoken = token
+        return render(request, 'chat/index.html', {'access_token': mark_safe(json.dumps(encodedtoken))})
 
 # loads the about page
 def about(request):
