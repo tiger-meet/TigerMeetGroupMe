@@ -1,7 +1,15 @@
 <script type="text/javascript">
     var url = "?access_token=" + {{ access_token }};
     var addurl = '/add/' + url;
-    document.getElementById("adurl").innerHTML=addurl;
+    //document.getElementById("adurl").innerHTML=addurl;
+
+    window.onload = function() {
+        document.adurl.action = get_action();
+    }
+
+    function get_action() {
+        return addurl;
+    }
     </script>
 
 <form action="adurl" method="post" name="adurl" id="adurl">
