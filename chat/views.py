@@ -52,7 +52,7 @@ def index(request):
         return render(request, 'chat/gmlogin.html', {})
         #print(token)
 
-    elif len(token) == 32 or len(token) == 40:
+    elif len(token) == 32:# or len(token) == 40:
         print(token)
         encodedtoken = token
         return render(request, 'chat/index.html', {'access_token': mark_safe(json.dumps(encodedtoken))})
