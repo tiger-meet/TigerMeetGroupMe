@@ -78,7 +78,19 @@ def events(request, group_name):
     #token = gettoken(request)
     encodedtoken = gettoken(request)
     token = decodetoken(encodedtoken)
-    todos = VideoGamesEvents.objects.all()[:10]
+
+    if (group_name == 'sports'):
+        todos = SportsEvents.objects.all()[:10]
+    elif (group_name == 'workingout'):
+        todos = WorkingOutEvents.objects.all()[:10]
+    elif (group_name == 'videogames'):
+        todos = VideoGamesEvents.objects.all()[:10]
+    elif (group_name == 'transportation'):
+        todos = TransportationEvents.objects.all()[:10]
+    elif (group_name == 'problemsetgroups'):
+        todos = ProblemSetEvents.objects.all()[:10]
+    elif (group_name == 'miscellaneous'):
+        todos = MiscellaneousEvents.objects.all()[:10]
 
     context = {
         'todos':todos
