@@ -100,8 +100,7 @@ def events(request, group_name):
     else:
         return render(request, 'chat/events.html',{'access_token': mark_safe(json.dumps(encodedtoken)),
                                                     'group_name': mark_safe(json.dumps(group_name)),
-                                                    context
-                                                    }, )
+                                                    } )
 
 # joins sports chat
 def joinchat(request, group_name):
