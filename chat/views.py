@@ -3,7 +3,7 @@ import requests
 import json
 import urllib.parse as urlparse
 from django.utils.safestring import mark_safe
-from .models import GroupChats, SportsEvents
+from .models import GroupChats, SportsEvent, WorkingOutEvents, VideoGamesEvents, TransportationEvents, ProblemSetEvents, MiscellaneousEvents
 from django.contrib import admin
 import base64
 
