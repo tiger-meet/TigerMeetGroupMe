@@ -78,10 +78,15 @@ def events(request, group_name):
     #token = gettoken(request)
     encodedtoken = gettoken(request)
     token = decodetoken(encodedtoken)
+    todos = VideoGamesEvents.objects.all()[:10]
+
+    context = {
+        'todos':todos
+    }
     if token == 'none':
         return render(request, 'chat/gmlogin.html', {})
     else:
-        return render(request, 'chat/events.html', {'access_token': mark_safe(json.dumps(encodedtoken)),
+        return render(request, 'chat/events.html', context, {'access_token': mark_safe(json.dumps(encodedtoken)),
                                                     'group_name': mark_safe(json.dumps(group_name))
                                                     })
 
