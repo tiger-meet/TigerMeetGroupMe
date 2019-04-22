@@ -217,7 +217,7 @@ def add(request, group_name):
 
         todo.save()
 
-        group_name = title + time
+        group_name = title + ' ' + time
         url = '?access_token=' + encodedtoken
         allurl = '/makechat/' + group_name + url
 
