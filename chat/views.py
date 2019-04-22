@@ -8,7 +8,7 @@ from django.contrib import admin
 import base64
 
 admin.site.register(GroupChats)
-admin.site.register(Todo)
+admin.site.register(SportsEvents)
 
 def encodetoken(token):
     bytestoken = token.encode()
@@ -164,7 +164,7 @@ def createchat(request, group_name):
 
 
 def todo(request):
-    todos = Todo.objects.all()[:10]
+    todos = SportsEvents.objects.all()[:10]
 
     context = {
         'todos':todos
