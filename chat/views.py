@@ -227,8 +227,20 @@ def add(request, group_name):
         return render(request, 'chat/add.html', {'access_token': mark_safe(json.dumps(encodedtoken)), 
                                                 'group_name': mark_safe(json.dumps(group_name))})
 
-def details(request, id):
+def details(request, group_name, id):
     todo = VideoGamesEvents.objects.get(id=id)
+    if (group_name == 'sports'):
+        todo = VideoGamesEvents.objects.get(id=id)
+    elif (group_name == 'workingout'):
+        todo = VideoGamesEvents.objects.get(id=id)
+    elif (group_name == 'videogames'):
+        todo = VideoGamesEvents.objects.get(id=id)
+    elif (group_name == 'transportation'):
+        todo = VideoGamesEvents.objects.get(id=id)
+    elif (group_name == 'problemsetgroups'):
+        todo = VideoGamesEvents.objects.get(id=id)
+    elif (group_name == 'miscellaneous'):
+        todo = VideoGamesEvents.objects.get(id=id)
 
     context = {
         'todo':todo
