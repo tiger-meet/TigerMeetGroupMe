@@ -164,7 +164,7 @@ def createchat(request, group_name):
 
 
 def todo(request):
-    todos = SportsEvents.objects.all()[:10]
+    todos = VideoGamesEvents.objects.all()[:10]
 
     context = {
         'todos':todos
@@ -185,7 +185,19 @@ def add(request, group_name):
         print(text)
         print(time)
 
-        todo = SportsEvents(title=title, text=text, time=time)
+        if (group_name == 'sports'):
+            todo = SportsEvents(title=title, text=text, time=time)
+        elif (group_name == 'workingout'):
+            todo = WorkingOutEvents(title=title, text=text, time=time)
+        elif (group_name == 'videogames'):
+            todo = VideoGamesEvents(title=title, text=text, time=time)
+        elif (group_name == 'transportation'):
+            todo = TransportationEvents(title=title, text=text, time=time)
+        elif (group_name == 'problemsetgroups'):
+            todo = ProblemSetEvents(title=title, text=text, time=time)
+        elif (group_name == 'miscellaneous'):
+            todo = MiscellaneousEvents(title=title, text=text, time=time)
+
         todo.save()
 
         group_name = title + time
@@ -199,7 +211,7 @@ def add(request, group_name):
                                                 'group_name': mark_safe(json.dumps(group_name))})
 
 def details(request, id):
-    todo = Todo.objects.get(id=id)
+    todo = VideoGamesEvents.objects.get(id=id)
 
     context = {
         'todo':todo
