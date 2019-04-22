@@ -3,7 +3,7 @@ import requests
 import json
 import urllib.parse as urlparse
 from django.utils.safestring import mark_safe
-from .models import GroupChats, Todo
+from .models import GroupChats, SportsEvents
 from django.contrib import admin
 import base64
 
@@ -185,7 +185,7 @@ def add(request, group_name):
         print(text)
         print(time)
 
-        todo = Todo(title=title, text=text, time=time)
+        todo = SportsEvents(title=title, text=text, time=time)
         todo.save()
 
         group_name = title + time
