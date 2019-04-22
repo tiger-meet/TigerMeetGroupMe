@@ -228,7 +228,7 @@ def add(request, group_name):
                                                 'group_name': mark_safe(json.dumps(group_name))})
 
 def details(request, group_name, id):
-    todo = VideoGamesEvents.objects.get(id=id)
+    
     if (group_name == 'sports'):
         todo = SportsEvents.objects.get(id=id)
     elif (group_name == 'workingout'):
