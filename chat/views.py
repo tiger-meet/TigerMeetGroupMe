@@ -171,7 +171,7 @@ def todo(request):
     }
     return render(request, 'chat/todo.html', context)
 
-def add(request):
+def add(request, group_name):
     #token = gettoken(request)
     encodedtoken = gettoken(request)
     token = decodetoken(encodedtoken)
@@ -195,7 +195,8 @@ def add(request):
         return redirect('/')
         #return redirect(allurl)
     else:
-        return render(request, 'chat/add.html', {'access_token': mark_safe(json.dumps(encodedtoken))})
+        return render(request, 'chat/add.html', {'access_token': mark_safe(json.dumps(encodedtoken)), 
+                                                'group_name': mark_safe(json.dumps(group_name))})
 
 def details(request, id):
     todo = Todo.objects.get(id=id)

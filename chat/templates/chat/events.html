@@ -28,7 +28,7 @@
     var name = {{ group_name }};
     var url = "?access_token=" + {{ access_token }};
     var allurl = '/makechat/' + name + url;
-    var addurl = '/add/' + url;
+    var addurl = '/add/' + name + url;
     var joinurl = '/join/' + name + '/chat' + url;
     window.onload = function()
     {
