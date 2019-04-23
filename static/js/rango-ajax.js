@@ -15,8 +15,8 @@ $('#likes').click(function(){
 
                // $('#like_count').html(data);
                // $("a#like_count").attr('href', '/'+ data + '/' + _href);
-               $('.replaceValue').html(data);
-               $('.replaceValue').attr('href', '/'+ data + '/' + _href);
+               $('.replaceValue').html(data + _href);
+               // $('.replaceValue').attr('href', '/'+ data + '/' + _href);
                });
            });
 });
