@@ -31,11 +31,41 @@
     var addurl = '/add/' + name + url;
     var joinurl = '/join/' + name + '/chat' + url;
     var deturl = '/details' + name;
+
+    // Custom group icons
+    var icon = '';
+    switch (name) 
+    {
+      case 'sports':
+        icon = 'futbol alternate icon'
+        break;
+      case 'workingout':
+        icon = 'heart icon'
+        break;
+      case 'videogames':
+        icon = 'heart icon'
+        break;
+      case 'transportation':
+        icon = 'heart icon'
+        break;
+      case 'problemsetgroups':
+        icon = 'heart icon'
+        break;
+      case 'miscellaneous':
+        icon = 'heart icon'
+        break;
+      default:
+        icon = 'heart icon'
+    }
+
     window.onload = function()
     {
       document.getElementById("myGroup").innerHTML = name;
       document.getElementById("link").innerHTML = "Create " + name + " Chat";
       document.getElementById("link2").innerHTML = "Join " + name + " Chat";
+
+      // Custom group icons
+      document.getElementById("groupIcon").className = icon;
     }
   </script>
 </head>
@@ -97,8 +127,8 @@
       <!-- Break -->
       <div style="clear:both"></div>
 
-      <h1 class="ui image header" >
-        <img src="{% static 'cub.png' %}" class="image">
+      <h1 class="ui center aligned icon header">
+        <i id="groupIcon"></i>
         <div class="content" id="myGroup"></div>
       </h1>
 
