@@ -145,16 +145,32 @@
       <!-- Join general chat -->
       <a class="ui right floated button" id="link2" class="item" href="fill" onclick="location.href=joinurl; return false;">Error</a>
 
-      <hr>
       
       <h2>Events</h2>
-    
-      <p>[display events]</p>
-      <ul>
-        {% for todo in todos %}
-        <li><a href="/details/{{todo.id}}">{{todo.title}}</a>: {{todo.text}}</li>
-        {% endfor %}
-      </ul>
+
+      <div class="ui four column stackable grid">
+
+        <div class="column">
+          <div class="card">
+            <div class="content">
+              <div class="header">Sample Event Name</div>
+              <div class="meta">Sample Event Time</div>
+              <div class="description">
+                Sample Event Description
+                <a href="#">Link to Event Group Chat</a>
+              </div>
+            </div>
+          </div>
+        </div>      
+
+        <!-- TODO -->
+        <ul>
+          {% for todo in todos %}
+          <li><a href="/details/{{todo.id}}">{{todo.title}}</a>: {{todo.text}}</li>
+          {% endfor %}
+        </ul>
+
+      </div>
 
     </div>
   </div>
