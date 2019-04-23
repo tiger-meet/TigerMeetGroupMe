@@ -39,23 +39,105 @@
 </head>
 <body>
 
-  <form method="post" name="adurl" id="adurl">
-  {% csrf_token %}
-  <label for="title">Title</label><br />
-  <input type="text" name="title" id="title" />
-  <br>
-  <label for="text">Text</label><br />
-  <textarea name="text" id="text"></textarea>
-  <br>
-  <label for="time">Time</label><br />
-  <textarea name="time" id="time"></textarea>
-  <br>
-  <input type="submit" value="Submit and Create Event Chat" />
-  </form>
-  <br>
+  <!-- Navbar -->
+  <div class="ui pointing menu" style="margin-bottom: 0; border-radius: 0;">
+    <a class="item" href="/">
+      <img src="{% static 'cub.png' %}">
+    </a>
+    <div class="ui simple dropdown item">
+      Chatrooms <i class="dropdown icon"></i>
+      <div class="menu">
+        <!-- Changes url to /chatname with the authentication token appended -->
+        <a class="item" href="fill" onclick="location.href='/category/sports'+url; return false;" >
+          <i class="futbol alternate icon"></i>
+          Sports
+        </a>
+        <a class="item" href="fill" onclick="location.href='/category/workingout'+url; return false;" >
+          <i class="heart icon"></i>
+          Working Out
+        </a>
+        <a class="item" href="fill" onclick="location.href='/category/videogames'+url; return false;" >
+          <i class="gamepad icon"></i>
+          Video Games
+        </a>
+        <a class="item" href="fill" onclick="location.href='/category/transportation'+url; return false;" >
+          <i class="car icon"></i>
+          Transportation
+        </a>
+        <a class="item" href="fill" onclick="location.href='/category/problemsetgroups'+url; return false;" >
+          <i class="pencil alternate icon"></i>
+          Problem Set Groups
+        </a>
+        <a class="item" href="fill" onclick="location.href='/category/miscellaneous'+url; return false;" >
+          <i class="ellipsis horizontal icon"></i>
+          Miscellaneous
+        </a>
+      </div>
+    </div>
+    <div class="right menu">
+      <a class="ui item" href="/about">
+        About
+      </a>
+      <a class="ui item" href="/">
+        Logout
+      </a>
+    </div>
+  </div>
 
-  <!-- TODO -->
-  <a class="ui button" href="/">Go Back</a>
+  <div class="ui middle aligned center aligned grid" style="margin: 10px;">
+    <div class="column">
+
+      <div>
+        <button class="ui left floated button" type="button" onclick="location.href = '/index'+url;">Back to Home</button>
+      </div>
+
+      <br/>
+      <!-- Break -->
+      <div style="clear:both"></div>
+
+      <!-- Form -->
+      <!-- <form method="post" name="adurl" id="adurl">
+      {% csrf_token %}
+      <label for="title">Title</label><br />
+      <input type="text" name="title" id="title" />
+      <br>
+      <label for="text">Text</label><br />
+      <textarea name="text" id="text"></textarea>
+      <br>
+      <label for="time">Time</label><br />
+      <textarea name="time" id="time"></textarea>
+      <br>
+      <input type="submit" value="Submit and Create Event Chat" />
+      </form>
+      <br> -->
+
+
+      <div class="ui form" method="post" name="adurl" id="adurl">
+        {% csrf_token %}
+        <div class="field">
+          <label for="title">Title</label>
+          <input type="text" name="title" id="title">
+        </div>
+        <div class="field">
+          <label for="text">Text</label>
+          <input type="text" name="text" id="text">
+        </div>
+        <div class="field">
+          <label for="time">Time</label>
+          <input type="text" name="time" id="time">
+        </div>
+        <div class="field">
+          <select>
+            <option value="">Gender</option>
+            <option value="1">Male</option>
+            <option value="0">Female</option>
+          </select>
+        </div>
+        <button class="ui button" type="submit">Submit and Create Event Chat</button>
+      </div>
+
+    </div>
+  </div>
 
 </body>
 </html>
