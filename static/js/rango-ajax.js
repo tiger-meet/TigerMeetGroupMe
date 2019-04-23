@@ -8,7 +8,7 @@ $('#likes').click(function(){
     //     var $this = $(this);
     //     var _href = $this.attr("href");
 
-    catid = $(this).attr("data-catid");
+    catid = $('a.replaceValue').attr("data-catid");
      $.get('/like_category/', {category_id: catid}, function(data){
 
                // $('#like_count').html(data);
