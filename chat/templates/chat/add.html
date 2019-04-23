@@ -28,10 +28,39 @@
     var addurl = '/add/' + name + url;
     //document.getElementById("adurl").innerHTML=addurl;
 
+    // Custom group icons
+    var icon = '';
+    switch (name) 
+    {
+      case 'sports':
+        icon = 'futbol alternate icon'
+        break;
+      case 'workingout':
+        icon = 'heart icon'
+        break;
+      case 'videogames':
+        icon = 'heart icon'
+        break;
+      case 'transportation':
+        icon = 'heart icon'
+        break;
+      case 'problemsetgroups':
+        icon = 'heart icon'
+        break;
+      case 'miscellaneous':
+        icon = 'heart icon'
+        break;
+      default:
+        icon = 'heart icon'
+    }
+
     window.onload = function() 
     {
       document.getElementById("myGroup").innerHTML = "Create " + name + " Event";
       document.adurl.action = get_action();
+
+      // Custom group icons
+      document.getElementById("groupIcon").className = icon;
     }
 
     function get_action() {
@@ -90,7 +119,7 @@
     <div class="column">
 
       <div>
-        <button class="ui left floated button" type="button" onclick="location.href = '/index'+url;">Back to Home</button>
+        <button class="ui left floated button" type="button" onclick="location.href = '/category/'+name+url; return false;">Back to Home</button>
       </div>
 
       <br/>
@@ -98,7 +127,7 @@
       <div style="clear:both"></div>
 
       <h1 class="ui image header" >
-        <img src="{% static 'cub.png' %}" class="image">
+        <i id="groupIcon"></i>
         <div class="content" id="myGroup"></div>
       </h1>
 
