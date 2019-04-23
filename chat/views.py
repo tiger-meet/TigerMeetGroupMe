@@ -240,7 +240,9 @@ def add(request, group_name):
                                                 'group_name': mark_safe(json.dumps(group_name))})
 
 def details(request, group_name, id):
-    
+    encodedtoken = gettoken(request)
+    token = decodetoken(encodedtoken)
+
     if (group_name == 'sports'):
         todo = SportsEvents.objects.get(id=id)
     if (group_name == 'workingout'):
@@ -255,7 +257,9 @@ def details(request, group_name, id):
         todo = MiscellaneousEvents.objects.get(id=id)
 
     context = {
-        'todo':todo
+        'todo':todo,
+        'access_token': mark_safe(json.dumps(token)),
+        'group_name': mark_safe(json.dumps(group_name))}
     }
     return render(request, 'chat/details.html', context)
 
