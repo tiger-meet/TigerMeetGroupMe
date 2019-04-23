@@ -123,7 +123,7 @@
   <button id ="likes" data-catid= {{ group_name }} class="btn btn-mini btn-primary" type="button">Like</button>
   <ul>
       {% for todo in todos %}
-          <a class ="replaceValue" href= {{todo.id}} >hi{{ todo.id }}</a>
+          <a class ="replaceValue" href= '/'{{todo.id}} >hi{{ todo.id }}</a>
 {#        <li><a onclick="location.href=deturl{{todo.id}}; return false;">{{todo.title}}</a>: {{todo.text}}</li>#}
           <li><a href={{todo.id}}>{{todo.title}}</a>: {{todo.text}}</li>
 {#          <div id="like_count">hi{{ todo.likes }} </div>#}
