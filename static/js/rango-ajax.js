@@ -4,9 +4,9 @@ $('#likes').click(function(){
     var catid;
     var _href = $('a.replaceValue').attr('href');
 
-    $('.replaceValue').each(function() {
-        var $this = $(this);
-        var _href = $this.attr("href");
+    // $('.replaceValue').each(function() {
+    //     var $this = $(this);
+    //     var _href = $this.attr("href");
 
     catid = $(this).attr("data-catid");
      $.get('/like_category/', {category_id: catid}, function(data){
