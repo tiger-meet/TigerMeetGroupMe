@@ -90,7 +90,9 @@
 
     <div class="column">
 
-      <button class="ui left floated button" type="button" onclick="location.href = '/index'+url;">Back to Home</button>
+      <div>
+        <button class="ui left floated button" type="button" onclick="location.href = '/index'+url;">Back to Home</button>
+      </div>
 
       <br/>
 
@@ -102,23 +104,25 @@
       <br/>
       <!-- <a href="fill" onclick="location.href='/test/'+ test; return false;" >Join <a id="myGroup1">chatname</a> Chat</a> -->
 
-      <a class="ui button" id="link" href="fill" onclick="location.href=allurl; return false;">Test</a>
+      <a class="ui button" id="link" href="fill" onclick="location.href=allurl; return false;">Error</a>
       <div class="ui bottom attached warning message">
         A chat will not be made if there already exists a chat of the same name.
       </div>
 
-      <a class="ui button" id="link2" class="item" href="fill" onclick="location.href=joinurl; return false;">Test</a>
+      <a class="ui button" id="link2" class="item" href="fill" onclick="location.href=joinurl; return false;">Error</a>
 
     </div>
   </div>
 
-<button onclick="location.href = addurl;">add new event</button>
+  <div>
+    <button class="ui button" type="button" onclick="location.href=addurl;">Create New Event</button>
+  </div>
 
-<p>display</p>
+  <p>display</p>
   <ul>
-      {% for todo in todos %}
-        <li><a href="/details/{{todo.id}}">{{todo.title}}</a>: {{todo.text}}</li>
-      {% endfor %}
+    {% for todo in todos %}
+    <li><a href="/details/{{todo.id}}">{{todo.title}}</a>: {{todo.text}}</li>
+    {% endfor %}
   </ul>
 
 </body>
