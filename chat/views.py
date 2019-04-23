@@ -259,7 +259,7 @@ def details(request, group_name, id):
     }
     return render(request, 'chat/details.html', context)
 
-def like_category(request):
+def getgroupname(request):
     if request.method == 'GET':
-        likes = request.GET['category_id']
-    return HttpResponse(likes)
+        name = request.GET['group_name']
+    return HttpResponse(name)

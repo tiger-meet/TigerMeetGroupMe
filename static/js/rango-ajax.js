@@ -1,12 +1,12 @@
 $(document).ready(function() {
 
 $('#likes').click(function(){
-    var catid;
-    catid = $(this).attr("data-catid");
+    var name;
+    name = $(this).attr("data-name");
 
     // var _href = $('a.replaceValue').attr('href');
 
-    $.get('/like_category/', {category_id: catid}, function(data){
+    $.get('/getgroupname/', {group_name: name}, function(data){
         $('.replaceValue').each(function() {
             var $this = $(this);
             var _href = $this.attr("href");
