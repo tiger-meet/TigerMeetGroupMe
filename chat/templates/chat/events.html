@@ -38,6 +38,10 @@
       document.getElementById("link2").innerHTML = "Join " + name + " Chat";
     }
   </script>
+
+    <script src="{% static "/js/jquery.js" %}"></script>
+    <script src="{% static "/js/rango-ajax.js" %}"></script>
+
 </head>
 <body>
 
@@ -116,10 +120,11 @@
 
 <p>display</p>
   <ul>
+  {% extends events.html %}
       {% for todo in todos %}
 {#          deturl{{todo.id}}#}
 {#        <li><a onclick="location.href=deturl{{todo.id}}; return false;">{{todo.title}}</a>: {{todo.text}}</li>#}
-          <li><a href="/details/{{todo.id}}">{{todo.title}}</a>: {{todo.text}}</li>
+          <li><a href="/details/{{ group_name }}">{{todo.title}}</a>: {{todo.text}}</li>
       {% endfor %}
   </ul>
 
