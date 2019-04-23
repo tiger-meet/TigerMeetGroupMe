@@ -242,15 +242,15 @@ def details(request, group_name, id):
     
     if (group_name == 'sports'):
         todo = SportsEvents.objects.get(id=id)
-    elif (group_name == 'workingout'):
+    if (group_name == 'workingout'):
         todo = WorkingOutEvents.objects.get(id=id)
-    elif (group_name == 'videogames'):
+    if (group_name == 'videogames'):
         todo = VideoGamesEvents.objects.get(id=id)
-    elif (group_name == 'transportation'):
+    if (group_name == 'transportation'):
         todo = TransportationEvents.objects.get(id=id)
-    elif (group_name == 'problemsetgroups'):
+    if (group_name == 'problemsetgroups'):
         todo = ProblemSetEvents.objects.get(id=id)
-    elif (group_name == 'miscellaneous'):
+    if (group_name == 'miscellaneous'):
         todo = MiscellaneousEvents.objects.get(id=id)
 
     context = {
