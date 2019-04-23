@@ -201,43 +201,65 @@ def todo(request):
     return render(request, 'chat/todo.html', context)
 
 def add(request, group_name):
-    #token = gettoken(request)
     encodedtoken = gettoken(request)
     token = decodetoken(encodedtoken)
 
-    if(request.method == 'POST'):
-        title = request.POST['title']
-        text = request.POST['text']
-        time = request.POST['time']
-
-        print(title)
-        print(text)
-        print(time)
-
-        if (group_name == 'sports'):
-            todo = SportsEvents(title=title, text=text, time=time)
-        if (group_name == 'workingout'):
-            todo = WorkingOutEvents(title=title, text=text, time=time)
-        if (group_name == 'videogames'):
-            todo = VideoGamesEvents(title=title, text=text, time=time)
-        if (group_name == 'transportation'):
-            todo = TransportationEvents(title=title, text=text, time=time)
-        if (group_name == 'problemsetgroups'):
-            todo = ProblemSetEvents(title=title, text=text, time=time)
-        if (group_name == 'miscellaneous'):
-            todo = MiscellaneousEvents(title=title, text=text, time=time)
-
-        todo.save()
-
-        group_name = title + ' ' + time
-        url = '?access_token=' + encodedtoken
-        allurl = '/makechat/' + group_name + url
-
-        #return redirect('/')
-        return redirect(allurl)
+    if token == 'none':
+        return render(request, 'chat/gmlogin.html', {})
     else:
-        return render(request, 'chat/add.html', {'access_token': mark_safe(json.dumps(encodedtoken)), 
-                                                'group_name': mark_safe(json.dumps(group_name))})
+
+        url = 'https://api.groupme.com/v3/groups?token=' + token
+        url = str(url)
+
+        if(request.method == 'POST'):
+            title = request.POST['title']
+            text = request.POST['text']
+            time = request.POST['time']
+
+            print(title)
+            print(text)
+            print(time)
+
+            chatname = "TigerMeet " + group_name
+            data = {'name': chatname,
+                    "share": True, }
+            headers = {"Content-Type": "application/json"}
+            r = requests.post(url, data=json.dumps(data), headers=headers)
+
+            print(r.json()['response']['share_url'])
+            shareurl = (r.json()['response']['share_url'])
+            code = str(shareurl[-17:-9])
+            sharetoken = str(shareurl[-8:])
+
+            if (group_name == 'sports'):
+                todo = SportsEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken)
+            if (group_name == 'workingout'):
+                todo = WorkingOutEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken)
+            if (group_name == 'videogames'):
+                todo = VideoGamesEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken)
+            if (group_name == 'transportation'):
+                todo = TransportationEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken)
+            if (group_name == 'problemsetgroups'):
+                todo = ProblemSetEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken)
+            if (group_name == 'miscellaneous'):
+                todo = MiscellaneousEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken)
+
+            todo.save()
+
+            group_name = title + ' ' + time
+            url = '?access_token=' + encodedtoken
+            allurl = '/makechat/' + group_name + url
+
+            #return redirect('/')
+            #change this so it doesn't just call createchat
+            return render(request, 'chat/chat.html', {
+                # 'access_token': mark_safe(json.dumps(access_token)),
+                'group_name': mark_safe(json.dumps(group_name))
+            })
+
+        else:
+            return render(request, 'chat/add.html', {'access_token': mark_safe(json.dumps(encodedtoken)),
+                                                    'group_name': mark_safe(json.dumps(group_name))})
 
 def details(request, group_name, id):
     encodedtoken = gettoken(request)
