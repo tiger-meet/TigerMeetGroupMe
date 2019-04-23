@@ -8,7 +8,7 @@ $('#likes').click(function(){
     //     var $this = $(this);
     //     var _href = $this.attr("href");
 
-    catid = $('a.replaceValue').attr("data-catid");
+    catid = $(this).attr("data-catid");
      $.get('/like_category/', {category_id: catid}, function(data){
 
                // $('#like_count').html(data);
@@ -16,7 +16,6 @@ $('#likes').click(function(){
                $('a.replaceValue').html(data);
                $('a.replaceValue').attr('href', '/'+ data + '/' + _href);
            });
-         });
 });
 
 });
