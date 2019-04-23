@@ -1,6 +1,7 @@
 $(document).ready(function() {
 
-$('#likes').click(function(){
+// $('#likes').click(function(){
+    $('#likes').ready(function(){
     var catid;
     var _href = $('a.replaceValue').attr('href');
 
