@@ -30,7 +30,7 @@
     var allurl = '/makechat/' + name + url;
     var addurl = '/add/' + name + url;
     var joinurl = '/join/' + name + '/chat' + url;
-    var deturl = '/details' + name;
+    var deturl = '/details/' + name;
     window.onload = function()
     {
       document.getElementById("myGroup").innerHTML = name + " Events";
@@ -117,7 +117,7 @@
 <p>display</p>
   <ul>
       {% for todo in todos %}
-        <li><a href="/details/{{group_name}}/{{todo.id}}">{{todo.title}}</a>: {{todo.text}}</li>
+        <li><a onclick="location.href=deturl{{todo.id}}; return false;">{{todo.title}}</a>: {{todo.text}}</li>
       {% endfor %}
   </ul>
 
