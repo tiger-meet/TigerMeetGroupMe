@@ -99,7 +99,7 @@ def events(request, group_name):
             'group_name': mark_safe(json.dumps(group_name)),
             'todos': todos
         }
-        
+
     except:
         context = {
             'access_token': mark_safe(json.dumps(encodedtoken)),
@@ -215,15 +215,15 @@ def add(request, group_name):
 
         if (group_name == 'sports'):
             todo = SportsEvents(title=title, text=text, time=time)
-        elif (group_name == 'workingout'):
+        if (group_name == 'workingout'):
             todo = WorkingOutEvents(title=title, text=text, time=time)
-        elif (group_name == 'videogames'):
+        if (group_name == 'videogames'):
             todo = VideoGamesEvents(title=title, text=text, time=time)
-        elif (group_name == 'transportation'):
+        if (group_name == 'transportation'):
             todo = TransportationEvents(title=title, text=text, time=time)
-        elif (group_name == 'problemsetgroups'):
+        if (group_name == 'problemsetgroups'):
             todo = ProblemSetEvents(title=title, text=text, time=time)
-        elif (group_name == 'miscellaneous'):
+        if (group_name == 'miscellaneous'):
             todo = MiscellaneousEvents(title=title, text=text, time=time)
 
         todo.save()
