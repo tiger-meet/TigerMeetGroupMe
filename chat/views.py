@@ -114,7 +114,7 @@ def events(request, group_name):
         else:
             return render(request, 'chat/events.html', context)
 
-# joins sports chat
+# joins chat
 def joinchat(request, group_name):
     #token = gettoken(request)
     encodedtoken = gettoken(request)
@@ -241,7 +241,6 @@ def add(request, group_name):
 
 def details(request, group_name, id):
     encodedtoken = gettoken(request)
-    token = decodetoken(encodedtoken)
 
     if (group_name == 'sports'):
         todo = SportsEvents.objects.get(id=id)
@@ -258,7 +257,7 @@ def details(request, group_name, id):
 
     context = {
         'todo':todo,
-        'access_token': mark_safe(json.dumps(token)),
+        'access_token': mark_safe(json.dumps(encodedtoken)),
         'group_name': mark_safe(json.dumps(group_name))
     }
     return render(request, 'chat/details.html', context)
