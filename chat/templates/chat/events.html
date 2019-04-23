@@ -121,7 +121,7 @@
 
 {#  data-access-token= {{ access_token }}#}
 <p>display</p>
-  <button id ="likes" data-name= {{ group_name }}, class="btn btn-mini btn-primary" type="button">Like</button>
+  <button id ="likes" data-name= {{ group_name }}, data-access-token= {{ access_token }}class="btn btn-mini btn-primary" type="button">Like</button>
   <ul>
       {% for todo in todos %}
           <li><a class ="replaceValue" href= '/{{todo.id}}' >{{todo.title}}</a>: {{todo.text}}</li>

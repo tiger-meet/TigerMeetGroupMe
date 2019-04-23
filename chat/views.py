@@ -262,4 +262,5 @@ def details(request, group_name, id):
 def getgroupname(request):
     if request.method == 'GET':
         name = request.GET['group_name']
-    return HttpResponse(name)
+        token = request.GET['access_token']
+    return HttpResponse(name, token)
