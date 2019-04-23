@@ -261,6 +261,5 @@ def details(request, group_name, id):
 
 def like_category(request):
     if request.method == 'GET':
-        cat_id = request.GET['category_id']
-        likes = 69
+        likes = request.GET['category_id']
     return HttpResponse(likes)

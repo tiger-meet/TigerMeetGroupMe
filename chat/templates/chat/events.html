@@ -121,7 +121,7 @@
 
 <p>display</p>
   <div id="like_count">hi{{ todo.likes }} </div>
-  <button id ="likes" data-catid= 1 class="btn btn-mini btn-primary" type="button">Like</button>
+  <button id ="likes" data-catid= {{ group_name }} class="btn btn-mini btn-primary" type="button">Like</button>
   <ul>
       {% for todo in todos %}
 {#          deturl{{todo.id}}#}
