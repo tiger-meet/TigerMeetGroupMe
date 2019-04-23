@@ -259,7 +259,7 @@ def details(request, group_name, id):
     context = {
         'todo':todo,
         'access_token': mark_safe(json.dumps(token)),
-        'group_name': mark_safe(json.dumps(group_name))}
+        'group_name': mark_safe(json.dumps(group_name))
     }
     return render(request, 'chat/details.html', context)
 
