@@ -12,7 +12,7 @@ $('#likes').click(function(){
      $.get('/like_category/', {category_id: catid}, function(data){
                $('#like_count').html(data);
                $("a#like_count").attr('href', '/'+ data + '/' + _href);
-               $("a.replaceValue").attr("href", '/trythis' + _herf);
+               $("a.replaceValue").attr('href', '/trythis' + _href);
            });
 });
 
