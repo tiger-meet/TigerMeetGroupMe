@@ -92,15 +92,26 @@ def events(request, group_name):
     elif (group_name == 'miscellaneous'):
         todos = MiscellaneousEvents.objects.all()[:10]
 
-    context = {
-        'access_token': mark_safe(json.dumps(encodedtoken)),
-        'group_name': mark_safe(json.dumps(group_name)),
-        'todos':todos
-    }
-    if token == 'none':
-        return render(request, 'chat/gmlogin.html', {})
-    else:
-        return render(request, 'chat/events.html', context)
+    try:
+        print(todos)
+        context = {
+            'access_token': mark_safe(json.dumps(encodedtoken)),
+            'group_name': mark_safe(json.dumps(group_name)),
+            'todos': todos
+        }
+        
+    except:
+        context = {
+            'access_token': mark_safe(json.dumps(encodedtoken)),
+            'group_name': mark_safe(json.dumps(group_name)),
+            'todos': ""
+        }
+
+    finally:
+        if token == 'none':
+            return render(request, 'chat/gmlogin.html', {})
+        else:
+            return render(request, 'chat/events.html', context)
 
 # joins sports chat
 def joinchat(request, group_name):
