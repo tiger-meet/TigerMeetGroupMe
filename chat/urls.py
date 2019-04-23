@@ -13,5 +13,5 @@ urlpatterns = [
     path('todo/', todo, name='todo'),
     re_path(r'^add/(?P<group_name>[^/]+)', add, name='add'),
     re_path(r'^details/(?P<group_name>[^/]+)/(?P<id>\w{0,50})/$', details, name='details'),
-    re_path(r'^getgroupname/$', getgroupname(), name='getgroupname'),
+    re_path(r'^getgroupname/$', getgroupname, name='getgroupname'),
 ]
