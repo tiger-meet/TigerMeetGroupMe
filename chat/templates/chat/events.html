@@ -33,7 +33,7 @@
     var deturl = '/details' + name;
     window.onload = function()
     {
-      document.getElementById("myGroup").innerHTML = name + " Events";
+      document.getElementById("myGroup").innerHTML = name;
       document.getElementById("link").innerHTML = "Create " + name + " Chat";
       document.getElementById("link2").innerHTML = "Join " + name + " Chat";
     }
@@ -94,6 +94,7 @@
       </div>
 
       <br/>
+      <div style="clear:both"></div>
 
       <h1 class="ui image header" >
         <img src="{% static 'cub.png' %}" class="image">
@@ -101,7 +102,7 @@
       </h1>
 
       <br/>
-      <!-- <a href="fill" onclick="location.href='/test/'+ test; return false;" >Join <a id="myGroup1">chatname</a> Chat</a> -->
+      <h2>General Chat</h2>
 
       <a class="ui button" id="link" href="fill" onclick="location.href=allurl; return false;">Error</a>
       <div class="ui bottom attached warning message">
@@ -112,11 +113,13 @@
 
       <hr>
       
+      <h2>Events</h2>
+
       <div>
         <button class="ui button" type="button" onclick="location.href=addurl;">Create New Event</button>
       </div>
     
-      <p>display</p>
+      <p>[display events]</p>
       <ul>
         {% for todo in todos %}
         <li><a href="/details/{{todo.id}}">{{todo.title}}</a>: {{todo.text}}</li>
