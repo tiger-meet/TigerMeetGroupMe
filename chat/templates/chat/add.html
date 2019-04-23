@@ -28,8 +28,10 @@
     var addurl = '/add/' + name + url;
     //document.getElementById("adurl").innerHTML=addurl;
 
-    window.onload = function() {
-        document.adurl.action = get_action();
+    window.onload = function() 
+    {
+      document.getElementById("myGroup").innerHTML = "Create " + name + " Event";
+      document.adurl.action = get_action();
     }
 
     function get_action() {
@@ -87,11 +89,6 @@
   <div class="ui middle aligned center aligned grid" style="margin: 10px;">
     <div class="column">
 
-      <h1 class="ui image header" >
-        <img src="{% static 'cub.png' %}" class="image">
-        <div class="content" id="myGroup">Create {{ group_name }} Event</div>
-      </h1>
-
       <div>
         <button class="ui left floated button" type="button" onclick="location.href = '/index'+url;">Back to Home</button>
       </div>
@@ -99,6 +96,11 @@
       <br/>
       <!-- Break -->
       <div style="clear:both"></div>
+
+      <h1 class="ui image header" >
+        <img src="{% static 'cub.png' %}" class="image">
+        <div class="content" id="myGroup"></div>
+      </h1>
 
       <!-- Form -->
       <!-- <form method="post" name="adurl" id="adurl">
