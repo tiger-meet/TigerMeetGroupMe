@@ -13,10 +13,6 @@ $('#likes').click(function(){
             var $this = $(this);
             var _href = $this.attr("href");
 
-
-
-               // $('#like_count').html(data);
-               // $("a#like_count").attr('href', '/'+ data + '/' + _href);
                $($this).attr('href', '/details/' + data + _href);  //+ token
                });
            });
