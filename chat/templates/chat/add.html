@@ -25,6 +25,7 @@
   <script type="text/javascript">
     var name = {{ group_name }};
     var url = "?access_token=" + {{ access_token }};
+    var categoryurl = '/category/' + name + url;
     var addurl = '/add/' + name + url;
     //document.getElementById("adurl").innerHTML=addurl;
 
@@ -119,7 +120,7 @@
     <div class="column">
 
       <div>
-        <button class="ui left floated button" type="button" onclick="location.href = '/category/'+name+'/'+url; return false;">Back to Group</button>
+        <button class="ui left floated button" type="button" onclick="location.href = categoryurl; return false;">Back to Group</button>
       </div>
 
       <br/>
