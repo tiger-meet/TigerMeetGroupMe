@@ -87,6 +87,11 @@
   <div class="ui middle aligned center aligned grid" style="margin: 10px;">
     <div class="column">
 
+      <h1 class="ui image header" >
+        <img src="{% static 'cub.png' %}" class="image">
+        <div class="content" id="myGroup">Create {{ group_name }} Event</div>
+      </h1>
+
       <div>
         <button class="ui left floated button" type="button" onclick="location.href = '/index'+url;">Back to Home</button>
       </div>
@@ -112,7 +117,7 @@
       <br> -->
 
 
-      <div class="ui form" method="post" name="adurl" id="adurl">
+      <form class="ui form" method="post" name="adurl" id="adurl">
         {% csrf_token %}
         <div class="field">
           <label for="title">Event Name</label>
@@ -127,7 +132,7 @@
           <input type="text" name="time" id="time" placeholder="Event Time">
         </div>
         <input class="ui button" type="submit" value="Submit and Create Event Chat">
-      </div>
+      </form>
 
     </div>
   </div>
