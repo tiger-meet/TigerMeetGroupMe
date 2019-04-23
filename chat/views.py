@@ -3,12 +3,12 @@ import requests
 import json
 import urllib.parse as urlparse
 from django.utils.safestring import mark_safe
-from .models import GroupChats, Todo
+from .models import GroupChats, SportsEvents, WorkingOutEvents, VideoGamesEvents, TransportationEvents, ProblemSetEvents, MiscellaneousEvents
 from django.contrib import admin
 import base64
 
 admin.site.register(GroupChats)
-admin.site.register(Todo)
+admin.site.register(SportsEvents)
 
 def encodetoken(token):
     bytestoken = token.encode()
@@ -78,12 +78,29 @@ def events(request, group_name):
     #token = gettoken(request)
     encodedtoken = gettoken(request)
     token = decodetoken(encodedtoken)
+
+    if (group_name == 'sports'):
+        todos = SportsEvents.objects.all()[:10]
+    elif (group_name == 'workingout'):
+        todos = WorkingOutEvents.objects.all()[:10]
+    elif (group_name == 'videogames'):
+        todos = VideoGamesEvents.objects.all()[:10]
+    elif (group_name == 'transportation'):
+        todos = TransportationEvents.objects.all()[:10]
+    elif (group_name == 'problemsetgroups'):
+        todos = ProblemSetEvents.objects.all()[:10]
+    elif (group_name == 'miscellaneous'):
+        todos = MiscellaneousEvents.objects.all()[:10]
+
+    context = {
+        'todos':todos
+    }
     if token == 'none':
         return render(request, 'chat/gmlogin.html', {})
     else:
-        return render(request, 'chat/events.html', {'access_token': mark_safe(json.dumps(encodedtoken)),
-                                                    'group_name': mark_safe(json.dumps(group_name))
-                                                    })
+        return render(request, 'chat/events.html',{'access_token': mark_safe(json.dumps(encodedtoken)),
+                                                    'group_name': mark_safe(json.dumps(group_name)),
+                                                    } )
 
 # joins sports chat
 def joinchat(request, group_name):
@@ -164,14 +181,14 @@ def createchat(request, group_name):
 
 
 def todo(request):
-    todos = Todo.objects.all()[:10]
+    todos = VideoGamesEvents.objects.all()[:10]
 
     context = {
         'todos':todos
     }
     return render(request, 'chat/todo.html', context)
 
-def add(request):
+def add(request, group_name):
     #token = gettoken(request)
     encodedtoken = gettoken(request)
     token = decodetoken(encodedtoken)
@@ -185,20 +202,45 @@ def add(request):
         print(text)
         print(time)
 
-        todo = Todo(title=title, text=text, time=time)
+        if (group_name == 'sports'):
+            todo = SportsEvents(title=title, text=text, time=time)
+        elif (group_name == 'workingout'):
+            todo = WorkingOutEvents(title=title, text=text, time=time)
+        elif (group_name == 'videogames'):
+            todo = VideoGamesEvents(title=title, text=text, time=time)
+        elif (group_name == 'transportation'):
+            todo = TransportationEvents(title=title, text=text, time=time)
+        elif (group_name == 'problemsetgroups'):
+            todo = ProblemSetEvents(title=title, text=text, time=time)
+        elif (group_name == 'miscellaneous'):
+            todo = MiscellaneousEvents(title=title, text=text, time=time)
+
         todo.save()
 
-        group_name = title + time
+        group_name = title + ' ' + time
         url = '?access_token=' + encodedtoken
         allurl = '/makechat/' + group_name + url
 
-        return redirect('/')
-        #return redirect(allurl)
+        #return redirect('/')
+        return redirect(allurl)
     else:
-        return render(request, 'chat/add.html', {'access_token': mark_safe(json.dumps(encodedtoken))})
+        return render(request, 'chat/add.html', {'access_token': mark_safe(json.dumps(encodedtoken)), 
+                                                'group_name': mark_safe(json.dumps(group_name))})
 
-def details(request, id):
-    todo = Todo.objects.get(id=id)
+def details(request, group_name, id):
+    
+    if (group_name == 'sports'):
+        todo = SportsEvents.objects.get(id=id)
+    elif (group_name == 'workingout'):
+        todo = WorkingOutEvents.objects.get(id=id)
+    elif (group_name == 'videogames'):
+        todo = VideoGamesEvents.objects.get(id=id)
+    elif (group_name == 'transportation'):
+        todo = TransportationEvents.objects.get(id=id)
+    elif (group_name == 'problemsetgroups'):
+        todo = ProblemSetEvents.objects.get(id=id)
+    elif (group_name == 'miscellaneous'):
+        todo = MiscellaneousEvents.objects.get(id=id)
 
     context = {
         'todo':todo
