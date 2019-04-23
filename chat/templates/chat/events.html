@@ -62,7 +62,7 @@
     {
       document.getElementById("myGroup").innerHTML = name;
       document.getElementById("link").innerHTML = "Create " + name + " Chat";
-      document.getElementById("link2").innerHTML = "Join " + name + " Chat";
+      document.getElementById("link2").innerHTML = "Join " + name + "General Chat";
 
       // Custom group icons
       document.getElementById("groupIcon").className = icon;
@@ -132,23 +132,22 @@
         <div class="content" id="myGroup"></div>
       </h1>
 
-      <br/>
-      <h2>General Chat</h2>
+      <br>
 
       <a class="ui button" id="link" href="fill" onclick="location.href=allurl; return false;">Error</a>
-      <div class="ui bottom attached warning message">
-        A chat will not be made if there already exists a chat of the same name.
-      </div>
+      <div class="floating ui red label">To Remove</div>
 
-      <a class="ui button" id="link2" class="item" href="fill" onclick="location.href=joinurl; return false;">Error</a>
+      <br>
+
+      <!-- Create new event -->
+      <button class="ui left floated button" type="button" onclick="location.href=addurl;">Create New Event</button>
+
+      <!-- Join general chat -->
+      <a class="ui right floated button" id="link2" class="item" href="fill" onclick="location.href=joinurl; return false;">Error</a>
 
       <hr>
       
       <h2>Events</h2>
-
-      <div>
-        <button class="ui button" type="button" onclick="location.href=addurl;">Create New Event</button>
-      </div>
     
       <p>[display events]</p>
       <ul>
