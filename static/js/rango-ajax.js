@@ -16,7 +16,7 @@ $('#likes').click(function(){
                // $('#like_count').html(data);
                // $("a#like_count").attr('href', '/'+ data + '/' + _href);
                $($this).html(data + _href);
-               $($this).attr('href', '/details' + data + _href);
+               $($this).attr('href', '/details/' + data + _href);
                });
            });
 });
