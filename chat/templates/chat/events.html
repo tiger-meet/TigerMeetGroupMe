@@ -147,8 +147,11 @@
       <br>
       <!-- Break -->
       <div style="clear:both"></div>
-      
-      <h2>Events</h2>
+
+      <h2 class="ui header">
+        Events
+        <div class="sub header">(Click an event to join the event's group chat)</div>
+      </h2>
 
       <div class="ui four column stackable grid">
 
@@ -160,19 +163,27 @@
                 <div class="meta">Sample Event Time</div>
                 <div class="description">
                   <p>Sample Event Description</p>
-                  <p>(Click to go to event group chat)</p>
                 </div>
               </div>
             </div>
           </a>
         </div>      
-
-        <!-- TODO -->
-        <ul>
-          {% for todo in todos %}
-          <li><a href="/details/{{todo.id}}">{{todo.title}}</a>: {{todo.text}}</li>
-          {% endfor %}
-        </ul>
+        
+        {% for todo in todos %}
+        <div class="column">
+          <a href="/details/{{ todo.id }}">
+            <div class="ui fluid card">
+              <div class="content">
+                <div class="header">{{ todo.title }}</div>
+                <div class="meta">{{ todo.time }}</div>
+                <div class="description">
+                  <p>{{ todo.text }}</p>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>    
+        {% endfor %}
 
       </div>
 
