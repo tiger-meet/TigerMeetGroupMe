@@ -6,6 +6,7 @@ from django.utils.safestring import mark_safe
 from .models import GroupChats, SportsEvents, WorkingOutEvents, VideoGamesEvents, TransportationEvents, ProblemSetEvents, MiscellaneousEvents
 from django.contrib import admin
 import base64
+from django.http import HttpResponse
 
 admin.site.register(GroupChats)
 admin.site.register(SportsEvents)
@@ -257,3 +258,9 @@ def details(request, group_name, id):
         'todo':todo
     }
     return render(request, 'chat/details.html', context)
+
+def like_category(request):
+    if request.method == 'GET':
+        cat_id = request.GET['category_id']
+        likes = 69
+    return HttpResponse(likes)

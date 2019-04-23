@@ -120,11 +120,13 @@
 <button onclick="location.href = addurl;">add new event</button>
 
 <p>display</p>
+  <div id="like_count">{{ todo.likes }} </div>
+  <button id ="likes" data-catid= 1 class="btn btn-mini btn-primary" type="button">Like</button>
   <ul>
       {% for todo in todos %}
 {#          deturl{{todo.id}}#}
 {#        <li><a onclick="location.href=deturl{{todo.id}}; return false;">{{todo.title}}</a>: {{todo.text}}</li>#}
-          <li><a href={{ todo.id}}>{{todo.title}}</a>: {{todo.text}}</li>
+          <li><a href={{todo.id}}>{{todo.title}}</a>: {{todo.text}}</li>
       {% endfor %}
   </ul>
 

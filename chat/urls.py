@@ -1,5 +1,5 @@
 from django.urls import path, re_path
-from .views import index, about, gmlogin, createchat, joinchat, events, todo, add, details
+from .views import index, about, gmlogin, createchat, joinchat, events, todo, add, details, like_category
 
 urlpatterns = [
     path('', gmlogin, name='gmlogin'),
@@ -13,5 +13,6 @@ urlpatterns = [
     path('todo/', todo, name='todo'),
     re_path(r'^add/(?P<group_name>[^/]+)', add, name='add'),
     # re_path(r'^details/(?P<group_name>[^/]+)/(?P<id>\w{0,50})/$', details, name='details')
-    re_path(r'^details/(?P<id>\w{0,50})/$', details, name='details')
+    re_path(r'^details/(?P<id>\w{0,50})/$', details, name='details'),
+    re_path(r'^like_category/$', like_category, name='like_category'),
 ]
