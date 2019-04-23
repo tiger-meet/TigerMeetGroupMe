@@ -115,23 +115,16 @@
       <div class="ui form" method="post" name="adurl" id="adurl">
         {% csrf_token %}
         <div class="field">
-          <label for="title">Title</label>
-          <input type="text" name="title" id="title">
+          <label for="title">Event Name</label>
+          <input type="text" name="title" id="title" placeholder="Event Name">
         </div>
         <div class="field">
-          <label for="text">Text</label>
-          <input type="text" name="text" id="text">
+          <label for="text">Event Description</label>
+          <input type="text" name="text" id="text" placeholder="Event Description">
         </div>
         <div class="field">
-          <label for="time">Time</label>
-          <input type="text" name="time" id="time">
-        </div>
-        <div class="field">
-          <select>
-            <option value="">Gender</option>
-            <option value="1">Male</option>
-            <option value="0">Female</option>
-          </select>
+          <label for="time">Event Time</label>
+          <input type="text" name="time" id="time" placeholder="Event Time">
         </div>
         <input class="ui button" type="submit" value="Submit and Create Event Chat">
       </div>
