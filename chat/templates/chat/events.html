@@ -87,7 +87,6 @@
   </div>
 
   <div class="ui middle aligned center aligned grid" style="margin: 10px;">
-
     <div class="column">
 
       <div>
@@ -111,19 +110,19 @@
 
       <a class="ui button" id="link2" class="item" href="fill" onclick="location.href=joinurl; return false;">Error</a>
 
+      <div>
+        <button class="ui button" type="button" onclick="location.href=addurl;">Create New Event</button>
+      </div>
+    
+      <p>display</p>
+      <ul>
+        {% for todo in todos %}
+        <li><a href="/details/{{todo.id}}">{{todo.title}}</a>: {{todo.text}}</li>
+        {% endfor %}
+      </ul>
+
     </div>
   </div>
-
-  <div>
-    <button class="ui button" type="button" onclick="location.href=addurl;">Create New Event</button>
-  </div>
-
-  <p>display</p>
-  <ul>
-    {% for todo in todos %}
-    <li><a href="/details/{{todo.id}}">{{todo.title}}</a>: {{todo.text}}</li>
-    {% endfor %}
-  </ul>
 
 </body>
 </html>
