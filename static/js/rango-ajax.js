@@ -2,7 +2,7 @@ $(document).ready(function() {
 
 $('#likes').click(function(){
     var catid;
-    var _href = $("a#like_count").attr("href");
+    var _href = $('a.replaceValue').attr('href');
 
     // $("a#like_count").each(function() {
     //     var $this = $(this);
