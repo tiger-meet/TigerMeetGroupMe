@@ -1,10 +1,10 @@
 $(document).ready(function() {
 
-$('#likes').change(function(){
+// $('#likes').change(function(){
     var name;
     var token;
-    name = $(this).attr("data-name");
-    token = $(this).attr("data-access-token");
+    name = $('#likes').attr("data-name");
+    token = $('#likes').attr("data-access-token");
     token = '?access_token=' + token;
 
     // $.get('/getgroupname/', {group_name: name }, function(data){
@@ -15,7 +15,7 @@ $('#likes').change(function(){
 
                $($this).attr('href', '/details/' + data + _href + token);
                });
-           });
+           // });
 });
 
 });
