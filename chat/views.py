@@ -14,6 +14,7 @@ admin.site.register(WorkingOutEvents)
 admin.site.register(VideoGamesEvents)
 admin.site.register(TransportationEvents)
 admin.site.register(ProblemSetEvents)
+admin.site.register(MiscellaneousEvents)
 
 def encodetoken(token):
     bytestoken = token.encode()
@@ -215,8 +216,9 @@ def add(request, group_name):
             print(title)
             print(text)
             print(time)
+            name = title + ' ' + time
 
-            chatname = "TigerMeet " + group_name
+            chatname = "TigerMeet " + name
             data = {'name': chatname,
                     "share": True, }
             headers = {"Content-Type": "application/json"}
