@@ -289,8 +289,20 @@ def joinsubchat(request, id, group_name):
         return render(request, 'chat/gmlogin.html', {})
 
     else:
-        code = GroupChats.objects.filter(GroupName=group_name).values_list("GroupId", flat=True)[0]
-        sharetoken = GroupChats.objects.filter(GroupName=group_name).values_list("ShareToken", flat=True)[0]
+        if (group_name == 'sports'):
+            code = SportsEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
+            sharetoken = SportsEvents.objects.filter(id=id).values_list("ShareToken", flat=True)[0]
+            title = SportsEvents.objects.filter(id=id).values_list("Title", flat=True)[0]
+        if (group_name == 'workingout'):
+            todo = WorkingOutEvents.objects.filter(id=id)
+        if (group_name == 'videogames'):
+            todo = VideoGamesEvents.objects.filter(id=id)
+        if (group_name == 'transportation'):
+            todo = TransportationEvents.objects.get(id=id)
+        if (group_name == 'problemsetgroups'):
+            todo = ProblemSetEvents.objects.get(id=id)
+        if (group_name == 'miscellaneous'):
+            todo = MiscellaneousEvents.objects.get(id=id)
 
         url = "https://api.groupme.com/v3/groups/" + code + "/join/" + sharetoken + "?token=" + token
         print(url)
@@ -301,7 +313,7 @@ def joinsubchat(request, id, group_name):
 
         return render(request, 'chat/joinchat.html', {
             'group_id': mark_safe(json.dumps(code)),
-            'group_name': mark_safe(json.dumps(group_name))
+            'group_name': mark_safe(json.dumps(title))
         })
 
 def getgroupname(request):
