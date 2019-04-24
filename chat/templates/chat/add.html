@@ -1,6 +1,7 @@
 <script type="text/javascript">
+    var name = {{ group_name }};
     var url = "?access_token=" + {{ access_token }};
-    var addurl = '/add/' + url;
+    var addurl = '/add/' + name + url;
     //document.getElementById("adurl").innerHTML=addurl;
 
     window.onload = function() {
