@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-$('#likes').click(function(){
+$('#likes').ready(function(){
     var name;
     var token;
     name = $(this).attr("data-name");
