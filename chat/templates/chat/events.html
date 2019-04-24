@@ -197,9 +197,10 @@
           </a>
         </div>
 
+        <p hidden id ="likes" data-name= {{ group_name }}, data-access-token= {{ access_token }} >Like</p>
         {% for todo in todos %}
         <div class="column">
-          <a href="/details/{{ todo.id }}">
+          <a class ="replaceValue" href= '/{{todo.id}}' >{{todo.title}}</a>
             <div class="ui fluid card">
               <div class="content">
                 <div class="header">{{ todo.title }}</div>
