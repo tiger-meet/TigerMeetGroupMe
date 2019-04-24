@@ -281,7 +281,7 @@ def details(request, group_name, id):
     }
     return render(request, 'chat/details.html', context)
 
-def joinsubchat(request, group_name, id):
+def joinsubchat(request, id, group_name):
     #token = gettoken(request)
     encodedtoken = gettoken(request)
     token = decodetoken(encodedtoken)

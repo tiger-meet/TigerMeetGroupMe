@@ -6,7 +6,7 @@ urlpatterns = [
     path('index/', index, name='index'),
     path('about/', about, name='about'),
     re_path(r'^join/(?P<group_name>[^/]+)', joinchat, name='joinchat'),
-    re_path(r'^subjoin/(?P<group_name>[^/]+)/(?P<id>\w{0,50})/', joinsubchat, name='joinchat'),
+    re_path(r'^subjoin/(?P<id>[^/]+)/(?P<group_name>\w{0,50})/', joinsubchat, name='joinchat'),
     re_path(r'^category/(?P<group_name>[^/]+)', events, name='events'),
     # This is the url re for making any chat
     re_path(r'^makechat/(?P<group_name>[^/]+)', createchat, name='createchat'),
