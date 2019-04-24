@@ -214,14 +214,6 @@
         </div>
         {% endfor %}
 
-<p>All Current Events</p>
-  <p hidden id ="likes" data-name= {{ group_name }}, data-access-token= {{ access_token }} >Like</p>
-  <ul>
-      {% for todo in todos %}
-          <li><a class ="replaceValue" href= '/{{todo.id}}' >{{todo.title}}</a>: {{todo.text}}</li>
-      {% endfor %}
-  </ul>
-
 
 
       </div>
