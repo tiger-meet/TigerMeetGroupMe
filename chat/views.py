@@ -292,7 +292,7 @@ def joinsubchat(request, id, group_name):
         if (group_name == 'sports'):
             code = SportsEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
             sharetoken = SportsEvents.objects.filter(id=id).values_list("ShareToken", flat=True)[0]
-            title = SportsEvents.objects.filter(id=id).values_list("Title", flat=True)[0]
+            title = SportsEvents.objects.filter(id=id).values_list("title", flat=True)[0]
         if (group_name == 'workingout'):
             todo = WorkingOutEvents.objects.filter(id=id)
         if (group_name == 'videogames'):
