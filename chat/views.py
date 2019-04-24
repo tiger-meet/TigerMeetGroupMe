@@ -120,7 +120,6 @@ def events(request, group_name):
 
 # joins chat
 def joinchat(request, group_name):
-    #token = gettoken(request)
     encodedtoken = gettoken(request)
     token = decodetoken(encodedtoken)
     if token == 'none':
@@ -188,13 +187,6 @@ def createchat(request, group_name):
                 #'access_token': mark_safe(json.dumps(access_token)),
                 'group_name': mark_safe(json.dumps(group_name))
             })
-
-
-# unused
-#def redirect(request):
- #   return render(request, 'chat/chat.html', {})
-
-
 
 def todo(request):
     todos = VideoGamesEvents.objects.all()[:10]
@@ -284,9 +276,33 @@ def details(request, group_name, id):
     context = {
         'todo':todo,
         'access_token': mark_safe(json.dumps(encodedtoken)),
-        'group_name': mark_safe(json.dumps(group_name))
+        'group_name': mark_safe(json.dumps(group_name)),
+        'id': mark_safe(json.dumps(id))
     }
     return render(request, 'chat/details.html', context)
+
+def joinsubchat(request, group_name):
+    #token = gettoken(request)
+    encodedtoken = gettoken(request)
+    token = decodetoken(encodedtoken)
+    if token == 'none':
+        return render(request, 'chat/gmlogin.html', {})
+
+    else:
+        code = GroupChats.objects.filter(GroupName=group_name).values_list("GroupId", flat=True)[0]
+        sharetoken = GroupChats.objects.filter(GroupName=group_name).values_list("ShareToken", flat=True)[0]
+
+        url = "https://api.groupme.com/v3/groups/" + code + "/join/" + sharetoken + "?token=" + token
+        print(url)
+        r = requests.post(url)
+        #print(sharetoken)
+        #print(r)
+        #print(r.json()['response']['group']['share_url'])
+
+        return render(request, 'chat/joinchat.html', {
+            'group_id': mark_safe(json.dumps(code)),
+            'group_name': mark_safe(json.dumps(group_name))
+        })
 
 def getgroupname(request):
     if request.method == 'GET':
