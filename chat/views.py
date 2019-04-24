@@ -10,6 +10,10 @@ from django.http import HttpResponse
 
 admin.site.register(GroupChats)
 admin.site.register(SportsEvents)
+admin.site.register(WorkingOutEvents)
+admin.site.register(VideoGamesEvents)
+admin.site.register(TransportationEvents)
+admin.site.register(ProblemSetEvents)
 
 def encodetoken(token):
     bytestoken = token.encode()
