@@ -1,31 +1,173 @@
-<script type="text/javascript">
+<!-- chat/templates/chat/add.html -->
+
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Meta -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <!-- Setup -->
+  <title>TigerMeet</title>
+  <link rel="icon" type="image/png" href="{% static 'cub.png' %}">
+
+  <!-- Semantic UI -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+  <script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+
+  <script type="text/javascript">
     var name = {{ group_name }};
     var url = "?access_token=" + {{ access_token }};
+    var categoryurl = '/category/' + name + url;
     var addurl = '/add/' + name + url;
     //document.getElementById("adurl").innerHTML=addurl;
 
-    window.onload = function() {
-        document.adurl.action = get_action();
+    // Custom group icons
+    var icon = '';
+    switch (name)
+    {
+      case 'sports':
+        icon = 'futbol alternate icon'
+        break;
+      case 'workingout':
+        icon = 'heart icon'
+        break;
+      case 'videogames':
+        icon = 'gamepad icon'
+        break;
+      case 'transportation':
+        icon = 'car icon'
+        break;
+      case 'problemsetgroups':
+        icon = 'pencil alternate icon'
+        break;
+      case 'miscellaneous':
+        icon = 'ellipsis horizontal icon'
+        break;
+      default:
+        icon = 'heart icon'
+    }
+
+    window.onload = function()
+    {
+      document.getElementById("myGroup").innerHTML = "Create " + name + " Event";
+      document.adurl.action = get_action();
+
+      // Custom group icons
+      document.getElementById("groupIcon").className = icon;
     }
 
     function get_action() {
         return addurl;
     }
-    </script>
+  </script>
+</head>
+<body>
 
-<form method="post" name="adurl" id="adurl">
-{% csrf_token %}
-  <label for="title">Title</label><br />
-  <input type="text" name="title" id="title" />
-  <br>
-  <label for="text">Text</label><br />
-  <textarea name="text" id="text"></textarea>
-  <br><br>
-  <label for="time">Time</label><br />
-  <textarea name="time" id="time"></textarea>
-  <br><br>
-  <input type="submit" value="Submit and Create Event Chat" />
-</form>
-<br>
+  <!-- Navbar -->
+  <div class="ui pointing menu" style="margin-bottom: 0; border-radius: 0;">
+    <a class="item" href="/">
+      <img src="{% static 'cub.png' %}">
+    </a>
+    <div class="ui simple dropdown item">
+      Chatrooms <i class="dropdown icon"></i>
+      <div class="menu">
+        <!-- Changes url to /chatname with the authentication token appended -->
+        <a class="item" href="fill" onclick="location.href='/category/sports'+url; return false;" >
+          <i class="futbol alternate icon"></i>
+          Sports
+        </a>
+        <a class="item" href="fill" onclick="location.href='/category/workingout'+url; return false;" >
+          <i class="heart icon"></i>
+          Working Out
+        </a>
+        <a class="item" href="fill" onclick="location.href='/category/videogames'+url; return false;" >
+          <i class="gamepad icon"></i>
+          Video Games
+        </a>
+        <a class="item" href="fill" onclick="location.href='/category/transportation'+url; return false;" >
+          <i class="car icon"></i>
+          Transportation
+        </a>
+        <a class="item" href="fill" onclick="location.href='/category/problemsetgroups'+url; return false;" >
+          <i class="pencil alternate icon"></i>
+          Problem Set Groups
+        </a>
+        <a class="item" href="fill" onclick="location.href='/category/miscellaneous'+url; return false;" >
+          <i class="ellipsis horizontal icon"></i>
+          Miscellaneous
+        </a>
+      </div>
+    </div>
+    <div class="right menu">
+      <a class="ui item" href="/about">
+        About
+      </a>
+      <a class="ui item" href="/">
+        Logout
+      </a>
+    </div>
+  </div>
 
-<a href="/">Go Back</a>
+  <div class="ui middle aligned center aligned grid" style="margin: 10px;">
+    <div class="column">
+
+      <div>
+        <button class="ui left floated button" type="button" onclick="location.href = categoryurl; return false;">Back to Category</button>
+      </div>
+
+      <br/>
+      <!-- Break -->
+      <div style="clear:both"></div>
+
+      <h1 class="ui center aligned icon header">
+        <i id="groupIcon"></i>
+        <div class="content" id="myGroup"></div>
+      </h1>
+
+      <!-- Form -->
+      <!-- <form method="post" name="adurl" id="adurl">
+      {% csrf_token %}
+      <label for="title">Title</label><br />
+      <input type="text" name="title" id="title" />
+      <br>
+      <label for="text">Text</label><br />
+      <textarea name="text" id="text"></textarea>
+      <br>
+      <label for="time">Time</label><br />
+      <textarea name="time" id="time"></textarea>
+      <br>
+      <input type="submit" value="Submit and Create Event Chat" />
+      </form>
+      <br> -->
+
+
+      <form class="ui form" method="post" name="adurl" id="adurl">
+        {% csrf_token %}
+        <div class="field">
+          <label for="title">Event Name</label>
+          <input type="text" name="title" id="title" placeholder="Event Name">
+        </div>
+        <div class="field">
+          <label for="text">Event Description</label>
+          <input type="text" name="text" id="text" placeholder="Event Description">
+        </div>
+        <div class="field">
+          <label for="time">Event Time</label>
+          <input type="text" name="time" id="time" placeholder="Event Time">
+        </div>
+        <input class="ui button" type="submit" value="Submit and Create Event Chat">
+      </form>
+
+    </div>
+  </div>
+
+</body>
+</html>

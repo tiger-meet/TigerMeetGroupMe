@@ -24,6 +24,9 @@
 
   <link rel="stylesheet" href="{% static 'events.css' %}">
 
+  <script src="{% static "/js/jquery.js" %}"></script>
+    <script src="{% static "/js/rango-ajax.js" %}"></script>
+
   <script type="text/javascript">
     var name = {{ group_name }};
     var url = "?access_token=" + {{ access_token }};
@@ -31,18 +34,43 @@
     var addurl = '/add/' + name + url;
     var joinurl = '/join/' + name + '/chat' + url;
     var det = '/details/' + name + '/' + url;
-    {#var deturl = "{% url 'details' arg1=12345 %}".replace(/12345/, det.toString());#}
+
+    // Custom group icons
+    var icon = '';
+    switch (name)
+    {
+      case 'sports':
+        icon = 'futbol alternate icon'
+        break;
+      case 'workingout':
+        icon = 'heart icon'
+        break;
+      case 'videogames':
+        icon = 'gamepad icon'
+        break;
+      case 'transportation':
+        icon = 'car icon'
+        break;
+      case 'problemsetgroups':
+        icon = 'pencil alternate icon'
+        break;
+      case 'miscellaneous':
+        icon = 'ellipsis horizontal icon'
+        break;
+      default:
+        icon = 'heart icon'
+    }
+
     window.onload = function()
     {
-      document.getElementById("myGroup").innerHTML = name + " Events";
-      document.getElementById("link").innerHTML = "Create " + name + " Chat";
-      document.getElementById("link2").innerHTML = "Join " + name + " Chat";
+      document.getElementById("myGroup").innerHTML = name;
+      document.getElementById("link").innerHTML = "Create " + name + " General Chat";
+      document.getElementById("link2").innerHTML = "Join " + name + " General Chat";
+
+      // Custom group icons
+      document.getElementById("groupIcon").className = icon;
     }
   </script>
-
-    <script src="{% static "/js/jquery.js" %}"></script>
-    <script src="{% static "/js/rango-ajax.js" %}"></script>
-
 </head>
 <body>
 
@@ -92,41 +120,106 @@
   </div>
 
   <div class="ui middle aligned center aligned grid" style="margin: 10px;">
-
     <div class="column">
 
-      <button class="ui left floated button" type="button" onclick="location.href = '/index'+url;">Back to Home</button>
+      <div>
+        <button class="ui left floated button" type="button" onclick="location.href = '/index'+url;">Back to Home</button>
+      </div>
 
-      <br/>
+      <br>
+      <!-- Break -->
+      <div style="clear:both"></div>
 
-      <h1 class="ui image header" >
-        <img src="{% static 'cub.png' %}" class="image">
+      <h1 class="ui center aligned icon header">
+        <i id="groupIcon"></i>
         <div class="content" id="myGroup"></div>
       </h1>
 
-      <br/>
-      <!-- <a href="fill" onclick="location.href='/test/'+ test; return false;" >Join <a id="myGroup1">chatname</a> Chat</a> -->
+      <br>
 
-      <a class="ui button" id="link" href="fill" onclick="location.href=allurl; return false;">Test</a>
-      <div class="ui bottom attached warning message">
-        A chat will not be made if there already exists a chat of the same name.
+      <a class="ui button" id="link" href="fill" onclick="location.href=allurl; return false;">Error</a>
+
+      <br>
+
+      <!-- Create new event -->
+      <button class="ui left floated button" type="button" onclick="location.href=addurl;">Create New Event</button>
+
+      <!-- Join general chat -->
+      <a class="ui right floated button" id="link2" class="item" href="fill" onclick="location.href=joinurl; return false;">Error</a>
+
+      <br>
+      <!-- Break -->
+      <div style="clear:both"></div>
+
+      <h2 class="ui header">
+        Events
+        <div class="sub header">(Click an event to join the event's group chat)</div>
+      </h2>
+
+      <br>
+
+      <div class="ui menu">
+        <div class="ui fluid selection dropdown">
+          <input type="hidden" name="user">
+          <i class="dropdown icon"></i>
+          <div class="default text">Filter by</div>
+          <div class="menu">
+            <div class="item">Choice 1</div>
+            <div class="item">Choice 2</div>
+            <div class="item">Choice 3</div>
+          </div>
+        </div>
+        <div class="ui fluid selection dropdown">
+          <input type="hidden" name="user">
+          <i class="dropdown icon"></i>
+          <div class="default text">Sort by</div>
+          <div class="menu">
+            <div class="item">Choice 1</div>
+            <div class="item">Choice 2</div>
+            <div class="item">Choice 3</div>
+          </div>
+        </div>
       </div>
 
-      <a class="ui button" id="link2" class="item" href="fill" onclick="location.href=joinurl; return false;">Test</a>
+      <div class="ui four column stackable grid">
+
+        <div class="column">
+          <a href="#">
+            <div class="ui fluid card">
+              <div class="content">
+                <div class="header">Sample Event Name</div>
+                <div class="meta">Sample Event Time</div>
+                <div class="description">
+                  <p>Sample Event Description</p>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <p hidden id ="likes" data-name= {{ group_name }}, data-access-token= {{ access_token }} >Like</p>
+        {% for todo in todos %}
+        <div class="column">
+          <a class ="replaceValue" href= '/{{todo.id}}'>
+            <div class="ui fluid card">
+              <div class="content">
+                <div class="header">{{ todo.title }}</div>
+                <div class="meta">{{ todo.time }}</div>
+                <div class="description">
+                  <p>{{ todo.text }}</p>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        {% endfor %}
+
+
+
+      </div>
 
     </div>
   </div>
-
-<button onclick="location.href = addurl;">add new event</button>
-
-{#  data-access-token= {{ access_token }}#}
-<p>All Current Events</p>
-  <p hidden id ="likes" data-name= {{ group_name }}, data-access-token= {{ access_token }} >Like</p>
-  <ul>
-      {% for todo in todos %}
-          <li><a class ="replaceValue" href= '/{{todo.id}}' >{{todo.title}}</a>: {{todo.text}}</li>
-      {% endfor %}
-  </ul>
 
 </body>
 </html>

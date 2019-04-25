@@ -78,13 +78,13 @@
 
   <div class="ui middle aligned center aligned grid" style="margin: 10px;">
     <div class="column">
-      <div class="ui image header">
+      <h1 class="ui image header">
         <img src="{% static 'cub.png' %}" class="image">
-        <h1 class="content">
+        <div class="content">
           Welcome to TigerMeet
-        </h1>
-        <h4 class="margin-top: 0;">TigerMeet is a web application that enables Princeton University students to connect with other students for recreation, transportation, and academic coordination. It is divided into sections of general interest (i.e. Sports, Transportation) each with a general chat as well as the ability to create specific events with chatrooms for users to connect.</h4>
-      </div>
+        </div>
+        <div class="sub header">TigerMeet is a web application that enables Princeton University students to connect with other students for recreation, transportation, and academic coordination. It is divided into sections of general interest (i.e. Sports, Transportation) each with a general chat as well as the ability to create specific events with chatrooms for users to connect.</div>
+      </h1>
 
       <div class="ui message">
         <h3><a href="https://oauth.groupme.com/oauth/authorize?client_id=AWKH6CxG0zTyz1cXWKZPvomGOkVdTW3jJb8nVYTJMljPKvDI" class="button">Login to TigerMeet with GroupMe</a></h3>
@@ -93,9 +93,12 @@
       <h2>How It Works</h2>
 
       <div class="ui ordered list">
-        <div class="item">Test</div>
-        <div class="item">Test</div>
-        <div class="item">Test</div>
+        <div class="item">Login using GroupMe</div>
+        <div class="item">
+          Check out six different categories: 1) Sports, 2) Working Out, 3) Video Games, 4) Transportation, 5) Problem Set Groups, 6) Miscellaneous.
+        </div>
+        <div class="item">Join and chat in the general group chat for each category</div>
+        <div class="item">Check out student-made events under each category, each with their own event group chat</div>
       </div>
 
     </div>
