@@ -28,8 +28,10 @@
     var name = {{ group_name }};
     var url = "?access_token=" + {{ access_token }};
     var allurl = '/makechat/' + name + url;
-    var addurl = '/add/' + url;
+    var addurl = '/add/' + name + url;
     var joinurl = '/join/' + name + '/chat' + url;
+    var det = '/details/' + name + '/' + url;
+    {#var deturl = "{% url 'details' arg1=12345 %}".replace(/12345/, det.toString());#}
     window.onload = function()
     {
       document.getElementById("myGroup").innerHTML = name + " Events";
@@ -37,6 +39,10 @@
       document.getElementById("link2").innerHTML = "Join " + name + " Chat";
     }
   </script>
+
+    <script src="{% static "/js/jquery.js" %}"></script>
+    <script src="{% static "/js/rango-ajax.js" %}"></script>
+
 </head>
 <body>
 
@@ -113,10 +119,12 @@
 
 <button onclick="location.href = addurl;">add new event</button>
 
-<p>display</p>
+{#  data-access-token= {{ access_token }}#}
+<p>All Current Events</p>
+  <p hidden id ="likes" data-name= {{ group_name }}, data-access-token= {{ access_token }} >Like</p>
   <ul>
       {% for todo in todos %}
-        <li><a href="/details/{{todo.id}}">{{todo.title}}</a>: {{todo.text}}</li>
+          <li><a class ="replaceValue" href= '/{{todo.id}}' >{{todo.title}}</a>: {{todo.text}}</li>
       {% endfor %}
   </ul>
 
