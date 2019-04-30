@@ -92,10 +92,13 @@ def gmlogin(request):
 def events(request, group_name):
     encodedtoken = gettoken(request)
     token = decodetoken(encodedtoken)
+<<<<<<< HEAD
 
+=======
+>>>>>>> raysort
     not_host = request.META.get('RAW_URI')
     # case for a search
-    if "access_token" not in not_host:
+    if "search=" in not_host:
 
         # find the category for the database
         if group_name == "sports":
@@ -105,13 +108,13 @@ def events(request, group_name):
         elif group_name == "videogames":
             event = copy.copy(VideoGamesEvents)
         elif group_name == "transportation":
-            event = TransportationEvents
+            event = copy.copy(TransportationEvents)
         elif group_name == "problemsetgroups":
-            event = ProblemSetEvents
+            event = copy.copy(ProblemSetEvents)
         elif group_name == "miscellaneous":
-            event = MiscellaneousEvents
+            event = copy.copy(MiscellaneousEvents)
 
-        if "search=" in not_host and not_host.split("search=", 1)[1] != "":
+        if not_host.split("search=", 1)[1] != "":
             queryString = not_host.split("search=", 1)[1]
             todos = []
             for i in range(0, len(event.objects.all())):
@@ -143,7 +146,7 @@ def events(request, group_name):
             }
             return render(request, 'chat/events.html', context)
 
-        elif "?sortBy=Alphabetical" in not_host:
+        elif "sortBy=Alphabetical" in not_host:
             todos = event.objects.order_by('title')
             context = {
                 'access_token': mark_safe(json.dumps(encodedtoken)),
@@ -152,18 +155,21 @@ def events(request, group_name):
             }
             return render(request, 'chat/events.html/', context)
 
-        elif "?sortBy=Time" in not_host:
+        elif "sortBy=Time" in not_host:
             todos = event.objects.order_by('time')
             context = {
                 'access_token': mark_safe(json.dumps(encodedtoken)),
                 'group_name': mark_safe(json.dumps(group_name)),
+<<<<<<< HEAD
             'todos': todos
+=======
+                'todos': todos
+>>>>>>> raysort
             }
             return render(request, 'chat/events.html/', context)
 
         else:
             todos = event.objects.all()
-            todos.reverse()
             context = {
                 'access_token': mark_safe(json.dumps(encodedtoken)),
                 'group_name': mark_safe(json.dumps(group_name)),
@@ -171,6 +177,10 @@ def events(request, group_name):
             }
             return render(request, 'chat/events.html', context)
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> raysort
     if (group_name == 'sports'):
         todos = SportsEvents.objects.all()[:10]
     elif (group_name == 'workingout'):
