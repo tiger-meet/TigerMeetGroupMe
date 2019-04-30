@@ -6,7 +6,7 @@
 <html>
 <head>
   <!-- Meta -->
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
@@ -63,6 +63,7 @@
 
     window.onload = function()
     {
+        {#document.getElementById("appendurl").value = url;#}
       document.getElementById("myGroup").innerHTML = name;
       document.getElementById("link").innerHTML = "Create " + name + " General Chat";
       document.getElementById("link2").innerHTML = "Join " + name + " General Chat";
@@ -158,6 +159,7 @@
 
       <br>
 
+      <!--
       <div class="ui menu">
         <div class="ui fluid selection dropdown">
           <input type="hidden" name="user">
@@ -179,7 +181,20 @@
             <div class="item">Choice 3</div>
           </div>
         </div>
-      </div>
+      </div>-->
+
+      <h2> Sort By: </h2>
+<form method="get">
+  <!--<input type="hidden" name="access_token" value=>-->
+  <input type="hidden" name="access_token" value={{ access_token }}>
+  <input type="radio" name = "sortBy" value="Alphabetical">
+  Alphabetical<br>
+  <input type="radio" name = "sortBy" value="Time">
+  Time<br>
+  <input type="text" name="search" value="" placeholder="Search for an Activity">
+  <input type="submit">
+</form>
+<br>
 
       <div class="ui four column stackable grid">
 
