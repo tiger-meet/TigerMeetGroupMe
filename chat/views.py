@@ -36,14 +36,8 @@ def gettoken(request):
     http_host = request.META.get('HTTP_HOST')
     not_host = request.META.get('RAW_URI')
     temp_url = 'https://' + http_host + not_host
-    url = 'https://'
-    print(url)
-    url = url.replace('h', 'test')
-    print(url)
-    temp_url = str(temp_url)
-    print(temp_url)
-    temp_url.replace('%3F', '?')
-    temp_url.replace('%3D', '=')
+    temp_url = temp_url.replace('%3F', '?')
+    temp_url = temp_url.replace('%3D', '=')
     print(temp_url)
 
     #parse the url for the token, if there is one
