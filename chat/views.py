@@ -7,6 +7,8 @@ from .models import GroupChats, SportsEvents, WorkingOutEvents, VideoGamesEvents
 from django.contrib import admin
 import base64
 from django.http import HttpResponse
+import re
+import copy
 
 admin.site.register(GroupChats)
 admin.site.register(SportsEvents)
@@ -81,9 +83,86 @@ def gmlogin(request):
 
 # loads the events page
 def events(request, group_name):
-    #token = gettoken(request)
     encodedtoken = gettoken(request)
     token = decodetoken(encodedtoken)
+
+    not_host = request.META.get('RAW_URI')
+    # case for a search
+    if "access_token" not in not_host:
+
+        # find the category for the database
+        if group_name == "sports":
+            event = copy.copy(SportsEvents)
+        elif group_name == "workingout":
+            event = copy.copy(WorkingOutEvents)
+        elif group_name == "videogames":
+            event = copy.copy(VideoGamesEvents)
+        elif group_name == "transportation":
+            event = TransportationEvents
+        elif group_name == "problemsetgroups":
+            event = ProblemSetEvents
+        elif group_name == "miscellaneous":
+            event = MiscellaneousEvents
+
+        if "search=" in not_host and not_host.split("search=", 1)[1] != "":
+            queryString = not_host.split("search=", 1)[1]
+            todos = []
+            for i in range(0, len(event.objects.all())):
+                if queryString.lower() in event.objects.all()[i].title.lower():
+                    todos.append(event.objects.all()[i])
+
+            if "sortBy=Alphabetical" in not_host:
+                todos.sort(key = lambda x: x.title)
+                context = {
+                    'access_token': mark_safe(json.dumps(encodedtoken)),
+                    'group_name': mark_safe(json.dumps(group_name)),
+                    'todos':todos
+                }
+                return render(request, 'chat/events.html', context)
+
+            if "sortBy=Time" in not_host:
+                todos.sort(key = lambda x: x.time)
+                context = {
+                    'access_token': mark_safe(json.dumps(encodedtoken)),
+                    'group_name': mark_safe(json.dumps(group_name)),
+                    'todos':todos
+                }
+                return render(request, 'chat/events.html', context)
+
+            context = {
+                'access_token': mark_safe(json.dumps(encodedtoken)),
+                'group_name': mark_safe(json.dumps(group_name)),
+                'todos':todos
+            }
+            return render(request, 'chat/events.html', context)
+
+        elif "?sortBy=Alphabetical" in not_host:
+            todos = event.objects.order_by('title')
+            context = {
+                'access_token': mark_safe(json.dumps(encodedtoken)),
+                'group_name': mark_safe(json.dumps(group_name)),
+                'todos': todos
+            }
+            return render(request, 'chat/events.html/', context)
+
+        elif "?sortBy=Time" in not_host:
+            todos = event.objects.order_by('time')
+            context = {
+                'access_token': mark_safe(json.dumps(encodedtoken)),
+                'group_name': mark_safe(json.dumps(group_name)),
+            'todos': todos
+            }
+            return render(request, 'chat/events.html/', context)
+
+        else:
+            todos = event.objects.all()
+            todos.reverse()
+            context = {
+                'access_token': mark_safe(json.dumps(encodedtoken)),
+                'group_name': mark_safe(json.dumps(group_name)),
+                'todos':todos
+            }
+            return render(request, 'chat/events.html', context)
 
     if (group_name == 'sports'):
         todos = SportsEvents.objects.all()[:10]
