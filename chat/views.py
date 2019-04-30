@@ -92,10 +92,7 @@ def gmlogin(request):
 def events(request, group_name):
     encodedtoken = gettoken(request)
     token = decodetoken(encodedtoken)
-<<<<<<< HEAD
 
-=======
->>>>>>> raysort
     not_host = request.META.get('RAW_URI')
     # case for a search
     if "search=" in not_host:
@@ -160,11 +157,7 @@ def events(request, group_name):
             context = {
                 'access_token': mark_safe(json.dumps(encodedtoken)),
                 'group_name': mark_safe(json.dumps(group_name)),
-<<<<<<< HEAD
-            'todos': todos
-=======
                 'todos': todos
->>>>>>> raysort
             }
             return render(request, 'chat/events.html/', context)
 
@@ -177,10 +170,6 @@ def events(request, group_name):
             }
             return render(request, 'chat/events.html', context)
 
-<<<<<<< HEAD
-=======
-
->>>>>>> raysort
     if (group_name == 'sports'):
         todos = SportsEvents.objects.all()[:10]
     elif (group_name == 'workingout'):
