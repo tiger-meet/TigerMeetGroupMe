@@ -49,16 +49,16 @@
     });
   </script>
 
-  <input type="button" value="Open in GroupMe" id="MyButton" >
+  <input class="ui button" type="button" value="Open in GroupMe" id="MyButton">
 
   <script type="text/javascript">
-    // detect if safari mobile
+    // Detect if safari mobile
     function isMobileSafari() 
     {
       return navigator.userAgent.match(/(iPod|iPhone|iPad)/) && navigator.userAgent.match(/AppleWebKit/)
     }
 
-    //Launch the element in your app if it's already installed on the phone
+    // Launch the element in your app if it's already installed on the phone
     function LaunchApp()
     {
       window.open("GroupMe://","_self");
