@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 import requests
 import json
 import urllib.parse as urlparse
+import urllib
 from django.utils.safestring import mark_safe
 from .models import GroupChats, SportsEvents, WorkingOutEvents, VideoGamesEvents, TransportationEvents, ProblemSetEvents, MiscellaneousEvents
 from django.contrib import admin
@@ -35,6 +36,7 @@ def gettoken(request):
     http_host = request.META.get('HTTP_HOST')
     not_host = request.META.get('RAW_URI')
     temp_url = 'https://' + http_host + not_host
+    temp_url = urllib.unquote(temp_url).decode('utf8')
 
     #parse the url for the token, if there is one
     parsed = urlparse.urlparse(temp_url)
