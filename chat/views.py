@@ -36,7 +36,8 @@ def gettoken(request):
     http_host = request.META.get('HTTP_HOST')
     not_host = request.META.get('RAW_URI')
     temp_url = 'https://' + http_host + not_host
-    print('https://')
+    url = 'https://'
+    url.replace('h', 'test')
     temp_url = str(temp_url)
     print(temp_url)
     temp_url.replace('%3F', '?')
