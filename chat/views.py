@@ -52,7 +52,10 @@ def gettoken(request):
 
     #if there is a token, continue onward
     else:
-        token_list = token_dict['access_token']
+        try:
+            token_list = token_dict['access_token']
+        except:
+            token_list = token_dict['?access_token']
         token = str(token_list[0])
         return token
 
