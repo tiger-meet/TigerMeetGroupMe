@@ -184,17 +184,28 @@
       </div>-->
 
       <h2> Sort By: </h2>
-<form method="get">
-  <!--<input type="hidden" name="access_token" value=>-->
-  <input type="hidden" name="access_token" value={{ access_token }}>
-  <input type="radio" name = "sortBy" value="Alphabetical">
-  Alphabetical<br>
-  <input type="radio" name = "sortBy" value="Time">
-  Time<br>
-  <input type="text" name="search" value="" placeholder="Search for an Activity">
-  <input type="submit">
-</form>
-<br>
+      <form class="ui form" method="get">
+        <input type="hidden" name="access_token" value={{ access_token }}>
+        <div class="field">
+          <div class="ui checkbox">
+            <input type="radio" name="sortBy" value="Alphabetical">
+            <label>Alphabetical</label>
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui checkbox">
+            <input type="radio" name="sortBy" value="Time">
+            <label>Time</label>
+          </div>
+        </div>
+        <div class="field">
+          <label>Last Name</label>
+          <input type="text" name="search" value="" placeholder="Search for an Activity">
+        </div>
+        <input class="ui button" type="submit">
+      </form>
+
+      <br>
 
       <div class="ui four column stackable grid">
 
