@@ -124,7 +124,7 @@
         <button class="ui left floated button" type="button" onclick="location.href = categoryurl; return false;">Back to Category</button>
       </div>
 
-      <br/>
+      <br>
       <!-- Break -->
       <div style="clear:both"></div>
 
@@ -149,20 +149,27 @@
       </form>
       <br> -->
 
-
       <form class="ui form" method="post" name="adurl" id="adurl">
         {% csrf_token %}
-        <div class="field">
+        <div class="required field">
           <label for="title">Event Name</label>
           <input type="text" name="title" id="title" placeholder="Event Name">
         </div>
-        <div class="field">
-          <label for="text">Event Description</label>
-          <input type="text" name="text" id="text" placeholder="Event Description">
+        <div class="required field">
+          <label for="text">Event Location</label>
+          <input type="text" name="text" id="text" placeholder="Event Location">
         </div>
-        <div class="field">
+        <div class="required field">
+          <label for="day">Event Day</label>
+          <input type="text" name="day" id="day" placeholder="Event Day">
+        </div>
+        <div class="required field">
           <label for="time">Event Time</label>
           <input type="text" name="time" id="time" placeholder="Event Time">
+        </div>
+        <div class="field">
+          <label for="description">Event Description</label>
+          <input type="text" name="description" id="description" placeholder="Event Description">
         </div>
         <input class="ui button" type="submit" value="Submit and Create Event Chat">
       </form>
@@ -170,6 +177,9 @@
     </div>
   </div>
 
+<<<<<<< HEAD
+{##}
+=======
 
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -187,6 +197,7 @@
         </form>
 
 
+>>>>>>> origin/master
 {#<div class="container">#}
 {#    <div class='col-md-5'>#}
 {#        <div class="form-group">#}
