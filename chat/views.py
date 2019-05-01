@@ -175,7 +175,7 @@ def events(request, group_name):
         todos = SportsEvents.objects.all()[:10]
         for todo in todos:
             groupid = getattr(todo, 'GroupId')
-            url = 'https://api.groupme.com/v3/groups/' + groupid + '?token=' + encodedtoken
+            url = 'https://api.groupme.com/v3/groups/' + groupid + '?token=' + token
             r = requests.get(url)
             print(r.json()['meta']['code'])
     elif (group_name == 'workingout'):
