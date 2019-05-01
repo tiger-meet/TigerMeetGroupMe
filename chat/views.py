@@ -73,6 +73,7 @@ def countandprune(todos):
             todo.Size = len(r.json()['response']['members'])
             todo.save()
 
+
 # loads the index page with authentication token
 def index(request):
     #code for scrambling access tokens
@@ -210,19 +211,25 @@ def events(request, group_name):
         countandprune(todos)
         todos = MiscellaneousEvents.objects.all()
 
+#for my events
+    myevents = SportsEvents.objects.filter(MakerToken=token)
+
+
     try:
         print(todos)
         context = {
             'access_token': mark_safe(json.dumps(encodedtoken)),
             'group_name': mark_safe(json.dumps(group_name)),
-            'todos': todos
+            'todos': todos,
+            'myevents': myevents
         }
 
     except:
         context = {
             'access_token': mark_safe(json.dumps(encodedtoken)),
             'group_name': mark_safe(json.dumps(group_name)),
-            'todos': ""
+            'todos': "",
+            'myevents': myevents
         }
 
     finally:
