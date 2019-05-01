@@ -6,10 +6,10 @@ function makeList() {
     var listData = [
     ];
 
-    {% for todo in todos3 %}
-    	{% if todo.UserId == token %}
-    {
+    {% for todo in todos3 %} {
+    	(if {{todo.UserId}} == token) {
     	listData.push({{todo.title})
+    }
     }
 
     // Make a container element for the list
