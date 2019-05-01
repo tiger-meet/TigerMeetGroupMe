@@ -1,7 +1,16 @@
+    <script type="text/javascript">
+    var token = {{ access_token }};
+    </script>
+
+
+
     <ul>
       {% for todo in todos1 %}
+      {% if {{todo.UserId}} == token}
         <li><a href="/details/{{todo.id}}">{{todo.title}}</a>: {{todo.text}}</li>
       {% endfor %}
+
+      <!--
       {% for todo in todos2 %}
         <li><a href="/details/{{todo.id}}">{{todo.title}}</a>: {{todo.text}}</li>
       {% endfor %}
@@ -17,5 +26,6 @@
       {% for todo in todos6 %}
         <li><a href="/details/{{todo.id}}">{{todo.title}}</a>: {{todo.text}}</li>
       {% endfor %}
+      -->
 
 	</ul>
