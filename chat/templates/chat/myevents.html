@@ -1,5 +1,7 @@
     <script type="text/javascript">
     function makeList() {
+
+    var token = {{ access_token }};
     // Establish the array which acts as a data source for the list
     var listData = [
         'Blue',
@@ -9,6 +11,8 @@
         'Black',
         'Orange'
     ];
+
+    listData.push(token)
 
     
 
