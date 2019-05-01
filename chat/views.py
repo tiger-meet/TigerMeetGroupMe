@@ -283,6 +283,8 @@ def todo(request):
     return render(request, 'chat/todo.html', context)
 
 def myevents(request):
+    encodedtoken = gettoken(request)
+    token = decodetoken(encodedtoken)
     todos1 = SportsEvents.objects.all()[:10]
     todos2 = WorkingOutEvents.objects.all()[:10]
     todos3 = VideoGamesEvents.objects.all()[:10]
