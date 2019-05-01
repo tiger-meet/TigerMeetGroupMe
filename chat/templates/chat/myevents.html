@@ -7,9 +7,13 @@ function makeList() {
     ];
 
     {% for todo in todos3 %} {
-    	(if {{todo.UserId}} == token) {
-    	listData.push({{todo.title}})
+    	if ({{todo.UserId}} == token) {
+    		listData.push({{todo.title}})
     }
+    	else {
+    		listData.push('annen')
+    	}
+
     }
     {% endfor %}
 
