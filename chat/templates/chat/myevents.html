@@ -6,8 +6,10 @@
 
     <ul>
       {% for todo in todos3 %}
-      {% if {{todo.UserId}} == token %}
-        <li><a href="/details/{{todo.id}}">{{todo.title}}</a>: {{todo.text}}</li>
+      	{% if {{todo.UserId}} == token %}
+        	<li><a href="/details/{{todo.id}}">{{todo.title}}</a>: {{todo.text}}</li>
+        {% else %}
+        	<li><a href="/details/{{todo.id}}">bok</a>: bok</li>
       {% endif %}
       {% endfor %}
 
