@@ -59,6 +59,19 @@ def gettoken(request):
         token = str(token_list[0])
         return token
 
+def countandprune(todos, token):
+    for todo in todos:
+
+        groupid = getattr(todo, 'GroupId')
+        url = 'https://api.groupme.com/v3/groups/' + groupid + '?token=' + token
+        r = requests.get(url)
+        print(r.json()['meta']['code'])
+        if r.json()['meta']['code'] == 404:
+            todo.delete()
+        else:
+            todo.Size = len(r.json()['response']['members'])
+            todo.save()
+
 # loads the index page with authentication token
 def index(request):
     #code for scrambling access tokens
@@ -173,28 +186,28 @@ def events(request, group_name):
     #create a count of the people in chats and check if they've been deleted
     if (group_name == 'sports'):
         todos = SportsEvents.objects.all()
-        for todo in todos:
-            groupid = getattr(todo, 'GroupId')
-            url = 'https://api.groupme.com/v3/groups/' + groupid + '?token=' + token
-            r = requests.get(url)
-            print(r.json()['meta']['code'])
-            if r.json()['meta']['code'] == 404:
-                todo.delete()
-            else:
-                todo.Size = len(r.json()['response']['members'])
-                todo.save()
-
-            print(r.json()['meta']['code'])
+        countandprune(todos, token)
+        todos = SportsEvents.objects.all()
     elif (group_name == 'workingout'):
-        todos = WorkingOutEvents.objects.all()[:10]
+        todos = WorkingOutEvents.objects.all()
+        countandprune(todos, token)
+        todos = WorkingOutEvents.objects.all()
     elif (group_name == 'videogames'):
-        todos = VideoGamesEvents.objects.all()[:10]
+        todos = VideoGamesEvents.objects.all()
+        countandprune(todos, token)
+        todos = VideoGamesEvents.objects.all()
     elif (group_name == 'transportation'):
-        todos = TransportationEvents.objects.all()[:10]
+        todos = TransportationEvents.objects.all()
+        countandprune(todos, token)
+        todos = TransportationEvents.objects.all()
     elif (group_name == 'problemsetgroups'):
-        todos = ProblemSetEvents.objects.all()[:10]
+        todos = ProblemSetEvents.objects.all()
+        countandprune(todos, token)
+        todos = ProblemSetEvents.objects.all()
     elif (group_name == 'miscellaneous'):
-        todos = MiscellaneousEvents.objects.all()[:10]
+        todos = MiscellaneousEvents.objects.all()
+        countandprune(todos, token)
+        todos = MiscellaneousEvents.objects.all()
 
     try:
         print(todos)
