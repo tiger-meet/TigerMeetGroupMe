@@ -170,8 +170,13 @@ def events(request, group_name):
             }
             return render(request, 'chat/events.html', context)
 
+    #create a count of the people in chats and check if they've been deleted
     if (group_name == 'sports'):
         todos = SportsEvents.objects.all()[:10]
+        for todo in todos:
+            groupid = getattr(todo, 'GroupId')
+            url = 'https://api.groupme.com/v3/groups/' + groupid + '?token=' + encodedtoken
+            print(url)
     elif (group_name == 'workingout'):
         todos = WorkingOutEvents.objects.all()[:10]
     elif (group_name == 'videogames'):
