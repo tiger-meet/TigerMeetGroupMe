@@ -8,6 +8,7 @@
       {% for todo in todos3 %}
       {% if {{todo.UserId}} == token %}
         <li><a href="/details/{{todo.id}}">{{todo.title}}</a>: {{todo.text}}</li>
+      {% endif %}
       {% endfor %}
 
       <!--
