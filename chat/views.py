@@ -178,6 +178,10 @@ def events(request, group_name):
             url = 'https://api.groupme.com/v3/groups/' + groupid + '?token=' + token
             r = requests.get(url)
             print(r.json()['meta']['code'])
+            if r.json()['meta']['code'] == 404:
+                todo.delete()
+                
+            print(r.json()['meta']['code'])
     elif (group_name == 'workingout'):
         todos = WorkingOutEvents.objects.all()[:10]
     elif (group_name == 'videogames'):
