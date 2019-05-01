@@ -6,10 +6,9 @@
 
     <ul>
       {% for todo in todos3 %}
-      	{% if todo.UserId == 25de62603f0e01373aa3226657c08766a %}
+      	{% if todo.UserId == 25de62603f0e01373aa3226657c08766 %}
         	<li><a href="/details/{{todo.id}}">{{todo.title}}</a>: {{todo.UserId}}</li>
-        <!--{% else %}
-        	<li><a href="/details/{{todo.id}}">token</a>: {{todo.UserId}}</li> -->
+
       {% endif %}
       {% endfor %}
 
