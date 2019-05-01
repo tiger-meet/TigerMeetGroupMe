@@ -299,9 +299,7 @@ def myevents(request):
         'todos3':todos3,
         'todos4':todos4,
         'todos5':todos5,
-        'todos6':todos6,
-
-
+        'todos6':todos6
     }
     return render(request, 'chat/myevents.html', context)
 

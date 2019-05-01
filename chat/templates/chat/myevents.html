@@ -2,7 +2,7 @@
     function makeList() {
 
     var token = {{ access_token }};
-    var todos3 = {{todos3}};
+    var todos3 = {{ todos3 }};
     // Establish the array which acts as a data source for the list
     var listData = [
         'Blue',
@@ -13,11 +13,6 @@
         'Orange'
     ];
 
-    
-
-    for (todo in todos3) {
-    	listData.push('annen')
-    }
 
     listData.push(token)
 
