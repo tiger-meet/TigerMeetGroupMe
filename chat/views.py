@@ -335,6 +335,8 @@ def add(request, group_name):
     encodedtoken = gettoken(request)
     token = decodetoken(encodedtoken)
 
+    category_name = group_name
+
     if token == 'none':
         return render(request, 'chat/gmlogin.html', {})
     else:
@@ -386,7 +388,8 @@ def add(request, group_name):
             #change this so it doesn't just call createchat
             return render(request, 'chat/chat.html', {
                 'access_token': mark_safe(json.dumps(encodedtoken)),
-                'group_name': mark_safe(json.dumps(group_name))
+                'group_name': mark_safe(json.dumps(group_name)),
+                'category_name': mark_safe(json.dumps(category_name))
             })
 
         else:

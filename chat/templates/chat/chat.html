@@ -4,7 +4,8 @@
     <script type="text/javascript">
     var url = "?access_token=" + {{ access_token }};
     var name = {{ group_name }};
-    var eventspage = '/category/' + name + url;
+    var catname = {{ category_name }}
+    var eventspage = '/category/' + catname + url;
     window.onload = function() {
     //document.getElementById("myToken").innerHTML=token;
     document.getElementById("myName").innerHTML=name;
