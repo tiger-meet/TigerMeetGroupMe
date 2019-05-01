@@ -196,6 +196,8 @@
 </form>
 <br>
 
+      <div class="ui four column stackable grid">
+
         <p hidden id ="likes" data-name= {{ group_name }}, data-access-token= {{ access_token }} >Like</p>
         {% for todo in todos %}
         <div class="column">
@@ -204,9 +206,10 @@
               <div class="content">
                 <div class="header">{{ todo.title }}</div>
                 <div class="meta">{{ todo.time }}</div>
-                <div class="description"><p>{{ todo.text }}</p>
-                    <div class="size">{{ todo.Size }}</div>
+                <div class="description">
+                  <p>{{ todo.text }}</p>
                 </div>
+                  <div class="size">{{ todo.Size }}</div>
               </div>
             </div>
           </a>
