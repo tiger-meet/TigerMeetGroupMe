@@ -180,6 +180,9 @@ def events(request, group_name):
             print(r.json()['meta']['code'])
             if r.json()['meta']['code'] == 404:
                 todo.delete()
+            else:
+                todo.Size = len(r.json()['response']['members'])
+                todo.save()
 
             print(r.json()['meta']['code'])
     elif (group_name == 'workingout'):
