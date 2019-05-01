@@ -212,7 +212,12 @@ def events(request, group_name):
         todos = MiscellaneousEvents.objects.all()
 
 #for my events
-    myevents = SportsEvents.objects.filter(MakerToken=token)
+    mysports = SportsEvents.objects.filter(MakerToken=token)
+    myworkingout = WorkingOutEvents.objects.filter(MakerToken=token)
+    myvideogames = VideoGamesEvents.objects.filter(MakerToken=token)
+    mytransportation = TransportationEvents.objects.filter(MakerToken=token)
+    myproblemsetgroups = ProblemSetEvents.objects.filter(MakerToken=token)
+    mymiscellaneous = MiscellaneousEvents.objects.filter(MakerToken=token)
 
 
     try:
@@ -221,7 +226,12 @@ def events(request, group_name):
             'access_token': mark_safe(json.dumps(encodedtoken)),
             'group_name': mark_safe(json.dumps(group_name)),
             'todos': todos,
-            'myevents': myevents
+            'mysports': mysports,
+            'myworkingout': myworkingout,
+            'myvideogames': myvideogames,
+            'mytransportation': mytransportation,
+            'myproblemsetgroups': myproblemsetgroups,
+            'mymiscellaneous': mymiscellaneous
         }
 
     except:
@@ -229,7 +239,12 @@ def events(request, group_name):
             'access_token': mark_safe(json.dumps(encodedtoken)),
             'group_name': mark_safe(json.dumps(group_name)),
             'todos': "",
-            'myevents': myevents
+            'mysports': mysports,
+            'myworkingout': myworkingout,
+            'myvideogames': myvideogames,
+            'mytransportation': mytransportation,
+            'myproblemsetgroups': myproblemsetgroups,
+            'mymiscellaneous': mymiscellaneous
         }
 
     finally:

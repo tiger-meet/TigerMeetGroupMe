@@ -228,13 +228,98 @@
       <div style="clear:both"></div>
 
       <h2 class="ui header">
-        All Events
+        My Events
       </h2>
 
       <br>
 
    <div class="ui four column stackable grid">
-     {% for todo in myevents %}
+     {% for todo in mysports %}
+        <div class="column">
+          <a class ="replaceValue" href= '/{{todo.id}}'>
+            <div class="ui fluid card">
+              <div class="content">
+                <div class="header">{{ todo.title }}</div>
+                <div class="meta">{{ todo.time }}</div>
+                <div class="description">
+                  <p>{{ todo.text }}</p>
+                </div>
+                  <div class="size">Current Size: {{ todo.Size }}</div>
+              </div>
+            </div>
+          </a>
+        </div>
+        {% endfor %}
+
+   {% for todo in myworkingout %}
+        <div class="column">
+          <a class ="replaceValue" href= '/{{todo.id}}'>
+            <div class="ui fluid card">
+              <div class="content">
+                <div class="header">{{ todo.title }}</div>
+                <div class="meta">{{ todo.time }}</div>
+                <div class="description">
+                  <p>{{ todo.text }}</p>
+                </div>
+                  <div class="size">Current Size: {{ todo.Size }}</div>
+              </div>
+            </div>
+          </a>
+        </div>
+        {% endfor %}
+
+   {% for todo in myvideogames %}
+        <div class="column">
+          <a class ="replaceValue" href= '/{{todo.id}}'>
+            <div class="ui fluid card">
+              <div class="content">
+                <div class="header">{{ todo.title }}</div>
+                <div class="meta">{{ todo.time }}</div>
+                <div class="description">
+                  <p>{{ todo.text }}</p>
+                </div>
+                  <div class="size">Current Size: {{ todo.Size }}</div>
+              </div>
+            </div>
+          </a>
+        </div>
+        {% endfor %}
+
+   {% for todo in mytransportation %}
+        <div class="column">
+          <a class ="replaceValue" href= '/{{todo.id}}'>
+            <div class="ui fluid card">
+              <div class="content">
+                <div class="header">{{ todo.title }}</div>
+                <div class="meta">{{ todo.time }}</div>
+                <div class="description">
+                  <p>{{ todo.text }}</p>
+                </div>
+                  <div class="size">Current Size: {{ todo.Size }}</div>
+              </div>
+            </div>
+          </a>
+        </div>
+        {% endfor %}
+
+   {% for todo in myproblemsetgroups %}
+        <div class="column">
+          <a class ="replaceValue" href= '/{{todo.id}}'>
+            <div class="ui fluid card">
+              <div class="content">
+                <div class="header">{{ todo.title }}</div>
+                <div class="meta">{{ todo.time }}</div>
+                <div class="description">
+                  <p>{{ todo.text }}</p>
+                </div>
+                  <div class="size">Current Size: {{ todo.Size }}</div>
+              </div>
+            </div>
+          </a>
+        </div>
+        {% endfor %}
+
+   {% for todo in mymiscellaneous %}
         <div class="column">
           <a class ="replaceValue" href= '/{{todo.id}}'>
             <div class="ui fluid card">
