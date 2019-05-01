@@ -59,11 +59,12 @@ def gettoken(request):
         token = str(token_list[0])
         return token
 
-def countandprune(todos, token):
+def countandprune(todos):
     for todo in todos:
 
         groupid = getattr(todo, 'GroupId')
-        url = 'https://api.groupme.com/v3/groups/' + groupid + '?token=' + token
+        makertoken = getattr(todo, 'MakerToken')
+        url = 'https://api.groupme.com/v3/groups/' + groupid + '?token=' + makertoken
         r = requests.get(url)
         print(r.json()['meta']['code'])
         if r.json()['meta']['code'] == 404:
@@ -186,27 +187,27 @@ def events(request, group_name):
     #create a count of the people in chats and check if they've been deleted
     if (group_name == 'sports'):
         todos = SportsEvents.objects.all()
-        countandprune(todos, token)
+        countandprune(todos)
         todos = SportsEvents.objects.all()
     elif (group_name == 'workingout'):
         todos = WorkingOutEvents.objects.all()
-        countandprune(todos, token)
+        countandprune(todos)
         todos = WorkingOutEvents.objects.all()
     elif (group_name == 'videogames'):
         todos = VideoGamesEvents.objects.all()
-        countandprune(todos, token)
+        countandprune(todos)
         todos = VideoGamesEvents.objects.all()
     elif (group_name == 'transportation'):
         todos = TransportationEvents.objects.all()
-        countandprune(todos, token)
+        countandprune(todos)
         todos = TransportationEvents.objects.all()
     elif (group_name == 'problemsetgroups'):
         todos = ProblemSetEvents.objects.all()
-        countandprune(todos, token)
+        countandprune(todos)
         todos = ProblemSetEvents.objects.all()
     elif (group_name == 'miscellaneous'):
         todos = MiscellaneousEvents.objects.all()
-        countandprune(todos, token)
+        countandprune(todos)
         todos = MiscellaneousEvents.objects.all()
 
     try:
@@ -341,17 +342,17 @@ def add(request, group_name):
             sharetoken = str(shareurl[-8:])
 
             if (group_name == 'sports'):
-                todo = SportsEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken)
+                todo = SportsEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken, MakerToken=token)
             if (group_name == 'workingout'):
-                todo = WorkingOutEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken)
+                todo = WorkingOutEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken, MakerToken=token)
             if (group_name == 'videogames'):
-                todo = VideoGamesEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken)
+                todo = VideoGamesEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken, MakerToken=token)
             if (group_name == 'transportation'):
-                todo = TransportationEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken)
+                todo = TransportationEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken, MakerToken=token)
             if (group_name == 'problemsetgroups'):
-                todo = ProblemSetEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken)
+                todo = ProblemSetEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken, MakerToken=token)
             if (group_name == 'miscellaneous'):
-                todo = MiscellaneousEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken)
+                todo = MiscellaneousEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken, MakerToken=token)
 
             todo.save()
 
