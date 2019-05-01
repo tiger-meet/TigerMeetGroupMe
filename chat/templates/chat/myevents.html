@@ -3,7 +3,7 @@
     // Establish the array which acts as a data source for the list
     var listData = [
     ];
-
+    listData.push('baban')
     {% for todo in todos3 %} {
     	if ({{todo.UserId}} == token) {
     		listData.push({{todo.title}})
