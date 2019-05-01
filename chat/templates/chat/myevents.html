@@ -8,9 +8,10 @@ function makeList() {
 
     {% for todo in todos3 %} {
     	(if {{todo.UserId}} == token) {
-    	listData.push({{todo.title})
+    	listData.push({{todo.title}})
     }
     }
+    {% endfor %}
 
     // Make a container element for the list
     var listContainer = document.createElement('div');
