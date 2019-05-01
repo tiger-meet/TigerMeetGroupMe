@@ -196,22 +196,6 @@
 </form>
 <br>
 
-      <div class="ui four column stackable grid">
-
-        <div class="column">
-          <a href="#">
-            <div class="ui fluid card">
-              <div class="content">
-                <div class="header">Sample Event Name</div>
-                <div class="meta">Sample Event Time</div>
-                <div class="description">
-                  <p>Sample Event Description</p>
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
-
         <p hidden id ="likes" data-name= {{ group_name }}, data-access-token= {{ access_token }} >Like</p>
         {% for todo in todos %}
         <div class="column">
@@ -221,6 +205,7 @@
                 <div class="header">{{ todo.title }}</div>
                 <div class="meta">{{ todo.time }}</div>
                 <div class="description">
+                    <div class="size">{{ todo.Size }}</div>
                   <p>{{ todo.text }}</p>
                 </div>
               </div>
