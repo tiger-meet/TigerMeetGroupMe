@@ -172,7 +172,7 @@ def events(request, group_name):
 
     #create a count of the people in chats and check if they've been deleted
     if (group_name == 'sports'):
-        todos = SportsEvents.objects.all()[:10]
+        todos = SportsEvents.objects.all()
         for todo in todos:
             groupid = getattr(todo, 'GroupId')
             url = 'https://api.groupme.com/v3/groups/' + groupid + '?token=' + token
@@ -180,7 +180,7 @@ def events(request, group_name):
             print(r.json()['meta']['code'])
             if r.json()['meta']['code'] == 404:
                 todo.delete()
-                
+
             print(r.json()['meta']['code'])
     elif (group_name == 'workingout'):
         todos = WorkingOutEvents.objects.all()[:10]
