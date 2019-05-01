@@ -330,17 +330,17 @@ def add(request, group_name):
             sharetoken = str(shareurl[-8:])
 
             if (group_name == 'sports'):
-                todo = SportsEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken)
+                todo = SportsEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken, UserId = token)
             if (group_name == 'workingout'):
-                todo = WorkingOutEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken)
+                todo = WorkingOutEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken, UserId = token)
             if (group_name == 'videogames'):
-                todo = VideoGamesEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken)
+                todo = VideoGamesEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken, UserId = token)
             if (group_name == 'transportation'):
-                todo = TransportationEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken)
+                todo = TransportationEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken, UserId = token)
             if (group_name == 'problemsetgroups'):
-                todo = ProblemSetEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken)
+                todo = ProblemSetEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken, UserId = token)
             if (group_name == 'miscellaneous'):
-                todo = MiscellaneousEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken)
+                todo = MiscellaneousEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken, UserId = token)
 
             todo.save()
 
