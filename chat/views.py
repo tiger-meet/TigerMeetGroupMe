@@ -293,7 +293,7 @@ def myevents(request):
     todos6 = MiscellaneousEvents.objects.all()[:10]
 
     context = {
-        'access_token': mark_safe(json.dumps(encodedtoken)),
+        'access_token': mark_safe(json.dumps(token)),
         'todos1':todos1,
         'todos2':todos2,
         'todos3':todos3,
