@@ -290,10 +290,16 @@ def myevents(request):
     todos5 = ProblemSetEvents.objects.all()[:10]
     todos6 = MiscellaneousEvents.objects.all()[:10]
 
-    todos = todos1 | todos2 | todos3 | todos4 | todos5 | todos6
 
     context = {
-        'todos':todos
+        'todos1':todos1,
+        'todos2':todos2,
+        'todos3':todos3,
+        'todos4':todos4,
+        'todos5':todos5,
+        'todos6':todos6,
+
+
     }
     return render(request, 'chat/myevents.html', context)
 
