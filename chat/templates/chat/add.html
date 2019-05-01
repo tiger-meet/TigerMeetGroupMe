@@ -6,6 +6,7 @@
 <html>
 <head>
   <!-- Meta -->
+
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
@@ -176,7 +177,27 @@
     </div>
   </div>
 
+<<<<<<< HEAD
 {##}
+=======
+
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script>
+            $(function () {
+                $("#datepicker").datepicker();
+            });
+        </script>
+
+        <form action="showDate.jsp">
+            <label for="datepicker">Enter date:</label>
+                <input type="text" name="selDate" id="datepicker">
+
+            <input type="submit" value="Submit">
+        </form>
+
+
+>>>>>>> origin/master
 {#<div class="container">#}
 {#    <div class='col-md-5'>#}
 {#        <div class="form-group">#}
@@ -214,5 +235,3 @@
 {#    });#}
 {#</script>#}
 
-</body>
-</html>
