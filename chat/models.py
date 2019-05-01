@@ -53,4 +53,5 @@ class MiscellaneousEvents(models.Model):
     text = models.CharField(max_length=50)
     time = models.CharField(max_length=50)
     GroupId = models.CharField(max_length=50)
+    ShareToken = models.CharField(max_length=50, default='filler')
     Size = models.CharField(max_length=50, default='0')
