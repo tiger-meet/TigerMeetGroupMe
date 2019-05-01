@@ -385,7 +385,7 @@ def add(request, group_name):
             #return redirect('/')
             #change this so it doesn't just call createchat
             return render(request, 'chat/chat.html', {
-                # 'access_token': mark_safe(json.dumps(access_token)),
+                'access_token': mark_safe(json.dumps(encodedtoken)),
                 'group_name': mark_safe(json.dumps(group_name))
             })
 

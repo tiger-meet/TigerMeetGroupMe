@@ -2,8 +2,9 @@
 <html>
 <head>
     <script type="text/javascript">
-    //var token = {{ access_token }};
+    var url = "?access_token=" + {{ access_token }};
     var name = {{ group_name }};
+    var eventspage = '/category/' + name + url;
     window.onload = function() {
     //document.getElementById("myToken").innerHTML=token;
     document.getElementById("myName").innerHTML=name;
@@ -11,6 +12,10 @@
     </script>
 </head>
 <body>
+
+    <div>
+        <button class="ui left floated button" type="button" onclick="location.href = eventspage;">Back to Events</button>
+      </div>
 
 <!--< id="myToken"> </a>-->
 <h1>Groupme <a id="myName"> chatname</a> Made!</h1>
