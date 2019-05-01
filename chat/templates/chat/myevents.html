@@ -10,16 +10,7 @@
         'Orange'
     ];
 
-    {% for todo in todos3 %} {
-    	if ({{todo.UserId}} == token) {
-    		listData.push({{todo.title}})
-    }
-    	else {
-    		listData.push('annen')
-    	}
-
-    }
-    {% endfor %}
+    
 
     // Make a container element for the list
     var listContainer = document.createElement('div');
