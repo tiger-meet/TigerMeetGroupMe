@@ -1,35 +1,43 @@
-    <script type="text/javascript">
-    var token = {{ access_token }};
-    </script>
+<script type="text/javascript">
+function makeList() {
+  	var token = {{ access_token }};
 
+    	// Establish the array which acts as a data source for the list
+    var listData = [
+    ];
 
+    {% for todo in todos3 %}
+    	{% if todo.UserId == token %}
+    {
+    	listData.push({{todo.title})
+    }
 
-    <ul>
-      {% for todo in todos3 %}
-      	{% if todo.UserId == 'token' %}
-        	<li><a href="/details/{{todo.id}}">{{todo.title}}</a>: {{todo.UserId}}</li>
-        	        <!--{% else %}
-        	<li><a href="/details/{{todo.id}}">token</a>: {{todo.UserId}}</li> -->
+    // Make a container element for the list
+    var listContainer = document.createElement('div');
 
-      {% endif %}
-      {% endfor %}
+    // Add it to the page
+    document.getElementsByTagName('body')[0].appendChild(listContainer);
 
-      <!--
-      {% for todo in todos2 %}
-        <li><a href="/details/{{todo.id}}">{{todo.title}}</a>: {{todo.text}}</li>
-      {% endfor %}
-      {% for todo in todos3 %}
-        <li><a href="/details/{{todo.id}}">{{todo.title}}</a>: {{todo.text}}</li>
-      {% endfor %}
-      {% for todo in todos4 %}
-        <li><a href="/details/{{todo.id}}">{{todo.title}}</a>: {{todo.text}}</li>
-      {% endfor %}
-      {% for todo in todos5 %}
-        <li><a href="/details/{{todo.id}}">{{todo.title}}</a>: {{todo.text}}</li>
-      {% endfor %}
-      {% for todo in todos6 %}
-        <li><a href="/details/{{todo.id}}">{{todo.title}}</a>: {{todo.text}}</li>
-      {% endfor %}
-      -->
+    // Make the list
+    var listElement = document.createElement('ul');
 
-	</ul>
+    // Add it to the page
+    listContainer.appendChild(listElement);
+
+    // Set up a loop that goes through the items in listItems one at a time
+    var numberOfListItems = listData.length;
+
+    for (var i = 0; i < numberOfListItems; ++i) {
+        // create an item for each one
+        var listItem = document.createElement('li');
+
+        // Add the item text
+        listItem.innerHTML = listData[i];
+
+        // Add listItem to the listElement
+        listElement.appendChild(listItem);
+    }
+}
+</script>
+
+<script>makeList();</script>
