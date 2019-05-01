@@ -34,6 +34,7 @@
     var addurl = '/add/' + name + url;
     var joinurl = '/join/' + name + '/chat' + url;
     var det = '/details/' + name + '/' + url;
+    var myeventsurl = '/myevents/' + url;
 
     // Custom group icons
     var icon = '';
@@ -144,6 +145,10 @@
 
       <!-- Create new event -->
       <button class="ui left floated button" type="button" onclick="location.href=addurl;">Create New Event</button>
+
+      <button class="ui left floated button" type="button" onclick="location.href=myeventsurl;">Go to myevents</button>
+
+
 
       <!-- Join general chat -->
       <a class="ui right floated button" id="link2" class="item" href="fill" onclick="location.href=joinurl; return false;">Error</a>
