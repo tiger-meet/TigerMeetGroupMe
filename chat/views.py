@@ -491,9 +491,24 @@ def destroy(request, id, group_name):
         return render(request, 'chat/gmlogin.html', {})
 
     else:
-        url = "https://api.groupme.com/v3/groups/" + id + "/destroy/" + "?token=" + token
+        if (group_name == 'sports'):
+            code = SportsEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
+        if (group_name == 'workingout'):
+            code = WorkingOutEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
+        if (group_name == 'videogames'):
+            code = VideoGamesEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
+        if (group_name == 'transportation'):
+            code = TransportationEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
+        if (group_name == 'problemsetgroups'):
+            code = ProblemSetEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
+        if (group_name == 'miscellaneous'):
+            code = MiscellaneousEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
+
+
+
+        url = "https://api.groupme.com/v3/groups/" + code + "/destroy/" + "?token=" + token
         print(url)
-        r = requests.post(url)
+        # r = requests.post(url)
 
         return render(request, 'chat/index.html', {'access_token': mark_safe(json.dumps(encodedtoken))})
 
