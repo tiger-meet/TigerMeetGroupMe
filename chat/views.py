@@ -73,6 +73,7 @@ def countandprune(todos):
             todo.Size = len(r.json()['response']['members'])
             todo.save()
 
+
 # loads the index page with authentication token
 def index(request):
     #code for scrambling access tokens
@@ -210,19 +211,40 @@ def events(request, group_name):
         countandprune(todos)
         todos = MiscellaneousEvents.objects.all()
 
+#for my events
+    mysports = SportsEvents.objects.filter(MakerToken=token)
+    myworkingout = WorkingOutEvents.objects.filter(MakerToken=token)
+    myvideogames = VideoGamesEvents.objects.filter(MakerToken=token)
+    mytransportation = TransportationEvents.objects.filter(MakerToken=token)
+    myproblemsetgroups = ProblemSetEvents.objects.filter(MakerToken=token)
+    mymiscellaneous = MiscellaneousEvents.objects.filter(MakerToken=token)
+
+
     try:
         print(todos)
         context = {
             'access_token': mark_safe(json.dumps(encodedtoken)),
             'group_name': mark_safe(json.dumps(group_name)),
-            'todos': todos
+            'todos': todos,
+            'mysports': mysports,
+            'myworkingout': myworkingout,
+            'myvideogames': myvideogames,
+            'mytransportation': mytransportation,
+            'myproblemsetgroups': myproblemsetgroups,
+            'mymiscellaneous': mymiscellaneous
         }
 
     except:
         context = {
             'access_token': mark_safe(json.dumps(encodedtoken)),
             'group_name': mark_safe(json.dumps(group_name)),
-            'todos': ""
+            'todos': "",
+            'mysports': mysports,
+            'myworkingout': myworkingout,
+            'myvideogames': myvideogames,
+            'mytransportation': mytransportation,
+            'myproblemsetgroups': myproblemsetgroups,
+            'mymiscellaneous': mymiscellaneous
         }
 
     finally:
@@ -313,6 +335,8 @@ def add(request, group_name):
     encodedtoken = gettoken(request)
     token = decodetoken(encodedtoken)
 
+    category_name = group_name
+
     if token == 'none':
         return render(request, 'chat/gmlogin.html', {})
     else:
@@ -342,17 +366,17 @@ def add(request, group_name):
             sharetoken = str(shareurl[-8:])
 
             if (group_name == 'sports'):
-                todo = SportsEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken, MakerToken=token)
+                todo = SportsEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
             if (group_name == 'workingout'):
-                todo = WorkingOutEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken, MakerToken=token)
+                todo = WorkingOutEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
             if (group_name == 'videogames'):
-                todo = VideoGamesEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken, MakerToken=token)
+                todo = VideoGamesEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
             if (group_name == 'transportation'):
-                todo = TransportationEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken, MakerToken=token)
+                todo = TransportationEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
             if (group_name == 'problemsetgroups'):
-                todo = ProblemSetEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken, MakerToken=token)
+                todo = ProblemSetEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
             if (group_name == 'miscellaneous'):
-                todo = MiscellaneousEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken, MakerToken=token)
+                todo = MiscellaneousEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
 
             todo.save()
 
@@ -363,8 +387,9 @@ def add(request, group_name):
             #return redirect('/')
             #change this so it doesn't just call createchat
             return render(request, 'chat/chat.html', {
-                # 'access_token': mark_safe(json.dumps(access_token)),
-                'group_name': mark_safe(json.dumps(group_name))
+                'access_token': mark_safe(json.dumps(encodedtoken)),
+                'group_name': mark_safe(json.dumps(group_name)),
+                'category_name': mark_safe(json.dumps(category_name))
             })
 
         else:
@@ -395,8 +420,31 @@ def details(request, group_name, id):
     }
     return render(request, 'chat/details.html', context)
 
+def mydetails(request, group_name, id):
+    encodedtoken = gettoken(request)
+
+    if (group_name == 'sports'):
+        todo = SportsEvents.objects.get(id=id)
+    if (group_name == 'workingout'):
+        todo = WorkingOutEvents.objects.get(id=id)
+    if (group_name == 'videogames'):
+        todo = VideoGamesEvents.objects.get(id=id)
+    if (group_name == 'transportation'):
+        todo = TransportationEvents.objects.get(id=id)
+    if (group_name == 'problemsetgroups'):
+        todo = ProblemSetEvents.objects.get(id=id)
+    if (group_name == 'miscellaneous'):
+        todo = MiscellaneousEvents.objects.get(id=id)
+
+    context = {
+        'todo':todo,
+        'access_token': mark_safe(json.dumps(encodedtoken)),
+        'group_name': mark_safe(json.dumps(group_name)),
+        'id': mark_safe(json.dumps(id))
+    }
+    return render(request, 'chat/mydetails.html', context)
+
 def joinsubchat(request, id, group_name):
-    #token = gettoken(request)
     encodedtoken = gettoken(request)
     token = decodetoken(encodedtoken)
     if token == 'none':
@@ -446,6 +494,48 @@ def joinsubchat(request, id, group_name):
             'group_id': mark_safe(json.dumps(code)),
             'group_name': mark_safe(json.dumps(name))
         })
+
+def deleteconfirmation(request, id, group_name):
+    encodedtoken = gettoken(request)
+    token = decodetoken(encodedtoken)
+    if token == 'none':
+        return render(request, 'chat/gmlogin.html', {})
+
+    else:
+        return render(request, 'chat/deleteconfirmation.html', {
+            'id': mark_safe(json.dumps(id)),
+            'group_name': mark_safe(json.dumps(group_name)),
+            'access_token': mark_safe(json.dumps(encodedtoken)),
+        })
+
+def destroy(request, id, group_name):
+    encodedtoken = gettoken(request)
+    token = decodetoken(encodedtoken)
+    if token == 'none':
+        return render(request, 'chat/gmlogin.html', {})
+
+    else:
+        if (group_name == 'sports'):
+            code = SportsEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
+        if (group_name == 'workingout'):
+            code = WorkingOutEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
+        if (group_name == 'videogames'):
+            code = VideoGamesEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
+        if (group_name == 'transportation'):
+            code = TransportationEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
+        if (group_name == 'problemsetgroups'):
+            code = ProblemSetEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
+        if (group_name == 'miscellaneous'):
+            code = MiscellaneousEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
+
+
+
+        url = "https://api.groupme.com/v3/groups/" + code + "/destroy" + "?token=" + token
+        print(url)
+        r = requests.post(url)
+        print(r)
+
+        return render(request, 'chat/index.html', {'access_token': mark_safe(json.dumps(encodedtoken))})
 
 def getgroupname(request):
     if request.method == 'GET':

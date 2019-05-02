@@ -151,7 +151,7 @@
       <div style="clear:both"></div>
 
       <h2 class="ui header">
-        Events
+        All Events
         <div class="sub header">(Click an event to join the event's group chat)</div>
       </h2>
 
@@ -228,6 +228,125 @@
 
     </div>
   </div>
+
+      <br>
+      <!-- Break -->
+      <div style="clear:both"></div>
+
+      <h2 class="ui header">
+        My Events
+      </h2>
+
+      <br>
+
+   <div class="ui four column stackable grid">
+     {% for todo in mysports %}
+        <div class="column">
+          <a  class ="MyReplaceValue" href= '/{{ todo.CategoryName }}/{{todo.id}}'>
+            <div class="ui fluid card">
+              <div class="content">
+                <div class="header">{{ todo.title }}</div>
+                <div class="meta">{{ todo.time }}</div>
+                <div class="description">
+                  <p>{{ todo.text }}</p>
+                </div>
+                  <div class="size">Current Size: {{ todo.Size }}</div>
+                  <div class="cat">Category: {{ todo.CategoryName }}</div>
+              </div>
+            </div>
+          </a>
+        </div>
+        {% endfor %}
+
+   {% for todo in myworkingout %}
+        <div class="column">
+          <a  class ="MyReplaceValue" href= '/{{ todo.CategoryName }}/{{todo.id}}'>
+            <div class="ui fluid card">
+              <div class="content">
+                <div class="header">{{ todo.title }}</div>
+                <div class="meta">{{ todo.time }}</div>
+                <div class="description">
+                  <p>{{ todo.text }}</p>
+                </div>
+                  <div class="size">Current Size: {{ todo.Size }}</div>
+                  <div class="cat">Category: {{ todo.CategoryName }}</div>
+              </div>
+            </div>
+          </a>
+        </div>
+        {% endfor %}
+
+   {% for todo in myvideogames %}
+        <div class="column">
+          <a  class ="MyReplaceValue" href= '/{{ todo.CategoryName }}/{{todo.id}}'>
+            <div class="ui fluid card">
+              <div class="content">
+                <div class="header">{{ todo.title }}</div>
+                <div class="meta">{{ todo.time }}</div>
+                <div class="description">
+                  <p>{{ todo.text }}</p>
+                </div>
+                  <div class="size">Current Size: {{ todo.Size }}</div>
+              </div>
+            </div>
+          </a>
+        </div>
+        {% endfor %}
+
+   {% for todo in mytransportation %}
+        <div class="column">
+          <a  class ="MyReplaceValue" href= '/{{ todo.CategoryName }}/{{todo.id}}'>
+            <div class="ui fluid card">
+              <div class="content">
+                <div class="header">{{ todo.title }}</div>
+                <div class="meta">{{ todo.time }}</div>
+                <div class="description">
+                  <p>{{ todo.text }}</p>
+                </div>
+                  <div class="size">Current Size: {{ todo.Size }}</div>
+                  <div class="cat">Category: {{ todo.CategoryName }}</div>
+              </div>
+            </div>
+          </a>
+        </div>
+        {% endfor %}
+
+   {% for todo in myproblemsetgroups %}
+        <div class="column">
+          <a  class ="MyReplaceValue" href= '/{{ todo.CategoryName }}/{{todo.id}}'> {#class ="replaceValue"#}
+            <div class="ui fluid card">
+              <div class="content">
+                <div class="header">{{ todo.title }}</div>
+                <div class="meta">{{ todo.time }}</div>
+                <div class="description">
+                  <p>{{ todo.text }}</p>
+                </div>
+                  <div class="size">Current Size: {{ todo.Size }}</div>
+                  <div class="cat">Category: {{ todo.CategoryName }}</div>
+              </div>
+            </div>
+          </a>
+        </div>
+        {% endfor %}
+
+   {% for todo in mymiscellaneous %}
+        <div class="column">
+          <a class ="MyReplaceValue" href= '/{{ todo.CategoryName }}/{{todo.id}}'>
+            <div class="ui fluid card">
+              <div class="content">
+                <div class="header">{{ todo.title }}</div>
+                <div class="meta">{{ todo.time }}</div>
+                <div class="description">
+                  <p>{{ todo.text }}</p>
+                </div>
+                  <div class="size">Current Size: {{ todo.Size }}</div>
+                  <div class="cat">Category: {{ todo.CategoryName }}</div>
+              </div>
+            </div>
+          </a>
+        </div>
+        {% endfor %}
+   </div>
 
 </body>
 </html>

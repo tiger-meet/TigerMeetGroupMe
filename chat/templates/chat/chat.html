@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
   <!-- Meta -->
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -25,6 +26,9 @@
   <script type="text/javascript">
     //var token = {{ access_token }};
     var name = {{ group_name }};
+    var url = "?access_token=" + {{ access_token }};
+    var catname = {{ category_name }}
+    var eventspage = '/category/' + catname + url;
     window.onload = function() 
     {
       //document.getElementById("myToken").innerHTML=token;
@@ -33,7 +37,11 @@
   </script>
 </head>
 <body>
-
+  
+      <div>
+        <button class="ui left floated button" type="button" onclick="location.href = eventspage;">Back to Events</button>
+      </div>
+  
   <!--< id="myToken"> </a>-->
   <div class="ui positive message">
     <h1><a id="myName">chatname</a> GroupMe chat successfully created!</h1>
