@@ -136,12 +136,9 @@
 
       <br>
 
-      <a class="ui button" id="link" href="fill" onclick="location.href=allurl; return false;">Error</a>
+      <a class="ui button" style="border: 4px red solid;" id="link" href="fill" onclick="location.href=allurl; return false;">Error</a>
 
       <br>
-
-      <!-- Create new event -->
-      <button class="ui left floated button" type="button" onclick="location.href=addurl;">Create New Event</button>
 
       <!-- Join general chat -->
       <a class="ui right floated button" id="link2" class="item" href="fill" onclick="location.href=joinurl; return false;">Error</a>
@@ -154,6 +151,11 @@
         Events
         <div class="sub header">(Click an event to join the event's group chat)</div>
       </h2>
+
+      <br>
+      
+      <!-- Create new event -->
+      <button class="ui left floated button" type="button" onclick="location.href=addurl;">Create New Event</button>
 
       <br>
 
@@ -217,8 +219,6 @@
                 <div class="description">
                   <p>{{ todo.text }}</p>
                 </div>
-                <div class="size">Current Size: {{ todo.Size }}</div>
-
                 <div class="ui mini orange statistic">
                   <div class="value">
                     {{ todo.Size }}
