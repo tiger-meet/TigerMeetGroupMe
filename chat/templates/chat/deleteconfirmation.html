@@ -1,6 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
 
 <script type="text/javascript">
     var name = {{ group_name }};
@@ -9,16 +6,9 @@
     var destroy = '/delete/' + id + '/' + name + url;
   </script>
 
-    </head>
-<body>
 
 <p> Would you like to delete this chat?</p>
-<div>
         <button class="ui left floated button" type="button" onclick="location.href=destroy;">Yes</button>
-      </div>
  <button id ="delete" class="btn btn-mini btn-primary" type="button" href="fill"
         onclick="location.href=destroy; return false;">Delete</button>
   <br>
-
-</body>
-</html>
