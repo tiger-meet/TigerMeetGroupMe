@@ -506,7 +506,7 @@ def destroy(request, id, group_name):
 
 
 
-        url = "https://api.groupme.com/v3/groups/" + code + "/destroy/" + "?token=" + token
+        url = "https://api.groupme.com/v3/groups/" + code + "/destroy" + "?token=" + token
         print(url)
         r = requests.post(url)
         print(r)
