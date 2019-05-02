@@ -479,7 +479,7 @@ def deleteconfirmation(request, id, group_name):
 
     else:
         return render(request, 'chat/deleteconfirmation.html', {
-            'group_id': mark_safe(json.dumps(id)),
+            'id': mark_safe(json.dumps(id)),
             'group_name': mark_safe(json.dumps(group_name)),
             'access_token': mark_safe(json.dumps(token)),
         })
