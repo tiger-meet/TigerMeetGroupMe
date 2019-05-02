@@ -209,7 +209,23 @@
         <p hidden id ="likes" data-name= {{ group_name }}, data-access-token= {{ access_token }} >Like</p>
         {% for todo in todos %}
             {% if todo.MakerToken == "3ad70e40394a0137a92656b15122bc3d"%}
-        <div class="column">
+               <div class="column">
+          <a  class ="MyReplaceValue" href= '/{{ todo.CategoryName }}/{{todo.id}}'>
+            <div class="ui fluid card">
+              <div class="content">
+                <div class="header">{{ todo.title }}</div>
+                <div class="meta">{{ todo.time }}</div>
+                <div class="description">
+                  <p>{{ todo.text }}</p>
+                </div>
+                  <div class="size">Current Size: {{ todo.Size }}</div>
+                  <div class="cat">Category: {{ todo.CategoryName }}</div>
+              </div>
+            </div>
+          </a>
+        </div>
+                {% else %}
+                <div class="column">
           <a class="replaceValue" href='/{{ todo.id }}'>
             <div class="ui fluid card">
               <div class="content">
