@@ -15,6 +15,7 @@ class SportsEvents(models.Model):
     GroupId = models.CharField(max_length=50)
     ShareToken = models.CharField(max_length=50)
     Size = models.CharField(max_length=50, default='0')
+    MakerToken = models.CharField(max_length=50, default='filler')
 
 class WorkingOutEvents(models.Model):
     title = models.CharField(max_length=50)
@@ -23,6 +24,7 @@ class WorkingOutEvents(models.Model):
     GroupId = models.CharField(max_length=50)
     ShareToken = models.CharField(max_length=50)
     Size = models.CharField(max_length=50, default='0')
+    MakerToken = models.CharField(max_length=50, default='filler')
 
 class VideoGamesEvents(models.Model):
     title = models.CharField(max_length=50)
@@ -31,6 +33,7 @@ class VideoGamesEvents(models.Model):
     GroupId = models.CharField(max_length=50)
     ShareToken = models.CharField(max_length=50)
     Size = models.CharField(max_length=50, default='0')
+    MakerToken = models.CharField(max_length=50, default='filler')
 
 class TransportationEvents(models.Model):
     title = models.CharField(max_length=50)
@@ -39,6 +42,7 @@ class TransportationEvents(models.Model):
     GroupId = models.CharField(max_length=50)
     ShareToken = models.CharField(max_length=50)
     Size = models.CharField(max_length=50, default='0')
+    MakerToken = models.CharField(max_length=50, default='filler')
 
 class ProblemSetEvents(models.Model):
     title = models.CharField(max_length=50)
@@ -47,6 +51,7 @@ class ProblemSetEvents(models.Model):
     GroupId = models.CharField(max_length=50)
     ShareToken = models.CharField(max_length=50)
     Size = models.CharField(max_length=50, default='0')
+    MakerToken = models.CharField(max_length=50, default='filler')
 
 class MiscellaneousEvents(models.Model):
     title = models.CharField(max_length=50)
@@ -55,3 +60,4 @@ class MiscellaneousEvents(models.Model):
     GroupId = models.CharField(max_length=50)
     ShareToken = models.CharField(max_length=50, default='filler')
     Size = models.CharField(max_length=50, default='0')
+    MakerToken = models.CharField(max_length=50, default='filler')
