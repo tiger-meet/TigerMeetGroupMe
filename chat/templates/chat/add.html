@@ -157,19 +157,19 @@
         {% csrf_token %}
         <div class="required field">
           <label for="title">Event Name</label>
-          <input type="text" name="title" id="title" placeholder="Event Name">
+          <input type="text" name="title" id="title" placeholder="Event Name" required>
         </div>
         <div class="required field">
           <label for="text">Event Location</label>
-          <input type="text" name="text" id="text" placeholder="Event Location">
+          <input type="text" name="text" id="text" placeholder="Event Location" required>
         </div>
         <div class="required field">
           <label for="day">Event Day</label>
-          <input type="text" name="day" id="day" placeholder="Event Day">
+          <input type="text" name="day" id="day" placeholder="Event Day" required>
         </div>
         <div class="required field">
           <label for="time">Event Time</label>
-          <input type="text" name="time" id="time" placeholder="Event Time">
+          <input type="text" name="time" id="time" placeholder="Event Time" required>
         </div>
         <div class="field">
           <label for="description">Event Description</label>
