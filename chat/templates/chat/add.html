@@ -185,16 +185,19 @@
 
       <script>
         $('#custom_format_calendar')
-          .calendar({
+          .calendar(
+          {
             monthFirst: false,
             type: 'date',
-            formatter: {
-              date: function (date, settings) {
-              if (!date) return '';
-              var day = date.getDate();
-              var month = date.getMonth() + 1;
-              var year = date.getFullYear();
-              return day + '/' + month + '/' + year;
+            formatter: 
+            {
+              date: function (date, settings) 
+              {
+                if (!date) return '';
+                var day = date.getDate();
+                var month = date.getMonth() + 1;
+                var year = date.getFullYear();
+                return month + '/' + day + '/' + year;
               }
             }
           });
