@@ -1,5 +1,5 @@
 from django.urls import path, re_path
-from .views import index, about, gmlogin, createchat, joinchat, events, todo, add, details, getgroupname, joinsubchat, deleteconfirmation, destroy
+from .views import index, about, gmlogin, createchat, joinchat, events, todo, add, details, mydetails, getgroupname, joinsubchat, deleteconfirmation, destroy
 
 urlpatterns = [
     path('', gmlogin, name='gmlogin'),
