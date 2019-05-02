@@ -500,7 +500,7 @@ def deleteconfirmation(request, id, group_name):
     token = decodetoken(encodedtoken)
     if token == 'none':
         return render(request, 'chat/gmlogin.html', {})
-
+        
     else:
         return render(request, 'chat/deleteconfirmation.html', {
             'id': mark_safe(json.dumps(id)),
