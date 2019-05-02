@@ -165,7 +165,12 @@
         </div>
         <div class="required field">
           <label for="day">Event Day</label>
-          <input type="text" name="day" id="day" placeholder="Event Day" required>
+          <div class="ui calendar" id="custom_format_calendar">
+            <div class="ui input left icon">
+              <i class="calendar icon"></i>
+              <input type="text" name="day" id="day" placeholder="Event Day" required>
+            </div>
+          </div>
         </div>
         <div class="required field">
           <label for="time">Event Time</label>
@@ -178,37 +183,21 @@
         <input class="ui button" type="submit" value="Submit and Create Event Chat">
       </form>
 
-      <div class="ui form">
-        <div class="two fields">
-          <div class="field">
-            <label>Start date</label>
-            <div class="ui calendar" id="rangestart">
-              <div class="ui input left icon">
-                <i class="calendar icon"></i>
-                <input type="text" placeholder="Start">
-              </div>
-            </div>
-          </div>
-          <div class="field">
-            <label>End date</label>
-            <div class="ui calendar" id="rangeend">
-              <div class="ui input left icon">
-                <i class="calendar icon"></i>
-                <input type="text" placeholder="End">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
       <script>
-        $('#rangestart').calendar({
-          type: 'date',
-          endCalendar: $('#rangeend')
-        });
-        $('#rangeend').calendar({
-          type: 'date',
-          startCalendar: $('#rangestart')
-        });
+        $('#custom_format_calendar')
+          .calendar({
+            monthFirst: false,
+            type: 'date',
+            formatter: {
+              date: function (date, settings) {
+              if (!date) return '';
+              var day = date.getDate();
+              var month = date.getMonth() + 1;
+              var year = date.getFullYear();
+              return day + '/' + month + '/' + year;
+              }
+            }
+          });
       </script>
 
     </div>
