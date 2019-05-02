@@ -3,7 +3,8 @@
     var name = {{ group_name }};
     var id = {{ id }};
     var url = "?access_token=" + {{ access_token }};
-    var destroy = '/delete/' + id + '/' + name + url;
+    var destroy = '/delete/';
+     {#+ id + '/' + name + url#}
   </script>
 
 
