@@ -421,7 +421,6 @@ def details(request, group_name, id):
     return render(request, 'chat/details.html', context)
 
 def joinsubchat(request, id, group_name):
-    #token = gettoken(request)
     encodedtoken = gettoken(request)
     token = decodetoken(encodedtoken)
     if token == 'none':
@@ -471,6 +470,32 @@ def joinsubchat(request, id, group_name):
             'group_id': mark_safe(json.dumps(code)),
             'group_name': mark_safe(json.dumps(name))
         })
+
+def deleteconfirmation(request, id, group_name):
+    encodedtoken = gettoken(request)
+    token = decodetoken(encodedtoken)
+    if token == 'none':
+        return render(request, 'chat/gmlogin.html', {})
+
+    else:
+        return render(request, 'chat/deleteconfirmation.html', {
+            'group_id': mark_safe(json.dumps(id)),
+            'group_name': mark_safe(json.dumps(group_name)),
+            'access_token': mark_safe(json.dumps(token)),
+        })
+
+def delete(request, id, group_name):
+    encodedtoken = gettoken(request)
+    token = decodetoken(encodedtoken)
+    if token == 'none':
+        return render(request, 'chat/gmlogin.html', {})
+
+    else:
+        url = "https://api.groupme.com/v3/groups/" + id + "/destroy/" + "?token=" + token
+        print(url)
+        r = requests.post(url)
+
+        return render(request, 'chat/index.html', {'access_token': mark_safe(json.dumps(encodedtoken))})
 
 def getgroupname(request):
     if request.method == 'GET':

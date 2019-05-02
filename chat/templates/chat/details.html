@@ -3,7 +3,7 @@
     var id = {{ id }};
     var url = "?access_token=" + {{ access_token }};
     var subjoinurl = '/subjoin/' + id + '/'+ name + '/chat' + url;
-
+    var destroy = '/deleteconfirmation/' + id + '/' + name + url;
   </script>
 
 
@@ -15,5 +15,6 @@
  <p>Current Size: {{todo.Size}}</p>
 <button id ="join" class="btn btn-mini btn-primary" type="button" href="fill"
         onclick="location.href=subjoinurl; return false;">Join this chat</button>
-
+ <button id ="delete" class="btn btn-mini btn-primary" type="button" href="fill"
+        onclick="location.href=destroy; return false;">Delete this chat</button>
   <br>
