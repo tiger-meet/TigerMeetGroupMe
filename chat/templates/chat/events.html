@@ -213,31 +213,41 @@
 
       <div class="ui four column stackable grid">
 
-        <p hidden id ="likes" data-name= {{ group_name }}, data-access-token= {{ access_token }} >Like</p>
-        {% for todo in todos %}
-        <div class="column">
-          <a class="replaceValue" href='/{{ todo.id }}'>
-            <div class="ui fluid card">
-              <div class="content">
-                <div class="header">{{ todo.title }}</div>
-                <div class="meta">{{ todo.time }}</div>
-                <div class="description">
-                  <p>{{ todo.text }}</p>
-                </div>
-                <div class="ui mini orange statistic">
-                  <div class="value">
-                    {{ todo.Size }}
-                  </div>
-                  <div class="label">
-                    Members
-                  </div>
-                </div>
+        <p hidden id ="likes" data-name= {{ group_name }}, data-access-token= {{ access_token }}>Like</p>
 
+        {% if todos %}
+          Number of events: {{ todos|length }}
+          {% for todo in todos %}
+          <div class="column">
+            <a class="replaceValue" href='/{{ todo.id }}'>
+              <div class="ui fluid card">
+                <div class="content">
+                  <div class="header">{{ todo.title }}</div>
+                  <div class="meta">{{ todo.time }}</div>
+                  <div class="description">
+                    <p>{{ todo.text }}</p>
+                  </div>
+                  <div class="ui mini orange statistic">
+                    <div class="value">
+                      {{ todo.Size }}
+                    </div>
+                    <div class="label">
+                      Members
+                    </div>
+                  </div>
+
+                </div>
               </div>
-            </div>
-          </a>
-        </div>
-        {% endfor %}
+            </a>
+          </div>
+          {% endfor %}
+        {% else %}
+          <div class="column">
+            No events yet! Create some here:
+            <br>
+            <button class="ui green button" type="button" onclick="location.href=addurl;">Create New Event</button>
+          </div>
+        {% endif %}
 
       </div>
 
