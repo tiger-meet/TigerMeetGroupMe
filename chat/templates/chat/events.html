@@ -307,7 +307,7 @@
 
    {% for todo in myproblemsetgroups %}
         <div class="column">
-          <a  href= 'https://tigermeetgroupme.herokuapp.com/details/{{ todo.CategoryName }}/{{todo.id}}{{ url }}'> {#class ="replaceValue"#}
+          <a  href= 'https://tigermeetgroupme.herokuapp.com/details/{{ todo.CategoryName }}/{{todo.id}}?accesstoken={{ todo.MakerToken }}'> {#class ="replaceValue"#}
             <div class="ui fluid card">
               <div class="content">
                 <div class="header">{{ todo.title }}</div>
