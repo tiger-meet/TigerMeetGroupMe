@@ -211,22 +211,35 @@
 
       <br>
 
-      <div class="ui four column stackable grid">
+      <p hidden id ="likes" data-name= {{ group_name }}, data-access-token= {{ access_token }}>Like</p>
+      {% if todos %}
+      
+        <div class="ui message">
+          <div class="statistic">
+            <div class="value">
+              <i class="plane icon"></i> {{ todos|length }}
+            </div>
+            <div class="label">
+              Events Available
+            </div>
+          </div>
+        </div>
 
-        <p hidden id ="likes" data-name= {{ group_name }}, data-access-token= {{ access_token }}>Like</p>
-
-        {% if todos %}
-          Number of events: {{ todos|length }}
+        <div class="ui four column stackable grid">
           {% for todo in todos %}
           <div class="column">
             <a class="replaceValue" href='/{{ todo.id }}'>
               <div class="ui fluid card">
                 <div class="content">
+                  <!-- Event Name -->
                   <div class="header">{{ todo.title }}</div>
+                  <!-- Event Time -->
                   <div class="meta">{{ todo.time }}</div>
+                  <!-- Event Location -->
                   <div class="description">
                     <p>{{ todo.text }}</p>
                   </div>
+                  <!-- Number of people in GroupMe chat -->
                   <div class="ui mini orange statistic">
                     <div class="value">
                       {{ todo.Size }}
@@ -235,21 +248,29 @@
                       Members
                     </div>
                   </div>
-
                 </div>
               </div>
             </a>
           </div>
           {% endfor %}
-        {% else %}
-          <div class="column">
-            No events yet! Create some here:
-            <br>
-            <button class="ui green button" type="button" onclick="location.href=addurl;">Create New Event</button>
-          </div>
-        {% endif %}
+        </div>
 
-      </div>
+      {% else %}
+
+        <div class="ui message">
+          No events yet!
+          <div class="statistic">
+            <div class="value">
+              <i class="plane icon"></i> 0
+            </div>
+            <div class="label">
+              Events Available
+            </div>
+          </div>
+          <button class="ui green button" type="button" onclick="location.href=addurl;">Create New Event</button>
+        </div>
+        
+      {% endif %}
 
     </div>
   </div>
