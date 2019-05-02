@@ -508,7 +508,8 @@ def destroy(request, id, group_name):
 
         url = "https://api.groupme.com/v3/groups/" + code + "/destroy/" + "?token=" + token
         print(url)
-        # r = requests.post(url)
+        r = requests.post(url)
+        print(r)
 
         return render(request, 'chat/index.html', {'access_token': mark_safe(json.dumps(encodedtoken))})
 
