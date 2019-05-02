@@ -1,0 +1,17 @@
+ <script type="text/javascript">
+    var name = {{ group_name }};
+    var id = {{ id }};
+    var url = "?access_token=" + {{ access_token }};
+    var destroy = '/deleteconfirmation/' + id + '/' + name + url;
+  </script>
+
+
+<a href="/"><< Go Back</a>
+  <br>
+  <h1>{{todo.title}}</h1>
+  <p>{{todo.text}}</p>
+  <p>{{todo.time}}</p>
+ <p>Current Size: {{todo.Size}}</p>
+ <button id ="delete" class="btn btn-mini btn-primary" type="button" href="fill"
+        onclick="location.href=destroy; return false;">Delete this chat</button>
+  <br>
