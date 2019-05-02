@@ -366,17 +366,17 @@ def add(request, group_name):
             sharetoken = str(shareurl[-8:])
 
             if (group_name == 'sports'):
-                todo = SportsEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken, MakerToken=token)
+                todo = SportsEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
             if (group_name == 'workingout'):
-                todo = WorkingOutEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken, MakerToken=token)
+                todo = WorkingOutEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
             if (group_name == 'videogames'):
-                todo = VideoGamesEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken, MakerToken=token)
+                todo = VideoGamesEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
             if (group_name == 'transportation'):
-                todo = TransportationEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken, MakerToken=token)
+                todo = TransportationEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
             if (group_name == 'problemsetgroups'):
-                todo = ProblemSetEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken, MakerToken=token)
+                todo = ProblemSetEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
             if (group_name == 'miscellaneous'):
-                todo = MiscellaneousEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken, MakerToken=token)
+                todo = MiscellaneousEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
 
             todo.save()
 
