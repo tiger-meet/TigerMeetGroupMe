@@ -23,7 +23,7 @@ $(document).ready(function() {
             var $this = $(this);
             var _href = $this.attr("href");
 
-               $($this).attr('href', '/details' + _href + token);
+               $($this).attr('href', '/mydetails' + _href + token);
                });
            // });
 });
