@@ -484,7 +484,7 @@ def deleteconfirmation(request, id, group_name):
             'access_token': mark_safe(json.dumps(token)),
         })
 
-def delete(request, id, group_name):
+def destroy(request, id, group_name):
     encodedtoken = gettoken(request)
     token = decodetoken(encodedtoken)
     if token == 'none':
