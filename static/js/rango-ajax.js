@@ -18,12 +18,12 @@ $(document).ready(function() {
            // });
 });
 
-    $.get('/getgroupname/', {group_name: name, access_token: token }, function(data){
+    $.get('/getgroupname/', {group_name: name, access_token: token }, function(){
         $('.MyReplaceValue').each(function() {
             var $this = $(this);
             var _href = $this.attr("href");
 
-               $($this).attr('href', '/details/' + _href + token);
+               $($this).attr('href', '/details' + _href + token);
                });
            // });
 });
