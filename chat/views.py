@@ -31,7 +31,6 @@ def decodetoken(encodedtoken):
     token = bytestoken.decode()
     return token
 
-
 def gettoken(request):
     http_host = request.META.get('HTTP_HOST')
     not_host = request.META.get('RAW_URI')
@@ -73,10 +72,9 @@ def countandprune(todos):
             todo.Size = len(r.json()['response']['members'])
             todo.save()
 
-
 # loads the index page with authentication token
 def index(request):
-    #code for scrambling access tokens
+    # code for scrambling access tokens
     token = gettoken(request)
 
     if token == 'none':
