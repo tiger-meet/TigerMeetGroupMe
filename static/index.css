@@ -4,4 +4,5 @@ body {
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
+    height: 0; /* Hack to remove vertical scrollbar */
 }
