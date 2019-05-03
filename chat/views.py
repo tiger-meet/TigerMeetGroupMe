@@ -346,13 +346,13 @@ def add(request, group_name):
 
         if(request.method == 'POST'):
             title = request.POST['title']
-            location = request.POST['location']
+            place = request.POST['place']
             date = request.POST['date']
             time = request.POST['time']
             description = request.POST['description']
 
             print(title)
-            print(location)
+            print(place)
             print(date)
             print(time)
             print(description)
@@ -370,17 +370,17 @@ def add(request, group_name):
             sharetoken = str(shareurl[-8:])
 
             if (group_name == 'sports'):
-                todo = SportsEvents(title=title, location=location, date=date, time=time, description=description, GroupId=code, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
+                todo = SportsEvents(title=title, place=place, date=date, time=time, description=description, GroupId=code, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
             if (group_name == 'workingout'):
-                todo = WorkingOutEvents(title=title, location=location, date=date, time=time, description=description, GroupId=code, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
+                todo = WorkingOutEvents(title=title, place=place, date=date, time=time, description=description, GroupId=code, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
             if (group_name == 'videogames'):
-                todo = VideoGamesEvents(title=title, location=location, date=date, time=time, description=description, GroupId=code, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
+                todo = VideoGamesEvents(title=title, place=place, date=date, time=time, description=description, GroupId=code, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
             if (group_name == 'transportation'):
-                todo = TransportationEvents(title=title, location=location, date=date, time=time, description=description, GroupId=code, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
+                todo = TransportationEvents(title=title, place=place, date=date, time=time, description=description, GroupId=code, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
             if (group_name == 'problemsetgroups'):
-                todo = ProblemSetEvents(title=title, location=location, date=date, time=time, description=description, GroupId=code, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
+                todo = ProblemSetEvents(title=title, place=place, date=date, time=time, description=description, GroupId=code, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
             if (group_name == 'miscellaneous'):
-                todo = MiscellaneousEvents(title=title, location=location, date=date, time=time, description=description, GroupId=code, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
+                todo = MiscellaneousEvents(title=title, place=place, date=date, time=time, description=description, GroupId=code, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
 
             todo.save()
 
