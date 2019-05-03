@@ -161,38 +161,33 @@
       <br>
 
       
-      <div class="ui form">
+      <div class="ui form" method="get">
+        <input type="hidden" name="access_token" value={{ access_token }}>
         <div class="three fields">
 
           <div class="field">
-              <i class="filter icon"></i>
             <label>Filter By...</label>
             <select class="ui fluid dropdown">
-              <option value="">Filter By</option>
-              <option value="AL">Alphabetical</option>
-              <option value="AK">Time</option>
+              <option value=""><i class="filter icon"></i> Filter By...</option>
+              <option value="">Coming soon...</option>
             </select>
           </div>
 
           <div class="field">
             <label>Sort By...</label>
             <select class="ui fluid dropdown">
-              <option value="">Sort By</option>
-              <option value="AL">Alphabetical</option>
-              <option value="AK">Time</option>
+              <option value=""><i class="dropdown icon"></i> Sort By...</option>
+              <option name="sortBy" value="Alphabetical">Alphabetical</option>
+              <option name="sortBy" value="Tiime">Time</option>
             </select>
           </div>
 
           <div class="field">
-            <label>State</label>
-            <select class="ui fluid dropdown">
-              <option value="">State</option>
-              <option value="AL">Alabama</option>
-              <option value="AK">Alaska</option>
-              <option value="AZ">Arizona</option>
-              <option value="AR">Arkansas</option>
-            </select>
+            <label>Search for Event</label>
+            <input type="text" name="search" value="" placeholder="Search for an Event by Name">
           </div>
+
+          <input class="ui button" type="submit" value="Sort">
 
         </div>
       </div>
@@ -202,7 +197,7 @@
         ;
       </script>
 
-      <h3 class="ui dividing header">Sort by...</h3>
+      <!-- <h3 class="ui dividing header">Sort by...</h3>
       <form class="ui form" method="get">
         <input type="hidden" name="access_token" value={{ access_token }}>
         <div class="field">
@@ -221,7 +216,7 @@
           <input type="text" name="search" value="" placeholder="Search for an Activity">
         </div>
         <input class="ui button" type="submit" value="Sort">
-      </form>
+      </form> -->
 
       <br>
 
