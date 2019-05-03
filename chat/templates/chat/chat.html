@@ -27,8 +27,8 @@
   <script type="text/javascript">
     var name = {{ group_name }};
     var url = "?access_token=" + {{ access_token }};
-    var catname = {{ category_name }}
-    var categoryurl = '/category/' + name + url;
+    var categoryname = {{ category_name }}
+    var categoryurl = '/category/' + categoryname + url;
     window.onload = function() 
     {
       document.getElementById("myName").innerHTML=name;
