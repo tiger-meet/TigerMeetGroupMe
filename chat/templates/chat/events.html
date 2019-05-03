@@ -23,8 +23,8 @@
   crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
 
-  <script src="{% static "/js/jquery.js" %}"></script>
-  <script src="{% static "/js/rango-ajax.js" %}"></script>
+  <script src="{% static '/js/jquery.js' %}"></script>
+  <script src="{% static '/js/rango-ajax.js' %}"></script>
 
   <script type="text/javascript">
     var name = {{ group_name }};
@@ -160,7 +160,7 @@
 
       <br>
 
-      
+      <h3 class="ui dividing header">Filter, Sort, and Search</h3>
       <div class="ui form" method="get">
         <input type="hidden" name="access_token" value={{ access_token }}>
         <div class="three fields">
@@ -186,6 +186,8 @@
             <label>Search for Event</label>
             <input type="text" name="search" value="" placeholder="Search for an Event by Name">
           </div>
+
+          <br>
 
           <input class="ui button" type="submit" value="Sort">
 
