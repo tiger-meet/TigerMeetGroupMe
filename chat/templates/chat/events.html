@@ -178,13 +178,13 @@
             <select class="ui fluid dropdown" name="sortBy">
               <option value=""><i class="dropdown icon"></i> Sort By...</option>
               <option name="sortBy" value="Alphabetical">Alphabetical</option>
-              <option name="sortBy" value="Tiime">Time</option>
+              <option name="sortBy" value="Time">Time</option>
             </select>
           </div>
 
           <div class="field">
             <label>Search for Event</label>
-            <input type="text" name="search" value="" placeholder="Search for an Event by Name">
+            <input type="text" name="search" value="" placeholder="Search for Event by Name">
           </div>
 
         </div>
@@ -197,28 +197,6 @@
           .dropdown()
         ;
       </script>
-
-      <!-- TODO: Update -->
-      <h3 class="ui dividing header">Sort by...</h3>
-      <form class="ui form" method="get">
-        <input type="hidden" name="access_token" value={{ access_token }}>
-        <div class="field">
-          <div class="ui checkbox">
-            <input type="radio" name="" value="Alphabetical">
-            <label>Alphabetical</label>
-          </div>
-        </div>
-        <div class="field">
-          <div class="ui checkbox">
-            <input type="radio" name="" value="Time">
-            <label>Time</label>
-          </div>
-        </div>
-        <div class="field">
-          <input type="text" name="search" value="" placeholder="Search for an Activity">
-        </div>
-        <input class="ui button" type="submit" value="Sort">
-      </form>
 
       <br>
 
