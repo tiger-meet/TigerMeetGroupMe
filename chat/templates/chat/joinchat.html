@@ -26,6 +26,8 @@
   <script type="text/javascript">
     var Group_id = {{ group_id }};
     var Group_name = {{ group_name }};
+    var categoryname = {{ category_name }}
+    var categoryurl = '/category/' + categoryname + url;
     window.onload = function() 
     {
       document.getElementById("myGroupId").innerHTML=Group_id;
@@ -84,7 +86,7 @@
     <div class="column">
   
       <div>
-        <button class="ui left floated button" type="button" onclick="location.href = '/index'+url;">Back to Home</button>
+        <button class="ui left floated button" type="button" onclick="location.href=categoryurl; return false;">Back to Category</button>
       </div>
 
       <br>
