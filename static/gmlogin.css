@@ -1,7 +1,9 @@
-body {
+html {
     color: white;
+    background-color: red;
     background-image: url("duelingTigers.jpg");
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
     background-attachment: fixed;
 }
