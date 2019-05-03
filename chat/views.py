@@ -346,13 +346,17 @@ def add(request, group_name):
 
         if(request.method == 'POST'):
             title = request.POST['title']
-            text = request.POST['text']
+            location = request.POST['location']
+            date = request.POST['date']
             time = request.POST['time']
+            description = request.POST['description']
 
             print(title)
-            print(text)
+            print(location)
+            print(date)
             print(time)
-            name = title + ' ' + time
+            print(description)
+            name = title + ' ' + date + ' ' + time
 
             chatname = "TigerMeet " + name
             data = {'name': chatname,
@@ -366,21 +370,21 @@ def add(request, group_name):
             sharetoken = str(shareurl[-8:])
 
             if (group_name == 'sports'):
-                todo = SportsEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
+                todo = SportsEvents(title=title, location=location, date=date, time=time, description=description, GroupId=code, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
             if (group_name == 'workingout'):
-                todo = WorkingOutEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
+                todo = WorkingOutEvents(title=title, location=location, date=date, time=time, description=description, GroupId=code, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
             if (group_name == 'videogames'):
-                todo = VideoGamesEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
+                todo = VideoGamesEvents(title=title, location=location, date=date, time=time, description=description, GroupId=code, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
             if (group_name == 'transportation'):
-                todo = TransportationEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
+                todo = TransportationEvents(title=title, location=location, date=date, time=time, description=description, GroupId=code, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
             if (group_name == 'problemsetgroups'):
-                todo = ProblemSetEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
+                todo = ProblemSetEvents(title=title, location=location, date=date, time=time, description=description, GroupId=code, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
             if (group_name == 'miscellaneous'):
-                todo = MiscellaneousEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
+                todo = MiscellaneousEvents(title=title, location=location, date=date, time=time, description=description, GroupId=code, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
 
             todo.save()
 
-            group_name = title + ' ' + time
+            group_name = title + ' ' + date + ' ' + time
             url = '?access_token=' + encodedtoken
             allurl = '/makechat/' + group_name + url
 
@@ -500,7 +504,7 @@ def deleteconfirmation(request, id, group_name):
     token = decodetoken(encodedtoken)
     if token == 'none':
         return render(request, 'chat/gmlogin.html', {})
-        
+
     else:
         return render(request, 'chat/deleteconfirmation.html', {
             'id': mark_safe(json.dumps(id)),
