@@ -161,26 +161,39 @@
       <br>
 
       
-      <div class="ui menu">
-        <div class="ui fluid selection dropdown">
-          <input type="hidden" name="user">
-          <i class="dropdown icon"></i>
-          <div class="default text">Filter by</div>
-          <div class="menu">
-            <div class="item">Choice 1</div>
-            <div class="item">Choice 2</div>
-            <div class="item">Choice 3</div>
+      <div class="ui form">
+        <div class="three fields">
+
+          <div class="field">
+              <i class="filter icon"></i>
+            <label>Filter By...</label>
+            <select class="ui fluid dropdown">
+              <option value="">Filter By</option>
+              <option value="AL">Alphabetical</option>
+              <option value="AK">Time</option>
+            </select>
           </div>
-        </div>
-        <div class="ui fluid selection dropdown">
-          <input type="hidden" name="user">
-          <i class="dropdown icon"></i>
-          <div class="default text">Sort by</div>
-          <div class="menu">
-            <div class="item">Choice 1</div>
-            <div class="item">Choice 2</div>
-            <div class="item">Choice 3</div>
+
+          <div class="field">
+            <label>Sort By...</label>
+            <select class="ui fluid dropdown">
+              <option value="">Sort By</option>
+              <option value="AL">Alphabetical</option>
+              <option value="AK">Time</option>
+            </select>
           </div>
+
+          <div class="field">
+            <label>State</label>
+            <select class="ui fluid dropdown">
+              <option value="">State</option>
+              <option value="AL">Alabama</option>
+              <option value="AK">Alaska</option>
+              <option value="AZ">Arizona</option>
+              <option value="AR">Arkansas</option>
+            </select>
+          </div>
+
         </div>
       </div>
       <script>
