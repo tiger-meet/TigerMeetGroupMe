@@ -356,9 +356,9 @@ def add(request, group_name):
             print(date)
             print(time)
             print(description)
-            name = title + ' ' + date + ' ' + time
+            name = title + ' (' + time + ', ' + date + ')'
 
-            chatname = "TigerMeet " + name
+            chatname = name + ' | TigerMeet '
             data = {'name': chatname,
                     "share": True, }
             headers = {"Content-Type": "application/json"}
@@ -384,7 +384,7 @@ def add(request, group_name):
 
             todo.save()
 
-            group_name = title + ' ' + date + ' ' + time
+            group_name = name
             url = '?access_token=' + encodedtoken
             allurl = '/makechat/' + group_name + url
 
