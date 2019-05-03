@@ -234,11 +234,13 @@
                 <div class="content">
                   <!-- Event Name -->
                   <div class="header">{{ todo.title }}</div>
-                  <!-- Event Time -->
-                  <div class="meta">{{ todo.time }}, {{ todo.date }}</div>
+                  <div class="meta"></div>
                   <!-- Event Location -->
                   <div class="description">
+                    <p><strong>Date:</strong> {{ todo.date }}</p>
+                    <p><strong>Time:</strong> {{ todo.time }}</p>
                     <p><strong>Location:</strong> {{ todo.place }}</p>
+                    <p>(Click to see description)</p>
                   </div>
                   <!-- Number of people in GroupMe chat -->
                   <div class="ui mini orange statistic">
