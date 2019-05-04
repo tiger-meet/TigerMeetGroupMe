@@ -7,13 +7,12 @@
   <!-- Fomantic UI -->
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.7.4/dist/semantic.min.css">
   <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.7.4/dist/semantic.min.js"></script>
-  
+
   <script type="text/javascript">
     var name = {{ group_name }};
     var url = "?access_token=" + {{ access_token }};
     var categoryurl = '/category/' + name + url;
     var addurl = '/add/' + name + url;
-    //document.getElementById("adurl").innerHTML=addurl;
 
     // Custom group icons
     var icon = '';
