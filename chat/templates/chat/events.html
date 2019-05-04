@@ -272,194 +272,195 @@
       <h2 class="ui inverted header">My Events</h2>
 
       <div class="ui four column stackable grid">
-        
+
         {% if name == sports %}
-          <p>name == sports</p>
+          {% for todo in mysports %}
+          <div class="column">
+            <a class="MyReplaceValue" href='/{{ todo.CategoryName }}/{{ todo.id }}'>
+              <div class="ui fluid card">
+                <div class="content">
+                  <!-- Event Name -->
+                  <div class="header">{{ todo.title }}</div>
+                  <div class="meta"></div>
+                  <!-- Event Time and Location -->
+                  <div class="description">
+                    <p><strong>Date:</strong> {{ todo.date }}</p>
+                    <p><strong>Time:</strong> {{ todo.time }}</p>
+                    <p><strong>Location:</strong> {{ todo.place }}</p>
+                    <p>(Click to see description)</p>
+                  </div>
+                  <!-- Number of people in GroupMe chat -->
+                  <div class="ui mini orange statistic">
+                    <div class="value">
+                      {{ todo.Size }}
+                    </div>
+                    <div class="label">
+                      Members
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+          {% endfor %}
+
+        {% elif name == workingout %}
+          {% for todo in myworkingout %}
+          <div class="column">
+            <a class="MyReplaceValue" href='/{{ todo.CategoryName }}/{{ todo.id }}'>
+              <div class="ui fluid card">
+                <div class="content">
+                  <!-- Event Name -->
+                  <div class="header">{{ todo.title }}</div>
+                  <div class="meta"></div>
+                  <!-- Event Time and Location -->
+                  <div class="description">
+                    <p><strong>Date:</strong> {{ todo.date }}</p>
+                    <p><strong>Time:</strong> {{ todo.time }}</p>
+                    <p><strong>Location:</strong> {{ todo.place }}</p>
+                    <p>(Click to see description)</p>
+                  </div>
+                  <!-- Number of people in GroupMe chat -->
+                  <div class="ui mini orange statistic">
+                    <div class="value">
+                      {{ todo.Size }}
+                    </div>
+                    <div class="label">
+                      Members
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+          {% endfor %}
+
+        {% elif name == videogames %}
+          {% for todo in myvideogames %}
+          <div class="column">
+            <a class="MyReplaceValue" href='/{{ todo.CategoryName }}/{{ todo.id }}'>
+              <div class="ui fluid card">
+                <div class="content">
+                  <!-- Event Name -->
+                  <div class="header">{{ todo.title }}</div>
+                  <div class="meta"></div>
+                  <!-- Event Time and Location -->
+                  <div class="description">
+                    <p><strong>Date:</strong> {{ todo.date }}</p>
+                    <p><strong>Time:</strong> {{ todo.time }}</p>
+                    <p><strong>Location:</strong> {{ todo.place }}</p>
+                    <p>(Click to see description)</p>
+                  </div>
+                  <!-- Number of people in GroupMe chat -->
+                  <div class="ui mini orange statistic">
+                    <div class="value">
+                      {{ todo.Size }}
+                    </div>
+                    <div class="label">
+                      Members
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+          {% endfor %}
+        
+        {% elif name == transportation %}
+          {% for todo in mytransportation %}
+          <div class="column">
+            <a class="MyReplaceValue" href='/{{ todo.CategoryName }}/{{ todo.id }}'>
+              <div class="ui fluid card">
+                <div class="content">
+                  <!-- Event Name -->
+                  <div class="header">{{ todo.title }}</div>
+                  <div class="meta"></div>
+                  <!-- Event Time and Location -->
+                  <div class="description">
+                    <p><strong>Date:</strong> {{ todo.date }}</p>
+                    <p><strong>Time:</strong> {{ todo.time }}</p>
+                    <p><strong>Location:</strong> {{ todo.place }}</p>
+                    <p>(Click to see description)</p>
+                  </div>
+                  <!-- Number of people in GroupMe chat -->
+                  <div class="ui mini orange statistic">
+                    <div class="value">
+                      {{ todo.Size }}
+                    </div>
+                    <div class="label">
+                      Members
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+          {% endfor %}
+
         {% elif name == problemsetgroups %}
-          <p>name == sports</p>
-        {% else %}
-          <p>name == sports</p>
+          {% for todo in myproblemsetgroups %}
+          <div class="column">
+            <a class="MyReplaceValue" href='/{{ todo.CategoryName }}/{{ todo.id }}'>
+              <div class="ui fluid card">
+                <div class="content">
+                  <!-- Event Name -->
+                  <div class="header">{{ todo.title }}</div>
+                  <div class="meta"></div>
+                  <!-- Event Time and Location -->
+                  <div class="description">
+                    <p><strong>Date:</strong> {{ todo.date }}</p>
+                    <p><strong>Time:</strong> {{ todo.time }}</p>
+                    <p><strong>Location:</strong> {{ todo.place }}</p>
+                    <p>(Click to see description)</p>
+                  </div>
+                  <!-- Number of people in GroupMe chat -->
+                  <div class="ui mini orange statistic">
+                    <div class="value">
+                      {{ todo.Size }}
+                    </div>
+                    <div class="label">
+                      Members
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+          {% endfor %}
+
+        {% elif name == miscellaneous %}
+          {% for todo in mymiscellaneous %}
+          <div class="column">
+            <a class="MyReplaceValue" href='/{{ todo.CategoryName }}/{{ todo.id }}'>
+              <div class="ui fluid card">
+                <div class="content">
+                  <!-- Event Name -->
+                  <div class="header">{{ todo.title }}</div>
+                  <div class="meta"></div>
+                  <!-- Event Time and Location -->
+                  <div class="description">
+                    <p><strong>Date:</strong> {{ todo.date }}</p>
+                    <p><strong>Time:</strong> {{ todo.time }}</p>
+                    <p><strong>Location:</strong> {{ todo.place }}</p>
+                    <p>(Click to see description)</p>
+                  </div>
+                  <!-- Number of people in GroupMe chat -->
+                  <div class="ui mini orange statistic">
+                    <div class="value">
+                      {{ todo.Size }}
+                    </div>
+                    <div class="label">
+                      Members
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+          {% endfor %}
+
         {% endif %}
 
-        {% for todo in mysports %}
-        <div class="column">
-          <a class="MyReplaceValue" href='/{{ todo.CategoryName }}/{{ todo.id }}'>
-            <div class="ui fluid card">
-              <div class="content">
-                <!-- Event Name -->
-                <div class="header">{{ todo.title }}</div>
-                <div class="meta"></div>
-                <!-- Event Time and Location -->
-                <div class="description">
-                  <p><strong>Date:</strong> {{ todo.date }}</p>
-                  <p><strong>Time:</strong> {{ todo.time }}</p>
-                  <p><strong>Location:</strong> {{ todo.place }}</p>
-                  <p>(Click to see description)</p>
-                </div>
-                <!-- Number of people in GroupMe chat -->
-                <div class="ui mini orange statistic">
-                  <div class="value">
-                    {{ todo.Size }}
-                  </div>
-                  <div class="label">
-                    Members
-                  </div>
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
-        {% endfor %}
-
-        {% for todo in myworkingout %}
-        <div class="column">
-          <a class="MyReplaceValue" href='/{{ todo.CategoryName }}/{{ todo.id }}'>
-            <div class="ui fluid card">
-              <div class="content">
-                <!-- Event Name -->
-                <div class="header">{{ todo.title }}</div>
-                <div class="meta"></div>
-                <!-- Event Time and Location -->
-                <div class="description">
-                  <p><strong>Date:</strong> {{ todo.date }}</p>
-                  <p><strong>Time:</strong> {{ todo.time }}</p>
-                  <p><strong>Location:</strong> {{ todo.place }}</p>
-                  <p>(Click to see description)</p>
-                </div>
-                <!-- Number of people in GroupMe chat -->
-                <div class="ui mini orange statistic">
-                  <div class="value">
-                    {{ todo.Size }}
-                  </div>
-                  <div class="label">
-                    Members
-                  </div>
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
-        {% endfor %}
-
-        {% for todo in myvideogames %}
-        <div class="column">
-          <a class="MyReplaceValue" href='/{{ todo.CategoryName }}/{{ todo.id }}'>
-            <div class="ui fluid card">
-              <div class="content">
-                <!-- Event Name -->
-                <div class="header">{{ todo.title }}</div>
-                <div class="meta"></div>
-                <!-- Event Time and Location -->
-                <div class="description">
-                  <p><strong>Date:</strong> {{ todo.date }}</p>
-                  <p><strong>Time:</strong> {{ todo.time }}</p>
-                  <p><strong>Location:</strong> {{ todo.place }}</p>
-                  <p>(Click to see description)</p>
-                </div>
-                <!-- Number of people in GroupMe chat -->
-                <div class="ui mini orange statistic">
-                  <div class="value">
-                    {{ todo.Size }}
-                  </div>
-                  <div class="label">
-                    Members
-                  </div>
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
-        {% endfor %}
-
-        {% for todo in mytransportation %}
-        <div class="column">
-          <a class="MyReplaceValue" href='/{{ todo.CategoryName }}/{{ todo.id }}'>
-            <div class="ui fluid card">
-              <div class="content">
-                <!-- Event Name -->
-                <div class="header">{{ todo.title }}</div>
-                <div class="meta"></div>
-                <!-- Event Time and Location -->
-                <div class="description">
-                  <p><strong>Date:</strong> {{ todo.date }}</p>
-                  <p><strong>Time:</strong> {{ todo.time }}</p>
-                  <p><strong>Location:</strong> {{ todo.place }}</p>
-                  <p>(Click to see description)</p>
-                </div>
-                <!-- Number of people in GroupMe chat -->
-                <div class="ui mini orange statistic">
-                  <div class="value">
-                    {{ todo.Size }}
-                  </div>
-                  <div class="label">
-                    Members
-                  </div>
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
-        {% endfor %}
-
-        {% for todo in myproblemsetgroups %}
-        <div class="column">
-          <a class="MyReplaceValue" href='/{{ todo.CategoryName }}/{{ todo.id }}'>
-            <div class="ui fluid card">
-              <div class="content">
-                <!-- Event Name -->
-                <div class="header">{{ todo.title }}</div>
-                <div class="meta"></div>
-                <!-- Event Time and Location -->
-                <div class="description">
-                  <p><strong>Date:</strong> {{ todo.date }}</p>
-                  <p><strong>Time:</strong> {{ todo.time }}</p>
-                  <p><strong>Location:</strong> {{ todo.place }}</p>
-                  <p>(Click to see description)</p>
-                </div>
-                <!-- Number of people in GroupMe chat -->
-                <div class="ui mini orange statistic">
-                  <div class="value">
-                    {{ todo.Size }}
-                  </div>
-                  <div class="label">
-                    Members
-                  </div>
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
-        {% endfor %}
-
-        {% for todo in mymiscellaneous %}
-        <div class="column">
-          <a class="MyReplaceValue" href='/{{ todo.CategoryName }}/{{ todo.id }}'>
-            <div class="ui fluid card">
-              <div class="content">
-                <!-- Event Name -->
-                <div class="header">{{ todo.title }}</div>
-                <div class="meta"></div>
-                <!-- Event Time and Location -->
-                <div class="description">
-                  <p><strong>Date:</strong> {{ todo.date }}</p>
-                  <p><strong>Time:</strong> {{ todo.time }}</p>
-                  <p><strong>Location:</strong> {{ todo.place }}</p>
-                  <p>(Click to see description)</p>
-                </div>
-                <!-- Number of people in GroupMe chat -->
-                <div class="ui mini orange statistic">
-                  <div class="value">
-                    {{ todo.Size }}
-                  </div>
-                  <div class="label">
-                    Members
-                  </div>
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
-        {% endfor %}
       </div>
 
     </div>
