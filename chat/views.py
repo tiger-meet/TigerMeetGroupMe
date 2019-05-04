@@ -190,42 +190,33 @@ def events(request, group_name):
     countandprune(ProblemSetEvents.objects.all())
     countandprune(MiscellaneousEvents.objects.all())
 
-
     #create a count of the people in chats and check if they've been deleted
     if (group_name == 'sports'):
-        todos = SportsEvents.objects.exclude(MakerToken=token)
+        otherTodos = SportsEvents.objects.exclude(MakerToken=token)
+        myTodos = SportsEvents.objects.filter(MakerToken=token)
     elif (group_name == 'workingout'):
-        todos = WorkingOutEvents.objects.exclude(MakerToken=token)
+        otherTodos = WorkingOutEvents.objects.exclude(MakerToken=token)
+        myTodos = WorkingOutEvents.objects.filter(MakerToken=token)
     elif (group_name == 'videogames'):
-        todos = VideoGamesEvents.objects.exclude(MakerToken=token)
+        otherTodos = VideoGamesEvents.objects.exclude(MakerToken=token)
+        myTodos = VideoGamesEvents.objects.filter(MakerToken=token)
     elif (group_name == 'transportation'):
-        todos = TransportationEvents.objects.exclude(MakerToken=token)
+        otherTodos = TransportationEvents.objects.exclude(MakerToken=token)
+        myTodos = TransportationEvents.objects.filter(MakerToken=token)
     elif (group_name == 'problemsetgroups'):
-        todos = ProblemSetEvents.objects.exclude(MakerToken=token)
+        otherTodos = ProblemSetEvents.objects.exclude(MakerToken=token)
+        myTodos = ProblemSetEvents.objects.filter(MakerToken=token)
     elif (group_name == 'miscellaneous'):
-        todos = MiscellaneousEvents.objects.exclude(MakerToken=token)
-
-    #for my events
-    mysports = SportsEvents.objects.filter(MakerToken=token)
-    myworkingout = WorkingOutEvents.objects.filter(MakerToken=token)
-    myvideogames = VideoGamesEvents.objects.filter(MakerToken=token)
-    mytransportation = TransportationEvents.objects.filter(MakerToken=token)
-    myproblemsetgroups = ProblemSetEvents.objects.filter(MakerToken=token)
-    mymiscellaneous = MiscellaneousEvents.objects.filter(MakerToken=token)
-
+        otherTodos = MiscellaneousEvents.objects.exclude(MakerToken=token)
+        myTodos = MiscellaneousEvents.objects.filter(MakerToken=token)
 
     try:
         print(todos)
         context = {
             'access_token': mark_safe(json.dumps(encodedtoken)),
             'group_name': mark_safe(json.dumps(group_name)),
-            'todos': todos,
-            'mysports': mysports,
-            'myworkingout': myworkingout,
-            'myvideogames': myvideogames,
-            'mytransportation': mytransportation,
-            'myproblemsetgroups': myproblemsetgroups,
-            'mymiscellaneous': mymiscellaneous
+            'todos': otherTodos,
+            'myTodos': myTodos
         }
 
     except:
@@ -233,12 +224,7 @@ def events(request, group_name):
             'access_token': mark_safe(json.dumps(encodedtoken)),
             'group_name': mark_safe(json.dumps(group_name)),
             'todos': "",
-            'mysports': mysports,
-            'myworkingout': myworkingout,
-            'myvideogames': myvideogames,
-            'mytransportation': mytransportation,
-            'myproblemsetgroups': myproblemsetgroups,
-            'mymiscellaneous': mymiscellaneous
+            'myTodos': myTodos
         }
 
     finally:
