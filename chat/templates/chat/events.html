@@ -274,6 +274,7 @@
       <div class="ui four column stackable grid">
 
         {% if name == sports %}
+          <p>name == sports: {% name %}</p>
           {% for todo in mysports %}
           <div class="column">
             <a class="MyReplaceValue" href='/{{ todo.CategoryName }}/{{ todo.id }}'>
@@ -305,6 +306,7 @@
           {% endfor %}
 
         {% elif name == workingout %}
+          <p>WORKINGOUT</p>
           {% for todo in myworkingout %}
           <div class="column">
             <a class="MyReplaceValue" href='/{{ todo.CategoryName }}/{{ todo.id }}'>
