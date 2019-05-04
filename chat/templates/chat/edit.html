@@ -1,0 +1,128 @@
+<!-- chat/templates/chat/edit.html -->
+<!-- Page to edit event -->
+
+{% extends "chat/base.html" %}
+
+{% block js_content %}
+  <!-- Fomantic UI -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.7.4/dist/semantic.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.7.4/dist/semantic.min.js"></script>
+
+  <script type="text/javascript">
+    var name = {{ group_name }};
+    var id = {{ id }};
+    var url = "?access_token=" + {{ access_token }};
+    var detailsurl = '/details/' + name + '/' + id + '/' + url;
+    // var addurl = '/add/' + name + url;
+
+    // Custom group icons
+    var icon = '';
+    switch (name)
+    {
+      case 'sports':
+        icon = 'futbol alternate icon'
+        break;
+      case 'workingout':
+        icon = 'heart icon'
+        break;
+      case 'videogames':
+        icon = 'gamepad icon'
+        break;
+      case 'transportation':
+        icon = 'car icon'
+        break;
+      case 'problemsetgroups':
+        icon = 'pencil alternate icon'
+        break;
+      case 'miscellaneous':
+        icon = 'ellipsis horizontal icon'
+        break;
+      default:
+        icon = 'heart icon'
+    }
+
+    window.onload = function()
+    {
+      document.getElementById("myGroup").innerHTML = "Edit " + id + " Event";
+      document.adurl.action = get_action();
+
+      // Custom group icons
+      document.getElementById("groupIcon").className = icon;
+    }
+
+    function get_action() {
+        return addurl;
+    }
+  </script>
+{% endblock %}
+ 
+{% block content %}
+  <div class="ui middle aligned center aligned grid" style="margin: 10px;">
+    <div class="column">
+
+      <div>
+        <button class="ui left floated button" type="button" onclick="location.href = detailsurl; return false;">Back to Category</button>
+      </div>
+
+      <br>
+      <!-- Break -->
+      <div style="clear:both"></div>
+
+      <h1 class="ui center aligned icon inverted header">
+        <i id="groupIcon"></i>
+        <div class="content" id="myGroup"></div>
+      </h1>
+
+      <form class="ui inverted form" method="post" name="" id="">
+        {% csrf_token %}
+        <div class="required field">
+          <label for="title">Event Name</label>
+          <input type="text" name="title" id="title" placeholder="Event Name" required>
+        </div>
+        <div class="required field">
+          <label for="place">Event Location</label>
+          <input type="text" name="place" id="place" placeholder="Event Location" required>
+        </div>
+        <div class="required field">
+          <label for="date">Event Date</label>
+          <div class="ui calendar" id="custom_format_calendar">
+            <div class="ui input left icon">
+              <i class="calendar icon"></i>
+              <input type="text" name="date" id="date" placeholder="Event Date" required>
+            </div>
+          </div>
+        </div>
+        <div class="required field">
+          <label for="time">Event Time</label>
+          <input type="text" name="time" id="time" placeholder="Event Time" required>
+        </div>
+        <div class="field">
+          <label for="description">Event Description</label>
+          <input type="text" name="description" id="description" placeholder="Event Description">
+        </div>
+        <input class="ui green button" type="submit" value="Submit and Create Event Chat">
+      </form>
+
+      <script>
+        $('#custom_format_calendar')
+          .calendar(
+          {
+            monthFirst: false,
+            type: 'date',
+            formatter: 
+            {
+              date: function (date, settings) 
+              {
+                if (!date) return '';
+                var day = date.getDate();
+                var month = date.getMonth() + 1;
+                var year = date.getFullYear();
+                return month + '/' + day + '/' + year;
+              }
+            }
+          });
+      </script>
+
+    </div>
+  </div>
+{% endblock %}

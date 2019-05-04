@@ -15,4 +15,5 @@ urlpatterns = [
     re_path(r'^details/(?P<group_name>[^/]+)/(?P<id>\w{0,50})/$', details, name='details'),
     re_path(r'^getgroupname/$', getgroupname, name='getgroupname'),
     re_path(r'^destroy/(?P<id>[^/]+)/(?P<group_name>\w{0,50})/', destroy, name='destroy'),
+    re_path(r'^edit/(?P<id>[^/]+)/(?P<group_name>\w{0,50})/', edit, name='edit'),    
 ]

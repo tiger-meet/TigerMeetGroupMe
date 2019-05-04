@@ -484,3 +484,31 @@ def getgroupname(request):
         name = request.GET['group_name']
         token = request.GET['access_token']
     return HttpResponse(name, token)
+
+def edit(request, id, group_name):
+    encodedtoken = gettoken(request)
+    token = decodetoken(encodedtoken)
+
+    if token == 'none':
+        return render(request, 'chat/gmlogin.html', {})
+
+    else:
+        if (group_name == 'sports'):
+            code = SportsEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
+        if (group_name == 'workingout'):
+            code = WorkingOutEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
+        if (group_name == 'videogames'):
+            code = VideoGamesEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
+        if (group_name == 'transportation'):
+            code = TransportationEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
+        if (group_name == 'problemsetgroups'):
+            code = ProblemSetEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
+        if (group_name == 'miscellaneous'):
+            code = MiscellaneousEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
+
+        # url = "https://api.groupme.com/v3/groups/" + code + "/destroy" + "?token=" + token
+        # print(url)
+        # r = requests.post(url)
+        # print(r)
+
+        return render(request, 'chat/edit.html', {'access_token': mark_safe(json.dumps(encodedtoken))})
