@@ -51,7 +51,37 @@
       {% if is_creator %}
         <div class="ui inverted divider"></div>
 
-        <button id="delete" class="ui red button" type="button" href="fill" onclick="location.href=destroy; return false;">Delete My Event</button>
+        <button id="delete" class="ui red button" type="button" href="fill">Delete My Event</button>
+        <script>
+          document.getElementById("delete").onclick = function() 
+          {
+            $("#deleteModal")
+              .modal("show")
+            ;
+          };
+        </script>
+
+        <div class="ui basic modal" id="deleteModal">
+          <div class="ui icon header">
+            <i class="archive icon"></i>
+            Are you sure you want to delete?
+          </div>
+          <div class="content">
+            <p>Your event will be gone forever :(</p>
+          </div>
+          <div class="actions">
+            <div class="ui red basic cancel inverted button">
+              <i class="remove icon"></i>
+              No
+            </div>
+            <div class="ui green ok inverted button">
+              <i class="checkmark icon"></i>
+              Yes
+            </div>
+          </div>
+        </div>
+
+
       {% endif %}
     
     </div>
