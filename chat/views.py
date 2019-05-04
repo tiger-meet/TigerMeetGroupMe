@@ -258,7 +258,6 @@ def joinchat(request, group_name):
 
 # creates a chat in your own personal groupme application based on which one you click
 def createchat(request, group_name):
-    #token = gettoken(request)
     encodedtoken = gettoken(request)
     token = decodetoken(encodedtoken)
 
@@ -289,7 +288,6 @@ def createchat(request, group_name):
             shareurl = (r.json()['response']['share_url'])
             code = str(shareurl[-17:-9])
             sharetoken = str(shareurl[-8:])
-
 
             #database stuff
             #don't delete this line below! It is used to delete items in database
