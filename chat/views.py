@@ -211,7 +211,7 @@ def events(request, group_name):
         myTodos = MiscellaneousEvents.objects.filter(MakerToken=token)
 
     try:
-        print(todos)
+        print(otherTodos)
         context = {
             'access_token': mark_safe(json.dumps(encodedtoken)),
             'group_name': mark_safe(json.dumps(group_name)),
