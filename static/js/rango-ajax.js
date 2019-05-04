@@ -15,7 +15,6 @@ $(document).ready(function() {
 
                $($this).attr('href', '/details/' + data + _href + token);
                });
-           // });
 });
 
     $.get('/getgroupname/', {group_name: name, access_token: token }, function(){
@@ -25,7 +24,6 @@ $(document).ready(function() {
 
                $($this).attr('href', '/mydetails' + _href + token);
                });
-           // });
 });
 
 });

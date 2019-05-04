@@ -183,31 +183,27 @@ def events(request, group_name):
             }
             return render(request, 'chat/events.html', context)
 
+    countandprune(SportsEvents.objects.all())
+    countandprune(WorkingOutEvents.objects.all())
+    countandprune(VideoGamesEvents.objects.all())
+    countandprune(TransportationEvents.objects.all())
+    countandprune(ProblemSetEvents.objects.all())
+    countandprune(MiscellaneousEvents.objects.all())
+
+
     #create a count of the people in chats and check if they've been deleted
     if (group_name == 'sports'):
-        todos = SportsEvents.objects.all()
-        countandprune(todos)
-        todos = SportsEvents.objects.all()
+        todos = SportsEvents.objects.exclude(MakerToken=token)
     elif (group_name == 'workingout'):
-        todos = WorkingOutEvents.objects.all()
-        countandprune(todos)
-        todos = WorkingOutEvents.objects.all()
+        todos = WorkingOutEvents.objects.exclude(MakerToken=token)
     elif (group_name == 'videogames'):
-        todos = VideoGamesEvents.objects.all()
-        countandprune(todos)
-        todos = VideoGamesEvents.objects.all()
+        todos = VideoGamesEvents.objects.exclude(MakerToken=token)
     elif (group_name == 'transportation'):
-        todos = TransportationEvents.objects.all()
-        countandprune(todos)
-        todos = TransportationEvents.objects.all()
+        todos = TransportationEvents.objects.exclude(MakerToken=token)
     elif (group_name == 'problemsetgroups'):
-        todos = ProblemSetEvents.objects.all()
-        countandprune(todos)
-        todos = ProblemSetEvents.objects.all()
+        todos = ProblemSetEvents.objects.exclude(MakerToken=token)
     elif (group_name == 'miscellaneous'):
-        todos = MiscellaneousEvents.objects.all()
-        countandprune(todos)
-        todos = MiscellaneousEvents.objects.all()
+        todos = MiscellaneousEvents.objects.exclude(MakerToken=token)
 
 #for my events
     mysports = SportsEvents.objects.filter(MakerToken=token)
