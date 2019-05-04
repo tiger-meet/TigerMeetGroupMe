@@ -33,6 +33,12 @@
         <h1>GroupMe <span id="myGroupName"></span>(<span id="myGroupId">myGroupId</span>) Joined!</h1>
       </div>
 
+      <div class="ui buttons">
+        <input class="ui primary button" type="button" value="Launch GroupMe (For iPhone)" id="MyButton">
+        <div class="or"></div>
+        <button target="_blank" rel="noopener noreferrer" class="ui positive button" type="button" onclick="location.href = 'https:/' + '/web.groupme.com/chats';">Open in Web</button>
+      </div>
+
       <script>
         $(document).ready(function()
         {
@@ -42,8 +48,6 @@
           });
         });
       </script>
-
-      <input type="button" value="Open in GroupMe" id="MyButton">
 
       <script type="text/javascript">
           // detect if safari mobile
