@@ -137,6 +137,8 @@
       <br>
 
       <!-- List events made by others -->
+      <h2 class="ui inverted header">Events from Others</h2>
+
       <p hidden id ="likes" data-name= {{ group_name }}, data-access-token= {{ access_token }}>Like</p>
       {% if otherTodos %}
       
@@ -204,39 +206,70 @@
       <!-- List events made by self -->
       <h2 class="ui inverted header">My Events</h2>
 
-      <div class="ui four column stackable grid">
+      {% if myTodos %}
 
-        {% for todo in myTodos %}
-        <div class="column">
-          <a class="replaceValue" href='/{{ todo.id }}'>
-            <div class="ui fluid card">
-              <div class="content">
-                <!-- Event Name -->
-                <div class="header">{{ todo.title }}</div>
-                <div class="meta"></div>
-                <!-- Event Time and Location -->
-                <div class="description">
-                  <p><strong>Date:</strong> {{ todo.date }}</p>
-                  <p><strong>Time:</strong> {{ todo.time }}</p>
-                  <p><strong>Location:</strong> {{ todo.place }}</p>
-                  <p>(Click to see description)</p>
-                </div>
-                <!-- Number of people in GroupMe chat -->
-                <div class="ui mini orange statistic">
-                  <div class="value">
-                    {{ todo.Size }}
+        <div class="ui message">
+          <div class="ui orange statistic">
+            <div class="value">
+              <i class="calendar alternate icon"></i> {{ myTodos|length }}
+            </div>
+            <div class="label">
+              Events Available
+            </div>
+          </div>
+        </div>
+
+        <div class="ui four column stackable grid">
+
+          {% for todo in myTodos %}
+          <div class="column">
+            <a class="replaceValue" href='/{{ todo.id }}'>
+              <div class="ui fluid card">
+                <div class="content">
+                  <!-- Event Name -->
+                  <div class="header">{{ todo.title }}</div>
+                  <div class="meta"></div>
+                  <!-- Event Time and Location -->
+                  <div class="description">
+                    <p><strong>Date:</strong> {{ todo.date }}</p>
+                    <p><strong>Time:</strong> {{ todo.time }}</p>
+                    <p><strong>Location:</strong> {{ todo.place }}</p>
+                    <p>(Click to see description)</p>
                   </div>
-                  <div class="label">
-                    Members
+                  <!-- Number of people in GroupMe chat -->
+                  <div class="ui mini orange statistic">
+                    <div class="value">
+                      {{ todo.Size }}
+                    </div>
+                    <div class="label">
+                      Members
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </a>
-        </div>
-        {% endfor %}
+            </a>
+          </div>
+          {% endfor %}
 
-      </div>
+        </div>
+      
+      {% else %}
+
+        <div class="ui message">
+          <h3>You haven't created any events yet!</h3>
+          <div class="ui orange statistic">
+            <div class="value">
+              <i class="calendar alternate icon"></i> 0
+            </div>
+            <div class="label">
+              Events Available
+            </div>
+          </div>
+          <br>
+          <button class="ui green button" type="button" onclick="location.href=addurl;">Create New Event</button>
+        </div>
+
+      {% endif %}
 
     </div>
   </div>
