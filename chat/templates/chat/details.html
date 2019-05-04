@@ -1,28 +1,9 @@
 <!-- chat/templates/chat/details.html -->
 <!-- Details for a specific event -->
 
-{% load static %}
+{% extends "base.html" %}
 
-<!DOCTYPE html>
-<html>
-<head>
-  <!-- Meta -->
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-
-  <!-- Setup -->
-  <title>TigerMeet</title>
-  <link rel="icon" type="image/png" href="{% static 'cub.png' %}">
-
-  <!-- Semantic UI -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
-  <script
-  src="https://code.jquery.com/jquery-3.1.1.min.js"
-  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-  crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
-
+{% block js_content %}
   <script type="text/javascript">
     var name = {{ group_name }};
     var id = {{ id }};
@@ -31,57 +12,9 @@
     var subjoinurl = '/subjoin/' + id + '/'+ name + '/chat' + url;
     var destroy = '/deleteconfirmation/' + id + '/' + name + url;
   </script>
+{% endblock %}
 
-  <link rel="stylesheet" href="{% static 'backgroundImageStyles.css' %}">
-
-</head>
-<body>
-
-  <!-- Navbar -->
-  <div class="ui pointing menu" style="margin-bottom: 0; border-radius: 0;">
-    <a class="item" href="/">
-      <img src="{% static 'cub.png' %}">
-    </a>
-    <div class="ui simple dropdown item">
-      Chatrooms <i class="dropdown icon"></i>
-      <div class="menu">
-        <!-- Changes url to /chatname with the authentication token appended -->
-        <a class="item" href="fill" onclick="location.href='/category/sports'+url; return false;" >
-          <i class="futbol alternate icon"></i>
-          Sports
-        </a>
-        <a class="item" href="fill" onclick="location.href='/category/workingout'+url; return false;" >
-          <i class="heart icon"></i>
-          Working Out
-        </a>
-        <a class="item" href="fill" onclick="location.href='/category/videogames'+url; return false;" >
-          <i class="gamepad icon"></i>
-          Video Games
-        </a>
-        <a class="item" href="fill" onclick="location.href='/category/transportation'+url; return false;" >
-          <i class="car icon"></i>
-          Transportation
-        </a>
-        <a class="item" href="fill" onclick="location.href='/category/problemsetgroups'+url; return false;" >
-          <i class="pencil alternate icon"></i>
-          Problem Set Groups
-        </a>
-        <a class="item" href="fill" onclick="location.href='/category/miscellaneous'+url; return false;" >
-          <i class="ellipsis horizontal icon"></i>
-          Miscellaneous
-        </a>
-      </div>
-    </div>
-    <div class="right menu">
-      <a class="ui item" href="/about">
-        About
-      </a>
-      <a class="ui item" href="/">
-        Logout
-      </a>
-    </div>
-  </div>
-
+{% block content %}
   <div class="ui middle aligned center aligned grid" style="margin: 10px;">
     <div class="column">
       <div>
@@ -117,6 +50,4 @@
     
     </div>
   </div>
-
-</body>
-</html>
+{% block content %}
