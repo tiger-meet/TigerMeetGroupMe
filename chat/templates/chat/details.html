@@ -58,6 +58,13 @@
         <div class="ui buttons">
 
         <script>
+          document.getElementById("edit").onclick = function() 
+          {
+            $("#editModal")
+              .modal("show")
+            ;
+          };
+
           document.getElementById("delete").onclick = function() 
           {
             $("#deleteModal")
@@ -65,6 +72,19 @@
             ;
           };
         </script>
+
+        <div class="ui basic modal" id="editModal">
+          <div class="ui icon header">
+            <i class="pencil alternate icon"></i>
+            Edit Functionality Coming Soon...
+          </div>
+          <div class="actions">
+            <div class="ui basic cancel inverted button">
+              <i class="remove icon"></i>
+              Go Back
+            </div>
+          </div>
+        </div>
 
         <div class="ui basic modal" id="deleteModal">
           <div class="ui icon header">
