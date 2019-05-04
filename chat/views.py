@@ -31,7 +31,6 @@ def decodetoken(encodedtoken):
     token = bytestoken.decode()
     return token
 
-
 def gettoken(request):
     http_host = request.META.get('HTTP_HOST')
     not_host = request.META.get('RAW_URI')
@@ -73,10 +72,9 @@ def countandprune(todos):
             todo.Size = len(r.json()['response']['members'])
             todo.save()
 
-
 # loads the index page with authentication token
 def index(request):
-    #code for scrambling access tokens
+    # code for scrambling access tokens
     token = gettoken(request)
 
     if token == 'none':
@@ -142,8 +140,8 @@ def events(request, group_name):
                 }
                 return render(request, 'chat/events.html', context)
 
-            if "sortBy=Time" in not_host:
-                todos.sort(key = lambda x: x.time)
+            if "sortBy=Date" in not_host:
+                todos.sort(key = lambda x: x.date)
                 context = {
                     'access_token': mark_safe(json.dumps(encodedtoken)),
                     'group_name': mark_safe(json.dumps(group_name)),
@@ -167,8 +165,8 @@ def events(request, group_name):
             }
             return render(request, 'chat/events.html/', context)
 
-        elif "sortBy=Time" in not_host:
-            todos = event.objects.order_by('time')
+        elif "sortBy=Date" in not_host:
+            todos = event.objects.order_by('date')
             context = {
                 'access_token': mark_safe(json.dumps(encodedtoken)),
                 'group_name': mark_safe(json.dumps(group_name)),
@@ -342,15 +340,19 @@ def add(request, group_name):
 
         if(request.method == 'POST'):
             title = request.POST['title']
-            text = request.POST['text']
+            place = request.POST['place']
+            date = request.POST['date']
             time = request.POST['time']
+            description = request.POST['description']
 
             print(title)
-            print(text)
+            print(place)
+            print(date)
             print(time)
-            name = title + ' ' + time
+            print(description)
+            name = title + ' (' + time + ', ' + date + ')'
 
-            chatname = "TigerMeet " + name
+            chatname = name + ' | TigerMeet '
             data = {'name': chatname,
                     "share": True, }
             headers = {"Content-Type": "application/json"}
@@ -362,21 +364,21 @@ def add(request, group_name):
             sharetoken = str(shareurl[-8:])
 
             if (group_name == 'sports'):
-                todo = SportsEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
+                todo = SportsEvents(title=title, place=place, date=date, time=time, description=description, GroupId=code, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
             if (group_name == 'workingout'):
-                todo = WorkingOutEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
+                todo = WorkingOutEvents(title=title, place=place, date=date, time=time, description=description, GroupId=code, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
             if (group_name == 'videogames'):
-                todo = VideoGamesEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
+                todo = VideoGamesEvents(title=title, place=place, date=date, time=time, description=description, GroupId=code, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
             if (group_name == 'transportation'):
-                todo = TransportationEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
+                todo = TransportationEvents(title=title, place=place, date=date, time=time, description=description, GroupId=code, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
             if (group_name == 'problemsetgroups'):
-                todo = ProblemSetEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
+                todo = ProblemSetEvents(title=title, place=place, date=date, time=time, description=description, GroupId=code, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
             if (group_name == 'miscellaneous'):
-                todo = MiscellaneousEvents(title=title, text=text, time=time, GroupId=code, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
+                todo = MiscellaneousEvents(title=title, place=place, date=date, time=time, description=description, GroupId=code, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
 
             todo.save()
 
-            group_name = title + ' ' + time
+            group_name = name
             url = '?access_token=' + encodedtoken
             allurl = '/makechat/' + group_name + url
 

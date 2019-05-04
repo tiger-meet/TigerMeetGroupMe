@@ -1,0 +1,10 @@
+body {
+    color: black;
+}
+
+.pushable .pusher {
+    background-image: url("https://source.unsplash.com/5fNmWej4tAA");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}

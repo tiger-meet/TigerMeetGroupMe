@@ -1,106 +1,77 @@
 <!-- chat/templates/chat/gmlogin.html -->
-<!-- Login page that you have to do before doing anything in the app -->
+<!-- Login page that you have to go through before doing anything in the app -->
 
-{% load static %}
+{% extends "chat/base.html" %}
 
-<!DOCTYPE html>
-<html>
-<head>
-  <!-- Meta -->
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-
-  <!-- Setup -->
-  <title>TigerMeet</title>
-  <link rel="icon" type="image/png" href="{% static 'cub.png' %}">
-
-  <!-- Semantic UI -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
-  <script
-  src="https://code.jquery.com/jquery-3.1.1.min.js"
-  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-  crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
-
+{% block js_content %}
   <script type="text/javascript">
     const url = "?access_token=" + {{ access_token }};
   </script>
-</head>
-<body>
+{% endblock %}
 
-  <!-- Navbar -->
-  <div class="ui pointing menu" style="margin-bottom: 0; border-radius: 0;">
-    <a class="item" href="/">
-      <img src="{% static 'cub.png' %}">
-    </a>
-    <div class="ui simple dropdown disabled item">
-      Chatrooms <i class="dropdown icon"></i>
-      <div class="menu">
-        <!-- Changes url to /chatname with the authentication token appended -->
-        <a class="item" href="fill" onclick="location.href='/category/sports' +url; return false;" >
-          <i class="futbol alternate icon"></i>
-          Sports
-        </a>
-        <a class="item" href="fill" onclick="location.href='/category/workingout' +url; return false;" >
-          <i class="heart icon"></i>
-          Working Out
-        </a>
-        <a class="item" href="fill" onclick="location.href='/category/videogames' +url; return false;" >
-          <i class="gamepad icon"></i>
-          Video Games
-        </a>
-        <a class="item" href="fill" onclick="location.href='/category/transportation' +url; return false;" >
-          <i class="car icon"></i>
-          Transportation
-        </a>
-        <a class="item" href="fill" onclick="location.href='/category/problemsetgroups' +url; return false;" >
-          <i class="pencil alternate icon"></i>
-          Problem Set Groups
-        </a>
-        <a class="item" href="fill" onclick="location.href='/category/miscellaneous' +url; return false;" >
-          <i class="ellipsis horizontal icon"></i>
-          Miscellaneous
-        </a>
-      </div>
-    </div>
-    <div class="right menu">
-      <a class="ui item" href="/about">
-        About
-      </a>
-      <a class="ui item" href="/">
-        Logout
-      </a>
-    </div>
-  </div>
+{% block disabled_chatrooms %}disabled{% endblock %}
 
+{% block content %}
   <div class="ui middle aligned center aligned grid" style="margin: 10px;">
-    <div class="column">
-      <h1 class="ui image header">
-        <img src="{% static 'cub.png' %}" class="image">
-        <div class="content">
-          Welcome to TigerMeet
-        </div>
-        <div class="sub header">TigerMeet is a web application that enables Princeton University students to connect with other students for recreation, transportation, and academic coordination. It is divided into sections of general interest (i.e. Sports, Transportation) each with a general chat as well as the ability to create specific events with chatrooms for users to connect.</div>
-      </h1>
+    <div class="row">
+      <div class="column">
+        <img class="ui small centered image" src="/static/cub.png">
+        <h1 class="ui inverted header" style="margin-top: 0;">
+          <div class="content">
+            Welcome to TigerMeet
+          </div>
+          <div class="sub header">TigerMeet is a web application that enables Princeton University students to connect with other students for recreation, transportation, and academic coordination. It is divided into sections of general interest (i.e. Sports, Transportation) each with a general chat as well as the ability to create specific events with chatrooms for users to connect.</div>
+        </h1>
 
-      <div class="ui message">
-        <h3><a href="https://oauth.groupme.com/oauth/authorize?client_id=LHuPBM2dje3PcEAHm0qRQ6RqjQMvGaxDlkKEugKc8qXQ2gbK" class="button">Login to TigerMeet with GroupMe</a></h3>
+        <button class="ui massive orange button" type="button" onclick="location.href='https://oauth.groupme.com/oauth/authorize?client_id=LHuPBM2dje3PcEAHm0qRQ6RqjQMvGaxDlkKEugKc8qXQ2gbK';">
+          Login to TigerMeet with GroupMe
+        </button>
+
+        <h2>How It Works</h2>
+
       </div>
-
-      <h2>How It Works</h2>
-
-      <div class="ui ordered list">
-        <div class="item">Login using GroupMe</div>
-        <div class="item">
-          Check out six different categories: 1) Sports, 2) Working Out, 3) Video Games, 4) Transportation, 5) Problem Set Groups, 6) Miscellaneous.
-        </div>
-        <div class="item">Join and chat in the general group chat for each category</div>
-        <div class="item">Check out student-made events under each category, each with their own event group chat</div>
-      </div>
-
     </div>
-  </div>
 
-</body>
-</html>
+    <div class="row" style="padding-top: 0;">
+
+        <div class="left aligned column">
+
+          <div class="ui vertical fluid steps">
+            <div class="step">
+              <i class="user outline icon"></i>
+              <div class="content">
+                <div class="title">1. Login</div>
+                <div class="description">Login using GroupMe. Create a GroupMe account if you don't have one already.</div>
+              </div>
+            </div>
+            <br>
+            <div class="step">
+              <i class="list alternate outline icon"></i>
+              <div class="content">
+                <div class="title">2. Check Out Categories</div>
+                <div class="description">Check out six different categories: 1) Sports, 2) Working Out, 3) Video Games, 4) Transportation, 5) Problem Set Groups, 6) Miscellaneous.</div>
+              </div>
+            </div>
+            <br>
+            <div class="step">
+              <i class="calendar alternate icon"></i>
+              <div class="content">
+                <div class="title">3. See, Join, and Make Events</div>
+                <div class="description">Check out student-made events under each category, each with their own event group chat.</div>
+              </div>
+            </div>
+            <br>
+            <div class="step">
+              <i class="comments icon"></i>
+              <div class="content">
+                <div class="title">4. Chat in General Chats</div>
+                <div class="description">Join and chat in the general group chat for each category.</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+    </div>
+    
+  </div>
+{% endblock %}

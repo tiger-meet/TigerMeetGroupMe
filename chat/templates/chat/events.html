@@ -1,29 +1,11 @@
 <!-- chat/templates/chat/events.html -->
+<!-- Category page -->
 
-{% load static %}
+{% extends "chat/base.html" %}
 
-<!DOCTYPE html>
-<html>
-<head>
-  <!-- Meta -->
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-
-  <!-- Setup -->
-  <title>TigerMeet</title>
-  <link rel="icon" type="image/png" href="{% static 'cub.png' %}">
-
-  <!-- Semantic UI -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
-  <script
-  src="https://code.jquery.com/jquery-3.1.1.min.js"
-  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-  crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
-
-  <script src="{% static "/js/jquery.js" %}"></script>
-  <script src="{% static "/js/rango-ajax.js" %}"></script>
+{% block js_content %}
+  <script src="/static/js/jquery.js"></script>
+  <script src="/static/js/rango-ajax.js"></script>
 
   <script type="text/javascript">
     var name = {{ group_name }};
@@ -70,54 +52,9 @@
       document.getElementById("groupIcon").className = icon;
     }
   </script>
-</head>
-<body>
+{% endblock %}
 
-  <!-- Navbar -->
-  <div class="ui pointing menu" style="margin-bottom: 0; border-radius: 0;">
-    <a class="item" href="/">
-      <img src="{% static 'cub.png' %}">
-    </a>
-    <div class="ui simple dropdown item">
-      Chatrooms <i class="dropdown icon"></i>
-      <div class="menu">
-        <!-- Changes url to /chatname with the authentication token appended -->
-        <a class="item" href="fill" onclick="location.href='/category/sports'+url; return false;" >
-          <i class="futbol alternate icon"></i>
-          Sports
-        </a>
-        <a class="item" href="fill" onclick="location.href='/category/workingout'+url; return false;" >
-          <i class="heart icon"></i>
-          Working Out
-        </a>
-        <a class="item" href="fill" onclick="location.href='/category/videogames'+url; return false;" >
-          <i class="gamepad icon"></i>
-          Video Games
-        </a>
-        <a class="item" href="fill" onclick="location.href='/category/transportation'+url; return false;" >
-          <i class="car icon"></i>
-          Transportation
-        </a>
-        <a class="item" href="fill" onclick="location.href='/category/problemsetgroups'+url; return false;" >
-          <i class="pencil alternate icon"></i>
-          Problem Set Groups
-        </a>
-        <a class="item" href="fill" onclick="location.href='/category/miscellaneous'+url; return false;" >
-          <i class="ellipsis horizontal icon"></i>
-          Miscellaneous
-        </a>
-      </div>
-    </div>
-    <div class="right menu">
-      <a class="ui item" href="/about">
-        About
-      </a>
-      <a class="ui item" href="/">
-        Logout
-      </a>
-    </div>
-  </div>
-
+{% block content %}
   <div class="ui middle aligned center aligned grid" style="margin: 10px;">
     <div class="column">
 
@@ -129,95 +66,321 @@
       <!-- Break -->
       <div style="clear:both"></div>
 
-      <h1 class="ui center aligned icon header">
+      <h1 class="ui center aligned icon inverted header">
         <i id="groupIcon"></i>
         <div class="content" id="myGroup"></div>
       </h1>
 
       <br>
 
-      <a class="ui button" id="link" href="fill" onclick="location.href=allurl; return false;">Error</a>
+      <a class="ui button" style="border: 4px red solid;" id="link" href="fill" onclick="location.href=allurl; return false;">Error</a>
 
       <br>
 
-      <!-- Create new event -->
-      <button class="ui left floated button" type="button" onclick="location.href=addurl;">Create New Event</button>
-
       <!-- Join general chat -->
-      <a class="ui right floated button" id="link2" class="item" href="fill" onclick="location.href=joinurl; return false;">Error</a>
+      <a class="ui blue button" id="link2" class="item" href="fill" onclick="location.href=joinurl; return false;">Error</a>
 
       <br>
       <!-- Break -->
       <div style="clear:both"></div>
 
-      <h2 class="ui header">
-        All Events
+      <h2 class="ui inverted header">
+        List of Events
         <div class="sub header">(Click an event to join the event's group chat)</div>
       </h2>
 
       <br>
-
-      <!--
-      <div class="ui menu">
-        <div class="ui fluid selection dropdown">
-          <input type="hidden" name="user">
-          <i class="dropdown icon"></i>
-          <div class="default text">Filter by</div>
-          <div class="menu">
-            <div class="item">Choice 1</div>
-            <div class="item">Choice 2</div>
-            <div class="item">Choice 3</div>
-          </div>
-        </div>
-        <div class="ui fluid selection dropdown">
-          <input type="hidden" name="user">
-          <i class="dropdown icon"></i>
-          <div class="default text">Sort by</div>
-          <div class="menu">
-            <div class="item">Choice 1</div>
-            <div class="item">Choice 2</div>
-            <div class="item">Choice 3</div>
-          </div>
-        </div>
-      </div>-->
-
-      <h3 class="ui dividing header">Sort by...</h3>
-      <form class="ui form" method="get">
-        <input type="hidden" name="access_token" value={{ access_token }}>
-        <div class="field">
-          <div class="ui checkbox">
-            <input type="radio" name="sortBy" value="Alphabetical">
-            <label>Alphabetical</label>
-          </div>
-        </div>
-        <div class="field">
-          <div class="ui checkbox">
-            <input type="radio" name="sortBy" value="Time">
-            <label>Time</label>
-          </div>
-        </div>
-        <div class="field">
-          <input type="text" name="search" value="" placeholder="Search for an Activity">
-        </div>
-        <input class="ui button" type="submit" value="Sort">
-      </form>
+      
+      <!-- Create New Event -->
+      <button class="ui green button" type="button" onclick="location.href=addurl;">Create New Event</button>
 
       <br>
 
+      <!-- Filter, Sort, and Search -->
+      <h3 class="ui dividing inverted header">Filter, Sort, and Search</h3>
+      <form class="ui inverted form" method="get">
+        <input type="hidden" name="access_token" value={{ access_token }}>
+        <div class="three fields">
+
+          <div class="field">
+            <label>Filter By...</label>
+            <select class="ui fluid dropdown">
+              <option value=""><i class="filter icon"></i> Filter By...</option>
+              <option value="">Coming soon...</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>Sort By...</label>
+            <select class="ui fluid dropdown" name="sortBy">
+              <option value=""><i class="dropdown icon"></i> Sort By...</option>
+              <option name="sortBy" value="Alphabetical">Alphabetical</option>
+              <option name="sortBy" value="Date">Date</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>Search for Event</label>
+            <input type="text" name="search" value="" placeholder="Search for Event by Name">
+          </div>
+
+        </div>
+
+        <input class="ui button" type="submit" value="Sort">
+
+      </form>
+      <script>
+        $('.ui.dropdown')
+          .dropdown()
+        ;
+      </script>
+
+      <br>
+
+      <!-- List events made by others -->
+      <p hidden id ="likes" data-name= {{ group_name }}, data-access-token= {{ access_token }}>Like</p>
+      {% if todos %}
+      
+        <div class="ui message">
+          <div class="ui orange statistic">
+            <div class="value">
+              <i class="calendar alternate icon"></i> {{ todos|length }}
+            </div>
+            <div class="label">
+              Events Available
+            </div>
+          </div>
+        </div>
+
+        <div class="ui four column stackable grid">
+          {% for todo in todos %}
+          <div class="column">
+            <a class="replaceValue" href='/{{ todo.id }}'>
+              <div class="ui fluid card">
+                <div class="content">
+                  <!-- Event Name -->
+                  <div class="header">{{ todo.title }}</div>
+                  <div class="meta"></div>
+                  <!-- Event Location -->
+                  <div class="description">
+                    <p><strong>Date:</strong> {{ todo.date }}</p>
+                    <p><strong>Time:</strong> {{ todo.time }}</p>
+                    <p><strong>Location:</strong> {{ todo.place }}</p>
+                    <p>(Click to see description)</p>
+                  </div>
+                  <!-- Number of people in GroupMe chat -->
+                  <div class="ui mini orange statistic">
+                    <div class="value">
+                      {{ todo.Size }}
+                    </div>
+                    <div class="label">
+                      Members
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+          {% endfor %}
+        </div>
+
+      {% else %}
+
+        <div class="ui message">
+          <h3>No events yet!</h3>
+          <div class="ui orange statistic">
+            <div class="value">
+              <i class="calendar alternate icon"></i> 0
+            </div>
+            <div class="label">
+              Events Available
+            </div>
+          </div>
+          <br>
+          <button class="ui green button" type="button" onclick="location.href=addurl;">Create New Event</button>
+        </div>
+
+      {% endif %}
+
+      <!-- List events made by self -->
+      <h2 class="ui inverted header">My Events</h2>
+
       <div class="ui four column stackable grid">
 
-        <p hidden id ="likes" data-name= {{ group_name }}, data-access-token= {{ access_token }} >Like</p>
-        {% for todo in todos %}
-                <div class="column">
-          <a class="replaceValue" href='/{{ todo.id }}'>
+        {% for todo in mysports %}
+        <div class="column">
+          <a class="MyReplaceValue" href='/{{ todo.CategoryName }}/{{ todo.id }}'>
             <div class="ui fluid card">
               <div class="content">
+                <!-- Event Name -->
                 <div class="header">{{ todo.title }}</div>
-                <div class="meta">{{ todo.time }}</div>
+                <div class="meta"></div>
+                <!-- Event Time and Location -->
                 <div class="description">
-                  <p>{{ todo.text }}</p>
+                  <p><strong>Date:</strong> {{ todo.date }}</p>
+                  <p><strong>Time:</strong> {{ todo.time }}</p>
+                  <p><strong>Location:</strong> {{ todo.place }}</p>
+                  <p>(Click to see description)</p>
                 </div>
-                  <div class="size">Current Size: {{ todo.Size }}</div>
+                <!-- Number of people in GroupMe chat -->
+                <div class="ui mini orange statistic">
+                  <div class="value">
+                    {{ todo.Size }}
+                  </div>
+                  <div class="label">
+                    Members
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        {% endfor %}
+
+        {% for todo in myworkingout %}
+        <div class="column">
+          <a class="MyReplaceValue" href='/{{ todo.CategoryName }}/{{ todo.id }}'>
+            <div class="ui fluid card">
+              <div class="content">
+                <!-- Event Name -->
+                <div class="header">{{ todo.title }}</div>
+                <div class="meta"></div>
+                <!-- Event Time and Location -->
+                <div class="description">
+                  <p><strong>Date:</strong> {{ todo.date }}</p>
+                  <p><strong>Time:</strong> {{ todo.time }}</p>
+                  <p><strong>Location:</strong> {{ todo.place }}</p>
+                  <p>(Click to see description)</p>
+                </div>
+                <!-- Number of people in GroupMe chat -->
+                <div class="ui mini orange statistic">
+                  <div class="value">
+                    {{ todo.Size }}
+                  </div>
+                  <div class="label">
+                    Members
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        {% endfor %}
+
+      {% for todo in myvideogames %}
+        <div class="column">
+          <a class="MyReplaceValue" href='/{{ todo.CategoryName }}/{{ todo.id }}'>
+            <div class="ui fluid card">
+              <div class="content">
+                <!-- Event Name -->
+                <div class="header">{{ todo.title }}</div>
+                <div class="meta"></div>
+                <!-- Event Time and Location -->
+                <div class="description">
+                  <p><strong>Date:</strong> {{ todo.date }}</p>
+                  <p><strong>Time:</strong> {{ todo.time }}</p>
+                  <p><strong>Location:</strong> {{ todo.place }}</p>
+                  <p>(Click to see description)</p>
+                </div>
+                <!-- Number of people in GroupMe chat -->
+                <div class="ui mini orange statistic">
+                  <div class="value">
+                    {{ todo.Size }}
+                  </div>
+                  <div class="label">
+                    Members
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        {% endfor %}
+        
+        {% for todo in mytransportation %}
+        <div class="column">
+          <a class="MyReplaceValue" href='/{{ todo.CategoryName }}/{{ todo.id }}'>
+            <div class="ui fluid card">
+              <div class="content">
+                <!-- Event Name -->
+                <div class="header">{{ todo.title }}</div>
+                <div class="meta"></div>
+                <!-- Event Time and Location -->
+                <div class="description">
+                  <p><strong>Date:</strong> {{ todo.date }}</p>
+                  <p><strong>Time:</strong> {{ todo.time }}</p>
+                  <p><strong>Location:</strong> {{ todo.place }}</p>
+                  <p>(Click to see description)</p>
+                </div>
+                <!-- Number of people in GroupMe chat -->
+                <div class="ui mini orange statistic">
+                  <div class="value">
+                    {{ todo.Size }}
+                  </div>
+                  <div class="label">
+                    Members
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        {% endfor %}
+
+        {% for todo in myproblemsetgroups %}
+        <div class="column">
+          <a class="MyReplaceValue" href='/{{ todo.CategoryName }}/{{ todo.id }}'>
+            <div class="ui fluid card">
+              <div class="content">
+                <!-- Event Name -->
+                <div class="header">{{ todo.title }}</div>
+                <div class="meta"></div>
+                <!-- Event Time and Location -->
+                <div class="description">
+                  <p><strong>Date:</strong> {{ todo.date }}</p>
+                  <p><strong>Time:</strong> {{ todo.time }}</p>
+                  <p><strong>Location:</strong> {{ todo.place }}</p>
+                  <p>(Click to see description)</p>
+                </div>
+                <!-- Number of people in GroupMe chat -->
+                <div class="ui mini orange statistic">
+                  <div class="value">
+                    {{ todo.Size }}
+                  </div>
+                  <div class="label">
+                    Members
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        {% endfor %}
+
+        {% for todo in mymiscellaneous %}
+        <div class="column">
+          <a class="MyReplaceValue" href='/{{ todo.CategoryName }}/{{ todo.id }}'>
+            <div class="ui fluid card">
+              <div class="content">
+                <!-- Event Name -->
+                <div class="header">{{ todo.title }}</div>
+                <div class="meta"></div>
+                <!-- Event Time and Location -->
+                <div class="description">
+                  <p><strong>Date:</strong> {{ todo.date }}</p>
+                  <p><strong>Time:</strong> {{ todo.time }}</p>
+                  <p><strong>Location:</strong> {{ todo.place }}</p>
+                  <p>(Click to see description)</p>
+                </div>
+                <!-- Number of people in GroupMe chat -->
+                <div class="ui mini orange statistic">
+                  <div class="value">
+                    {{ todo.Size }}
+                  </div>
+                  <div class="label">
+                    Members
+                  </div>
+                </div>
               </div>
             </div>
           </a>
@@ -228,125 +391,4 @@
 
     </div>
   </div>
-
-      <br>
-      <!-- Break -->
-      <div style="clear:both"></div>
-
-      <h2 class="ui header">
-        My Events
-      </h2>
-
-      <br>
-
-   <div class="ui four column stackable grid">
-     {% for todo in mysports %}
-        <div class="column">
-          <a  class ="MyReplaceValue" href= '/{{ todo.CategoryName }}/{{todo.id}}'>
-            <div class="ui fluid card">
-              <div class="content">
-                <div class="header">{{ todo.title }}</div>
-                <div class="meta">{{ todo.time }}</div>
-                <div class="description">
-                  <p>{{ todo.text }}</p>
-                </div>
-                  <div class="size">Current Size: {{ todo.Size }}</div>
-                  <div class="cat">Category: {{ todo.CategoryName }}</div>
-              </div>
-            </div>
-          </a>
-        </div>
-        {% endfor %}
-
-   {% for todo in myworkingout %}
-        <div class="column">
-          <a  class ="MyReplaceValue" href= '/{{ todo.CategoryName }}/{{todo.id}}'>
-            <div class="ui fluid card">
-              <div class="content">
-                <div class="header">{{ todo.title }}</div>
-                <div class="meta">{{ todo.time }}</div>
-                <div class="description">
-                  <p>{{ todo.text }}</p>
-                </div>
-                  <div class="size">Current Size: {{ todo.Size }}</div>
-                  <div class="cat">Category: {{ todo.CategoryName }}</div>
-              </div>
-            </div>
-          </a>
-        </div>
-        {% endfor %}
-
-   {% for todo in myvideogames %}
-        <div class="column">
-          <a  class ="MyReplaceValue" href= '/{{ todo.CategoryName }}/{{todo.id}}'>
-            <div class="ui fluid card">
-              <div class="content">
-                <div class="header">{{ todo.title }}</div>
-                <div class="meta">{{ todo.time }}</div>
-                <div class="description">
-                  <p>{{ todo.text }}</p>
-                </div>
-                  <div class="size">Current Size: {{ todo.Size }}</div>
-              </div>
-            </div>
-          </a>
-        </div>
-        {% endfor %}
-
-   {% for todo in mytransportation %}
-        <div class="column">
-          <a  class ="MyReplaceValue" href= '/{{ todo.CategoryName }}/{{todo.id}}'>
-            <div class="ui fluid card">
-              <div class="content">
-                <div class="header">{{ todo.title }}</div>
-                <div class="meta">{{ todo.time }}</div>
-                <div class="description">
-                  <p>{{ todo.text }}</p>
-                </div>
-                  <div class="size">Current Size: {{ todo.Size }}</div>
-                  <div class="cat">Category: {{ todo.CategoryName }}</div>
-              </div>
-            </div>
-          </a>
-        </div>
-        {% endfor %}
-
-   {% for todo in myproblemsetgroups %}
-        <div class="column">
-          <a  class ="MyReplaceValue" href= '/{{ todo.CategoryName }}/{{todo.id}}'> {#class ="replaceValue"#}
-            <div class="ui fluid card">
-              <div class="content">
-                <div class="header">{{ todo.title }}</div>
-                <div class="meta">{{ todo.time }}</div>
-                <div class="description">
-                  <p>{{ todo.text }}</p>
-                </div>
-                  <div class="size">Current Size: {{ todo.Size }}</div>
-                  <div class="cat">Category: {{ todo.CategoryName }}</div>
-              </div>
-            </div>
-          </a>
-        </div>
-        {% endfor %}
-
-   {% for todo in mymiscellaneous %}
-        <div class="column">
-          <a class ="MyReplaceValue" href= '/{{ todo.CategoryName }}/{{todo.id}}'>
-            <div class="ui fluid card">
-              <div class="content">
-                <div class="header">{{ todo.title }}</div>
-                <div class="meta">{{ todo.time }}</div>
-                <div class="description">
-                  <p>{{ todo.text }}</p>
-                </div>
-                  <div class="size">Current Size: {{ todo.Size }}</div>
-                  <div class="cat">Category: {{ todo.CategoryName }}</div>
-              </div>
-            </div>
-          </a>
-        </div>
-        {% endfor %}
-   </div>
-
-</body>
-</html>
+{% endblock %}
