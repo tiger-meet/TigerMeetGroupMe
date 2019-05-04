@@ -14,16 +14,7 @@ $(document).ready(function() {
             var _href = $this.attr("href");
 
                $($this).attr('href', '/details/' + data + _href + token);
-               });
-});
-
-    $.get('/getgroupname/', {group_name: name, access_token: token }, function(){
-        $('.MyReplaceValue').each(function() {
-            var $this = $(this);
-            var _href = $this.attr("href");
-
-               $($this).attr('href', '/mydetails' + _href + token);
-               });
-});
+        });
+    });
 
 });
