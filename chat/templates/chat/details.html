@@ -47,6 +47,11 @@
       <div>
         <button id="join" class="ui blue button" type="button" href="fill" onclick="location.href=subjoinurl; return false;">Join this GroupMe Chat</button>
       </div>
+
+      {% if is_creator %}
+        <hr>
+        <button id ="delete" class="btn btn-mini btn-primary" type="button" href="fill" onclick="location.href=destroy; return false;">Delete My Event</button>
+      {% endif %}
     
     </div>
   </div>

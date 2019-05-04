@@ -396,6 +396,7 @@ def add(request, group_name):
 
 def details(request, group_name, id):
     encodedtoken = gettoken(request)
+    token = decodetoken(encodedtoken)
 
     if (group_name == 'sports'):
         todo = SportsEvents.objects.get(id=id)
@@ -410,11 +411,17 @@ def details(request, group_name, id):
     if (group_name == 'miscellaneous'):
         todo = MiscellaneousEvents.objects.get(id=id)
 
+    if (todo.MakerToken == token):
+        is_creator = True
+    else:
+        is_creator = False
+
     context = {
-        'todo':todo,
+        'todo': todo,
         'access_token': mark_safe(json.dumps(encodedtoken)),
         'group_name': mark_safe(json.dumps(group_name)),
-        'id': mark_safe(json.dumps(id))
+        'id': mark_safe(json.dumps(id)),
+        'is_creator': is_creator
     }
     return render(request, 'chat/details.html', context)
 
@@ -435,11 +442,12 @@ def mydetails(request, group_name, id):
         todo = MiscellaneousEvents.objects.get(id=id)
 
     context = {
-        'todo':todo,
+        'todo': todo,
         'access_token': mark_safe(json.dumps(encodedtoken)),
         'group_name': mark_safe(json.dumps(group_name)),
         'id': mark_safe(json.dumps(id))
     }
+
     return render(request, 'chat/mydetails.html', context)
 
 def joinsubchat(request, id, group_name):
