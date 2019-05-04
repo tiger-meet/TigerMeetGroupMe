@@ -273,7 +273,7 @@
 
       <div class="ui four column stackable grid">
 
-        {% if name == sports %}
+        {% if name == "sports" %}
           <p>name == sports</p>
           {% for todo in mysports %}
           <div class="column">
@@ -305,7 +305,7 @@
           </div>
           {% endfor %}
 
-        {% elif name == workingout %}
+        {% elif name == "workingout" %}
           {% for todo in myworkingout %}
           <div class="column">
             <a class="MyReplaceValue" href='/{{ todo.CategoryName }}/{{ todo.id }}'>
@@ -336,7 +336,7 @@
           </div>
           {% endfor %}
 
-        {% elif name == videogames %}
+        {% elif name == "videogames" %}
           {% for todo in myvideogames %}
           <div class="column">
             <a class="MyReplaceValue" href='/{{ todo.CategoryName }}/{{ todo.id }}'>
@@ -367,7 +367,7 @@
           </div>
           {% endfor %}
         
-        {% elif name == transportation %}
+        {% elif name == "transportation" %}
           {% for todo in mytransportation %}
           <div class="column">
             <a class="MyReplaceValue" href='/{{ todo.CategoryName }}/{{ todo.id }}'>
@@ -398,7 +398,7 @@
           </div>
           {% endfor %}
 
-        {% elif name == problemsetgroups %}
+        {% elif name == "problemsetgroups" %}
           {% for todo in myproblemsetgroups %}
           <div class="column">
             <a class="MyReplaceValue" href='/{{ todo.CategoryName }}/{{ todo.id }}'>
@@ -429,7 +429,7 @@
           </div>
           {% endfor %}
 
-        {% elif name == miscellaneous %}
+        {% elif name == "miscellaneous" %}
           {% for todo in mymiscellaneous %}
           <div class="column">
             <a class="MyReplaceValue" href='/{{ todo.CategoryName }}/{{ todo.id }}'>
