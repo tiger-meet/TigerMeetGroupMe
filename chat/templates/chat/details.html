@@ -51,7 +51,11 @@
       {% if is_creator %}
         <div class="ui inverted divider"></div>
 
-        <button id="delete" class="ui red button" type="button" href="fill">Delete My Event</button>
+        <div class="ui buttons">
+          <button id="edit" class="ui yellow button" type="button" href="fill">Edit My Event</button>
+          <button id="delete" class="ui red button" type="button" href="fill">Delete My Event</button>
+        <div class="ui buttons">
+
         <script>
           document.getElementById("delete").onclick = function() 
           {
@@ -67,7 +71,7 @@
             Are you sure you want to delete this?
           </div>
           <div class="content">
-            <p>Your event and group chat will be gone forever...</p> <i class="suitcase icon"></i>
+            <p>Your event and group chat will be gone forever...</p>
             <p><em>"Taking a new step, uttering a new word, is what people fear most." - Fyodor Dostoevsky, Crime and Punishment</em></p>
           </div>
           <div class="actions">
