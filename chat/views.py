@@ -140,8 +140,8 @@ def events(request, group_name):
                 }
                 return render(request, 'chat/events.html', context)
 
-            if "sortBy=Time" in not_host:
-                todos.sort(key = lambda x: x.time)
+            if "sortBy=Date" in not_host:
+                todos.sort(key = lambda x: x.date)
                 context = {
                     'access_token': mark_safe(json.dumps(encodedtoken)),
                     'group_name': mark_safe(json.dumps(group_name)),
@@ -165,8 +165,8 @@ def events(request, group_name):
             }
             return render(request, 'chat/events.html/', context)
 
-        elif "sortBy=Time" in not_host:
-            todos = event.objects.order_by('time')
+        elif "sortBy=Date" in not_host:
+            todos = event.objects.order_by('date')
             context = {
                 'access_token': mark_safe(json.dumps(encodedtoken)),
                 'group_name': mark_safe(json.dumps(group_name)),
