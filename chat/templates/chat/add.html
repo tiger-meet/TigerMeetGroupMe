@@ -74,6 +74,9 @@
         return addurl;
     }
   </script>
+
+  <link rel="stylesheet" href="{% static 'backgroundImageStyles.css' %}">
+
 </head>
 <body>
 
@@ -133,7 +136,7 @@
       <!-- Break -->
       <div style="clear:both"></div>
 
-      <h1 class="ui center aligned icon header">
+      <h1 class="ui center aligned icon inverted header">
         <i id="groupIcon"></i>
         <div class="content" id="myGroup"></div>
       </h1>
@@ -154,7 +157,7 @@
       </form>
       <br> -->
 
-      <form class="ui form" method="post" name="adurl" id="adurl">
+      <form class="ui inverted form" method="post" name="adurl" id="adurl">
         {% csrf_token %}
         <div class="required field">
           <label for="title">Event Name</label>
