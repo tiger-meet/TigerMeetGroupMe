@@ -10,7 +10,8 @@
     var url = "?access_token=" + {{ access_token }};
     var categoryurl = '/category/' + name + url;
     var subjoinurl = '/subjoin/' + id + '/'+ name + '/chat' + url;
-    var destroy = '/destroy/' + id + '/' + name + url;
+    var editurl = '/edit/' + id + '/' + name + url;
+    var destroyurl = '/destroy/' + id + '/' + name + url;
   </script>
 {% endblock %}
 
@@ -52,19 +53,12 @@
         <div class="ui inverted divider"></div>
 
         <div class="ui buttons">
-          <button id="edit" class="ui yellow button" type="button" href="fill">Edit My Event</button>
+          <button class="ui yellow button" type="button" href="fill" onclick="location.href=destroyurl;">Edit My Event</button>
           <div class="or"></div>
           <button id="delete" class="ui red button" type="button" href="fill" style="border-top-right-radius: .28571429rem; border-bottom-right-radius: .28571429rem;">Delete My Event</button>
         <div class="ui buttons">
 
         <script>
-          document.getElementById("edit").onclick = function() 
-          {
-            $("#editModal")
-              .modal("show")
-            ;
-          };
-
           document.getElementById("delete").onclick = function() 
           {
             $("#deleteModal")
@@ -72,19 +66,6 @@
             ;
           };
         </script>
-
-        <div class="ui basic modal" id="editModal">
-          <div class="ui icon header">
-            <i class="pencil alternate icon"></i>
-            Edit Functionality Coming Soon...
-          </div>
-          <div class="actions">
-            <div class="ui basic cancel inverted button">
-              <i class="remove icon"></i>
-              Go Back
-            </div>
-          </div>
-        </div>
 
         <div class="ui basic modal" id="deleteModal">
           <div class="ui icon header">
@@ -100,7 +81,7 @@
               <i class="remove icon"></i>
               No
             </div>
-            <button class="ui red ok inverted button" type="button" onclick="location.href=destroy;">
+            <button class="ui red ok inverted button" type="button" onclick="location.href=destroyurl;">
               <i class="trash alternate outline icon"></i>
               Delete
             </button>

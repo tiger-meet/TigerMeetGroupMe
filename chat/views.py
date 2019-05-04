@@ -506,6 +506,7 @@ def edit(request, id, group_name):
         if (group_name == 'miscellaneous'):
             code = MiscellaneousEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
 
+        # TODO
         # url = "https://api.groupme.com/v3/groups/" + code + "/destroy" + "?token=" + token
         # print(url)
         # r = requests.post(url)
