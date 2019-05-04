@@ -476,19 +476,6 @@ def joinsubchat(request, id, group_name):
             'group_name': mark_safe(json.dumps(name))
         })
 
-def deleteconfirmation(request, id, group_name):
-    encodedtoken = gettoken(request)
-    token = decodetoken(encodedtoken)
-    if token == 'none':
-        return render(request, 'chat/gmlogin.html', {})
-
-    else:
-        return render(request, 'chat/deleteconfirmation.html', {
-            'id': mark_safe(json.dumps(id)),
-            'group_name': mark_safe(json.dumps(group_name)),
-            'access_token': mark_safe(json.dumps(encodedtoken)),
-        })
-
 def destroy(request, id, group_name):
     encodedtoken = gettoken(request)
     token = decodetoken(encodedtoken)
@@ -508,8 +495,6 @@ def destroy(request, id, group_name):
             code = ProblemSetEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
         if (group_name == 'miscellaneous'):
             code = MiscellaneousEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
-
-
 
         url = "https://api.groupme.com/v3/groups/" + code + "/destroy" + "?token=" + token
         print(url)
