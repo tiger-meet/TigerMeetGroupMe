@@ -152,7 +152,7 @@
       <div style="clear:both"></div>
 
       <h2 class="ui inverted header">
-        All Events
+        List of Events
         <div class="sub header">(Click an event to join the event's group chat)</div>
       </h2>
 
@@ -203,6 +203,7 @@
 
       <br>
 
+      <!-- List events made by others -->
       <p hidden id ="likes" data-name= {{ group_name }}, data-access-token= {{ access_token }}>Like</p>
       {% if todos %}
       
@@ -267,127 +268,205 @@
 
       {% endif %}
 
+
+      <!-- List events made by self -->
+
+      <h2 class="ui inverted header">My Events</h2>
+
+      {% if name == "sports" %}
+        {% for todo in mysports %}
+        <div class="column">
+          <a class="MyReplaceValue" href='/{{ todo.CategoryName }}/{{ todo.id }}'>
+            <div class="ui fluid card">
+              <div class="content">
+                <!-- Event Name -->
+                <div class="header">{{ todo.title }}</div>
+                <div class="meta"></div>
+                <!-- Event Time and Location -->
+                <div class="description">
+                  <p><strong>Date:</strong> {{ todo.date }}</p>
+                  <p><strong>Time:</strong> {{ todo.time }}</p>
+                  <p><strong>Location:</strong> {{ todo.place }}</p>
+                  <p>(Click to see description)</p>
+                </div>
+                <!-- Number of people in GroupMe chat -->
+                <div class="ui mini orange statistic">
+                  <div class="value">
+                    {{ todo.Size }}
+                  </div>
+                  <div class="label">
+                    Members
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        {% endfor %}
+      {% endif %}
+
+      {% if name == "workingout" %}
+        {% for todo in myworkingout %}
+        <div class="column">
+          <a class="MyReplaceValue" href='/{{ todo.CategoryName }}/{{ todo.id }}'>
+            <div class="ui fluid card">
+              <div class="content">
+                <!-- Event Name -->
+                <div class="header">{{ todo.title }}</div>
+                <div class="meta"></div>
+                <!-- Event Time and Location -->
+                <div class="description">
+                  <p><strong>Date:</strong> {{ todo.date }}</p>
+                  <p><strong>Time:</strong> {{ todo.time }}</p>
+                  <p><strong>Location:</strong> {{ todo.place }}</p>
+                  <p>(Click to see description)</p>
+                </div>
+                <!-- Number of people in GroupMe chat -->
+                <div class="ui mini orange statistic">
+                  <div class="value">
+                    {{ todo.Size }}
+                  </div>
+                  <div class="label">
+                    Members
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        {% endfor %}
+      {% endif %}
+
+      {% if name == "videogames" %}
+        {% for todo in myvideogames %}
+        <div class="column">
+          <a class="MyReplaceValue" href='/{{ todo.CategoryName }}/{{ todo.id }}'>
+            <div class="ui fluid card">
+              <div class="content">
+                <!-- Event Name -->
+                <div class="header">{{ todo.title }}</div>
+                <div class="meta"></div>
+                <!-- Event Time and Location -->
+                <div class="description">
+                  <p><strong>Date:</strong> {{ todo.date }}</p>
+                  <p><strong>Time:</strong> {{ todo.time }}</p>
+                  <p><strong>Location:</strong> {{ todo.place }}</p>
+                  <p>(Click to see description)</p>
+                </div>
+                <!-- Number of people in GroupMe chat -->
+                <div class="ui mini orange statistic">
+                  <div class="value">
+                    {{ todo.Size }}
+                  </div>
+                  <div class="label">
+                    Members
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        {% endfor %}
+      {% endif %}
+
+      {% if name == "transportation" %}
+        {% for todo in mytransportation %}
+        <div class="column">
+          <a class="MyReplaceValue" href='/{{ todo.CategoryName }}/{{ todo.id }}'>
+            <div class="ui fluid card">
+              <div class="content">
+                <!-- Event Name -->
+                <div class="header">{{ todo.title }}</div>
+                <div class="meta"></div>
+                <!-- Event Time and Location -->
+                <div class="description">
+                  <p><strong>Date:</strong> {{ todo.date }}</p>
+                  <p><strong>Time:</strong> {{ todo.time }}</p>
+                  <p><strong>Location:</strong> {{ todo.place }}</p>
+                  <p>(Click to see description)</p>
+                </div>
+                <!-- Number of people in GroupMe chat -->
+                <div class="ui mini orange statistic">
+                  <div class="value">
+                    {{ todo.Size }}
+                  </div>
+                  <div class="label">
+                    Members
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        {% endfor %}
+      {% endif %}
+
+      {% if name == "problemsetgroups" %}
+        {% for todo in myproblemsetgroups %}
+        <div class="column">
+          <a class="MyReplaceValue" href='/{{ todo.CategoryName }}/{{ todo.id }}'>
+            <div class="ui fluid card">
+              <div class="content">
+                <!-- Event Name -->
+                <div class="header">{{ todo.title }}</div>
+                <div class="meta"></div>
+                <!-- Event Time and Location -->
+                <div class="description">
+                  <p><strong>Date:</strong> {{ todo.date }}</p>
+                  <p><strong>Time:</strong> {{ todo.time }}</p>
+                  <p><strong>Location:</strong> {{ todo.place }}</p>
+                  <p>(Click to see description)</p>
+                </div>
+                <!-- Number of people in GroupMe chat -->
+                <div class="ui mini orange statistic">
+                  <div class="value">
+                    {{ todo.Size }}
+                  </div>
+                  <div class="label">
+                    Members
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        {% endfor %}
+      {% endif %}
+
+      {% if name == "miscellaneous" %}
+        {% for todo in mymiscellaneous %}
+        <div class="column">
+          <a class="MyReplaceValue" href='/{{ todo.CategoryName }}/{{ todo.id }}'>
+            <div class="ui fluid card">
+              <div class="content">
+                <!-- Event Name -->
+                <div class="header">{{ todo.title }}</div>
+                <div class="meta"></div>
+                <!-- Event Time and Location -->
+                <div class="description">
+                  <p><strong>Date:</strong> {{ todo.date }}</p>
+                  <p><strong>Time:</strong> {{ todo.time }}</p>
+                  <p><strong>Location:</strong> {{ todo.place }}</p>
+                  <p>(Click to see description)</p>
+                </div>
+                <!-- Number of people in GroupMe chat -->
+                <div class="ui mini orange statistic">
+                  <div class="value">
+                    {{ todo.Size }}
+                  </div>
+                  <div class="label">
+                    Members
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        {% endfor %}
+      {% endif %}
+
     </div>
   </div>
-
-      <br>
-      <!-- Break -->
-      <div style="clear:both"></div>
-
-      <h2 class="ui inverted header">
-        My Events
-      </h2>
-
-      <br>
-
-   <div class="ui four column stackable grid">
-     {% for todo in mysports %}
-        <div class="column">
-          <a  class ="MyReplaceValue" href= '/{{ todo.CategoryName }}/{{todo.id}}'>
-            <div class="ui fluid card">
-              <div class="content">
-                <div class="header">{{ todo.title }}</div>
-                <div class="meta">{{ todo.time }}</div>
-                <div class="description">
-                  <p>{{ todo.place }}</p>
-                </div>
-                  <div class="size">Current Size: {{ todo.Size }}</div>
-                  <div class="cat">Category: {{ todo.CategoryName }}</div>
-              </div>
-            </div>
-          </a>
-        </div>
-        {% endfor %}
-
-   {% for todo in myworkingout %}
-        <div class="column">
-          <a  class ="MyReplaceValue" href= '/{{ todo.CategoryName }}/{{todo.id}}'>
-            <div class="ui fluid card">
-              <div class="content">
-                <div class="header">{{ todo.title }}</div>
-                <div class="meta">{{ todo.time }}</div>
-                <div class="description">
-                  <p>{{ todo.place }}</p>
-                </div>
-                  <div class="size">Current Size: {{ todo.Size }}</div>
-                  <div class="cat">Category: {{ todo.CategoryName }}</div>
-              </div>
-            </div>
-          </a>
-        </div>
-        {% endfor %}
-
-   {% for todo in myvideogames %}
-        <div class="column">
-          <a  class ="MyReplaceValue" href= '/{{ todo.CategoryName }}/{{todo.id}}'>
-            <div class="ui fluid card">
-              <div class="content">
-                <div class="header">{{ todo.title }}</div>
-                <div class="meta">{{ todo.time }}</div>
-                <div class="description">
-                  <p>{{ todo.place }}</p>
-                </div>
-                  <div class="size">Current Size: {{ todo.Size }}</div>
-              </div>
-            </div>
-          </a>
-        </div>
-        {% endfor %}
-
-   {% for todo in mytransportation %}
-        <div class="column">
-          <a  class ="MyReplaceValue" href= '/{{ todo.CategoryName }}/{{todo.id}}'>
-            <div class="ui fluid card">
-              <div class="content">
-                <div class="header">{{ todo.title }}</div>
-                <div class="meta">{{ todo.time }}</div>
-                <div class="description">
-                  <p>{{ todo.place }}</p>
-                </div>
-                  <div class="size">Current Size: {{ todo.Size }}</div>
-                  <div class="cat">Category: {{ todo.CategoryName }}</div>
-              </div>
-            </div>
-          </a>
-        </div>
-        {% endfor %}
-
-   {% for todo in myproblemsetgroups %}
-        <div class="column">
-          <a  class ="MyReplaceValue" href= '/{{ todo.CategoryName }}/{{todo.id}}'> {#class ="replaceValue"#}
-            <div class="ui fluid card">
-              <div class="content">
-                <div class="header">{{ todo.title }}</div>
-                <div class="meta">{{ todo.time }}</div>
-                <div class="description">
-                  <p>{{ todo.place }}</p>
-                </div>
-                  <div class="size">Current Size: {{ todo.Size }}</div>
-                  <div class="cat">Category: {{ todo.CategoryName }}</div>
-              </div>
-            </div>
-          </a>
-        </div>
-        {% endfor %}
-
-   {% for todo in mymiscellaneous %}
-        <div class="column">
-          <a class ="MyReplaceValue" href= '/{{ todo.CategoryName }}/{{todo.id}}'>
-            <div class="ui fluid card">
-              <div class="content">
-                <div class="header">{{ todo.title }}</div>
-                <div class="meta">{{ todo.time }}</div>
-                <div class="description">
-                  <p>{{ todo.place }}</p>
-                </div>
-                  <div class="size">Current Size: {{ todo.Size }}</div>
-                  <div class="cat">Category: {{ todo.CategoryName }}</div>
-              </div>
-            </div>
-          </a>
-        </div>
-        {% endfor %}
-   </div>
 
 </body>
 </html>
