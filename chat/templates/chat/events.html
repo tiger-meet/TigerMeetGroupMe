@@ -273,8 +273,8 @@
 
       <div class="ui four column stackable grid">
 
-        {% if {{ name }} == "sports" %}
-          <p>name == sports</p>
+        {% if name == "sports" %}
+          <p>name == sports: {{ name }}</p>
           {% for todo in mysports %}
           <div class="column">
             <a class="MyReplaceValue" href='/{{ todo.CategoryName }}/{{ todo.id }}'>
