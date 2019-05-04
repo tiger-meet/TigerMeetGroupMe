@@ -272,6 +272,15 @@
       <h2 class="ui inverted header">My Events</h2>
 
       <div class="ui four column stackable grid">
+        
+        {% if name == sports %}
+          <p>name == sports</p>
+        {% elif name == problemsetgroups %}
+          <p>name == sports</p>
+        {% else %}
+          <p>name == sports</p>
+        {% endif %}
+
         {% for todo in mysports %}
         <div class="column">
           <a class="MyReplaceValue" href='/{{ todo.CategoryName }}/{{ todo.id }}'>
