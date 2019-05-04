@@ -205,7 +205,7 @@ def events(request, group_name):
     elif (group_name == 'miscellaneous'):
         todos = MiscellaneousEvents.objects.exclude(MakerToken=token)
 
-#for my events
+    #for my events
     mysports = SportsEvents.objects.filter(MakerToken=token)
     myworkingout = WorkingOutEvents.objects.filter(MakerToken=token)
     myvideogames = VideoGamesEvents.objects.filter(MakerToken=token)
