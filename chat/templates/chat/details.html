@@ -10,7 +10,7 @@
     var url = "?access_token=" + {{ access_token }};
     var categoryurl = '/category/' + name + url;
     var subjoinurl = '/subjoin/' + id + '/'+ name + '/chat' + url;
-    var destroy = '/deleteconfirmation/' + id + '/' + name + url;
+    var destroy = '/destroy/' + id + '/' + name + url;
   </script>
 {% endblock %}
 
@@ -63,7 +63,7 @@
 
         <div class="ui basic modal" id="deleteModal">
           <div class="ui icon header">
-            <i class="archive icon"></i>
+            <i class="trash icon"></i>
             Are you sure you want to delete?
           </div>
           <div class="content">
@@ -74,13 +74,12 @@
               <i class="remove icon"></i>
               No
             </div>
-            <div class="ui green ok inverted button">
+            <button class="ui green ok inverted button" type="button" onclick="location.href=destroy;">
               <i class="checkmark icon"></i>
-              Yes
-            </div>
+              Delete
+            </button>
           </div>
         </div>
-
 
       {% endif %}
     
