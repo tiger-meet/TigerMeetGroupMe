@@ -145,7 +145,7 @@ def events(request, group_name):
                 context = {
                     'access_token': mark_safe(json.dumps(encodedtoken)),
                     'group_name': mark_safe(json.dumps(group_name)),
-                    'todos':todos
+                    'todos': todos
                 }
                 return render(request, 'chat/events.html', context)
 
@@ -179,7 +179,7 @@ def events(request, group_name):
             context = {
                 'access_token': mark_safe(json.dumps(encodedtoken)),
                 'group_name': mark_safe(json.dumps(group_name)),
-                'todos':todos
+                'todos': todos
             }
             return render(request, 'chat/events.html', context)
 
@@ -215,7 +215,7 @@ def events(request, group_name):
         context = {
             'access_token': mark_safe(json.dumps(encodedtoken)),
             'group_name': mark_safe(json.dumps(group_name)),
-            'todos': otherTodos,
+            'otherTodos': otherTodos,
             'myTodos': myTodos
         }
 
@@ -223,7 +223,7 @@ def events(request, group_name):
         context = {
             'access_token': mark_safe(json.dumps(encodedtoken)),
             'group_name': mark_safe(json.dumps(group_name)),
-            'todos': "",
+            'otherTodos': "",
             'myTodos': myTodos
         }
 
@@ -302,14 +302,6 @@ def createchat(request, group_name):
                 #'access_token': mark_safe(json.dumps(access_token)),
                 'group_name': mark_safe(json.dumps(group_name))
             })
-
-def todo(request):
-    todos = VideoGamesEvents.objects.all()[:10]
-
-    context = {
-        'todos':todos
-    }
-    return render(request, 'chat/todo.html', context)
 
 def add(request, group_name):
     encodedtoken = gettoken(request)
