@@ -10,7 +10,8 @@
     var url = "?access_token=" + {{ access_token }};
     var categoryurl = '/category/' + name + url;
     var subjoinurl = '/subjoin/' + id + '/'+ name + '/chat' + url;
-    var destroy = '/deleteconfirmation/' + id + '/' + name + url;
+    var editurl = '/edit/' + id + '/' + name + url;
+    var destroyurl = '/destroy/' + id + '/' + name + url;
   </script>
 {% endblock %}
 
@@ -25,7 +26,7 @@
       <!-- Break -->
       <div style="clear:both"></div>
 
-      <h1><strong></strong> {{ todo.title }}</h1>
+      <h1><strong>{{ todo.title }}</strong></h1>
       <h3><strong>Date:</strong> {{ todo.date }}</h3>
       <h3><strong>Time:</strong> {{ todo.time }}</h3>
       <h3><strong>Location:</strong> {{ todo.place }}</h3>
@@ -47,6 +48,47 @@
       <div>
         <button id="join" class="ui blue button" type="button" href="fill" onclick="location.href=subjoinurl; return false;">Join this GroupMe Chat</button>
       </div>
+
+      {% if is_creator %}
+        <div class="ui inverted divider"></div>
+
+        <div class="ui buttons">
+          <button class="ui yellow button" type="button" href="fill" onclick="location.href=editurl;">Edit My Event</button>
+          <div class="or"></div>
+          <button id="delete" class="ui red button" type="button" href="fill" style="border-top-right-radius: .28571429rem; border-bottom-right-radius: .28571429rem;">Delete My Event</button>
+        <div class="ui buttons">
+
+        <script>
+          document.getElementById("delete").onclick = function() 
+          {
+            $("#deleteModal")
+              .modal("show")
+            ;
+          };
+        </script>
+
+        <div class="ui basic modal" id="deleteModal">
+          <div class="ui icon header">
+            <i class="trash alternate outline icon"></i>
+            Are you sure you want to delete this?
+          </div>
+          <div class="content">
+            <p>Your event and group chat will be gone forever...</p>
+            <p><em>"Taking a new step, uttering a new word, is what people fear most." - Fyodor Dostoevsky, Crime and Punishment</em></p>
+          </div>
+          <div class="actions">
+            <div class="ui basic cancel inverted button">
+              <i class="remove icon"></i>
+              No
+            </div>
+            <button class="ui red ok inverted button" type="button" onclick="location.href=destroyurl;">
+              <i class="trash alternate outline icon"></i>
+              Delete
+            </button>
+          </div>
+        </div>
+
+      {% endif %}
     
     </div>
   </div>

@@ -1,5 +1,5 @@
-<!-- chat/templates/chat/add.html -->
-<!-- Page to add event -->
+<!-- chat/templates/chat/edit.html -->
+<!-- Page to edit event -->
 
 {% extends "chat/base.html" %}
 
@@ -10,9 +10,10 @@
 
   <script type="text/javascript">
     var name = {{ group_name }};
+    var id = {{ id }};
     var url = "?access_token=" + {{ access_token }};
-    var categoryurl = '/category/' + name + url;
-    var addurl = '/add/' + name + url;
+    var detailsurl = '/details/' + name + '/' + id + '/' + url;
+    // var addurl = '/add/' + name + url;
 
     // Custom group icons
     var icon = '';
@@ -42,7 +43,7 @@
 
     window.onload = function()
     {
-      document.getElementById("myGroup").innerHTML = "Create " + name + " Event";
+      document.getElementById("myGroup").innerHTML = "Edit " + "This" + " Event";
       document.adurl.action = get_action();
 
       // Custom group icons
@@ -60,7 +61,7 @@
     <div class="column">
 
       <div>
-        <button class="ui left floated button" type="button" onclick="location.href = categoryurl; return false;">Back to Category</button>
+        <button class="ui left floated button" type="button" onclick="location.href = detailsurl; return false;">Back to Event Details</button>
       </div>
 
       <br>
@@ -72,7 +73,7 @@
         <div class="content" id="myGroup"></div>
       </h1>
 
-      <form class="ui inverted form" method="post" name="adurl" id="adurl">
+      <form class="ui inverted form" method="post" name="" id="">
         {% csrf_token %}
         <div class="required field">
           <label for="title">Event Name</label>
@@ -99,7 +100,7 @@
           <label for="description">Event Description</label>
           <input type="text" name="description" id="description" placeholder="Event Description">
         </div>
-        <input class="ui green button" type="submit" value="Submit and Create Event Chat">
+        <input class="ui green button" type="submit" value="Submit and Edit Event Chat">
       </form>
 
       <script>

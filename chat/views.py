@@ -145,7 +145,7 @@ def events(request, group_name):
                 context = {
                     'access_token': mark_safe(json.dumps(encodedtoken)),
                     'group_name': mark_safe(json.dumps(group_name)),
-                    'todos':todos
+                    'todos': todos
                 }
                 return render(request, 'chat/events.html', context)
 
@@ -179,7 +179,7 @@ def events(request, group_name):
             context = {
                 'access_token': mark_safe(json.dumps(encodedtoken)),
                 'group_name': mark_safe(json.dumps(group_name)),
-                'todos':todos
+                'todos': todos
             }
             return render(request, 'chat/events.html', context)
 
@@ -190,55 +190,41 @@ def events(request, group_name):
     countandprune(ProblemSetEvents.objects.all())
     countandprune(MiscellaneousEvents.objects.all())
 
-
     #create a count of the people in chats and check if they've been deleted
     if (group_name == 'sports'):
-        todos = SportsEvents.objects.exclude(MakerToken=token)
+        otherTodos = SportsEvents.objects.exclude(MakerToken=token)
+        myTodos = SportsEvents.objects.filter(MakerToken=token)
     elif (group_name == 'workingout'):
-        todos = WorkingOutEvents.objects.exclude(MakerToken=token)
+        otherTodos = WorkingOutEvents.objects.exclude(MakerToken=token)
+        myTodos = WorkingOutEvents.objects.filter(MakerToken=token)
     elif (group_name == 'videogames'):
-        todos = VideoGamesEvents.objects.exclude(MakerToken=token)
+        otherTodos = VideoGamesEvents.objects.exclude(MakerToken=token)
+        myTodos = VideoGamesEvents.objects.filter(MakerToken=token)
     elif (group_name == 'transportation'):
-        todos = TransportationEvents.objects.exclude(MakerToken=token)
+        otherTodos = TransportationEvents.objects.exclude(MakerToken=token)
+        myTodos = TransportationEvents.objects.filter(MakerToken=token)
     elif (group_name == 'problemsetgroups'):
-        todos = ProblemSetEvents.objects.exclude(MakerToken=token)
+        otherTodos = ProblemSetEvents.objects.exclude(MakerToken=token)
+        myTodos = ProblemSetEvents.objects.filter(MakerToken=token)
     elif (group_name == 'miscellaneous'):
-        todos = MiscellaneousEvents.objects.exclude(MakerToken=token)
-
-#for my events
-    mysports = SportsEvents.objects.filter(MakerToken=token)
-    myworkingout = WorkingOutEvents.objects.filter(MakerToken=token)
-    myvideogames = VideoGamesEvents.objects.filter(MakerToken=token)
-    mytransportation = TransportationEvents.objects.filter(MakerToken=token)
-    myproblemsetgroups = ProblemSetEvents.objects.filter(MakerToken=token)
-    mymiscellaneous = MiscellaneousEvents.objects.filter(MakerToken=token)
-
+        otherTodos = MiscellaneousEvents.objects.exclude(MakerToken=token)
+        myTodos = MiscellaneousEvents.objects.filter(MakerToken=token)
 
     try:
-        print(todos)
+        print(otherTodos)
         context = {
             'access_token': mark_safe(json.dumps(encodedtoken)),
             'group_name': mark_safe(json.dumps(group_name)),
-            'todos': todos,
-            'mysports': mysports,
-            'myworkingout': myworkingout,
-            'myvideogames': myvideogames,
-            'mytransportation': mytransportation,
-            'myproblemsetgroups': myproblemsetgroups,
-            'mymiscellaneous': mymiscellaneous
+            'otherTodos': otherTodos,
+            'myTodos': myTodos
         }
 
     except:
         context = {
             'access_token': mark_safe(json.dumps(encodedtoken)),
             'group_name': mark_safe(json.dumps(group_name)),
-            'todos': "",
-            'mysports': mysports,
-            'myworkingout': myworkingout,
-            'myvideogames': myvideogames,
-            'mytransportation': mytransportation,
-            'myproblemsetgroups': myproblemsetgroups,
-            'mymiscellaneous': mymiscellaneous
+            'otherTodos': "",
+            'myTodos': myTodos
         }
 
     finally:
@@ -272,7 +258,6 @@ def joinchat(request, group_name):
 
 # creates a chat in your own personal groupme application based on which one you click
 def createchat(request, group_name):
-    #token = gettoken(request)
     encodedtoken = gettoken(request)
     token = decodetoken(encodedtoken)
 
@@ -304,7 +289,6 @@ def createchat(request, group_name):
             code = str(shareurl[-17:-9])
             sharetoken = str(shareurl[-8:])
 
-
             #database stuff
             #don't delete this line below! It is used to delete items in database
             #GroupChats.objects.filter(GroupName=group_name).delete()
@@ -316,14 +300,6 @@ def createchat(request, group_name):
                 #'access_token': mark_safe(json.dumps(access_token)),
                 'group_name': mark_safe(json.dumps(group_name))
             })
-
-def todo(request):
-    todos = VideoGamesEvents.objects.all()[:10]
-
-    context = {
-        'todos':todos
-    }
-    return render(request, 'chat/todo.html', context)
 
 def add(request, group_name):
     encodedtoken = gettoken(request)
@@ -396,6 +372,7 @@ def add(request, group_name):
 
 def details(request, group_name, id):
     encodedtoken = gettoken(request)
+    token = decodetoken(encodedtoken)
 
     if (group_name == 'sports'):
         todo = SportsEvents.objects.get(id=id)
@@ -410,37 +387,19 @@ def details(request, group_name, id):
     if (group_name == 'miscellaneous'):
         todo = MiscellaneousEvents.objects.get(id=id)
 
+    if (todo.MakerToken == token):
+        is_creator = True
+    else:
+        is_creator = False
+
     context = {
-        'todo':todo,
+        'todo': todo,
         'access_token': mark_safe(json.dumps(encodedtoken)),
         'group_name': mark_safe(json.dumps(group_name)),
-        'id': mark_safe(json.dumps(id))
+        'id': mark_safe(json.dumps(id)),
+        'is_creator': is_creator
     }
     return render(request, 'chat/details.html', context)
-
-def mydetails(request, group_name, id):
-    encodedtoken = gettoken(request)
-
-    if (group_name == 'sports'):
-        todo = SportsEvents.objects.get(id=id)
-    if (group_name == 'workingout'):
-        todo = WorkingOutEvents.objects.get(id=id)
-    if (group_name == 'videogames'):
-        todo = VideoGamesEvents.objects.get(id=id)
-    if (group_name == 'transportation'):
-        todo = TransportationEvents.objects.get(id=id)
-    if (group_name == 'problemsetgroups'):
-        todo = ProblemSetEvents.objects.get(id=id)
-    if (group_name == 'miscellaneous'):
-        todo = MiscellaneousEvents.objects.get(id=id)
-
-    context = {
-        'todo':todo,
-        'access_token': mark_safe(json.dumps(encodedtoken)),
-        'group_name': mark_safe(json.dumps(group_name)),
-        'id': mark_safe(json.dumps(id))
-    }
-    return render(request, 'chat/mydetails.html', context)
 
 def joinsubchat(request, id, group_name):
     encodedtoken = gettoken(request)
@@ -493,19 +452,6 @@ def joinsubchat(request, id, group_name):
             'group_name': mark_safe(json.dumps(name))
         })
 
-def deleteconfirmation(request, id, group_name):
-    encodedtoken = gettoken(request)
-    token = decodetoken(encodedtoken)
-    if token == 'none':
-        return render(request, 'chat/gmlogin.html', {})
-
-    else:
-        return render(request, 'chat/deleteconfirmation.html', {
-            'id': mark_safe(json.dumps(id)),
-            'group_name': mark_safe(json.dumps(group_name)),
-            'access_token': mark_safe(json.dumps(encodedtoken)),
-        })
-
 def destroy(request, id, group_name):
     encodedtoken = gettoken(request)
     token = decodetoken(encodedtoken)
@@ -526,8 +472,6 @@ def destroy(request, id, group_name):
         if (group_name == 'miscellaneous'):
             code = MiscellaneousEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
 
-
-
         url = "https://api.groupme.com/v3/groups/" + code + "/destroy" + "?token=" + token
         print(url)
         r = requests.post(url)
@@ -540,3 +484,32 @@ def getgroupname(request):
         name = request.GET['group_name']
         token = request.GET['access_token']
     return HttpResponse(name, token)
+
+def edit(request, id, group_name):
+    encodedtoken = gettoken(request)
+    token = decodetoken(encodedtoken)
+
+    if token == 'none':
+        return render(request, 'chat/gmlogin.html', {})
+
+    else:
+        if (group_name == 'sports'):
+            code = SportsEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
+        if (group_name == 'workingout'):
+            code = WorkingOutEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
+        if (group_name == 'videogames'):
+            code = VideoGamesEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
+        if (group_name == 'transportation'):
+            code = TransportationEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
+        if (group_name == 'problemsetgroups'):
+            code = ProblemSetEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
+        if (group_name == 'miscellaneous'):
+            code = MiscellaneousEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
+
+        # TODO
+        # url = "https://api.groupme.com/v3/groups/" + code + "/destroy" + "?token=" + token
+        # print(url)
+        # r = requests.post(url)
+        # print(r)
+
+        return render(request, 'chat/edit.html', {'access_token': mark_safe(json.dumps(encodedtoken))})
