@@ -210,12 +210,12 @@ def events(request, group_name):
         myTodos = MiscellaneousEvents.objects.filter(MakerToken=token)
 
     try:
-        code = GroupChats.objects.get(GroupName=group_name).GroupId
+        group_id = GroupChats.objects.get(GroupName=group_name).GroupId
         print(code)
     except:
-        code = 'none'
+        group_id = 'none'
     finally:
-        url = 'https://api.groupme.com/v3/groups/' + code + '?token=' + token
+        url = 'https://api.groupme.com/v3/groups/' + group_id + '?token=' + token
         r = requests.get(url)
         print(r.json())
         print(r.json()['meta']['code'])
@@ -258,7 +258,7 @@ def joinchat(request, group_name):
         group_id = GroupChats.objects.filter(GroupName=group_name).values_list("GroupId", flat=True)[0]
         sharetoken = GroupChats.objects.filter(GroupName=group_name).values_list("ShareToken", flat=True)[0]
 
-        url = "https://api.groupme.com/v3/groups/" + code + "/join/" + sharetoken + "?token=" + token
+        url = "https://api.groupme.com/v3/groups/" + group_id + "/join/" + sharetoken + "?token=" + token
         print(url)
         r = requests.post(url)
         #print(sharetoken)
@@ -299,14 +299,14 @@ def createchat(request, group_name):
 
             print(r.json()['response'])
             shareurl = (r.json()['response']['share_url'])
-            code = str(shareurl[-17:-9])
+            group_id = str(shareurl[-17:-9])
             sharetoken = str(shareurl[-8:])
 
             #database stuff
             #don't delete this line below! It is used to delete items in database
             #GroupChats.objects.filter(GroupName=group_name).delete()
 
-            p = GroupChats(GroupName=group_name, GroupId=code, ShareToken=sharetoken)
+            p = GroupChats(GroupName=group_name, GroupId=group_id, ShareToken=sharetoken)
             p.save()
 
             # Redirect
@@ -346,21 +346,21 @@ def add(request, group_name):
 
             print(r.json()['response']['share_url'])
             shareurl = (r.json()['response']['share_url'])
-            code = str(shareurl[-17:-9])
+            group_id = str(shareurl[-17:-9])
             sharetoken = str(shareurl[-8:])
 
             if (group_name == 'sports'):
-                todo = SportsEvents(title=title, place=place, date=date, time=time, description=description, GroupId=code, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
+                todo = SportsEvents(title=title, place=place, date=date, time=time, description=description, GroupId=group_id, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
             if (group_name == 'workingout'):
-                todo = WorkingOutEvents(title=title, place=place, date=date, time=time, description=description, GroupId=code, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
+                todo = WorkingOutEvents(title=title, place=place, date=date, time=time, description=description, GroupId=group_id, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
             if (group_name == 'videogames'):
-                todo = VideoGamesEvents(title=title, place=place, date=date, time=time, description=description, GroupId=code, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
+                todo = VideoGamesEvents(title=title, place=place, date=date, time=time, description=description, GroupId=group_id, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
             if (group_name == 'transportation'):
-                todo = TransportationEvents(title=title, place=place, date=date, time=time, description=description, GroupId=code, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
+                todo = TransportationEvents(title=title, place=place, date=date, time=time, description=description, GroupId=group_id, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
             if (group_name == 'problemsetgroups'):
-                todo = ProblemSetEvents(title=title, place=place, date=date, time=time, description=description, GroupId=code, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
+                todo = ProblemSetEvents(title=title, place=place, date=date, time=time, description=description, GroupId=group_id, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
             if (group_name == 'miscellaneous'):
-                todo = MiscellaneousEvents(title=title, place=place, date=date, time=time, description=description, GroupId=code, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
+                todo = MiscellaneousEvents(title=title, place=place, date=date, time=time, description=description, GroupId=group_id, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
 
             todo.save()
 
@@ -397,8 +397,8 @@ def details(request, id, group_name):
     else:
         is_creator = False
 
-    code = todo.GroupId
-    url = 'https://api.groupme.com/v3/groups/' + code + '?token=' + token
+    group_id = todo.GroupId
+    url = 'https://api.groupme.com/v3/groups/' + group_id + '?token=' + token
     r = requests.get(url)
     print(r.json()['meta']['code'])
     if r.json()['meta']['code'] == 200:
@@ -459,19 +459,19 @@ def destroy(request, id, group_name):
 
     else:
         if (group_name == 'sports'):
-            code = SportsEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
+            group_id = SportsEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
         if (group_name == 'workingout'):
-            code = WorkingOutEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
+            group_id = WorkingOutEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
         if (group_name == 'videogames'):
-            code = VideoGamesEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
+            group_id = VideoGamesEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
         if (group_name == 'transportation'):
-            code = TransportationEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
+            group_id = TransportationEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
         if (group_name == 'problemsetgroups'):
-            code = ProblemSetEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
+            group_id = ProblemSetEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
         if (group_name == 'miscellaneous'):
-            code = MiscellaneousEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
+            group_id = MiscellaneousEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
 
-        url = "https://api.groupme.com/v3/groups/" + code + "/destroy" + "?token=" + token
+        url = "https://api.groupme.com/v3/groups/" + group_id + "/destroy" + "?token=" + token
         print(url)
         r = requests.post(url)
         print(r)
