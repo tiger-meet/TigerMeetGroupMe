@@ -286,7 +286,7 @@ def createchat(request, group_name):
             headers = {"Content-Type": "application/json"}
             r = requests.post(url, data=json.dumps(data), headers=headers)
 
-            print(r.json()['response']['share_url'])
+            print(r.json()['response'])
             shareurl = (r.json()['response']['share_url'])
             code = str(shareurl[-17:-9])
             sharetoken = str(shareurl[-8:])
