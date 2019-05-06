@@ -547,10 +547,8 @@ def edit(request, id, group_name):
             if (todo.MakerToken == token):
                 todo.save()
 
-            return render(request, 'chat/events.html', {
-                'access_token': mark_safe(json.dumps(encodedtoken)),
-                'group_name': mark_safe(json.dumps(group_name))
-            })
+            # Redirect
+            events(request, group_name)
 
         else:
             if (group_name == 'sports'):
