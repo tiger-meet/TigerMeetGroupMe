@@ -1,4 +1,5 @@
 # TigerMeet
+![alt text](https://raw.githubusercontent.com/tiger-meet/TigerMeetGroupMe/master/static/cub.png)
 
 ## Table of Contents
 
