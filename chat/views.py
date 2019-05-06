@@ -210,13 +210,14 @@ def events(request, group_name):
         otherTodos = MiscellaneousEvents.objects.exclude(MakerToken=token)
         myTodos = MiscellaneousEvents.objects.filter(MakerToken=token)
 
-    GroupChats.objects.filter(GroupName=group_name).values_list("GroupId", flat=True)[0]
-    groupid = getattr(todo, 'GroupId')
-    makertoken = getattr(todo, 'MakerToken')
-    url = 'https://api.groupme.com/v3/groups/' + groupid + '?token=' + makertoken
+    code = GroupChats.objects.filter(GroupName=group_name).values_list("GroupId", flat=True)[0]
+    url = 'https://api.groupme.com/v3/groups/' + code + '?token=' + token
     r = requests.get(url)
     print(r.json()['meta']['code'])
-    if r.json()['meta']['code'] == 404:
+    if r.json()['meta']['code'] == 200:
+        AlreadyInChat = True
+    else:
+        AlreadyInChat = False
 
     groupid = getattr(todo, 'GroupId')
     makertoken = getattr(todo, 'MakerToken')
@@ -229,6 +230,7 @@ def events(request, group_name):
     try:
         print(otherTodos)
         context = {
+            'already_in_chat': mark_safe(json.dumps(AlreadyInChat)),
             'access_token': mark_safe(json.dumps(encodedtoken)),
             'group_name': mark_safe(json.dumps(group_name)),
             'otherTodos': otherTodos,
@@ -237,6 +239,7 @@ def events(request, group_name):
 
     except:
         context = {
+            'already_in_chat': mark_safe(json.dumps(AlreadyInChat)),
             'access_token': mark_safe(json.dumps(encodedtoken)),
             'group_name': mark_safe(json.dumps(group_name)),
             'otherTodos': "",
