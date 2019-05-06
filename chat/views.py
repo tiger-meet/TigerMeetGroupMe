@@ -65,7 +65,6 @@ def countandprune(todos):
         makertoken = getattr(todo, 'MakerToken')
         url = 'https://api.groupme.com/v3/groups/' + groupid + '?token=' + makertoken
         r = requests.get(url)
-        print(r.json()['meta']['code'])
         if r.json()['meta']['code'] == 404:
             todo.delete()
         else:
@@ -107,6 +106,23 @@ def events(request, group_name):
     token = decodetoken(encodedtoken)
 
     not_host = request.META.get('RAW_URI')
+
+    # Logic for whether to disabled join general chat
+    try:
+        group_id = GroupChats.objects.get(GroupName=group_name).GroupId
+        print(group_id)
+    except:
+        group_id = 'none'
+    finally:
+        url = 'https://api.groupme.com/v3/groups/' + group_id + '?token=' + token
+        r = requests.get(url)
+        print(r.json())
+        print(r.json()['meta']['code'])
+        if r.json()['meta']['code'] == 200:
+            already_in_chat = True
+        else:
+            already_in_chat = False
+
     # case for a search
     if "search=" in not_host:
 
@@ -161,6 +177,7 @@ def events(request, group_name):
                 todos1.sort(key = lambda x: x.title)
                 todos2.sort(key = lambda x: x.title)
                 context = {
+                    'already_in_chat': already_in_chat,
                     'access_token': mark_safe(json.dumps(encodedtoken)),
                     'group_name': mark_safe(json.dumps(group_name)),
                     'myTodos':todos2,
@@ -171,15 +188,19 @@ def events(request, group_name):
             if "sortBy=Date" in not_host:
                 todos1.sort(key = lambda x: x.date)
                 todos2.sort(key = lambda x: x.date)
+    
                 context = {
+                    'already_in_chat': already_in_chat,
                     'access_token': mark_safe(json.dumps(encodedtoken)),
                     'group_name': mark_safe(json.dumps(group_name)),
+
                     'myTodos': todos2,
                     'otherTodos': todos1
                 }
                 return render(request, 'chat/events.html', context)
 
             context = {
+                'already_in_chat': already_in_chat,
                 'access_token': mark_safe(json.dumps(encodedtoken)),
                 'group_name': mark_safe(json.dumps(group_name)),
                 'myTodos':todos2,
@@ -192,31 +213,35 @@ def events(request, group_name):
             otherTodos = otherTodos.order_by('title')
 
             context = {
+                'already_in_chat': already_in_chat,
                 'access_token': mark_safe(json.dumps(encodedtoken)),
                 'group_name': mark_safe(json.dumps(group_name)),
                 'otherTodos': otherTodos,
                 'myTodos': myTodos
             }
-            return render(request, 'chat/events.html/', context)
+            return render(request, 'chat/events.html', context)
 
         elif "sortBy=Date" in not_host:
             myTodos = myTodos.order_by('date')
             otherTodos = otherTodos.order_by('date')
 
             context = {
+                'already_in_chat': already_in_chat,
                 'access_token': mark_safe(json.dumps(encodedtoken)),
                 'group_name': mark_safe(json.dumps(group_name)),
                 'myTodos': myTodos,
                 'otherTodos': otherTodos
             }
-            return render(request, 'chat/events.html/', context)
+            return render(request, 'chat/events.html', context)
 
         else:
             context = {
+                'already_in_chat': already_in_chat,
                 'access_token': mark_safe(json.dumps(encodedtoken)),
                 'group_name': mark_safe(json.dumps(group_name)),
                 'myTodos': myTodos,
                 'otherTodos': otherTodos
+
             }
             return render(request, 'chat/events.html', context)
 
@@ -251,20 +276,20 @@ def events(request, group_name):
     try:
         print(otherTodos)
         context = {
+            'already_in_chat': already_in_chat,
             'access_token': mark_safe(json.dumps(encodedtoken)),
             'group_name': mark_safe(json.dumps(group_name)),
             'otherTodos': otherTodos,
             'myTodos': myTodos
         }
-
     except:
         context = {
+            'already_in_chat': already_in_chat,
             'access_token': mark_safe(json.dumps(encodedtoken)),
             'group_name': mark_safe(json.dumps(group_name)),
             'otherTodos': "",
             'myTodos': myTodos
         }
-
     finally:
         if token == 'none':
             return render(request, 'chat/gmlogin.html', {})
@@ -279,20 +304,18 @@ def joinchat(request, group_name):
         return render(request, 'chat/gmlogin.html', {})
 
     else:
-        code = GroupChats.objects.filter(GroupName=group_name).values_list("GroupId", flat=True)[0]
+        group_id = GroupChats.objects.filter(GroupName=group_name).values_list("GroupId", flat=True)[0]
         sharetoken = GroupChats.objects.filter(GroupName=group_name).values_list("ShareToken", flat=True)[0]
 
-        url = "https://api.groupme.com/v3/groups/" + code + "/join/" + sharetoken + "?token=" + token
+        url = "https://api.groupme.com/v3/groups/" + group_id + "/join/" + sharetoken + "?token=" + token
         print(url)
         r = requests.post(url)
         #print(sharetoken)
         #print(r)
         #print(r.json()['response']['group']['share_url'])
 
-        return render(request, 'chat/joinchat.html', {
-            'group_id': mark_safe(json.dumps(code)),
-            'group_name': mark_safe(json.dumps(group_name))
-        })
+        # Redirect
+        return events(request, group_name)
 
 # creates a chat in your own personal groupme application based on which one you click
 def createchat(request, group_name):
@@ -308,36 +331,35 @@ def createchat(request, group_name):
 
         try:
             GroupChats.objects.filter(GroupName=group_name).values_list("GroupId", flat=True)[0]
-            group_name = 'didn\'t create group ' + group_name
-            return render(request, 'chat/chat.html', {
-                # 'access_token': mark_safe(json.dumps(access_token)),
-                'group_name': mark_safe(json.dumps(group_name))
-            })
+            groupchat_name = 'didn\'t create group ' + group_name
+
+            # Redirect
+            return events(request, group_name)
 
         except:
 
             chatname = "TigerMeet " + group_name
             data = {'name': chatname,
-                    "share": True,}
+                    "share": True,
+                    'image_url': 'https://i.groupme.com/666x562.png.22b32dd48efe4c138892a502d5e44032',
+                    }
             headers = {"Content-Type": "application/json"}
             r = requests.post(url, data=json.dumps(data), headers=headers)
 
-            print(r.json()['response']['share_url'])
+            print(r.json()['response'])
             shareurl = (r.json()['response']['share_url'])
-            code = str(shareurl[-17:-9])
+            group_id = str(shareurl[-17:-9])
             sharetoken = str(shareurl[-8:])
 
             #database stuff
             #don't delete this line below! It is used to delete items in database
             #GroupChats.objects.filter(GroupName=group_name).delete()
 
-            p = GroupChats(GroupName=group_name, GroupId=code, ShareToken=sharetoken)
+            p = GroupChats(GroupName=group_name, GroupId=group_id, ShareToken=sharetoken)
             p.save()
 
-            return render(request, 'chat/chat.html', {
-                #'access_token': mark_safe(json.dumps(access_token)),
-                'group_name': mark_safe(json.dumps(group_name))
-            })
+            # Redirect
+            return events(request, group_name)
 
 def add(request, group_name):
     encodedtoken = gettoken(request)
@@ -368,47 +390,43 @@ def add(request, group_name):
 
             chatname = name + ' | TigerMeet '
             data = {'name': chatname,
-                    "share": True, }
+                    "share": True,
+                    'image_url': 'https://i.groupme.com/666x562.png.22b32dd48efe4c138892a502d5e44032'}
             headers = {"Content-Type": "application/json"}
             r = requests.post(url, data=json.dumps(data), headers=headers)
 
             print(r.json()['response']['share_url'])
             shareurl = (r.json()['response']['share_url'])
-            code = str(shareurl[-17:-9])
+            group_id = str(shareurl[-17:-9])
             sharetoken = str(shareurl[-8:])
 
             if (group_name == 'sports'):
-                todo = SportsEvents(title=title, place=place, date=date, time=time, description=description, GroupId=code, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
+                todo = SportsEvents(title=title, place=place, date=date, time=time, description=description, GroupId=group_id, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
             if (group_name == 'workingout'):
-                todo = WorkingOutEvents(title=title, place=place, date=date, time=time, description=description, GroupId=code, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
+                todo = WorkingOutEvents(title=title, place=place, date=date, time=time, description=description, GroupId=group_id, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
             if (group_name == 'videogames'):
-                todo = VideoGamesEvents(title=title, place=place, date=date, time=time, description=description, GroupId=code, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
+                todo = VideoGamesEvents(title=title, place=place, date=date, time=time, description=description, GroupId=group_id, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
             if (group_name == 'transportation'):
-                todo = TransportationEvents(title=title, place=place, date=date, time=time, description=description, GroupId=code, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
+                todo = TransportationEvents(title=title, place=place, date=date, time=time, description=description, GroupId=group_id, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
             if (group_name == 'problemsetgroups'):
-                todo = ProblemSetEvents(title=title, place=place, date=date, time=time, description=description, GroupId=code, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
+                todo = ProblemSetEvents(title=title, place=place, date=date, time=time, description=description, GroupId=group_id, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
             if (group_name == 'miscellaneous'):
-                todo = MiscellaneousEvents(title=title, place=place, date=date, time=time, description=description, GroupId=code, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
+                todo = MiscellaneousEvents(title=title, place=place, date=date, time=time, description=description, GroupId=group_id, ShareToken=sharetoken, MakerToken=token, CategoryName=group_name)
 
             todo.save()
 
-            group_name = name
+            groupchat_name = name
             url = '?access_token=' + encodedtoken
-            allurl = '/makechat/' + group_name + url
+            allurl = '/makechat/' + groupchat_name + url
 
-            #return redirect('/')
-            #change this so it doesn't just call createchat
-            return render(request, 'chat/chat.html', {
-                'access_token': mark_safe(json.dumps(encodedtoken)),
-                'group_name': mark_safe(json.dumps(group_name)),
-                'category_name': mark_safe(json.dumps(category_name))
-            })
+            # Redirect
+            return events(request, group_name)
 
         else:
             return render(request, 'chat/add.html', {'access_token': mark_safe(json.dumps(encodedtoken)),
                                                     'group_name': mark_safe(json.dumps(group_name))})
 
-def details(request, group_name, id):
+def details(request, id, group_name):
     encodedtoken = gettoken(request)
     token = decodetoken(encodedtoken)
 
@@ -430,7 +448,17 @@ def details(request, group_name, id):
     else:
         is_creator = False
 
+    group_id = todo.GroupId
+    url = 'https://api.groupme.com/v3/groups/' + group_id + '?token=' + token
+    r = requests.get(url)
+    print(r.json()['meta']['code'])
+    if r.json()['meta']['code'] == 200:
+        already_in_chat = True
+    else:
+        already_in_chat = False
+
     context = {
+        'already_in_chat': already_in_chat,
         'todo': todo,
         'access_token': mark_safe(json.dumps(encodedtoken)),
         'group_name': mark_safe(json.dumps(group_name)),
@@ -447,48 +475,60 @@ def joinsubchat(request, id, group_name):
 
     else:
         if (group_name == 'sports'):
-            code = SportsEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
+            group_id = SportsEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
             sharetoken = SportsEvents.objects.filter(id=id).values_list("ShareToken", flat=True)[0]
-            title = SportsEvents.objects.filter(id=id).values_list("title", flat=True)[0]
-            time = SportsEvents.objects.filter(id=id).values_list("time", flat=True)[0]
         if (group_name == 'workingout'):
-            code = WorkingOutEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
+            group_id = WorkingOutEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
             sharetoken = WorkingOutEvents.objects.filter(id=id).values_list("ShareToken", flat=True)[0]
-            title = WorkingOutEvents.objects.filter(id=id).values_list("title", flat=True)[0]
-            time = WorkingOutEvents.objects.filter(id=id).values_list("time", flat=True)[0]
         if (group_name == 'videogames'):
-            code = VideoGamesEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
+            group_id = VideoGamesEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
             sharetoken = VideoGamesEvents.objects.filter(id=id).values_list("ShareToken", flat=True)[0]
-            title = VideoGamesEvents.objects.filter(id=id).values_list("title", flat=True)[0]
-            time = VideoGamesEvents.objects.filter(id=id).values_list("time", flat=True)[0]
         if (group_name == 'transportation'):
-            code = TransportationEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
+            group_id = TransportationEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
             sharetoken = TransportationEvents.objects.filter(id=id).values_list("ShareToken", flat=True)[0]
-            title = TransportationEvents.objects.filter(id=id).values_list("title", flat=True)[0]
-            time = TransportationEvents.objects.filter(id=id).values_list("time", flat=True)[0]
         if (group_name == 'problemsetgroups'):
-            code = ProblemSetEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
+            group_id = ProblemSetEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
             sharetoken = ProblemSetEvents.objects.filter(id=id).values_list("ShareToken", flat=True)[0]
-            title = ProblemSetEvents.objects.filter(id=id).values_list("title", flat=True)[0]
-            time = ProblemSetEvents.objects.filter(id=id).values_list("time", flat=True)[0]
         if (group_name == 'miscellaneous'):
-            code = MiscellaneousEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
+            group_id = MiscellaneousEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
             sharetoken = MiscellaneousEvents.objects.filter(id=id).values_list("ShareToken", flat=True)[0]
-            title = MiscellaneousEvents.objects.filter(id=id).values_list("title", flat=True)[0]
-            time = MiscellaneousEvents.objects.filter(id=id).values_list("time", flat=True)[0]
 
-        name = title + ' ' + time
-        url = "https://api.groupme.com/v3/groups/" + code + "/join/" + sharetoken + "?token=" + token
+        url = "https://api.groupme.com/v3/groups/" + group_id + "/join/" + sharetoken + "?token=" + token
         print(url)
         r = requests.post(url)
         #print(sharetoken)
         #print(r)
         #print(r.json()['response']['group']['share_url'])
 
-        return render(request, 'chat/joinchat.html', {
-            'group_id': mark_safe(json.dumps(code)),
-            'group_name': mark_safe(json.dumps(name))
-        })
+        return details(request, id, group_name)
+
+def destroy(request, id, group_name):
+    encodedtoken = gettoken(request)
+    token = decodetoken(encodedtoken)
+    if token == 'none':
+        return render(request, 'chat/gmlogin.html', {})
+
+    else:
+        if (group_name == 'sports'):
+            group_id = SportsEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
+        if (group_name == 'workingout'):
+            group_id = WorkingOutEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
+        if (group_name == 'videogames'):
+            group_id = VideoGamesEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
+        if (group_name == 'transportation'):
+            group_id = TransportationEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
+        if (group_name == 'problemsetgroups'):
+            group_id = ProblemSetEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
+        if (group_name == 'miscellaneous'):
+            group_id = MiscellaneousEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
+
+        url = "https://api.groupme.com/v3/groups/" + group_id + "/destroy" + "?token=" + token
+        print(url)
+        r = requests.post(url)
+        print(r)
+
+        # Redirect
+        return events(request, group_name)
 
 def destroy(request, id, group_name):
     encodedtoken = gettoken(request)
@@ -531,23 +571,82 @@ def edit(request, id, group_name):
         return render(request, 'chat/gmlogin.html', {})
 
     else:
-        if (group_name == 'sports'):
-            code = SportsEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
-        if (group_name == 'workingout'):
-            code = WorkingOutEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
-        if (group_name == 'videogames'):
-            code = VideoGamesEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
-        if (group_name == 'transportation'):
-            code = TransportationEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
-        if (group_name == 'problemsetgroups'):
-            code = ProblemSetEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
-        if (group_name == 'miscellaneous'):
-            code = MiscellaneousEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
+        if (request.method == 'POST'):
+            title = request.POST['title']
+            place = request.POST['place']
+            date = request.POST['date']
+            time = request.POST['time']
+            description = request.POST['description']
 
-        # TODO
-        # url = "https://api.groupme.com/v3/groups/" + code + "/destroy" + "?token=" + token
-        # print(url)
-        # r = requests.post(url)
-        # print(r)
+            if (group_name == 'sports'):
+                todo = SportsEvents.objects.get(id=id)
+                todo.title = title
+                todo.place = place
+                todo.date = date
+                todo.time = time 
+                todo.description = description
+            if (group_name == 'workingout'):
+                todo = WorkingOutEvents.objects.get(id=id)
+                todo.title = title
+                todo.place = place
+                todo.date = date
+                todo.time = time 
+                todo.description = description
+            if (group_name == 'videogames'):
+                todo = VideoGamesEvents.objects.get(id=id)
+                todo.title = title
+                todo.place = place
+                todo.date = date
+                todo.time = time 
+                todo.description = description
+            if (group_name == 'transportation'):
+                todo = TransportationEvents.objects.get(id=id)
+                todo.title = title
+                todo.place = place
+                todo.date = date
+                todo.time = time 
+                todo.description = description
+            if (group_name == 'problemsetgroups'):
+                todo = ProblemSetEvents.objects.get(id=id)
+                todo.title = title
+                todo.place = place
+                todo.date = date
+                todo.time = time 
+                todo.description = description
+            if (group_name == 'miscellaneous'):
+                todo = MiscellaneousEvents.objects.get(id=id)
+                todo.title = title
+                todo.place = place
+                todo.date = date
+                todo.time = time 
+                todo.description = description
 
-        return render(request, 'chat/edit.html', {'access_token': mark_safe(json.dumps(encodedtoken))})
+            # Security
+            if (todo.MakerToken == token):
+                todo.save()
+
+            # Redirect
+            return events(request, group_name)
+
+        else:
+            if (group_name == 'sports'):
+                todo = SportsEvents.objects.get(id=id)
+            if (group_name == 'workingout'):
+                todo = WorkingOutEvents.objects.get(id=id)
+            if (group_name == 'videogames'):
+                todo = VideoGamesEvents.objects.get(id=id)
+            if (group_name == 'transportation'):
+                todo = TransportationEvents.objects.get(id=id)
+            if (group_name == 'problemsetgroups'):
+                todo = ProblemSetEvents.objects.get(id=id)
+            if (group_name == 'miscellaneous'):
+                todo = MiscellaneousEvents.objects.get(id=id)
+
+            context = {
+                'todo': todo,
+                'access_token': mark_safe(json.dumps(encodedtoken)),
+                'group_name': mark_safe(json.dumps(group_name)),
+                'id': mark_safe(json.dumps(id))
+            }
+
+            return render(request, 'chat/edit.html', context)

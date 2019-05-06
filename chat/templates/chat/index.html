@@ -1,103 +1,26 @@
 <!-- chat/templates/chat/index.html -->
+<!-- Home page that links to all the categories -->
 
-{% load static %}
+{% extends "chat/base.html" %}
 
-<!DOCTYPE html>
-<html>
-<head>
-  <!-- Meta -->
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-
-  <!-- Setup -->
-  <title>TigerMeet</title>
-  <link rel="icon" type="image/png" href="{% static 'cub.png' %}">
-
-  <!-- Semantic UI -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
-  <script
-  src="https://code.jquery.com/jquery-3.1.1.min.js"
-  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-  crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
-
-  <!-- <script type="text/javascript">
-  var url = "?access_token=" + {{ access_token }};
-  window.onload = function() {
-  document.getElementById("url").innerHTML = url;
-  }
-  </script>  -->
-
-  <!-- doesn't actually do anything... figure out later  -->
+{% block js_content %}
   <script type="text/javascript">
     const url = "?access_token=" + {{ access_token }};
   </script>
+{% endblock %}
 
-  <link rel="stylesheet" href="{% static 'index.css' %}">
-</head>
-<body>
-
-  <!-- Navbar -->
-  <div class="ui pointing menu" style="margin-bottom: 0; border-radius: 0;">
-    <a class="item" href="/">
-      <img src="{% static 'cub.png' %}">
-    </a>
-    <div class="ui simple dropdown item">
-      Chatrooms <i class="dropdown icon"></i>
-      <div class="menu">
-        <!-- Changes url to /chatname with the authentication token appended -->
-        <a class="item" href="fill" onclick="location.href='/category/sports'+url; return false;" >
-          <i class="futbol alternate icon"></i>
-          Sports
-        </a>
-        <a class="item" href="fill" onclick="location.href='/category/workingout'+url; return false;" >
-          <i class="heart icon"></i>
-          Working Out
-        </a>
-        <a class="item" href="fill" onclick="location.href='/category/videogames'+url; return false;" >
-          <i class="gamepad icon"></i>
-          Video Games
-        </a>
-        <a class="item" href="fill" onclick="location.href='/category/transportation'+url; return false;" >
-          <i class="car icon"></i>
-          Transportation
-        </a>
-        <a class="item" href="fill" onclick="location.href='/category/problemsetgroups'+url; return false;" >
-          <i class="pencil alternate icon"></i>
-          Problem Set Groups
-        </a>
-        <a class="item" href="fill" onclick="location.href='/category/miscellaneous'+url; return false;" >
-          <i class="ellipsis horizontal icon"></i>
-          Miscellaneous
-        </a>
-      </div>
-    </div>
-    <div class="right menu">
-      <a class="ui item" href="/about">
-        About
-      </a>
-      <a class="ui item" href="/">
-        Logout
-      </a>
-    </div>
-  </div>
-
+{% block content %}
   <div class="ui middle aligned center aligned grid" style="margin: 10px;">
     <div class="column">
-      <h1 class="ui image header">
-        <img src="{% static 'cub.png' %}" class="image">
-        <div class="content">
-          Welcome to TigerMeet
-        </div>
-        <div class="sub header">TigerMeet is a web application that enables Princeton University students to connect with other students for recreation, transportation, and academic coordination. It is divided into sections of general interest (i.e. Sports, Transportation) each with a general chat as well as the ability to create specific events with chatrooms for users to connect.</div>
-      </h1>
+      <img class="ui small centered image" src="/static/cub.png">
 
-      <h2>How It Works</h2>
+      <h4 style="margin-top: 0;">TigerMeet is a web application that enables Princeton University students to connect with other students for recreation, transportation, and academic coordination. It is divided into sections of general interest (i.e. Sports, Transportation) each with a general chat as well as the ability to create specific events with chatrooms for users to connect.</h4>
+
+      <h2>Explore the Categories</h2>
 
       <h4>Click one of the categories below to see what student-made events are currently available or chat in the general chats.</h4>
 
-      <div class="ui vertical buttons">
+      <div class="ui large vertical buttons">
         <!-- Changes url to /chatname with the authentication token appended -->
         <a class="ui red button" href="fill" onclick="location.href='/category/sports'+url; return false;" >
           <i class="futbol alternate icon"></i>
@@ -127,6 +50,4 @@
 
     </div>
   </div>
-
-</body>
-</html>
+{% endblock %}

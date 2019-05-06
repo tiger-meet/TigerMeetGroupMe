@@ -1,18 +1,100 @@
- <script type="text/javascript">
+<!-- chat/templates/chat/details.html -->
+<!-- Details for a specific event -->
+
+{% extends "chat/base.html" %}
+
+{% block js_content %}
+  <script type="text/javascript">
     var name = {{ group_name }};
     var id = {{ id }};
     var url = "?access_token=" + {{ access_token }};
+    var categoryurl = '/category/' + name + url;
     var subjoinurl = '/subjoin/' + id + '/'+ name + '/chat' + url;
-
+    var editurl = '/edit/' + name + '/' + id + url;
+    var destroyurl = '/destroy/' + name + '/' + id + url;
   </script>
+{% endblock %}
 
+{% block content %}
+  <div class="ui middle aligned center aligned grid" style="margin: 10px;">
+    <div class="column">
+      <div>
+        <button class="ui left floated button" type="button" onclick="location.href=categoryurl; return false;">Back to Category</button>
+      </div>
 
-<a href="/"><< Go Back</a>
-  <br>
-  <h1>{{todo.title}}</h1>
-  <p>{{todo.text}}</p>
-  <p>{{todo.time}}</p>
-<button id ="join" class="btn btn-mini btn-primary" type="button" href="fill"
-        onclick="location.href=subjoinurl; return false;">Join this chat</button>
+      <br>
+      <!-- Break -->
+      <div style="clear:both"></div>
 
-  <br>
+      <h1><strong>{{ todo.title }}</strong></h1>
+      <h3><strong>Location:</strong> {{ todo.place }}</h3>
+      <h3><strong>Date:</strong> {{ todo.date }}</h3>
+      <h3><strong>Time:</strong> {{ todo.time }}</h3>
+      <h3><strong>Description:</strong> {{ todo.description }}</h3>
+      <!-- Number of people in GroupMe chat -->
+      <div class="ui orange inverted statistic">
+        <div class="value">
+          {{ todo.Size }}
+        </div>
+        <div class="label">
+          Members
+        </div>
+      </div>
+  
+      <br>
+      <!-- Break -->
+      <div style="clear:both"></div>
+      
+      {% if already_in_chat %}
+        <div>
+          <button id="join" class="ui blue disabled button" type="button" href="fill" onclick="location.href=subjoinurl; return false;">Already in GroupMe Chat</button>
+        </div>
+      {% else %}
+        <div>
+          <button id="join" class="ui blue button" type="button" href="fill" onclick="location.href=subjoinurl; return false;">Join GroupMe Chat</button>
+        </div>  
+      {% endif %}
+
+      {% if is_creator %}
+        <div class="ui inverted divider"></div>
+
+        <div class="ui buttons">
+          <button class="ui yellow button" type="button" href="fill" onclick="location.href=editurl;">Edit My Event</button>
+          <div class="or"></div>
+          <button id="delete" class="ui red button" type="button" href="fill" style="border-top-right-radius: .28571429rem; border-bottom-right-radius: .28571429rem;">Delete My Event</button>
+        <div class="ui buttons">
+
+        <script>
+          document.getElementById("delete").onclick = function() 
+          {
+            $("#deleteModal")
+              .modal("show")
+            ;
+          };
+        </script>
+
+        <div class="ui basic modal" id="deleteModal">
+          <div class="ui icon header">
+            <i class="trash alternate outline icon"></i>
+            Are you sure you want to delete this?
+          </div>
+          <div class="content">
+            <p>Your event and group chat will be gone forever.</p>
+            <p><em>"Taking a new step, uttering a new word, is what people fear most." - Fyodor Dostoevsky, Crime and Punishment</em></p>
+          </div>
+          <div class="actions">
+            <div class="ui basic cancel inverted button">
+              <i class="remove icon"></i>
+              No
+            </div>
+            <button class="ui red ok inverted button" type="button" onclick="location.href=destroyurl;">
+              <i class="trash alternate outline icon"></i>
+              Delete
+            </button>
+          </div>
+        </div>
+      {% endif %}
+    
+    </div>
+  </div>
+{% endblock %}

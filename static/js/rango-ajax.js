@@ -14,8 +14,7 @@ $(document).ready(function() {
             var _href = $this.attr("href");
 
                $($this).attr('href', '/details/' + data + _href + token);
-               });
-           // });
-});
+        });
+    });
 
 });
