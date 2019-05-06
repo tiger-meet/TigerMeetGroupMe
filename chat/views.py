@@ -508,21 +508,21 @@ def edit(request, id, group_name):
                 todo.time = time 
                 todo.description = description
             if (group_name == 'workingout'):
-                todo = SportsEvents.objects.get(id=id)
+                todo = WorkingOutEvents.objects.get(id=id)
                 todo.title = title
                 todo.place = place
                 todo.date = date
                 todo.time = time 
                 todo.description = description
             if (group_name == 'videogames'):
-                todo = SportsEvents.objects.get(id=id)
+                todo = VideoGamesEvents.objects.get(id=id)
                 todo.title = title
                 todo.place = place
                 todo.date = date
                 todo.time = time 
                 todo.description = description
             if (group_name == 'transportation'):
-                todo = SportsEvents.objects.get(id=id)
+                todo = TransportationEvents.objects.get(id=id)
                 todo.title = title
                 todo.place = place
                 todo.date = date
