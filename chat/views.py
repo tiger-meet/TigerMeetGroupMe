@@ -412,7 +412,7 @@ def details(request, group_name, id):
     else:
         is_creator = False
 
-    code = todo.values_list("GroupId", flat=True)[0]
+    code = todo.GroupId
     url = 'https://api.groupme.com/v3/groups/' + code + '?token=' + token
     r = requests.get(url)
     print(r.json()['meta']['code'])
