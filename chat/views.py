@@ -209,7 +209,6 @@ def events(request, group_name):
         otherTodos = MiscellaneousEvents.objects.exclude(MakerToken=token)
         myTodos = MiscellaneousEvents.objects.filter(MakerToken=token)
 
-
     try:
         code = GroupChats.objects.get(GroupName=group_name).GroupId
         print(code)
@@ -234,7 +233,6 @@ def events(request, group_name):
             'otherTodos': otherTodos,
             'myTodos': myTodos
         }
-
     except:
         context = {
             'already_in_chat': already_in_chat,
@@ -243,7 +241,6 @@ def events(request, group_name):
             'otherTodos': "",
             'myTodos': myTodos
         }
-
     finally:
         if token == 'none':
             return render(request, 'chat/gmlogin.html', {})
@@ -258,7 +255,7 @@ def joinchat(request, group_name):
         return render(request, 'chat/gmlogin.html', {})
 
     else:
-        code = GroupChats.objects.filter(GroupName=group_name).values_list("GroupId", flat=True)[0]
+        group_id = GroupChats.objects.filter(GroupName=group_name).values_list("GroupId", flat=True)[0]
         sharetoken = GroupChats.objects.filter(GroupName=group_name).values_list("ShareToken", flat=True)[0]
 
         url = "https://api.groupme.com/v3/groups/" + code + "/join/" + sharetoken + "?token=" + token
@@ -269,7 +266,7 @@ def joinchat(request, group_name):
         #print(r.json()['response']['group']['share_url'])
 
         return render(request, 'chat/joinchat.html', {
-            'group_id': mark_safe(json.dumps(code)),
+            'group_id': mark_safe(json.dumps(group_id)),
             'group_name': mark_safe(json.dumps(group_name))
         })
 
@@ -287,11 +284,10 @@ def createchat(request, group_name):
 
         try:
             GroupChats.objects.filter(GroupName=group_name).values_list("GroupId", flat=True)[0]
-            group_name = 'didn\'t create group ' + group_name
-            return render(request, 'chat/chat.html', {
-                # 'access_token': mark_safe(json.dumps(access_token)),
-                'group_name': mark_safe(json.dumps(group_name))
-            })
+            groupchat_name = 'didn\'t create group ' + group_name
+
+            # Redirect
+            return events(request, group_name)
 
         except:
 
@@ -315,16 +311,12 @@ def createchat(request, group_name):
             p = GroupChats(GroupName=group_name, GroupId=code, ShareToken=sharetoken)
             p.save()
 
-            return render(request, 'chat/chat.html', {
-                #'access_token': mark_safe(json.dumps(access_token)),
-                'group_name': mark_safe(json.dumps(group_name))
-            })
+            # Redirect
+            return events(request, group_name)
 
 def add(request, group_name):
     encodedtoken = gettoken(request)
     token = decodetoken(encodedtoken)
-
-    category_name = group_name
 
     if token == 'none':
         return render(request, 'chat/gmlogin.html', {})
@@ -374,17 +366,12 @@ def add(request, group_name):
 
             todo.save()
 
-            group_name = name
+            groupchat_name = name
             url = '?access_token=' + encodedtoken
-            allurl = '/makechat/' + group_name + url
+            allurl = '/makechat/' + groupchat_name + url
 
-            #return redirect('/')
-            #change this so it doesn't just call createchat
-            return render(request, 'chat/chat.html', {
-                'access_token': mark_safe(json.dumps(encodedtoken)),
-                'group_name': mark_safe(json.dumps(group_name)),
-                'category_name': mark_safe(json.dumps(category_name))
-            })
+            # Redirect
+            return events(request, group_name)
 
         else:
             return render(request, 'chat/add.html', {'access_token': mark_safe(json.dumps(encodedtoken)),
