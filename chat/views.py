@@ -217,6 +217,7 @@ def events(request, group_name):
     finally:
         url = 'https://api.groupme.com/v3/groups/' + code + '?token=' + token
         r = requests.get(url)
+        print(r.json())
         print(r.json()['meta']['code'])
         if r.json()['meta']['code'] == 200:
             AlreadyInChat = True
