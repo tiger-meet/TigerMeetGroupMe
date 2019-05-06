@@ -40,7 +40,7 @@
     <a class="item" href="/">
       <img src="{% static 'cub.png' %}">
     </a>
-    <div class="ui {% block disabled_chatrooms %}{% endblock %} simple dropdown item">
+    <div class="ui {% block disabled_chatrooms %}{% endblock %} dropdown item">
       Categories <i class="dropdown icon"></i>
       <div class="menu">
         <!-- Changes url to /chatname with the authentication token appended -->
@@ -79,6 +79,11 @@
       </a>
     </div>
   </div>
+  <script>
+    $('.ui.dropdown')
+      .dropdown()
+    ;
+  </script>
 
   {% block content %}
   {% endblock %}
