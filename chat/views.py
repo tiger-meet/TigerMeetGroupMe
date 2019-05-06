@@ -226,7 +226,7 @@ def events(request, group_name):
     try:
         print(otherTodos)
         context = {
-            'already_in_chat': mark_safe(json.dumps(AlreadyInChat)),
+            'already_in_chat': AlreadyInChat,
             'access_token': mark_safe(json.dumps(encodedtoken)),
             'group_name': mark_safe(json.dumps(group_name)),
             'otherTodos': otherTodos,
@@ -235,7 +235,7 @@ def events(request, group_name):
 
     except:
         context = {
-            'already_in_chat': mark_safe(json.dumps(AlreadyInChat)),
+            'already_in_chat': AlreadyInChat,
             'access_token': mark_safe(json.dumps(encodedtoken)),
             'group_name': mark_safe(json.dumps(group_name)),
             'otherTodos': "",
@@ -410,7 +410,17 @@ def details(request, group_name, id):
     else:
         is_creator = False
 
+    code = todo.values_list("GroupId", flat=True)[0]
+    url = 'https://api.groupme.com/v3/groups/' + code + '?token=' + token
+    r = requests.get(url)
+    print(r.json()['meta']['code'])
+    if r.json()['meta']['code'] == 200:
+        AlreadyInChat = True
+    else:
+        AlreadyInChat = False
+
     context = {
+        'already_in_chat': AlreadyInChat,
         'todo': todo,
         'access_token': mark_safe(json.dumps(encodedtoken)),
         'group_name': mark_safe(json.dumps(group_name)),
