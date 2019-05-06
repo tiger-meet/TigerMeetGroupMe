@@ -280,7 +280,9 @@ def createchat(request, group_name):
 
             chatname = "TigerMeet " + group_name
             data = {'name': chatname,
-                    "share": True,}
+                    "share": True,
+                    'image_url': 'https://i.groupme.com/1010x795.png.d6b074fc2c02411c920e474a561100bd',
+                    }
             headers = {"Content-Type": "application/json"}
             r = requests.post(url, data=json.dumps(data), headers=headers)
 
