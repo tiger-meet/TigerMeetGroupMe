@@ -221,14 +221,14 @@ def events(request, group_name):
         print(r.json())
         print(r.json()['meta']['code'])
         if r.json()['meta']['code'] == 200:
-            AlreadyInChat = True
+            already_in_chat = True
         else:
-            AlreadyInChat = False
+            already_in_chat = False
 
     try:
         print(otherTodos)
         context = {
-            'already_in_chat': AlreadyInChat,
+            'already_in_chat': already_in_chat,
             'access_token': mark_safe(json.dumps(encodedtoken)),
             'group_name': mark_safe(json.dumps(group_name)),
             'otherTodos': otherTodos,
@@ -237,7 +237,7 @@ def events(request, group_name):
 
     except:
         context = {
-            'already_in_chat': AlreadyInChat,
+            'already_in_chat': already_in_chat,
             'access_token': mark_safe(json.dumps(encodedtoken)),
             'group_name': mark_safe(json.dumps(group_name)),
             'otherTodos': "",
@@ -417,12 +417,12 @@ def details(request, group_name, id):
     r = requests.get(url)
     print(r.json()['meta']['code'])
     if r.json()['meta']['code'] == 200:
-        AlreadyInChat = True
+        already_in_chat = True
     else:
-        AlreadyInChat = False
+        already_in_chat = False
 
     context = {
-        'already_in_chat': AlreadyInChat,
+        'already_in_chat': already_in_chat,
         'todo': todo,
         'access_token': mark_safe(json.dumps(encodedtoken)),
         'group_name': mark_safe(json.dumps(group_name)),
