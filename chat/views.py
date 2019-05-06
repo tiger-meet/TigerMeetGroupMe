@@ -332,7 +332,8 @@ def add(request, group_name):
 
             chatname = name + ' | TigerMeet '
             data = {'name': chatname,
-                    "share": True, }
+                    "share": True,
+                    'image_url': 'https://i.groupme.com/1010x795.png.23174c2fbb8848098a7f6f367a279d93'}
             headers = {"Content-Type": "application/json"}
             r = requests.post(url, data=json.dumps(data), headers=headers)
 
