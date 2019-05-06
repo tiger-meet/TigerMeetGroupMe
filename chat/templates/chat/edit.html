@@ -43,7 +43,7 @@
 
     window.onload = function()
     {
-      document.getElementById("myGroup").innerHTML = "Edit " + "This" + " Event";
+      document.getElementById("myGroup").innerHTML = "Edit Event";
       document.adurl.action = get_action();
 
       // Custom group icons
@@ -73,7 +73,7 @@
         <div class="content" id="myGroup"></div>
       </h1>
 
-      <form class="ui inverted form" method="post" name="" id="">
+      <form class="ui inverted form" method="post" name="adurl" id="adurl">
         {% csrf_token %}
         <div class="required field">
           <label for="title">Event Name</label>
@@ -100,7 +100,7 @@
           <label for="description">Event Description</label>
           <input type="text" name="description" id="description" placeholder="Event Description" value="{{ todo.description }}">
         </div>
-        <input class="ui green button" type="submit" value="Submit and Edit Event Chat">
+        <input class="ui green button" type="submit" value="Edit Event">
       </form>
 
       <script>

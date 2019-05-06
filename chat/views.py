@@ -489,25 +489,90 @@ def edit(request, id, group_name):
     encodedtoken = gettoken(request)
     token = decodetoken(encodedtoken)
 
-    if (group_name == 'sports'):
-        todo = SportsEvents.objects.get(id=id)
-    if (group_name == 'workingout'):
-        todo = WorkingOutEvents.objects.get(id=id)
-    if (group_name == 'videogames'):
-        todo = VideoGamesEvents.objects.get(id=id)
-    if (group_name == 'transportation'):
-        todo = TransportationEvents.objects.get(id=id)
-    if (group_name == 'problemsetgroups'):
-        todo = ProblemSetEvents.objects.get(id=id)
-    if (group_name == 'miscellaneous'):
-        todo = MiscellaneousEvents.objects.get(id=id)
+    if token == 'none':
+        return render(request, 'chat/gmlogin.html', {})
 
-    context = {
-        'todo': todo,
-        'access_token': mark_safe(json.dumps(encodedtoken)),
-        'group_name': mark_safe(json.dumps(group_name)),
-        'id': mark_safe(json.dumps(id))
-    }
+    else:
+        if(request.method == 'POST'):
+            title = request.POST['title']
+            place = request.POST['place']
+            date = request.POST['date']
+            time = request.POST['time']
+            description = request.POST['description']
 
-    return render(request, 'chat/edit.html', context)
-    
+            if (group_name == 'sports'):
+                todo = SportsEvents.objects.get(id=id)
+                todo.title = title
+                todo.place = place
+                todo.date = date
+                todo.time = time 
+                todo.description = description
+            if (group_name == 'workingout'):
+                todo = SportsEvents.objects.get(id=id)
+                todo.title = title
+                todo.place = place
+                todo.date = date
+                todo.time = time 
+                todo.description = description
+            if (group_name == 'videogames'):
+                todo = SportsEvents.objects.get(id=id)
+                todo.title = title
+                todo.place = place
+                todo.date = date
+                todo.time = time 
+                todo.description = description
+            if (group_name == 'transportation'):
+                todo = SportsEvents.objects.get(id=id)
+                todo.title = title
+                todo.place = place
+                todo.date = date
+                todo.time = time 
+                todo.description = description
+            if (group_name == 'problemsetgroups'):
+                todo = ProblemSetEvents.objects.get(id=id)
+                todo.title = title
+                todo.place = place
+                todo.date = date
+                todo.time = time 
+                todo.description = description
+            if (group_name == 'miscellaneous'):
+                todo = MiscellaneousEvents.objects.get(id=id)
+                todo.title = title
+                todo.place = place
+                todo.date = date
+                todo.time = time 
+                todo.description = description
+
+            # Security
+            if (todo.MakerToken == token):
+                todo.save()
+
+            return render(request, 'chat/events.html', {
+                'access_token': mark_safe(json.dumps(encodedtoken)),
+                'group_name': mark_safe(json.dumps(group_name))
+            })
+
+        else:
+            if (group_name == 'sports'):
+                todo = SportsEvents.objects.get(id=id)
+            if (group_name == 'workingout'):
+                todo = WorkingOutEvents.objects.get(id=id)
+            if (group_name == 'videogames'):
+                todo = VideoGamesEvents.objects.get(id=id)
+            if (group_name == 'transportation'):
+                todo = TransportationEvents.objects.get(id=id)
+            if (group_name == 'problemsetgroups'):
+                todo = ProblemSetEvents.objects.get(id=id)
+            if (group_name == 'miscellaneous'):
+                todo = MiscellaneousEvents.objects.get(id=id)
+
+            context = {
+                'todo': todo,
+                'access_token': mark_safe(json.dumps(encodedtoken)),
+                'group_name': mark_safe(json.dumps(group_name)),
+                'id': mark_safe(json.dumps(id))
+            }
+
+            return render(request, 'chat/edit.html', {'access_token': mark_safe(json.dumps(encodedtoken)),
+                                                    'group_name': mark_safe(json.dumps(group_name))})
+                                                    
