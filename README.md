@@ -25,11 +25,13 @@ When you clone the repository:
 3. Host it on your own Heroku server
 4. Set the GroupMe developer application callback url to "https://{{ your_heroku_site_name }}" + "/index"
 5. Update that PostgreSQL database settings in settings.py to that on your Heroku site
+
 If you change static files, make sure to run "python manage.py collectstatic"
 
 To upload changes back to GitHub:
 ```
 git checkout -b "your_branch_name" (your_branch_name is whatever you want to call it)
+...
 git push origin your_branch_name
 ```
 Then, go to Github, and create a pull request and merge it
