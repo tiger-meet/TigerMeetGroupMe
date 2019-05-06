@@ -10,7 +10,7 @@
     var url = "?access_token=" + {{ access_token }};
     var categoryurl = '/category/' + name + url;
     var subjoinurl = '/subjoin/' + id + '/'+ name + '/chat' + url;
-    var editurl = '/edit/' + id + '/' + name + url;
+    var editurl = '/edit/' + name + '/' + id + url;
     var destroyurl = '/destroy/' + id + '/' + name + url;
   </script>
 {% endblock %}
