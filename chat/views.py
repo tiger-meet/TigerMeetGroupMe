@@ -210,22 +210,19 @@ def events(request, group_name):
         otherTodos = MiscellaneousEvents.objects.exclude(MakerToken=token)
         myTodos = MiscellaneousEvents.objects.filter(MakerToken=token)
 
-    code = GroupChats.objects.filter(GroupName=group_name).values_list("GroupId", flat=True)[0]
-    url = 'https://api.groupme.com/v3/groups/' + code + '?token=' + token
-    r = requests.get(url)
-    print(r.json()['meta']['code'])
-    if r.json()['meta']['code'] == 200:
-        AlreadyInChat = True
-    else:
-        AlreadyInChat = False
 
-    groupid = getattr(todo, 'GroupId')
-    makertoken = getattr(todo, 'MakerToken')
-    url = 'https://api.groupme.com/v3/groups/' + groupid + '?token=' + makertoken
-    r = requests.get(url)
-    print(r.json()['meta']['code'])
-    if r.json()['meta']['code'] == 404:
-        todo.delete()
+    try:
+        code = GroupChats.objects.filter(GroupName=group_name).values_list("GroupId", flat=True)[0]
+    except:
+        code = 'none'
+    finally:
+        url = 'https://api.groupme.com/v3/groups/' + code + '?token=' + token
+        r = requests.get(url)
+        print(r.json()['meta']['code'])
+        if r.json()['meta']['code'] == 200:
+            AlreadyInChat = True
+        else:
+            AlreadyInChat = False
 
     try:
         print(otherTodos)
