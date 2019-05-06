@@ -252,7 +252,8 @@ def createchat(request, group_name):
 
             chatname = "TigerMeet " + group_name
             data = {'name': chatname,
-                    "share": True,}
+                    "share": True,
+                    "image_url": "https://tmboragroupme.herokuapp.com/static/cub.png"}
             headers = {"Content-Type": "application/json"}
             r = requests.post(url, data=json.dumps(data), headers=headers)
 
