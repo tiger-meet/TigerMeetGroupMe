@@ -211,7 +211,7 @@ def events(request, group_name):
 
 
 # try:
-    code = GroupChats.objects.get(GroupName=group_name).values_list("GroupId", flat=True)[0]
+    code = GroupChats.objects.get(GroupName=group_name).GroupId
     print(code)
 # except:
     code = 'none'
