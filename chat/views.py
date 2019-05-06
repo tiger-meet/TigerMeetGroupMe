@@ -65,7 +65,6 @@ def countandprune(todos):
         makertoken = getattr(todo, 'MakerToken')
         url = 'https://api.groupme.com/v3/groups/' + groupid + '?token=' + makertoken
         r = requests.get(url)
-        print(r.json()['meta']['code'])
         if r.json()['meta']['code'] == 404:
             todo.delete()
         else:
