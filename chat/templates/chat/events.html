@@ -4,6 +4,10 @@
 {% extends "chat/base.html" %}
 
 {% block js_content %}
+  <!-- Fomantic UI -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.7.4/dist/semantic.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.7.4/dist/semantic.min.js"></script>
+  
   <script src="/static/js/jquery.js"></script>
   <script src="/static/js/rango-ajax.js"></script>
 
@@ -131,8 +135,8 @@
         <input class="ui button" type="submit" value="Filter, Sort, and Search">
 
       </form>
+
       <script>
-        
         $('#custom_format_calendar')
           .calendar(
           {
@@ -153,7 +157,6 @@
       </script>
 
       <script>
-        
         $('.ui.dropdown')
           .dropdown()
         ;
