@@ -104,11 +104,13 @@
         <div class="three fields">
 
           <div class="field">
-            <label>Filter By...</label>
-            <select class="ui fluid dropdown">
-              <option value=""><i class="filter icon"></i> Filter By...</option>
-              <option value="">Coming soon...</option>
-            </select>
+            <label for="date">Filter by Date</label>
+            <div class="ui calendar" id="custom_format_calendar">
+              <div class="ui input left icon">
+                <i class="calendar icon"></i>
+                <input type="text" name="date" id="date" placeholder="Choose Date">
+              </div>
+            </div>
           </div>
 
           <div class="field">
@@ -124,13 +126,34 @@
             <label>Search for Event</label>
             <input type="text" name="search" value="" placeholder="Search for Event by Name">
           </div>
-
         </div>
 
         <input class="ui button" type="submit" value="Filter, Sort, and Search">
 
       </form>
       <script>
+        
+        $('#custom_format_calendar')
+          .calendar(
+          {
+            monthFirst: false,
+            type: 'date',
+            formatter: 
+            {
+              date: function (date, settings) 
+              {
+                if (!date) return '';
+                var day = date.getDate();
+                var month = date.getMonth() + 1;
+                var year = date.getFullYear();
+                return month + '/' + day + '/' + year;
+              }
+            }
+          });
+      </script>
+
+      <script>
+        
         $('.ui.dropdown')
           .dropdown()
         ;
