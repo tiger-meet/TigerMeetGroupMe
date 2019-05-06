@@ -135,7 +135,7 @@ def events(request, group_name):
                 context = {
                     'access_token': mark_safe(json.dumps(encodedtoken)),
                     'group_name': mark_safe(json.dumps(group_name)),
-                    'todos':todos
+                    'todos': todos
                 }
                 return render(request, 'chat/events.html', context)
 
@@ -162,7 +162,7 @@ def events(request, group_name):
                 'group_name': mark_safe(json.dumps(group_name)),
                 'todos': todos
             }
-            return render(request, 'chat/events.html/', context)
+            return render(request, 'chat/events.html', context)
 
         elif "sortBy=Date" in not_host:
             todos = event.objects.order_by('date')
@@ -171,7 +171,7 @@ def events(request, group_name):
                 'group_name': mark_safe(json.dumps(group_name)),
                 'todos': todos
             }
-            return render(request, 'chat/events.html/', context)
+            return render(request, 'chat/events.html', context)
 
         else:
             todos = event.objects.all()
@@ -507,7 +507,8 @@ def destroy(request, id, group_name):
         r = requests.post(url)
         print(r)
 
-        return render(request, 'chat/index.html', {'access_token': mark_safe(json.dumps(encodedtoken))})
+        # Redirect
+        return events(request, group_name)
 
 def getgroupname(request):
     if request.method == 'GET':
