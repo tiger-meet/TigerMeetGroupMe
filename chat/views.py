@@ -548,7 +548,7 @@ def edit(request, id, group_name):
                 todo.save()
 
             # Redirect
-            events(request, group_name)
+            return events(request, group_name)
 
         else:
             if (group_name == 'sports'):
