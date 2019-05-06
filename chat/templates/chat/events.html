@@ -1,0 +1,302 @@
+<!-- chat/templates/chat/events.html -->
+<!-- Category page -->
+
+{% extends "chat/base.html" %}
+
+{% block js_content %}
+  <!-- Fomantic UI -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.7.4/dist/semantic.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.7.4/dist/semantic.min.js"></script>
+
+  <script src="/static/js/jquery.js"></script>
+  <script src="/static/js/rango-ajax.js"></script>
+
+  <script type="text/javascript">
+    var name = {{ group_name }};
+    var url = "?access_token=" + {{ access_token }};
+    var allurl = '/makechat/' + name + url;
+    var addurl = '/add/' + name + url;
+    var joinurl = '/join/' + name + '/chat' + url;
+    var det = '/details/' + name + '/' + url;
+
+    // Custom group icons
+    var icon = '';
+    switch (name)
+    {
+      case 'sports':
+        icon = 'futbol alternate icon'
+        break;
+      case 'workingout':
+        icon = 'heart icon'
+        break;
+      case 'videogames':
+        icon = 'gamepad icon'
+        break;
+      case 'transportation':
+        icon = 'car icon'
+        break;
+      case 'problemsetgroups':
+        icon = 'pencil alternate icon'
+        break;
+      case 'miscellaneous':
+        icon = 'ellipsis horizontal icon'
+        break;
+      default:
+        icon = 'heart icon'
+    }
+
+    window.onload = function()
+    {
+      document.getElementById("myGroup").innerHTML = name;
+      document.getElementById("link").innerHTML = "Create " + name + " General Chat";
+      document.getElementById("link2").innerHTML = "Join " + name + " General Chat";
+
+      // Custom group icons
+      document.getElementById("groupIcon").className = icon;
+    }
+  </script>
+{% endblock %}
+
+{% block content %}
+  <div class="ui middle aligned center aligned grid" style="margin: 10px;">
+    <div class="column">
+
+      <div>
+        <button class="ui left floated button" type="button" onclick="location.href = '/index'+url;">Back to Home</button>
+      </div>
+
+      <br>
+      <!-- Break -->
+      <div style="clear:both"></div>
+
+      <h1 class="ui center aligned icon inverted header">
+        <i id="groupIcon"></i>
+        <div class="content" id="myGroup"></div>
+      </h1>
+
+      <br>
+
+      <a class="ui button" style="border: 4px red solid;" id="link" href="fill" onclick="location.href=allurl; return false;">Error</a>
+
+      <br>
+
+      <!-- Join general chat -->
+      <a class="ui blue button" id="link2" class="item" href="fill" onclick="location.href=joinurl; return false;">Error</a>
+
+      <br>
+      <!-- Break -->
+      <div style="clear:both"></div>
+
+      <h2 class="ui inverted header">
+        List of Events
+        <div class="sub header">(Click an event to join the event's group chat)</div>
+      </h2>
+
+      <br>
+      
+      <!-- Create New Event -->
+      <button class="ui green button" type="button" onclick="location.href=addurl;">Create New Event</button>
+
+      <br>
+
+      <!-- Filter, Sort, and Search -->
+      <h3 class="ui dividing inverted header">Filter, Sort, and Search</h3>
+      <form class="ui inverted form" method="get">
+        <input type="hidden" name="access_token" value={{ access_token }}>
+        <div class="three fields">
+
+          <div class="field">
+            <label for="date">Filter by Date</label>
+            <div class="ui calendar" id="custom_format_calendar">
+              <div class="ui input left icon">
+                <i class="calendar icon"></i>
+                <input type="text" name="date" id="date" placeholder="Choose Date">
+              </div>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Sort By...</label>
+            <select class="ui fluid dropdown" name="sortBy">
+              <option value=""><i class="dropdown icon"></i> Sort By...</option>
+              <option name="sortBy" value="Alphabetical">Alphabetical</option>
+              <option name="sortBy" value="Date">Date</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>Search for Event</label>
+            <input type="text" name="search" value="" placeholder="Search for Event by Name">
+          </div>
+
+        </div>
+
+        <input class="ui button" type="submit" value="Sort">
+
+      </form>
+      <script>
+        $('#custom_format_calendar')
+          .calendar(
+          {
+            monthFirst: false,
+            type: 'date',
+            formatter: 
+            {
+              date: function (date, settings) 
+              {
+                if (!date) return '';
+                var day = date.getDate();
+                var month = date.getMonth() + 1;
+                var year = date.getFullYear();
+                return month + '/' + day + '/' + year;
+              }
+            }
+          });
+      </script>
+
+      <script>
+        $('.ui.dropdown')
+          .dropdown()
+        ;
+      </script>
+
+      <br>
+
+      <!-- List events made by others -->
+      <h2 class="ui inverted header">Events from Others</h2>
+
+      <p hidden id ="likes" data-name= {{ group_name }}, data-access-token= {{ access_token }}>Like</p>
+      {% if otherTodos %}
+      
+        <div class="ui message">
+          <div class="ui orange statistic">
+            <div class="value">
+              <i class="calendar alternate icon"></i> {{ otherTodos|length }}
+            </div>
+            <div class="label">
+              Events Available
+            </div>
+          </div>
+        </div>
+
+        <div class="ui four column stackable grid">
+          {% for todo in otherTodos %}
+          <div class="column">
+            <a class="replaceValue" href='/{{ todo.id }}'>
+              <div class="ui fluid card">
+                <div class="content">
+                  <!-- Event Name -->
+                  <div class="header">{{ todo.title }}</div>
+                  <div class="meta"></div>
+                  <!-- Event Location -->
+                  <div class="description">
+                    <p><strong>Date:</strong> {{ todo.date }}</p>
+                    <p><strong>Time:</strong> {{ todo.time }}</p>
+                    <p><strong>Location:</strong> {{ todo.place }}</p>
+                    <p>(Click to see description)</p>
+                  </div>
+                  <!-- Number of people in GroupMe chat -->
+                  <div class="ui mini orange statistic">
+                    <div class="value">
+                      {{ todo.Size }}
+                    </div>
+                    <div class="label">
+                      Members
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+          {% endfor %}
+        </div>
+
+      {% else %}
+
+        <div class="ui message">
+          <h3>No events from others yet!</h3>
+          <div class="ui orange statistic">
+            <div class="value">
+              <i class="calendar alternate icon"></i> 0
+            </div>
+            <div class="label">
+              Events Available
+            </div>
+          </div>
+          <br>
+          <button class="ui green button" type="button" onclick="location.href=addurl;">Create New Event</button>
+        </div>
+
+      {% endif %}
+
+      <!-- List events made by self -->
+      <h2 class="ui inverted header">My Events</h2>
+
+      {% if myTodos %}
+
+        <div class="ui message">
+          <div class="ui orange statistic">
+            <div class="value">
+              <i class="calendar alternate icon"></i> {{ myTodos|length }}
+            </div>
+            <div class="label">
+              Events Available
+            </div>
+          </div>
+        </div>
+
+        <div class="ui four column stackable grid">
+
+          {% for todo in myTodos %}
+          <div class="column">
+            <a class="replaceValue" href='/{{ todo.id }}'>
+              <div class="ui fluid card">
+                <div class="content">
+                  <!-- Event Name -->
+                  <div class="header">{{ todo.title }}</div>
+                  <div class="meta"></div>
+                  <!-- Event Time and Location -->
+                  <div class="description">
+                    <p><strong>Date:</strong> {{ todo.date }}</p>
+                    <p><strong>Time:</strong> {{ todo.time }}</p>
+                    <p><strong>Location:</strong> {{ todo.place }}</p>
+                    <p>(Click to see description)</p>
+                  </div>
+                  <!-- Number of people in GroupMe chat -->
+                  <div class="ui mini orange statistic">
+                    <div class="value">
+                      {{ todo.Size }}
+                    </div>
+                    <div class="label">
+                      Members
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+          {% endfor %}
+
+        </div>
+      
+      {% else %}
+
+        <div class="ui message">
+          <h3>You haven't created any events yet!</h3>
+          <div class="ui orange statistic">
+            <div class="value">
+              <i class="calendar alternate icon"></i> 0
+            </div>
+            <div class="label">
+              Events Available
+            </div>
+          </div>
+          <br>
+          <button class="ui green button" type="button" onclick="location.href=addurl;">Create New Event</button>
+        </div>
+
+      {% endif %}
+
+    </div>
+  </div>
+{% endblock %}
