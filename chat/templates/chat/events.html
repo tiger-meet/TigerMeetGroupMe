@@ -46,7 +46,7 @@
       document.getElementById("myGroup").innerHTML = name;
       // Below code for a button to create the general chat
       // document.getElementById("link").innerHTML = "Create " + name + " General Chat";
-      if (already_in_chat)
+      if ({{ already_in_chat }})
       {
         document.getElementById("link2").innerHTML = "Already in " + name + " General Chat";
       }
@@ -54,7 +54,6 @@
       {
         document.getElementById("link2").innerHTML = "Join " + name + " General Chat";
       }
-
 
       // Custom group icons
       document.getElementById("groupIcon").className = icon;
