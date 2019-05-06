@@ -10,8 +10,8 @@
     var url = "?access_token=" + {{ access_token }};
     var categoryurl = '/category/' + name + url;
     var subjoinurl = '/subjoin/' + id + '/'+ name + '/chat' + url;
-    var editurl = '/edit/' + id + '/' + name + url;
-    var destroyurl = '/destroy/' + id + '/' + name + url;
+    var editurl = '/edit/' + name + '/' + id + url;
+    var destroyurl = '/destroy/' + name + '/' + id + url;
   </script>
 {% endblock %}
 
@@ -45,9 +45,15 @@
       <!-- Break -->
       <div style="clear:both"></div>
       
-      <div>
-        <button id="join" class="ui blue button" type="button" href="fill" onclick="location.href=subjoinurl; return false;">Join this GroupMe Chat</button>
-      </div>
+      {% if already_in_chat %}
+        <div>
+          <button id="join" class="ui blue disabled button" type="button" href="fill" onclick="location.href=subjoinurl; return false;">Already in GroupMe Chat</button>
+        </div>
+      {% else %}
+        <div>
+          <button id="join" class="ui blue button" type="button" href="fill" onclick="location.href=subjoinurl; return false;">Join GroupMe Chat</button>
+        </div>  
+      {% endif %}
 
       {% if is_creator %}
         <div class="ui inverted divider"></div>
@@ -73,7 +79,7 @@
             Are you sure you want to delete this?
           </div>
           <div class="content">
-            <p>Your event and group chat will be gone forever...</p>
+            <p>Your event and group chat will be gone forever.</p>
             <p><em>"Taking a new step, uttering a new word, is what people fear most." - Fyodor Dostoevsky, Crime and Punishment</em></p>
           </div>
           <div class="actions">
@@ -87,7 +93,6 @@
             </button>
           </div>
         </div>
-
       {% endif %}
     
     </div>

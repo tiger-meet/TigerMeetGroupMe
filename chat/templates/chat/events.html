@@ -44,8 +44,6 @@
     window.onload = function()
     {
       document.getElementById("myGroup").innerHTML = name;
-      document.getElementById("link").innerHTML = "Create " + name + " General Chat";
-      document.getElementById("link2").innerHTML = "Join " + name + " General Chat";
 
       // Custom group icons
       document.getElementById("groupIcon").className = icon;
@@ -72,12 +70,16 @@
 
       <br>
 
-      <a class="ui button" style="border: 4px red solid;" id="link" href="fill" onclick="location.href=allurl; return false;">Error</a>
-
-      <br>
+      <!-- Below code for a button to create the general chat -->
+      <!-- <a class="ui button" style="border: 4px red solid;" href="fill" onclick="location.href=allurl; return false;">Create General GroupMe Chat</a> -->
+      <!-- <br> -->
 
       <!-- Join general chat -->
-      <a class="ui blue button" id="link2" class="item" href="fill" onclick="location.href=joinurl; return false;">Error</a>
+      {% if already_in_chat %}
+        <button class="ui blue disabled button" href="fill" onclick="location.href=joinurl; return false;">Already in General GroupMe Chat</button>
+      {% else %}
+        <button class="ui blue button" href="fill" onclick="location.href=joinurl; return false;">Join General GroupMe Chat</button>
+      {% endif %}
 
       <br>
       <!-- Break -->
