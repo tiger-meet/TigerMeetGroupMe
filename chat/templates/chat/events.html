@@ -14,7 +14,6 @@
     var addurl = '/add/' + name + url;
     var joinurl = '/join/' + name + '/chat' + url;
     var det = '/details/' + name + '/' + url;
-    var alreadyinchat = {{ already_in_chat }};
 
     // Custom group icons
     var icon = '';
@@ -47,14 +46,7 @@
       document.getElementById("myGroup").innerHTML = name;
       // Below code for a button to create the general chat
       // document.getElementById("link").innerHTML = "Create " + name + " General Chat";
-      if (alreadyinchat)
-      {
-        document.getElementById("link2").innerHTML = "Already in " + name + " General Chat";
-      }
-      else
-      {
-        document.getElementById("link2").innerHTML = "Join " + name + " General Chat";
-      }
+      document.getElementById("link2").innerHTML = "Join " + name + " General Chat";
 
       // Custom group icons
       document.getElementById("groupIcon").className = icon;
@@ -87,9 +79,9 @@
 
       <!-- Join general chat -->
       {% if already_in_chat %}
-        <a class="ui blue disabled button" id="link2" class="item" href="fill" onclick="location.href=joinurl; return false;">Error</a>
+        <button class="ui blue disabled button" id="link2" class="item" href="fill" onclick="location.href=joinurl; return false;">Already in {{ name }} General Chat</button>
       {% else %}
-        <a class="ui blue button" id="link2" class="item" href="fill" onclick="location.href=joinurl; return false;">Error</a>
+        <button class="ui blue button" id="link2" class="item" href="fill" onclick="location.href=joinurl; return false;">Join {{ name }} General Chat</button>
       {% endif %}
 
       <br>
