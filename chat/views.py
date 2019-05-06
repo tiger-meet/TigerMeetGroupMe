@@ -377,7 +377,7 @@ def add(request, group_name):
             return render(request, 'chat/add.html', {'access_token': mark_safe(json.dumps(encodedtoken)),
                                                     'group_name': mark_safe(json.dumps(group_name))})
 
-def details(request, group_name, id):
+def details(request, id, group_name):
     encodedtoken = gettoken(request)
     token = decodetoken(encodedtoken)
 
@@ -451,7 +451,7 @@ def joinsubchat(request, id, group_name):
         #print(r)
         #print(r.json()['response']['group']['share_url'])
 
-        return details(request, group_name, group_id)
+        return details(request, id, group_name)
 
 def destroy(request, id, group_name):
     encodedtoken = gettoken(request)
