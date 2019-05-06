@@ -65,7 +65,6 @@ def countandprune(todos):
         makertoken = getattr(todo, 'MakerToken')
         url = 'https://api.groupme.com/v3/groups/' + groupid + '?token=' + makertoken
         r = requests.get(url)
-        print(r.json()['meta']['code'])
         if r.json()['meta']['code'] == 404:
             todo.delete()
         else:
@@ -210,9 +209,26 @@ def events(request, group_name):
         otherTodos = MiscellaneousEvents.objects.exclude(MakerToken=token)
         myTodos = MiscellaneousEvents.objects.filter(MakerToken=token)
 
+
+    try:
+        code = GroupChats.objects.get(GroupName=group_name).GroupId
+        print(code)
+    except:
+        code = 'none'
+    finally:
+        url = 'https://api.groupme.com/v3/groups/' + code + '?token=' + token
+        r = requests.get(url)
+        print(r.json())
+        print(r.json()['meta']['code'])
+        if r.json()['meta']['code'] == 200:
+            AlreadyInChat = True
+        else:
+            AlreadyInChat = False
+
     try:
         print(otherTodos)
         context = {
+            'already_in_chat': AlreadyInChat,
             'access_token': mark_safe(json.dumps(encodedtoken)),
             'group_name': mark_safe(json.dumps(group_name)),
             'otherTodos': otherTodos,
@@ -221,6 +237,7 @@ def events(request, group_name):
 
     except:
         context = {
+            'already_in_chat': AlreadyInChat,
             'access_token': mark_safe(json.dumps(encodedtoken)),
             'group_name': mark_safe(json.dumps(group_name)),
             'otherTodos': "",
@@ -280,11 +297,13 @@ def createchat(request, group_name):
 
             chatname = "TigerMeet " + group_name
             data = {'name': chatname,
-                    "share": True,}
+                    "share": True,
+                    'image_url': 'https://i.groupme.com/666x562.png.22b32dd48efe4c138892a502d5e44032',
+                    }
             headers = {"Content-Type": "application/json"}
             r = requests.post(url, data=json.dumps(data), headers=headers)
 
-            print(r.json()['response']['share_url'])
+            print(r.json()['response'])
             shareurl = (r.json()['response']['share_url'])
             code = str(shareurl[-17:-9])
             sharetoken = str(shareurl[-8:])
@@ -330,7 +349,8 @@ def add(request, group_name):
 
             chatname = name + ' | TigerMeet '
             data = {'name': chatname,
-                    "share": True, }
+                    "share": True,
+                    'image_url': 'https://i.groupme.com/666x562.png.22b32dd48efe4c138892a502d5e44032'}
             headers = {"Content-Type": "application/json"}
             r = requests.post(url, data=json.dumps(data), headers=headers)
 
@@ -392,7 +412,17 @@ def details(request, group_name, id):
     else:
         is_creator = False
 
+    code = todo.GroupId
+    url = 'https://api.groupme.com/v3/groups/' + code + '?token=' + token
+    r = requests.get(url)
+    print(r.json()['meta']['code'])
+    if r.json()['meta']['code'] == 200:
+        AlreadyInChat = True
+    else:
+        AlreadyInChat = False
+
     context = {
+        'already_in_chat': AlreadyInChat,
         'todo': todo,
         'access_token': mark_safe(json.dumps(encodedtoken)),
         'group_name': mark_safe(json.dumps(group_name)),
