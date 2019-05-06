@@ -210,6 +210,22 @@ def events(request, group_name):
         otherTodos = MiscellaneousEvents.objects.exclude(MakerToken=token)
         myTodos = MiscellaneousEvents.objects.filter(MakerToken=token)
 
+    GroupChats.objects.filter(GroupName=group_name).values_list("GroupId", flat=True)[0]
+    groupid = getattr(todo, 'GroupId')
+    makertoken = getattr(todo, 'MakerToken')
+    url = 'https://api.groupme.com/v3/groups/' + groupid + '?token=' + makertoken
+    r = requests.get(url)
+    print(r.json()['meta']['code'])
+    if r.json()['meta']['code'] == 404:
+
+    groupid = getattr(todo, 'GroupId')
+    makertoken = getattr(todo, 'MakerToken')
+    url = 'https://api.groupme.com/v3/groups/' + groupid + '?token=' + makertoken
+    r = requests.get(url)
+    print(r.json()['meta']['code'])
+    if r.json()['meta']['code'] == 404:
+        todo.delete()
+
     try:
         print(otherTodos)
         context = {
@@ -281,7 +297,7 @@ def createchat(request, group_name):
             chatname = "TigerMeet " + group_name
             data = {'name': chatname,
                     "share": True,
-                    'image_url': 'https://i.groupme.com/1010x795.png.d6b074fc2c02411c920e474a561100bd',
+                    'image_url': 'https://i.groupme.com/666x562.png.22b32dd48efe4c138892a502d5e44032',
                     }
             headers = {"Content-Type": "application/json"}
             r = requests.post(url, data=json.dumps(data), headers=headers)
@@ -333,7 +349,7 @@ def add(request, group_name):
             chatname = name + ' | TigerMeet '
             data = {'name': chatname,
                     "share": True,
-                    'image_url': 'https://i.groupme.com/1010x795.png.23174c2fbb8848098a7f6f367a279d93'}
+                    'image_url': 'https://i.groupme.com/666x562.png.22b32dd48efe4c138892a502d5e44032'}
             headers = {"Content-Type": "application/json"}
             r = requests.post(url, data=json.dumps(data), headers=headers)
 
