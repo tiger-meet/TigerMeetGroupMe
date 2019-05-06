@@ -426,48 +426,32 @@ def joinsubchat(request, id, group_name):
 
     else:
         if (group_name == 'sports'):
-            code = SportsEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
+            group_id = SportsEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
             sharetoken = SportsEvents.objects.filter(id=id).values_list("ShareToken", flat=True)[0]
-            title = SportsEvents.objects.filter(id=id).values_list("title", flat=True)[0]
-            time = SportsEvents.objects.filter(id=id).values_list("time", flat=True)[0]
         if (group_name == 'workingout'):
-            code = WorkingOutEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
+            group_id = WorkingOutEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
             sharetoken = WorkingOutEvents.objects.filter(id=id).values_list("ShareToken", flat=True)[0]
-            title = WorkingOutEvents.objects.filter(id=id).values_list("title", flat=True)[0]
-            time = WorkingOutEvents.objects.filter(id=id).values_list("time", flat=True)[0]
         if (group_name == 'videogames'):
-            code = VideoGamesEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
+            group_id = VideoGamesEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
             sharetoken = VideoGamesEvents.objects.filter(id=id).values_list("ShareToken", flat=True)[0]
-            title = VideoGamesEvents.objects.filter(id=id).values_list("title", flat=True)[0]
-            time = VideoGamesEvents.objects.filter(id=id).values_list("time", flat=True)[0]
         if (group_name == 'transportation'):
-            code = TransportationEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
+            group_id = TransportationEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
             sharetoken = TransportationEvents.objects.filter(id=id).values_list("ShareToken", flat=True)[0]
-            title = TransportationEvents.objects.filter(id=id).values_list("title", flat=True)[0]
-            time = TransportationEvents.objects.filter(id=id).values_list("time", flat=True)[0]
         if (group_name == 'problemsetgroups'):
-            code = ProblemSetEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
+            group_id = ProblemSetEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
             sharetoken = ProblemSetEvents.objects.filter(id=id).values_list("ShareToken", flat=True)[0]
-            title = ProblemSetEvents.objects.filter(id=id).values_list("title", flat=True)[0]
-            time = ProblemSetEvents.objects.filter(id=id).values_list("time", flat=True)[0]
         if (group_name == 'miscellaneous'):
-            code = MiscellaneousEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
+            group_id = MiscellaneousEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
             sharetoken = MiscellaneousEvents.objects.filter(id=id).values_list("ShareToken", flat=True)[0]
-            title = MiscellaneousEvents.objects.filter(id=id).values_list("title", flat=True)[0]
-            time = MiscellaneousEvents.objects.filter(id=id).values_list("time", flat=True)[0]
 
-        name = title + ' ' + time
-        url = "https://api.groupme.com/v3/groups/" + code + "/join/" + sharetoken + "?token=" + token
+        url = "https://api.groupme.com/v3/groups/" + group_id + "/join/" + sharetoken + "?token=" + token
         print(url)
         r = requests.post(url)
         #print(sharetoken)
         #print(r)
         #print(r.json()['response']['group']['share_url'])
 
-        return render(request, 'chat/joinchat.html', {
-            'group_id': mark_safe(json.dumps(code)),
-            'group_name': mark_safe(json.dumps(name))
-        })
+        return details(request, group_name, group_id)
 
 def destroy(request, id, group_name):
     encodedtoken = gettoken(request)
