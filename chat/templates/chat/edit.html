@@ -77,28 +77,28 @@
         {% csrf_token %}
         <div class="required field">
           <label for="title">Event Name</label>
-          <input type="text" name="title" id="title" placeholder="Event Name" required>
+          <input type="text" name="title" id="title" placeholder="Event Name" value="{{ todo.title }}" required>
         </div>
         <div class="required field">
           <label for="place">Event Location</label>
-          <input type="text" name="place" id="place" placeholder="Event Location" required>
+          <input type="text" name="place" id="place" placeholder="Event Location" value="{{ todo.place }}" required>
         </div>
         <div class="required field">
           <label for="date">Event Date</label>
           <div class="ui calendar" id="custom_format_calendar">
             <div class="ui input left icon">
               <i class="calendar icon"></i>
-              <input type="text" name="date" id="date" placeholder="Event Date" required>
+              <input type="text" name="date" id="date" placeholder="Event Date" value="{{ todo.date }}" required>
             </div>
           </div>
         </div>
         <div class="required field">
           <label for="time">Event Time</label>
-          <input type="text" name="time" id="time" placeholder="Event Time" required>
+          <input type="text" name="time" id="time" placeholder="Event Time" value="{{ todo.time }}" required>
         </div>
         <div class="field">
           <label for="description">Event Description</label>
-          <input type="text" name="description" id="description" placeholder="Event Description">
+          <input type="text" name="description" id="description" placeholder="Event Description" value="{{ todo.description }}">
         </div>
         <input class="ui green button" type="submit" value="Submit and Edit Event Chat">
       </form>

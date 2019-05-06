@@ -489,27 +489,25 @@ def edit(request, id, group_name):
     encodedtoken = gettoken(request)
     token = decodetoken(encodedtoken)
 
-    if token == 'none':
-        return render(request, 'chat/gmlogin.html', {})
+    if (group_name == 'sports'):
+        todo = SportsEvents.objects.get(id=id)
+    if (group_name == 'workingout'):
+        todo = WorkingOutEvents.objects.get(id=id)
+    if (group_name == 'videogames'):
+        todo = VideoGamesEvents.objects.get(id=id)
+    if (group_name == 'transportation'):
+        todo = TransportationEvents.objects.get(id=id)
+    if (group_name == 'problemsetgroups'):
+        todo = ProblemSetEvents.objects.get(id=id)
+    if (group_name == 'miscellaneous'):
+        todo = MiscellaneousEvents.objects.get(id=id)
 
-    else:
-        if (group_name == 'sports'):
-            code = SportsEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
-        if (group_name == 'workingout'):
-            code = WorkingOutEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
-        if (group_name == 'videogames'):
-            code = VideoGamesEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
-        if (group_name == 'transportation'):
-            code = TransportationEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
-        if (group_name == 'problemsetgroups'):
-            code = ProblemSetEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
-        if (group_name == 'miscellaneous'):
-            code = MiscellaneousEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
+    context = {
+        'todo': todo,
+        'access_token': mark_safe(json.dumps(encodedtoken)),
+        'group_name': mark_safe(json.dumps(group_name)),
+        'id': mark_safe(json.dumps(id))
+    }
 
-        # TODO
-        # url = "https://api.groupme.com/v3/groups/" + code + "/destroy" + "?token=" + token
-        # print(url)
-        # r = requests.post(url)
-        # print(r)
-
-        return render(request, 'chat/edit.html', {'access_token': mark_safe(json.dumps(encodedtoken))})
+    return render(request, 'chat/edit.html', context)
+    
