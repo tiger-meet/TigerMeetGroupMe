@@ -265,10 +265,8 @@ def joinchat(request, group_name):
         #print(r)
         #print(r.json()['response']['group']['share_url'])
 
-        return render(request, 'chat/joinchat.html', {
-            'group_id': mark_safe(json.dumps(group_id)),
-            'group_name': mark_safe(json.dumps(group_name))
-        })
+        # Redirect
+        return events(request, group_name)
 
 # creates a chat in your own personal groupme application based on which one you click
 def createchat(request, group_name):
