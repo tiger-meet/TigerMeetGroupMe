@@ -106,6 +106,23 @@ def events(request, group_name):
     token = decodetoken(encodedtoken)
 
     not_host = request.META.get('RAW_URI')
+
+    # Logic for whether to disabled join general chat
+    try:
+        group_id = GroupChats.objects.get(GroupName=group_name).GroupId
+        print(group_id)
+    except:
+        group_id = 'none'
+    finally:
+        url = 'https://api.groupme.com/v3/groups/' + group_id + '?token=' + token
+        r = requests.get(url)
+        print(r.json())
+        print(r.json()['meta']['code'])
+        if r.json()['meta']['code'] == 200:
+            already_in_chat = True
+        else:
+            already_in_chat = False
+
     # case for a search
     if "search=" in not_host:
 
@@ -133,6 +150,7 @@ def events(request, group_name):
             if "sortBy=Alphabetical" in not_host:
                 todos.sort(key = lambda x: x.title)
                 context = {
+                    'already_in_chat': already_in_chat,
                     'access_token': mark_safe(json.dumps(encodedtoken)),
                     'group_name': mark_safe(json.dumps(group_name)),
                     'todos': todos
@@ -142,6 +160,7 @@ def events(request, group_name):
             if "sortBy=Date" in not_host:
                 todos.sort(key = lambda x: x.date)
                 context = {
+                    'already_in_chat': already_in_chat,
                     'access_token': mark_safe(json.dumps(encodedtoken)),
                     'group_name': mark_safe(json.dumps(group_name)),
                     'todos': todos
@@ -149,6 +168,7 @@ def events(request, group_name):
                 return render(request, 'chat/events.html', context)
 
             context = {
+                'already_in_chat': already_in_chat,
                 'access_token': mark_safe(json.dumps(encodedtoken)),
                 'group_name': mark_safe(json.dumps(group_name)),
                 'todos':todos
@@ -158,6 +178,7 @@ def events(request, group_name):
         elif "sortBy=Alphabetical" in not_host:
             todos = event.objects.order_by('title')
             context = {
+                'already_in_chat': already_in_chat,
                 'access_token': mark_safe(json.dumps(encodedtoken)),
                 'group_name': mark_safe(json.dumps(group_name)),
                 'todos': todos
@@ -167,6 +188,7 @@ def events(request, group_name):
         elif "sortBy=Date" in not_host:
             todos = event.objects.order_by('date')
             context = {
+                'already_in_chat': already_in_chat,
                 'access_token': mark_safe(json.dumps(encodedtoken)),
                 'group_name': mark_safe(json.dumps(group_name)),
                 'todos': todos
@@ -176,6 +198,7 @@ def events(request, group_name):
         else:
             todos = event.objects.all()
             context = {
+                'already_in_chat': already_in_chat,
                 'access_token': mark_safe(json.dumps(encodedtoken)),
                 'group_name': mark_safe(json.dumps(group_name)),
                 'todos': todos
@@ -208,21 +231,6 @@ def events(request, group_name):
     elif (group_name == 'miscellaneous'):
         otherTodos = MiscellaneousEvents.objects.exclude(MakerToken=token)
         myTodos = MiscellaneousEvents.objects.filter(MakerToken=token)
-
-    try:
-        group_id = GroupChats.objects.get(GroupName=group_name).GroupId
-        print(code)
-    except:
-        group_id = 'none'
-    finally:
-        url = 'https://api.groupme.com/v3/groups/' + group_id + '?token=' + token
-        r = requests.get(url)
-        print(r.json())
-        print(r.json()['meta']['code'])
-        if r.json()['meta']['code'] == 200:
-            already_in_chat = True
-        else:
-            already_in_chat = False
 
     try:
         print(otherTodos)
