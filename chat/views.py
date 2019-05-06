@@ -128,42 +128,74 @@ def events(request, group_name):
 
         # find the category for the database
         if group_name == "sports":
-            event = copy.copy(SportsEvents)
+            otherTodos = SportsEvents.objects.exclude(MakerToken=token)
+            myTodos = SportsEvents.objects.filter(MakerToken=token)
         elif group_name == "workingout":
-            event = copy.copy(WorkingOutEvents)
+            otherTodos = WorkingOutEvents.objects.exclude(MakerToken=token)
+            myTodos = WorkingOutEvents.objects.filter(MakerToken=token)
         elif group_name == "videogames":
-            event = copy.copy(VideoGamesEvents)
+            otherTodos = VideoGamesEvents.objects.exclude(MakerToken=token)
+            myTodos = VideoGamesEvents.objects.filter(MakerToken=token)
         elif group_name == "transportation":
-            event = copy.copy(TransportationEvents)
+            otherTodos = TransportationEvents.objects.exclude(MakerToken=token)
+            myTodos = TransportationEvents.objects.filter(MakerToken=token)
         elif group_name == "problemsetgroups":
-            event = copy.copy(ProblemSetEvents)
+            otherTodos = ProblemSetEvents.objects.exclude(MakerToken=token)
+            myTodos = ProblemSetEvents.objects.filter(MakerToken=token)
         elif group_name == "miscellaneous":
-            event = copy.copy(MiscellaneousEvents)
+            otherTodos = MiscellaneousEvents.objects.exclude(MakerToken=token)
+            myTodos = MiscellaneousEvents.objects.filter(MakerToken=token)
+
+        dateIndex = not_host.index("date=")
+        if not_host[dateIndex + 5] != '&':
+            udate = (not_host.split("date="))[1].split("&sort")[0]
+            print(udate)
+
+            udate = udate.replace("%2F", "/")
+
+            print(udate)
+
+            #udate = udate.strip("%")
+            
+            print(udate)
+            otherTodos = otherTodos.filter(date=udate)
+            myTodos = myTodos.filter(date=udate)
 
         if not_host.split("search=", 1)[1] != "":
             queryString = not_host.split("search=", 1)[1]
-            todos = []
-            for i in range(0, len(event.objects.all())):
-                if queryString.lower() in event.objects.all()[i].title.lower():
-                    todos.append(event.objects.all()[i])
+            todos1 = []
+            todos2 = []
+
+            for i in range(0, len(otherTodos.all())):
+                if queryString.lower() in otherTodos.all()[i].title.lower():
+                    todos1.append(otherTodos.all()[i])
+            for i in range(0, len(myTodos.all())):
+                if queryString.lower() in myTodos.all()[i].title.lower():
+                    todos2.append(myTodos.all()[i])
 
             if "sortBy=Alphabetical" in not_host:
-                todos.sort(key = lambda x: x.title)
+                todos1.sort(key = lambda x: x.title)
+                todos2.sort(key = lambda x: x.title)
                 context = {
                     'already_in_chat': already_in_chat,
                     'access_token': mark_safe(json.dumps(encodedtoken)),
                     'group_name': mark_safe(json.dumps(group_name)),
-                    'todos': todos
+                    'myTodos':todos2,
+                    'otherTodos':todos1
                 }
                 return render(request, 'chat/events.html', context)
 
             if "sortBy=Date" in not_host:
-                todos.sort(key = lambda x: x.date)
+                todos1.sort(key = lambda x: x.date)
+                todos2.sort(key = lambda x: x.date)
+    
                 context = {
                     'already_in_chat': already_in_chat,
                     'access_token': mark_safe(json.dumps(encodedtoken)),
                     'group_name': mark_safe(json.dumps(group_name)),
-                    'todos': todos
+
+                    'myTodos': todos2,
+                    'otherTodos': todos1
                 }
                 return render(request, 'chat/events.html', context)
 
@@ -171,37 +203,45 @@ def events(request, group_name):
                 'already_in_chat': already_in_chat,
                 'access_token': mark_safe(json.dumps(encodedtoken)),
                 'group_name': mark_safe(json.dumps(group_name)),
-                'todos':todos
+                'myTodos':todos2,
+                'otherTodos':todos1
             }
             return render(request, 'chat/events.html', context)
 
         elif "sortBy=Alphabetical" in not_host:
-            todos = event.objects.order_by('title')
+            myTodos = myTodos.order_by('title')
+            otherTodos = otherTodos.order_by('title')
+
             context = {
                 'already_in_chat': already_in_chat,
                 'access_token': mark_safe(json.dumps(encodedtoken)),
                 'group_name': mark_safe(json.dumps(group_name)),
-                'todos': todos
+                'otherTodos': otherTodos,
+                'myTodos': myTodos
             }
             return render(request, 'chat/events.html', context)
 
         elif "sortBy=Date" in not_host:
-            todos = event.objects.order_by('date')
+            myTodos = myTodos.order_by('date')
+            otherTodos = otherTodos.order_by('date')
+
             context = {
                 'already_in_chat': already_in_chat,
                 'access_token': mark_safe(json.dumps(encodedtoken)),
                 'group_name': mark_safe(json.dumps(group_name)),
-                'todos': todos
+                'myTodos': myTodos,
+                'otherTodos': otherTodos
             }
             return render(request, 'chat/events.html', context)
 
         else:
-            todos = event.objects.all()
             context = {
                 'already_in_chat': already_in_chat,
                 'access_token': mark_safe(json.dumps(encodedtoken)),
                 'group_name': mark_safe(json.dumps(group_name)),
-                'todos': todos
+                'myTodos': myTodos,
+                'otherTodos': otherTodos
+
             }
             return render(request, 'chat/events.html', context)
 
@@ -214,6 +254,7 @@ def events(request, group_name):
 
     #create a count of the people in chats and check if they've been deleted
     if (group_name == 'sports'):
+        # filtering by my events and other events
         otherTodos = SportsEvents.objects.exclude(MakerToken=token)
         myTodos = SportsEvents.objects.filter(MakerToken=token)
     elif (group_name == 'workingout'):
@@ -323,6 +364,8 @@ def createchat(request, group_name):
 def add(request, group_name):
     encodedtoken = gettoken(request)
     token = decodetoken(encodedtoken)
+
+    category_name = group_name
 
     if token == 'none':
         return render(request, 'chat/gmlogin.html', {})
@@ -487,6 +530,33 @@ def destroy(request, id, group_name):
         # Redirect
         return events(request, group_name)
 
+def destroy(request, id, group_name):
+    encodedtoken = gettoken(request)
+    token = decodetoken(encodedtoken)
+    if token == 'none':
+        return render(request, 'chat/gmlogin.html', {})
+
+    else:
+        if (group_name == 'sports'):
+            code = SportsEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
+        if (group_name == 'workingout'):
+            code = WorkingOutEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
+        if (group_name == 'videogames'):
+            code = VideoGamesEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
+        if (group_name == 'transportation'):
+            code = TransportationEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
+        if (group_name == 'problemsetgroups'):
+            code = ProblemSetEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
+        if (group_name == 'miscellaneous'):
+            code = MiscellaneousEvents.objects.filter(id=id).values_list("GroupId", flat=True)[0]
+
+        url = "https://api.groupme.com/v3/groups/" + code + "/destroy" + "?token=" + token
+        print(url)
+        r = requests.post(url)
+        print(r)
+
+        return render(request, 'chat/index.html', {'access_token': mark_safe(json.dumps(encodedtoken))})
+
 def getgroupname(request):
     if request.method == 'GET':
         name = request.GET['group_name']
@@ -580,4 +650,3 @@ def edit(request, id, group_name):
             }
 
             return render(request, 'chat/edit.html', context)
-                                                    
