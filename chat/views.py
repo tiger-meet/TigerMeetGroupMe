@@ -493,7 +493,7 @@ def edit(request, id, group_name):
         return render(request, 'chat/gmlogin.html', {})
 
     else:
-        if(request.method == 'POST'):
+        if (request.method == 'POST'):
             title = request.POST['title']
             place = request.POST['place']
             date = request.POST['date']
@@ -573,6 +573,5 @@ def edit(request, id, group_name):
                 'id': mark_safe(json.dumps(id))
             }
 
-            return render(request, 'chat/edit.html', {'access_token': mark_safe(json.dumps(encodedtoken)),
-                                                    'group_name': mark_safe(json.dumps(group_name))})
+            return render(request, 'chat/edit.html', context)
                                                     
