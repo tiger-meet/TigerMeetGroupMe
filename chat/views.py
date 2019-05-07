@@ -62,6 +62,7 @@ def gettoken(request):
 def countandprune(todos):
     for todo in todos:
 
+        is_deleted = False
         groupid = getattr(todo, 'GroupId')
         makertoken = getattr(todo, 'MakerToken')
 
@@ -76,6 +77,7 @@ def countandprune(todos):
             r = requests.post(url)
             print(r)
             todo.delete()
+            is_deleted = True
         if now.year == int(datearray[2]):
             # go check the other things
             if now.month > int(datearray[0]):
@@ -84,6 +86,7 @@ def countandprune(todos):
                 r = requests.post(url)
                 print(r)
                 todo.delete()
+                is_deleted = True
             if now.month == int(datearray[0]):
                 #go check other things
                 if now.day > int(datearray[1]):
@@ -92,12 +95,13 @@ def countandprune(todos):
                     r = requests.post(url)
                     print(r)
                     todo.delete()
+                    is_deleted = True
 
 
 
         url = 'https://api.groupme.com/v3/groups/' + groupid + '?token=' + makertoken
         r = requests.get(url)
-        if todo:
+        if not is_deleted:
             if r.json()['meta']['code'] == 404:
                 todo.delete()
             else:
