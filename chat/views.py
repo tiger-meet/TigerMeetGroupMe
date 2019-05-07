@@ -72,16 +72,25 @@ def countandprune(todos):
         now = datetime.datetime.now()
         if now.year > int(datearray[2]):
             print('year' + str(now.year) + 'deletion')
+            url = "https://api.groupme.com/v3/groups/" + todo.GroupId + "/destroy" + "?token=" + todo.MakerToken
+            r = requests.post(url)
+            print(r)
             todo.delete()
         if now.year == int(datearray[2]):
             # go check the other things
             if now.month > int(datearray[0]):
                 print('month' + str(now.month) + 'deletion')
+                url = "https://api.groupme.com/v3/groups/" + todo.GroupId + "/destroy" + "?token=" + todo.MakerToken
+                r = requests.post(url)
+                print(r)
                 todo.delete()
             if now.month == int(datearray[0]):
                 #go check other things
                 if now.day > int(datearray[1]):
                     print('day' + str(now.day) + 'deletion')
+                    url = "https://api.groupme.com/v3/groups/" + todo.GroupId + "/destroy" + "?token=" + todo.MakerToken
+                    r = requests.post(url)
+                    print(r)
                     todo.delete()
 
 
