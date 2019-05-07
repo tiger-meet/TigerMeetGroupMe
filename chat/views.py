@@ -66,7 +66,7 @@ def countandprune(todos):
         makertoken = getattr(todo, 'MakerToken')
 
         #date deletion
-        date = getattr(todo, 'Date')
+        date = getattr(todo, 'date')
         datearray = date.split('/')
         now = datetime.datetime.now()
         if now.year > datearray[2]:
