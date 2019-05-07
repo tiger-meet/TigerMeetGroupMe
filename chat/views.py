@@ -97,11 +97,12 @@ def countandprune(todos):
 
         url = 'https://api.groupme.com/v3/groups/' + groupid + '?token=' + makertoken
         r = requests.get(url)
-        if r.json()['meta']['code'] == 404:
-            todo.delete()
-        else:
-            todo.Size = len(r.json()['response']['members'])
-            todo.save()
+        if todo:
+            if r.json()['meta']['code'] == 404:
+                todo.delete()
+            else:
+                todo.Size = len(r.json()['response']['members'])
+                todo.save()
 
 # loads the index page with authentication token
 def index(request):
