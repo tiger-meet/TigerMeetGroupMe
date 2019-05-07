@@ -65,21 +65,25 @@ def countandprune(todos):
         groupid = getattr(todo, 'GroupId')
         makertoken = getattr(todo, 'MakerToken')
 
-        # #date deletion
-        # date = getattr(todo, 'Time')
-        # datearray = date.split('/')
-        # now = datetime.datetime.now()
-        # if datearray[2] <= now.year:
-        #     if datearray[0] <= now.month:
-        #         # delete
-        #         if datearray[1] <= now.day:
-        #             # good
-        # else:
-        #     # delete
-        #     else:
-        #         # delete
-        #         else:
-        #             # delete
+        #date deletion
+        date = getattr(todo, 'Time')
+        datearray = date.split('/')
+        now = datetime.datetime.now()
+        if now.year > datearray[2]:
+            print('year' + now.year + 'deletion')
+            todo.delete()
+        if now.year == datearray[2]:
+            # go check the other things
+            if now.month > datearray[0]:
+                print('month' + now.month + 'deletion')
+                todo.delete()
+            if now.month == datearray[0]:
+                #go check other things
+                if now.day > datearray[1]:
+                    print('day' + now.day + 'deletion')
+                    todo.delete()
+
+
 
         url = 'https://api.groupme.com/v3/groups/' + groupid + '?token=' + makertoken
         r = requests.get(url)
