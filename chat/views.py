@@ -69,9 +69,6 @@ def countandprune(todos):
         date = getattr(todo, 'date')
         print(date)
         datearray = date.split('/')
-        print(datearray[0])
-        print(datearray[1])
-        print(datearray[2])
         now = datetime.datetime.now()
         if now.year > int(datearray[2]):
             print('year' + now.year + 'deletion')
