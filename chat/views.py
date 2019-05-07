@@ -10,6 +10,7 @@ import base64
 from django.http import HttpResponse
 import re
 import copy
+import datetime
 
 admin.site.register(GroupChats)
 admin.site.register(SportsEvents)
@@ -63,6 +64,23 @@ def countandprune(todos):
 
         groupid = getattr(todo, 'GroupId')
         makertoken = getattr(todo, 'MakerToken')
+
+        # #date deletion
+        # date = getattr(todo, 'Time')
+        # datearray = date.split('/')
+        # now = datetime.datetime.now()
+        # if datearray[2] <= now.year:
+        #     if datearray[0] <= now.month:
+        #         # delete
+        #         if datearray[1] <= now.day:
+        #             # good
+        # else:
+        #     # delete
+        #     else:
+        #         # delete
+        #         else:
+        #             # delete
+
         url = 'https://api.groupme.com/v3/groups/' + groupid + '?token=' + makertoken
         r = requests.get(url)
         if r.json()['meta']['code'] == 404:
