@@ -433,6 +433,7 @@ def add(request, group_name):
             r = requests.post(url, data=json.dumps(data), headers=headers)
 
             print(r.json()['response']['share_url'])
+            print(r.json()['response'])
             shareurl = (r.json()['response']['share_url'])
             group_id = str(shareurl[-17:-9])
             sharetoken = str(shareurl[-8:])
