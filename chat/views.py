@@ -69,17 +69,17 @@ def countandprune(todos):
         date = getattr(todo, 'date')
         datearray = date.split('/')
         now = datetime.datetime.now()
-        if now.year > datearray[2]:
+        if now.year > int(datearray[2]):
             print('year' + now.year + 'deletion')
             todo.delete()
-        if now.year == datearray[2]:
+        if now.year == int(datearray[2]):
             # go check the other things
-            if now.month > datearray[0]:
+            if now.month > int(datearray[0]):
                 print('month' + now.month + 'deletion')
                 todo.delete()
-            if now.month == datearray[0]:
+            if now.month == int(datearray[0]):
                 #go check other things
-                if now.day > datearray[1]:
+                if now.day > int(datearray[1]):
                     print('day' + now.day + 'deletion')
                     todo.delete()
 
