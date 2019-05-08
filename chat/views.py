@@ -359,8 +359,9 @@ def createchat(request, group_name):
             p = GroupChats(GroupName=group_name, GroupId=group_id, ShareToken=sharetoken)
             p.save()
 
+            redirecturl = 'category/' + group_name + '?token=' + token
             # Redirect
-            return events(request, group_name)
+            return redirect(redirecturl)
 
 def add(request, group_name):
     encodedtoken = gettoken(request)
