@@ -333,8 +333,9 @@ def createchat(request, group_name):
             GroupChats.objects.filter(GroupName=group_name).values_list("GroupId", flat=True)[0]
             groupchat_name = 'didn\'t create group ' + group_name
 
+            redirecturl = 'category/' + group_name + '?token=' + token
             # Redirect
-            return events(request, group_name)
+            return redirect(redirecturl)
 
         except:
 
