@@ -419,8 +419,9 @@ def add(request, group_name):
             url = '?access_token=' + encodedtoken
             allurl = '/makechat/' + groupchat_name + url
 
-            # Redirect
-            return events(request, group_name)
+            # Redirect (Brute force)
+            redirecturl = '/category/' + group_name + '?access_token=' + encodedtoken
+            return redirect(redirecturl)
 
         else:
             return render(request, 'chat/add.html', {'access_token': mark_safe(json.dumps(encodedtoken)),
@@ -555,7 +556,9 @@ def destroy(request, id, group_name):
         r = requests.post(url)
         print(r)
 
-        return render(request, 'chat/index.html', {'access_token': mark_safe(json.dumps(encodedtoken))})
+        # Redirect (Brute force)
+        redirecturl = '/category/' + group_name + '?access_token=' + encodedtoken
+        return redirect(redirecturl)
 
 def getgroupname(request):
     if request.method == 'GET':
@@ -625,8 +628,9 @@ def edit(request, id, group_name):
             if (todo.MakerToken == token):
                 todo.save()
 
-            # Redirect
-            return events(request, group_name)
+            # Redirect (Brute force)
+            redirecturl = '/category/' + group_name + '?access_token=' + encodedtoken
+            return redirect(redirecturl)
 
         else:
             if (group_name == 'sports'):

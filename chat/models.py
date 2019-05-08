@@ -11,7 +11,7 @@ class GroupChats(models.Model):
 class SportsEvents(models.Model):
     title = models.CharField(max_length=50)
     place = models.CharField(max_length=50, default='')
-    date = models.CharField(max_length=50)
+    date = models.DateField()
     time = models.CharField(max_length=50, default='')
     description = models.CharField(max_length=5000, default='')
     GroupId = models.CharField(max_length=50)
@@ -23,7 +23,7 @@ class SportsEvents(models.Model):
 class WorkingOutEvents(models.Model):
     title = models.CharField(max_length=50)
     place = models.CharField(max_length=50, default='')
-    date = models.CharField(max_length=50)
+    date = models.DateField()
     time = models.CharField(max_length=50, default='')
     description = models.CharField(max_length=5000, default='')
     GroupId = models.CharField(max_length=50)
@@ -36,7 +36,7 @@ class WorkingOutEvents(models.Model):
 class VideoGamesEvents(models.Model):
     title = models.CharField(max_length=50)
     place = models.CharField(max_length=50, default='')
-    date = models.CharField(max_length=50)
+    date = models.DateField()
     time = models.CharField(max_length=50, default='')
     description = models.CharField(max_length=5000, default='')
     GroupId = models.CharField(max_length=50)
@@ -48,7 +48,7 @@ class VideoGamesEvents(models.Model):
 class TransportationEvents(models.Model):
     title = models.CharField(max_length=50)
     place = models.CharField(max_length=50, default='')
-    date = models.CharField(max_length=50)
+    date = models.DateField()
     time = models.CharField(max_length=50, default='')
     description = models.CharField(max_length=5000, default='')
     GroupId = models.CharField(max_length=50)
@@ -60,7 +60,7 @@ class TransportationEvents(models.Model):
 class ProblemSetEvents(models.Model):
     title = models.CharField(max_length=50)
     place = models.CharField(max_length=50, default='')
-    date = models.CharField(max_length=50)
+    date = models.DateField()
     time = models.CharField(max_length=50, default='')
     description = models.CharField(max_length=5000, default='')
     GroupId = models.CharField(max_length=50)
@@ -72,7 +72,7 @@ class ProblemSetEvents(models.Model):
 class MiscellaneousEvents(models.Model):
     title = models.CharField(max_length=50)
     place = models.CharField(max_length=50, default='')
-    date = models.CharField(max_length=50)
+    date = models.DateField()
     time = models.CharField(max_length=50, default='')
     description = models.CharField(max_length=5000, default='')
     GroupId = models.CharField(max_length=50)
