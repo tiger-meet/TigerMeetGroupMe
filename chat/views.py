@@ -626,8 +626,9 @@ def edit(request, id, group_name):
             if (todo.MakerToken == token):
                 todo.save()
 
-            # Redirect
-            return events(request, group_name)
+            # Redirect (Brute force)
+            redirecturl = '/category/' + group_name + '?access_token=' + encodedtoken
+            return redirect(redirecturl)
 
         else:
             if (group_name == 'sports'):
