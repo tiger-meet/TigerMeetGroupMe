@@ -421,7 +421,7 @@ def add(request, group_name):
 
             # Redirect
             # return events(request, group_name)
-            redirecturl = 'category/' + group_name + '?token=' + encodedtoken
+            redirecturl = '/category/' + group_name + '?access_token=' + encodedtoken
             return redirect(redirecturl)
 
         else:
