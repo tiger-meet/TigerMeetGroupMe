@@ -556,7 +556,9 @@ def destroy(request, id, group_name):
         r = requests.post(url)
         print(r)
 
-        return render(request, 'chat/index.html', {'access_token': mark_safe(json.dumps(encodedtoken))})
+        # Redirect (Brute force)
+        redirecturl = '/category/' + group_name + '?access_token=' + encodedtoken
+        return redirect(redirecturl)
 
 def getgroupname(request):
     if request.method == 'GET':
