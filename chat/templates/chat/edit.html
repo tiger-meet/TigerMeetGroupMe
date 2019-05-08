@@ -117,6 +117,10 @@
                 var day = date.getDate();
                 var month = date.getMonth() + 1;
                 var year = date.getFullYear();
+                if (month.toString().length == 1)
+                  month = "0" + month.toString();
+                if (day.toString().length == 1)
+                  day = "0" + day.toString();
                 return month + '/' + day + '/' + year;
               }
             }
