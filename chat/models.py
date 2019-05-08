@@ -11,7 +11,7 @@ class GroupChats(models.Model):
 class SportsEvents(models.Model):
     title = models.CharField(max_length=50)
     place = models.CharField(max_length=50, default='')
-    date = models.CharField(max_length=50)
+    date = models.DateField()
     time = models.CharField(max_length=50, default='')
     description = models.CharField(max_length=5000, default='')
     GroupId = models.CharField(max_length=50)
