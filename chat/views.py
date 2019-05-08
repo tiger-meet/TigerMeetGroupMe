@@ -333,9 +333,8 @@ def createchat(request, group_name):
             GroupChats.objects.filter(GroupName=group_name).values_list("GroupId", flat=True)[0]
             groupchat_name = 'didn\'t create group ' + group_name
 
-            redirecturl = 'category/' + group_name + '?token=' + token
             # Redirect
-            return redirect(redirecturl)
+            return events(request, group_name)
 
         except:
 
@@ -359,9 +358,8 @@ def createchat(request, group_name):
             p = GroupChats(GroupName=group_name, GroupId=group_id, ShareToken=sharetoken)
             p.save()
 
-            redirecturl = 'category/' + group_name + '?token=' + token
             # Redirect
-            return redirect(redirecturl)
+            return events(request, group_name)
 
 def add(request, group_name):
     encodedtoken = gettoken(request)
@@ -422,7 +420,9 @@ def add(request, group_name):
             allurl = '/makechat/' + groupchat_name + url
 
             # Redirect
-            return events(request, group_name)
+            # return events(request, group_name)
+            redirecturl = 'category/' + group_name + '?token=' + encodedtoken
+            return redirect(redirecturl)
 
         else:
             return render(request, 'chat/add.html', {'access_token': mark_safe(json.dumps(encodedtoken)),
