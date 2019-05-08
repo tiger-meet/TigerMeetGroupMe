@@ -166,11 +166,12 @@ def events(request, group_name):
             todos1 = []
             todos2 = []
 
+            # Replacing +s in url and spaces in title with empty strings (May have bugs for weird titles)
             for i in range(0, len(otherTodos.all())):
-                if queryString.lower() in otherTodos.all()[i].title.lower():
+                if queryString.replace("+", "").lower() in otherTodos.all()[i].title.replace(" ", "").lower():
                     todos1.append(otherTodos.all()[i])
             for i in range(0, len(myTodos.all())):
-                if queryString.lower() in myTodos.all()[i].title.lower():
+                if queryString.replace("+", "").lower() in myTodos.all()[i].title.replace(" ", "").lower():
                     todos2.append(myTodos.all()[i])
 
             if "sortBy=Alphabetical" in not_host:
