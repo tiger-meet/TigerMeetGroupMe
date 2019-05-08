@@ -419,8 +419,7 @@ def add(request, group_name):
             url = '?access_token=' + encodedtoken
             allurl = '/makechat/' + groupchat_name + url
 
-            # Redirect
-            # return events(request, group_name)
+            # Redirect (Brute force)
             redirecturl = '/category/' + group_name + '?access_token=' + encodedtoken
             return redirect(redirecturl)
 
