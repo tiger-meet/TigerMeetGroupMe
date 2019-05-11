@@ -10,6 +10,7 @@ import base64
 from django.http import HttpResponse
 import re
 import copy
+import datetime
 
 admin.site.register(GroupChats)
 admin.site.register(SportsEvents)
@@ -61,15 +62,48 @@ def gettoken(request):
 def countandprune(todos):
     for todo in todos:
 
+        is_deleted = False
         groupid = getattr(todo, 'GroupId')
         makertoken = getattr(todo, 'MakerToken')
+
+        #date deletion
+        date = getattr(todo, 'date')
+        print(date)
+        datearray = date.split('-')
+        now = datetime.datetime.now()
+        if now.year > int(datearray[0]):
+            print('year' + str(now.year) + 'deletion')
+            url = "https://api.groupme.com/v3/groups/" + todo.GroupId + "/destroy" + "?token=" + todo.MakerToken
+            r = requests.post(url)
+            todo.delete()
+            is_deleted = True
+        if now.year == int(datearray[0]):
+            # go check the other things
+            if now.month > int(datearray[1]):
+                print('month' + str(now.month) + 'deletion')
+                url = "https://api.groupme.com/v3/groups/" + todo.GroupId + "/destroy" + "?token=" + todo.MakerToken
+                r = requests.post(url)
+                todo.delete()
+                is_deleted = True
+            if now.month == int(datearray[1]):
+                #go check other things
+                if now.day > int(datearray[2]):
+                    print('day' + str(now.day) + 'deletion')
+                    url = "https://api.groupme.com/v3/groups/" + todo.GroupId + "/destroy" + "?token=" + todo.MakerToken
+                    r = requests.post(url)
+                    todo.delete()
+                    is_deleted = True
+
+
+
         url = 'https://api.groupme.com/v3/groups/' + groupid + '?token=' + makertoken
         r = requests.get(url)
-        if r.json()['meta']['code'] == 404:
-            todo.delete()
-        else:
-            todo.Size = len(r.json()['response']['members'])
-            todo.save()
+        if not is_deleted:
+            if r.json()['meta']['code'] == 404:
+                todo.delete()
+            else:
+                todo.Size = len(r.json()['response']['members'])
+                todo.save()
 
 # loads the index page with authentication token
 def index(request):
@@ -397,6 +431,7 @@ def add(request, group_name):
             r = requests.post(url, data=json.dumps(data), headers=headers)
 
             print(r.json()['response']['share_url'])
+            print(r.json()['response'])
             shareurl = (r.json()['response']['share_url'])
             group_id = str(shareurl[-17:-9])
             sharetoken = str(shareurl[-8:])
