@@ -150,7 +150,11 @@
                 var day = date.getDate();
                 var month = date.getMonth() + 1;
                 var year = date.getFullYear();
-                return month + '/' + day + '/' + year;
+                if (month.toString().length == 1)
+                  month = "0" + month.toString();
+                if (day.toString().length == 1)
+                  day = "0" + day.toString();
+                return year + '-' + month + '-' + day;
               }
             }
           });
@@ -192,9 +196,9 @@
                   <div class="meta"></div>
                   <!-- Event Location -->
                   <div class="description">
+                    <p><strong>Location:</strong> {{ todo.place }}</p>
                     <p><strong>Date:</strong> {{ todo.date }}</p>
                     <p><strong>Time:</strong> {{ todo.time }}</p>
-                    <p><strong>Location:</strong> {{ todo.place }}</p>
                     <p>(Click to see description)</p>
                   </div>
                   <!-- Number of people in GroupMe chat -->
@@ -259,9 +263,9 @@
                   <div class="meta"></div>
                   <!-- Event Time and Location -->
                   <div class="description">
+                    <p><strong>Location:</strong> {{ todo.place }}</p>
                     <p><strong>Date:</strong> {{ todo.date }}</p>
                     <p><strong>Time:</strong> {{ todo.time }}</p>
-                    <p><strong>Location:</strong> {{ todo.place }}</p>
                     <p>(Click to see description)</p>
                   </div>
                   <!-- Number of people in GroupMe chat -->

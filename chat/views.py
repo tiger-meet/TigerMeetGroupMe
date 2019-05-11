@@ -200,11 +200,12 @@ def events(request, group_name):
             todos1 = []
             todos2 = []
 
+            # Replacing +s in url and spaces in title with empty strings (May have bugs for weird titles)
             for i in range(0, len(otherTodos.all())):
-                if queryString.lower() in otherTodos.all()[i].title.lower():
+                if queryString.replace("+", "").lower() in otherTodos.all()[i].title.replace(" ", "").lower():
                     todos1.append(otherTodos.all()[i])
             for i in range(0, len(myTodos.all())):
-                if queryString.lower() in myTodos.all()[i].title.lower():
+                if queryString.replace("+", "").lower() in myTodos.all()[i].title.replace(" ", "").lower():
                     todos2.append(myTodos.all()[i])
 
             if "sortBy=Alphabetical" in not_host:
@@ -454,8 +455,9 @@ def add(request, group_name):
             url = '?access_token=' + encodedtoken
             allurl = '/makechat/' + groupchat_name + url
 
-            # Redirect
-            return events(request, group_name)
+            # Redirect (Brute force)
+            redirecturl = '/category/' + group_name + '?access_token=' + encodedtoken
+            return redirect(redirecturl)
 
         else:
             return render(request, 'chat/add.html', {'access_token': mark_safe(json.dumps(encodedtoken)),
@@ -590,7 +592,9 @@ def destroy(request, id, group_name):
         r = requests.post(url)
         print(r)
 
-        return render(request, 'chat/index.html', {'access_token': mark_safe(json.dumps(encodedtoken))})
+        # Redirect (Brute force)
+        redirecturl = '/category/' + group_name + '?access_token=' + encodedtoken
+        return redirect(redirecturl)
 
 def getgroupname(request):
     if request.method == 'GET':
@@ -660,8 +664,9 @@ def edit(request, id, group_name):
             if (todo.MakerToken == token):
                 todo.save()
 
-            # Redirect
-            return events(request, group_name)
+            # Redirect (Brute force)
+            redirecturl = '/category/' + group_name + '?access_token=' + encodedtoken
+            return redirect(redirecturl)
 
         else:
             if (group_name == 'sports'):

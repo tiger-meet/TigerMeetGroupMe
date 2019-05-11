@@ -13,7 +13,6 @@
     var url = "?access_token=" + {{ access_token }};
     var categoryurl = '/category/' + name + url;
     var addurl = '/add/' + name + url;
-
     // Custom group icons
     var icon = '';
     switch (name)
@@ -39,16 +38,13 @@
       default:
         icon = 'heart icon'
     }
-
     window.onload = function()
     {
       document.getElementById("myGroup").innerHTML = "Create " + name + " Event";
       document.adurl.action = get_action();
-
       // Custom group icons
       document.getElementById("groupIcon").className = icon;
     }
-
     function get_action() {
         return addurl;
     }
@@ -116,7 +112,11 @@
                 var day = date.getDate();
                 var month = date.getMonth() + 1;
                 var year = date.getFullYear();
-                return month + '/' + day + '/' + year;
+                if (month.toString().length == 1)
+                  month = "0" + month.toString();
+                if (day.toString().length == 1)
+                  day = "0" + day.toString();
+                return year + '-' + month + '-' + day;
               }
             }
           });
